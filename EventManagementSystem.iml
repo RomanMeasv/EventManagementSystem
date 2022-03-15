@@ -10,5 +10,6 @@
     <orderEntry type="library" name="google.zxing.core" level="project" />
     <orderEntry type="library" name="google.zxing.javase" level="project" />
     <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="microsoft.sqlserver.mssql.jdbc" level="project" />
   </component>
 </module>

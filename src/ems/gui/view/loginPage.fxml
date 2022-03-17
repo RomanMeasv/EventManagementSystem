@@ -17,7 +17,7 @@
    <children>
       <AnchorPane id="login-form-holder" accessibleText=" dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 4, 4)" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20;">
          <children>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+            <VBox alignment="TOP_CENTER" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
                <children>
                   <HBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0">
                      <children>
@@ -28,7 +28,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <VBox maxWidth="1.7976931348623157E308">
+                  <VBox>
                      <children>
                         <TextField promptText="username" styleClass="login-form-field">
                            <VBox.margin>
@@ -60,13 +60,10 @@
                         </Button>
                      </children>
                      <VBox.margin>
-                        <Insets top="12.0" />
+                        <Insets top="20.0" />
                      </VBox.margin>
                   </HBox>
                </children>
-               <padding>
-                  <Insets bottom="12.0" />
-               </padding>
             </VBox>
          </children>
          <effect>

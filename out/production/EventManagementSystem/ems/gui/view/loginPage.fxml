@@ -21,7 +21,7 @@
                <children>
                   <HBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0">
                      <children>
-                        <Label styleClass="login-label" text="Login">
+                        <Label styleClass="login-label" text="EMS Login">
                            <font>
                               <Font name="Roboto" size="24.0" />
                            </font>

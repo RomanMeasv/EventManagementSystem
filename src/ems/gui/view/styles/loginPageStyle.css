@@ -13,7 +13,7 @@
 }
 
 .login-form-field {
-    -fx-border-width: 0 0 1px 0;
+    -fx-border-width: 0 0 2px 0;
     -fx-border-color: #7B61FF;
     -fx-background-color: -fx-control-inner-background;
     -fx-font-size: 10pt;
@@ -29,7 +29,7 @@
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 0;
     -fx-font-size: 11pt;
-
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
 }
 
 .login-button:hover {

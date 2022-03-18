@@ -1,6 +1,6 @@
 package ems.be;
 
-public class Customer extends User{
+public class Customer{
     private String name;
 
     public Customer(String name){

@@ -13,18 +13,18 @@ public class DAFacade implements IDataAccess {
     TicketDAO ticketDAO;
     EventDAO eventDAO;
 
-    private DAFacade() throws SQLServerException {
+    private DAFacade() {
         userDAO = new UserDAO();
         ticketDAO = new TicketDAO();
         eventDAO = new EventDAO();
     }
 
-    public static DAFacade getInstance() throws SQLServerException {
+    public static DAFacade getInstance() {
         return instance == null ? instance = new DAFacade() : instance;
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userDAO.getAll();
+    public User tryLogin(String username, String password) throws Exception {
+        return userDAO.tryLogin(username, password);
     }
 }

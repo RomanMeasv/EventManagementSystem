@@ -1,6 +1,9 @@
 package ems.gui.controller;
 
-import ems.bll.LoginPageLogic;
+import ems.be.Admin;
+import ems.be.EventCoordinator;
+import ems.be.User;
+import ems.gui.model.LoginModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,38 +21,37 @@ public class LoginPageController {
     public PasswordField pfPassword;
     public Button loginButton;
 
-    LoginPageLogic loginLogic;
+    LoginModel loginModel;
 
-    public LoginPageController() {
-        loginLogic = new LoginPageLogic();
+    public LoginPageController() throws Exception {
+
+        loginModel = new LoginModel();
     }
 
     public void loginAction(ActionEvent event) {
-        String inputUsername = tfUsername.getText();
-        String inputPassword = pfPassword.getText();
+        String username = tfUsername.getText();
+        String password = pfPassword.getText();
 
-        System.out.println("Login creds:\t" + inputUsername + ":" + inputPassword);
-        if(loginLogic.tryLogin(inputUsername, inputPassword)){
-            //change views
-            try{
-                Parent root = null;
+        System.out.println("Login creds:\t" + username + ":" + password);
+
+        User loggedUser = null;
+        try {
+            loggedUser = loginModel.tryLogin(username, password);
+            if(loggedUser.getClass().equals(Admin.class)){
+                Parent root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                if(inputUsername.equals("admin")){
-                    root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
-                    System.out.println("Login admin");
-                } else if(inputUsername.equals("event")){
-                    root = FXMLLoader.load(getClass().getResource("../view/ec-eventPage.fxml"));
-                    System.out.println("Login event coordinator");
-                }
-
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-
-            } catch (Exception e){
-                e.printStackTrace();
+            } else if(loggedUser.getClass().equals(EventCoordinator.class)){
+                Parent root = FXMLLoader.load(getClass().getResource("../view/ec-eventPage.fxml"));
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

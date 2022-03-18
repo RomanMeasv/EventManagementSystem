@@ -5,5 +5,5 @@ import ems.be.User;
 import java.util.List;
 
 public interface IDataAccess {
-    List<User> getAllUsers();
+    User tryLogin(String username, String password) throws Exception;
 }

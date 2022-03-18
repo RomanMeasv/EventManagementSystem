@@ -7,7 +7,7 @@ import java.sql.Connection;
 
 //Singleton class
 public class ConnectionManager {
-    private static ConnectionManager cm;
+    private static ConnectionManager instance;
     private final SQLServerDataSource ds;
 
     private ConnectionManager()
@@ -21,7 +21,7 @@ public class ConnectionManager {
     }
 
     public static ConnectionManager getInstance(){
-        return cm == null ? cm = new ConnectionManager() : cm;
+        return instance == null ? instance = new ConnectionManager() : instance;
     }
 
     public static Connection getConnection() throws SQLServerException

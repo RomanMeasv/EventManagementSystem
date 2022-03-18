@@ -17,4 +17,5 @@ public class ConnectionManagerTest {
         assertNotNull(connectionManager);
         assertNotNull(connection);
     }
+
 }

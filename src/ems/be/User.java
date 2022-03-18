@@ -1,9 +1,9 @@
 package ems.be;
 
 public abstract class User {
-    private int id;
-    private String username;
-    private String password;
+    protected int id;
+    protected String username;
+    protected String password;
 
     public int getId() {
         return id;

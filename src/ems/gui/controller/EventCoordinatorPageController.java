@@ -5,6 +5,7 @@ import ems.be.Event;
 import ems.be.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,13 +17,19 @@ import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
 
-    public TableView<Event> tvEvents;
-    public TableView<Ticket> tvTickets;
-    public TableView<Customer> tvCustomers;
+    @FXML
+    private TableView<Event> tvEvents;
+    @FXML
+    private TableView<Ticket> tvTickets;
+    @FXML
+    private TableView<Customer> tvCustomers;
 
-    public TableColumn<Event, String> tvColEvent;
-    public TableColumn<Ticket, String> tvColTicket;
-    public TableColumn<Customer, String> tvColCustomer;
+    @FXML
+    private TableColumn<Event, String> tvColEvent;
+    @FXML
+    private TableColumn<Ticket, String> tvColTicket;
+    @FXML
+    private TableColumn<Customer, String> tvColCustomer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,9 +42,9 @@ public class EventCoordinatorPageController implements Initializable {
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
         for (int i = 0; i < 100; i++) {
-            Event e = new Event("e"+i);
-            Ticket t = new Ticket("t"+i);
-            Customer c = new Customer("c"+i);
+            Event e = new Event("event"+i);
+            Ticket t = new Ticket("ticket"+i);
+            Customer c = new Customer("customer"+i);
 
             eventList.add(e);
             ticketList.add(t);

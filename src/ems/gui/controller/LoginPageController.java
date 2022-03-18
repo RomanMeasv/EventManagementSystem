@@ -28,7 +28,7 @@ public class LoginPageController {
         String inputUsername = tfUsername.getText();
         String inputPassword = pfPassword.getText();
 
-        System.out.println("Login creds: " + inputUsername + ": " + inputPassword);
+        System.out.println("Login creds:\t" + inputUsername + ":" + inputPassword);
         if(loginLogic.tryLogin(inputUsername, inputPassword)){
             //change views
             try{

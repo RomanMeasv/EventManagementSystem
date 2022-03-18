@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.CustomerPageController">
+   <children>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="100.0" HBox.hgrow="NEVER">
+         <children>
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="100.0" spacing="12.0">
+               <children>
+                  <ImageView fx:id="ivEvents" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#changeToEventPage" pickOnBounds="true" preserveRatio="true" styleClass="events-default">
+                     <image>
+                        <Image url="@resources/EventsIcoDefault.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="ivTickets" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#changeToTicketPage" pickOnBounds="true" preserveRatio="true" styleClass="tickets-default">
+                     <image>
+                        <Image url="@resources/TicketsIcoDefault.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="ivCustomer" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" styleClass="customer-active">
+                     <image>
+                        <Image url="@resources/ManageIcoDefault.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane HBox.hgrow="ALWAYS">
+         <children>
+            <HBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="tvCustomers" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="530.0" prefWidth="230.0" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="tvColCustomer" prefWidth="75.0" text="Customers" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField promptText="filter" VBox.vgrow="NEVER" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleAdd" pickOnBounds="true" preserveRatio="true" styleClass="plus-btn">
+                                 <image>
+                                    <Image url="@resources/TableViewPlusIcoDefault.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleRemove" pickOnBounds="true" preserveRatio="true" styleClass="minus-btn">
+                                 <image>
+                                    <Image url="@resources/TableViewMinusIcoDefault.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleManage" pickOnBounds="true" preserveRatio="true" styleClass="manage-btn">
+                                 <image>
+                                    <Image url="@resources/TableViewManageIcoDefault.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <children>
+                        <TableView fx:id="tvEvents" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="530.0" prefWidth="230.0" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="tvColEvent" prefWidth="75.0" text="Events" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField promptText="filter" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="tvTicketTypes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="530.0" prefWidth="230.0" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="tvColTicketType" prefWidth="75.0" text="TicketTypes" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField promptText="filter" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@styles/eventCoordinatorPageStyle.css" />
+      <URL value="@styles/fontStyle.css" />
+   </stylesheets>
+</HBox>

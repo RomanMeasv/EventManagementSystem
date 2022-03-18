@@ -4,27 +4,39 @@
 }
 
 /* LEFT SIDE PANEL */
-.events {
+.events-default {
     -fx-image: url("../resources/EventsIcoDefault.png");
 }
 
-.tickets {
+.tickets-default {
     -fx-image: url("../resources/TicketsIcoDefault.png");
 }
 
-.manage {
+.customer-default {
     -fx-image: url("../resources/ManageIcoDefault.png");
 }
 
-.events:hover {
+.events-default:hover {
     -fx-image: url("../resources/EventsIcoActive.png");
 }
 
-.tickets:hover {
+.tickets-default:hover {
     -fx-image: url("../resources/TicketsIcoActive.png");
 }
 
-.manage:hover {
+.customer-default:hover {
+    -fx-image: url("../resources/ManageIcoActive.png");
+}
+
+.events-active {
+    -fx-image: url("../resources/EventsIcoActive.png");
+}
+
+.tickets-active {
+    -fx-image: url("../resources/TicketsIcoActive.png");
+}
+
+.customer-active {
     -fx-image: url("../resources/ManageIcoActive.png");
 }
 

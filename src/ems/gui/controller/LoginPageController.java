@@ -39,7 +39,7 @@ public class LoginPageController {
                     root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
                     System.out.println("Login admin");
                 } else if(inputUsername.equals("event")){
-                    root = FXMLLoader.load(getClass().getResource("../view/eventCoordinatorPage.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("../view/ec-eventPage.fxml"));
                     System.out.println("Login event coordinator");
                 }
 
@@ -48,7 +48,6 @@ public class LoginPageController {
                 stage.show();
 
             } catch (Exception e){
-                System.out.println("Exception: ");
                 e.printStackTrace();
             }
         }

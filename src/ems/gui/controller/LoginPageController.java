@@ -30,7 +30,6 @@ public class LoginPageController {
 
         System.out.println("Login creds: " + inputUsername + ": " + inputPassword);
         if(loginLogic.tryLogin(inputUsername, inputPassword)){
-            System.out.println("Login successful");
             //change views
             try{
                 Parent root = null;
@@ -38,16 +37,19 @@ public class LoginPageController {
 
                 if(inputUsername.equals("admin")){
                     root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
+                    System.out.println("Login admin");
                 } else if(inputUsername.equals("event")){
                     root = FXMLLoader.load(getClass().getResource("../view/eventCoordinatorPage.fxml"));
+                    System.out.println("Login event coordinator");
                 }
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
 
-            } catch (Exception ignored){
-
+            } catch (Exception e){
+                System.out.println("Exception: ");
+                e.printStackTrace();
             }
         }
     }

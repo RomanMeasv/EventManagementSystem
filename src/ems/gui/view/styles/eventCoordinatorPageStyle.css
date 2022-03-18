@@ -69,14 +69,22 @@
     -fx-padding: 2 0 2 8px;
 }
 
-.table-row-cell:hover {
-    -fx-background-color: #8293E3;
-}
-
 .table-row-cell{
     -fx-background-color: #FFF;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #8293E3;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #8293E3;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #FFF;
 }
 
 .table-view .virtual-flow .scroll-bar .increment-button,
@@ -99,14 +107,6 @@
 
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color: #F7B449;
-}
-
-.table-row-cell:selected {
-    -fx-background-color: #8293E3;
-}
-
-.table-row-cell:selected .text {
-    -fx-fill: #FFF;
 }
 
 /* CENTER TABLE VIEW BUTTONS */

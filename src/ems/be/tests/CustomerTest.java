@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class CustomerTest {
     @Test
     public void testGetters(){
-        User customer = new Customer();
+        User customer = new Customer("Customer1");
 
         int uId = 3;
         String username = "customer";

@@ -54,7 +54,7 @@
                   </TableView>
                   <HBox spacing="10.0">
                      <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="plus-btn">
+                        <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleAddEvent" pickOnBounds="true" preserveRatio="true" styleClass="plus-btn">
                            <image>
                               <Image url="@resources/TableViewPlusIcoDefault.png" />
                            </image>
@@ -75,6 +75,32 @@
             </VBox>
          </children>
       </AnchorPane>
+      <HBox spacing="20.0" HBox.hgrow="ALWAYS">
+         <children>
+            <TableView fx:id="tvTickets" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="530.0" prefWidth="230.0" HBox.hgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="tvColTicket" prefWidth="75.0" text="Tickets" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </TableView>
+            <TableView fx:id="tvCustomers" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="530.0" prefWidth="230.0" HBox.hgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="tvColCustomer" prefWidth="75.0" text="Customers" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
    </children>
    <opaqueInsets>
       <Insets />

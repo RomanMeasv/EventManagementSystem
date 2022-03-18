@@ -1,46 +1,6 @@
-.root {
-    -fx-background-color: #DDE9F8;
-    -fx-font-size: 13pt;
-}
 
-/* LEFT SIDE PANEL */
-.events-default {
-    -fx-image: url("../resources/EventsIcoDefault.png");
-}
 
-.tickets-default {
-    -fx-image: url("../resources/TicketsIcoDefault.png");
-}
-
-.customer-default {
-    -fx-image: url("../resources/ManageIcoDefault.png");
-}
-
-.events-default:hover {
-    -fx-image: url("../resources/EventsIcoActive.png");
-}
-
-.tickets-default:hover {
-    -fx-image: url("../resources/TicketsIcoActive.png");
-}
-
-.customer-default:hover {
-    -fx-image: url("../resources/ManageIcoActive.png");
-}
-
-.events-active {
-    -fx-image: url("../resources/EventsIcoActive.png");
-}
-
-.tickets-active {
-    -fx-image: url("../resources/TicketsIcoActive.png");
-}
-
-.customer-active {
-    -fx-image: url("../resources/ManageIcoActive.png");
-}
-
-/* TABLE VIEW LOOK */
+/* TABLE VIEW */
 .table-view {
     -fx-background-color: transparent;
     -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 4.0, 4.0);
@@ -115,28 +75,30 @@
     -fx-background-color: #F7B449;
 }
 
-/* CENTER TABLE VIEW BUTTONS */
+/* TABLE VIEW BUTTONS */
 .plus-btn {
-    -fx-image: url("../resources/TableViewPlusIcoDefault.png");
+    -fx-image: url("../resources/PlusIcoDefault.png");
 }
 
 .minus-btn {
-    -fx-image: url("../resources/TableViewMinusIcoDefault.png");
+    -fx-image: url("../resources/MinusIcoDefault.png");
 }
 
-.manage-btn {
-    -fx-image: url("../resources/TableViewManageIcoDefault.png");
+.settings-btn {
+    -fx-image: url("../resources/SettingsIcoDefault.png");
 }
 
 .plus-btn:hover {
-    -fx-image: url("../resources/TableViewPlusIcoActive.png");
+    -fx-image: url("../resources/PlusIcoActive.png");
 }
 
 .minus-btn:hover {
-    -fx-image: url("../resources/TableViewMinusIcoActive.png");
+    -fx-image: url("../resources/MinusIcoActive.png");
 }
 
-.manage-btn:hover {
-    -fx-image: url("../resources/TableViewManageIcoActive.png");
+.settings-btn:hover {
+    -fx-image: url("../resources/SettingsIcoActive.png");
 }
+
+/* TABLE VIEW FILTER */
 

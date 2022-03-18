@@ -1,4 +1,4 @@
-package ems.gui.controller;
+package ems.gui.controller.ec;
 
 import ems.be.Customer;
 import ems.be.Event;
@@ -80,7 +80,7 @@ public class CustomerPageController implements Initializable {
     @FXML
     public void changeToEventPage(MouseEvent mouseEvent) {
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("../view/ec-eventPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../view/ec/ec-eventPage.fxml"));
             Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -93,7 +93,7 @@ public class CustomerPageController implements Initializable {
     @FXML
     public void changeToTicketPage(MouseEvent mouseEvent) {
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("../view/ec-ticketPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../view/ec/ec-ticketPage.fxml"));
             Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

@@ -1,9 +1,6 @@
 package ems.dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import ems.be.User;
-
-import java.util.List;
 
 public class DAFacade implements IDataAccess {
 

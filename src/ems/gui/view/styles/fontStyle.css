@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+/* ROOT ELEMENT (INHERITED) */
 .root {
     -fx-font-family: 'Roboto';
+    -fx-font-size: 13pt;
 }

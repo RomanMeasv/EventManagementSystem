@@ -1,4 +1,4 @@
-package ems.gui.controller;
+package ems.gui.controller.ec;
 
 import ems.be.Customer;
 import ems.be.Event;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EventPageController implements Initializable {
+public class TicketPageController implements Initializable {
 
     @FXML
     private TableView<Event> tvEvents;
@@ -78,9 +78,9 @@ public class EventPageController implements Initializable {
     }
 
     @FXML
-    public void changeToTicketPage(MouseEvent mouseEvent) {
+    public void changeToEventPage(MouseEvent mouseEvent) {
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("../view/ec-ticketPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../view/ec/ec-eventPage.fxml"));
             Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -93,7 +93,7 @@ public class EventPageController implements Initializable {
     @FXML
     public void changeToCustomerPage(MouseEvent mouseEvent) {
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("../view/ec-customerPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../view/ec/ec-customerPage.fxml"));
             Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

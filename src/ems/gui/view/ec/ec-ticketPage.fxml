@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.TicketPageController">
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.ec.TicketPageController">
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="100.0" HBox.hgrow="NEVER">
          <children>
@@ -19,17 +19,17 @@
                <children>
                   <ImageView fx:id="ivEvents" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#changeToEventPage" pickOnBounds="true" preserveRatio="true" styleClass="events-default">
                      <image>
-                        <Image url="@resources/EventsIcoDefault.png" />
+                        <Image url="@../resources/EventsIcoDefault.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="ivTickets" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" styleClass="tickets-active">
                      <image>
-                        <Image url="@resources/TicketsIcoDefault.png" />
+                        <Image url="@../resources/TicketsIcoDefault.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="ivCustomer" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#changeToCustomerPage" pickOnBounds="true" preserveRatio="true" styleClass="customer-default">
                      <image>
-                        <Image url="@resources/ManageIcoDefault.png" />
+                        <Image url="@../resources/UserIcoDefault.png" />
                      </image>
                   </ImageView>
                </children>
@@ -119,7 +119,7 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <stylesheets>
-      <URL value="@styles/eventCoordinatorPageStyle.css" />
+      <URL value="@../styles/tableViewStyle.css" />
       <URL value="@styles/fontStyle.css" />
    </stylesheets>
 </HBox>

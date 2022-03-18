@@ -8,7 +8,7 @@ public class LoginLogic {
 
     IDataAccess dataAccess;
 
-    public LoginLogic() throws Exception {
+    public LoginLogic() {
         dataAccess = DAFacade.getInstance();
     }
 

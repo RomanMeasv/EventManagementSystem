@@ -32,11 +32,8 @@ public class LoginPageController {
         String username = tfUsername.getText();
         String password = pfPassword.getText();
 
-        System.out.println("Login creds:\t" + username + ":" + password);
-
-        User loggedUser = null;
         try {
-            loggedUser = loginModel.tryLogin(username, password);
+            User loggedUser = loginModel.tryLogin(username, password);
             if(loggedUser.getClass().equals(Admin.class)){
                 Parent root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -44,11 +41,14 @@ public class LoginPageController {
                 stage.setScene(scene);
                 stage.show();
             } else if(loggedUser.getClass().equals(EventCoordinator.class)){
-                Parent root = FXMLLoader.load(getClass().getResource("../view/ec-eventPage.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../view/coordinatorPage.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+            } else if(loggedUser == null){
+                //TODO: implement "entered wrong credentials"
+
             }
         } catch (Exception e) {
             e.printStackTrace();

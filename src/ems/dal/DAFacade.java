@@ -39,5 +39,7 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {}
+    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
+        userDAO.deleteEventCoordinator(ec);
+    }
 }

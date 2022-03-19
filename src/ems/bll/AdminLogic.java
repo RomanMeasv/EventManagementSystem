@@ -22,6 +22,10 @@ public class AdminLogic {
         return dataAccess.createEventCoordinator(ec);
     }
     public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
-        dataAccess.deleteEvenCoordinator(ec);
+        dataAccess.deleteEventCoordinator(ec);
+    }
+
+    public void updateEventCoordinator(EventCoordinator updatedEC) {
+        dataAccess.updateEventCoordinator(updatedEC);
     }
 }

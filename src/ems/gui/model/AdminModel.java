@@ -32,4 +32,11 @@ public class AdminModel {
         adminLogic.deleteEventCoordinator(ec);
         observableEventCoordinators.remove(ec);
     }
+
+    public void updateEventCoordinator(EventCoordinator oldEC, EventCoordinator updatedEC) {
+        adminLogic.updateEventCoordinator(updatedEC);
+        observableEventCoordinators.remove(oldEC);
+        observableEventCoordinators.add(updatedEC);
+
+    }
 }

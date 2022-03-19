@@ -34,4 +34,9 @@ public class ECDialog extends Dialog<EventCoordinator> {
             //System.out.println("Couldn't load view!");
         }
     }
+
+    public void setFields(EventCoordinator ec){
+        controller.setECName(ec.getUsername());
+        controller.setECPassword(ec.getPassword());
+    }
 }

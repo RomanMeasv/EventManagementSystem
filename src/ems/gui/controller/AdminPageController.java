@@ -62,6 +62,20 @@ public class AdminPageController implements Initializable {
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {
-
+        EventCoordinator oldEC = tbvCoordinators.getSelectionModel().getSelectedItem();
+        if(oldEC != null){
+            ECDialog dialog = new ECDialog();
+            dialog.setFields(oldEC);
+            Optional<EventCoordinator> result = dialog.showAndWait();
+            result.ifPresent(updatedEC ->{
+                try{
+                    updatedEC.setId(oldEC.getId());
+                    adminModel.updateEventCoordinator(oldEC, updatedEC);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 }

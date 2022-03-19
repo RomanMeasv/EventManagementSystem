@@ -11,5 +11,5 @@ public interface IDataAccess {
     User tryLogin(String username, String password) throws Exception;
     EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception;
     List<EventCoordinator> readAllEventCoordinators() throws Exception;
-    void deleteEvenCoordinator() throws Exception;
+    void deleteEvenCoordinator(EventCoordinator ec) throws Exception;
 }

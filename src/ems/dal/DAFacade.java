@@ -39,7 +39,7 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public void deleteEvenCoordinator() throws Exception {
+    public void deleteEventCoordinator() throws Exception {
 
     }
 }

@@ -35,9 +35,16 @@ public class DAFacade implements IDataAccess {
 
     @Override
     public List<EventCoordinator> readAllEventCoordinators() throws Exception {
-        return userDAO.getAllEventCoordinators();
+        return userDAO.readAllEventCoordinators();
     }
 
     @Override
-    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {}
+    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
+        userDAO.deleteEventCoordinator(ec);
+    }
+
+    @Override
+    public void updateEventCoordinator(EventCoordinator ec) throws Exception {
+        userDAO.updateEventCoordinator(ec);
+    }
 }

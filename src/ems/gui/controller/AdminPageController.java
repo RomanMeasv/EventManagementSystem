@@ -1,8 +1,6 @@
 package ems.gui.controller;
 
-import ems.be.Event;
 import ems.be.EventCoordinator;
-import ems.be.User;
 import ems.gui.model.AdminModel;
 import ems.gui.view.ECDialog;
 import javafx.event.ActionEvent;
@@ -55,7 +53,10 @@ public class AdminPageController implements Initializable {
 
     public void handleDelete(MouseEvent mouseEvent) {
         try {
-            adminModel.deleteEventCoordinator(tbvCoordinators.getSelectionModel().getSelectedItem());
+            EventCoordinator selected = tbvCoordinators.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                adminModel.deleteEventCoordinator(selected);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,16 +64,15 @@ public class AdminPageController implements Initializable {
 
     public void handleUpdate(MouseEvent mouseEvent) {
         EventCoordinator oldEC = tbvCoordinators.getSelectionModel().getSelectedItem();
-        if(oldEC != null){
+        if (oldEC != null) {
             ECDialog dialog = new ECDialog();
             dialog.setFields(oldEC);
             Optional<EventCoordinator> result = dialog.showAndWait();
-            result.ifPresent(updatedEC ->{
-                try{
+            result.ifPresent(updatedEC -> {
+                try {
                     updatedEC.setId(oldEC.getId());
                     adminModel.updateEventCoordinator(oldEC, updatedEC);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });

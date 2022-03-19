@@ -27,4 +27,9 @@ public class AdminModel {
             observableEventCoordinators.add(created);
         }
     }
+
+    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
+        adminLogic.deleteEventCoordinator(ec);
+        observableEventCoordinators.remove(ec);
+    }
 }

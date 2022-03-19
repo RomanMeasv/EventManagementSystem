@@ -54,7 +54,11 @@ public class AdminPageController implements Initializable {
     }
 
     public void handleDelete(MouseEvent mouseEvent) {
-
+        try {
+            adminModel.deleteEventCoordinator(tbvCoordinators.getSelectionModel().getSelectedItem());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {

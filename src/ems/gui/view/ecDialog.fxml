@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<DialogPane prefHeight="115.0" prefWidth="198.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.ECDialogController">
+<DialogPane prefHeight="115.0" prefWidth="198.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.ECDialogController">
    <content>
-      <VBox prefHeight="400.0" prefWidth="200.0">
+      <VBox prefHeight="400.0" prefWidth="200.0" spacing="10.0">
          <children>
             <TextField fx:id="txfECName" promptText="User name" />
             <TextField fx:id="txfECPassword" promptText="User password" />

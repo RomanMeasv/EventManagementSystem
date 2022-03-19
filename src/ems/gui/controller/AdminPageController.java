@@ -1,8 +1,6 @@
 package ems.gui.controller;
 
-import ems.be.Event;
 import ems.be.EventCoordinator;
-import ems.be.User;
 import ems.gui.model.AdminModel;
 import ems.gui.view.ECDialog;
 import javafx.event.ActionEvent;

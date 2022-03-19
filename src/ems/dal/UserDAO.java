@@ -5,10 +5,9 @@ import ems.be.Admin;
 import ems.be.EventCoordinator;
 import ems.be.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -50,5 +49,23 @@ public class UserDAO {
             }
         }
         return ecCreated;
+    }
+
+    public List<EventCoordinator> getAllEventCoordinators() throws Exception {
+        List<EventCoordinator> allEventCoordinators = new ArrayList<>();
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlcommandSelect = "SELECT * FROM Users WHERE roleId = 2;";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlcommandSelect);
+            ResultSet rs = pstmtSelect.executeQuery();
+            while(rs.next())
+            {
+                allEventCoordinators.add(new EventCoordinator(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"))
+                );
+            }
+        }
+        return allEventCoordinators;
     }
 }

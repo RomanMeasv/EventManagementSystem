@@ -1,5 +1,6 @@
 package ems;
 
+import ems.dal.UserDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +16,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Event Management System");
         primaryStage.show();
+
+        UserDAO u = new UserDAO();
+        System.out.println(u.getAllEventCoordinators().size());
     }
 
     public static void main(String[] args) {

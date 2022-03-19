@@ -34,7 +34,10 @@ public class LoginPageController {
 
         try {
             User loggedUser = userModel.tryLogin(username, password);
-            if(loggedUser.getClass().equals(Admin.class)){
+            if(loggedUser == null){
+                //TODO: implement "entered wrong credentials"
+            }
+            else if(loggedUser.getClass().equals(Admin.class)){
                 Parent root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
@@ -46,9 +49,6 @@ public class LoginPageController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-            } else if(loggedUser == null){
-                //TODO: implement "entered wrong credentials"
-
             }
         } catch (Exception e) {
             e.printStackTrace();

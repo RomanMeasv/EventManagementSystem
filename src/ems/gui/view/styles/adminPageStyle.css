@@ -1,3 +1,116 @@
 .root {
     -fx-background-color: #DDE9F8;
 }
+
+/* TABLE VIEW */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 4.0, 4.0);
+
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: #FFF;
+    -fx-background-radius: 10px 10px 0px 0px;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #000;
+    -fx-font-size: 16pt;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 8px;
+}
+
+.table-row-cell{
+    -fx-background-color: #FFF;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #8293E3;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #8293E3;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #FFF;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 1;
+    -fx-padding: 4;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical{
+    -fx-background-color: #FFF;
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal{
+    -fx-background-color: #FFF;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color: #F7B449;
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: #F7B449;
+}
+
+/* TABLE VIEW BUTTONS */
+.btnCreate {
+    -fx-image: url("../resources/CreateIcoDefault.png");
+}
+
+.btnDelete {
+    -fx-image: url("../resources/DeleteIcoDefault.png");
+}
+
+.btnUpdate {
+    -fx-image: url("../resources/UpdateIcoDefault.png");
+}
+
+.btnCreate:hover {
+    -fx-image: url("../resources/CreateIcoActive.png");
+}
+
+.btnDelete:hover {
+    -fx-image: url("../resources/DeleteIcoActive.png");
+}
+
+.btnUpdate:hover {
+    -fx-image: url("../resources/UpdateIcoActive.png");
+}
+
+/* TABLE VIEW FILTER */
+.text-field {
+    -fx-background-color: -fx-text-box-border, #F7B449;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-prompt-text-fill: #000000;
+}
+
+.text-field:focused {
+    -fx-background-color: -fx-focus-color, #F7B449;
+}
+

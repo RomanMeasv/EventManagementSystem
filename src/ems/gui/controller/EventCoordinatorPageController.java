@@ -1,6 +1,7 @@
 package ems.gui.controller;
 
 import ems.be.Event;
+import ems.gui.view.Dialogs.CreateMovieDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
@@ -27,6 +29,13 @@ public class EventCoordinatorPageController implements Initializable {
         }
 
         tvEvents.setItems(list);
+
+    }
+
+    public void handleAddEvent() {
+        CreateMovieDialog createMovieDialog = new CreateMovieDialog();
+        Optional<Event> result = createMovieDialog.showAndWait();
+
 
     }
 }

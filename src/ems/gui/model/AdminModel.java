@@ -9,22 +9,22 @@ import java.util.List;
 
 public class AdminModel {
     private AdminLogic adminLogic;
-    private ObservableList<EventCoordinator> observableList;
+    private ObservableList<EventCoordinator> observableEventCoordinators;
 
-    public AdminModel(){
+    public AdminModel() throws Exception {
         adminLogic = new AdminLogic();
-        List<EventCoordinator> list = adminLogic.readEventCoordinators();
-        observableList = FXCollections.observableList(list);
+        List<EventCoordinator> list = adminLogic.readAllEventCoordinators();
+        observableEventCoordinators = FXCollections.observableList(list);
     }
 
-    public ObservableList<EventCoordinator> getObservableList(){
-        return observableList;
+    public ObservableList<EventCoordinator> getObservableEventCoordinators() {
+        return observableEventCoordinators;
     }
 
     public void createEventCoordinator(EventCoordinator ec) throws Exception {
         EventCoordinator created = adminLogic.createEventCoordinator(ec);
-        if(created != null){
-            observableList.add(created);
+        if (created != null) {
+            observableEventCoordinators.add(created);
         }
     }
 }

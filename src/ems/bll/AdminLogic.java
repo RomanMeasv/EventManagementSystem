@@ -10,12 +10,12 @@ public class AdminLogic {
 
     IDataAccess dataAccess;
 
-    public AdminLogic(){
+    public AdminLogic() {
         dataAccess = DAFacade.getInstance();
     }
 
-    public List<EventCoordinator> readEventCoordinators() {
-        return null;
+    public List<EventCoordinator> readAllEventCoordinators() throws Exception {
+        return dataAccess.readAllEventCoordinators();
     }
 
     public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {

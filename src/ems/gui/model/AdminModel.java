@@ -33,7 +33,7 @@ public class AdminModel {
         observableEventCoordinators.remove(ec);
     }
 
-    public void updateEventCoordinator(EventCoordinator oldEC, EventCoordinator updatedEC) {
+    public void updateEventCoordinator(EventCoordinator oldEC, EventCoordinator updatedEC) throws Exception {
         adminLogic.updateEventCoordinator(updatedEC);
         observableEventCoordinators.remove(oldEC);
         observableEventCoordinators.add(updatedEC);

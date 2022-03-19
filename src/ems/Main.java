@@ -16,9 +16,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Event Management System");
         primaryStage.show();
-
-        UserDAO u = new UserDAO();
-        System.out.println(u.getAllEventCoordinators().size());
     }
 
     public static void main(String[] args) {

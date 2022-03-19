@@ -76,28 +76,28 @@
 }
 
 /* TABLE VIEW BUTTONS */
-.plus-btn {
-    -fx-image: url("../resources/PlusIcoDefault.png");
+.btnCreate {
+    -fx-image: url("../resources/CreateIcoDefault.png");
 }
 
-.minus-btn {
-    -fx-image: url("../resources/MinusIcoDefault.png");
+.btnDelete {
+    -fx-image: url("../resources/DeleteIcoDefault.png");
 }
 
-.settings-btn {
-    -fx-image: url("../resources/SettingsIcoDefault.png");
+.btnUpdate {
+    -fx-image: url("../resources/UpdateIcoDefault.png");
 }
 
-.plus-btn:hover {
-    -fx-image: url("../resources/PlusIcoActive.png");
+.btnCreate:hover {
+    -fx-image: url("../resources/CreateIcoActive.png");
 }
 
-.minus-btn:hover {
-    -fx-image: url("../resources/MinusIcoActive.png");
+.btnDelete:hover {
+    -fx-image: url("../resources/DeleteIcoActive.png");
 }
 
-.settings-btn:hover {
-    -fx-image: url("../resources/SettingsIcoActive.png");
+.btnUpdate:hover {
+    -fx-image: url("../resources/UpdateIcoActive.png");
 }
 
 /* TABLE VIEW FILTER */

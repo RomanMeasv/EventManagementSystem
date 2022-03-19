@@ -28,6 +28,6 @@ public class DAFacade implements IDataAccess {
 
     @Override
     public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {
-        return null;
+        return userDAO.createEventCoordinator(ec);
     }
 }

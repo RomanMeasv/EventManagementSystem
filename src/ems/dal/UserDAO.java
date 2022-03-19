@@ -8,19 +8,15 @@ import ems.be.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class UserDAO {
 
-
-    public UserDAO() {
-
-    }
-
     public User tryLogin(String username, String password) throws Exception {
         User user = null;
-        try (Connection connection = ConnectionManager.getConnection()) {
+        try (Connection con = ConnectionManager.getConnection()) {
             String sqlcommandSelect = "SELECT Users.id, username, [password], [name] FROM Users JOIN UserRoles ON roleId = UserRoles.id WHERE username=? AND [password]=?";
-            PreparedStatement pstmtSelect = connection.prepareStatement(sqlcommandSelect);
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlcommandSelect);
             pstmtSelect.setString(1, username);
             pstmtSelect.setString(2, password);
             ResultSet rs = pstmtSelect.executeQuery();
@@ -34,5 +30,26 @@ public class UserDAO {
             }
             return user;
         }
+    }
+
+    public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {
+        EventCoordinator ecCreated = null;
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlcommandInsert = "INSERT INTO Users(username, [password], roleId) VALUES (?, ?, 2);;";
+            PreparedStatement pstmtInsert = con.prepareStatement(sqlcommandInsert, Statement.RETURN_GENERATED_KEYS);
+            pstmtInsert.setString(1,ec.getUsername());
+            pstmtInsert.setString(2,ec.getPassword());
+            pstmtInsert.execute();
+            ResultSet rs = pstmtInsert.getGeneratedKeys();
+            while(rs.next())
+            {
+                ecCreated = new EventCoordinator(
+                        rs.getInt(1),
+                        ec.getUsername(),
+                        ec.getPassword()
+                );
+            }
+        }
+        return ecCreated;
     }
 }

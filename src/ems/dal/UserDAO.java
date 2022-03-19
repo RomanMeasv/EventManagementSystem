@@ -35,14 +35,13 @@ public class UserDAO {
     public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {
         EventCoordinator ecCreated = null;
         try (Connection con = ConnectionManager.getConnection()) {
-            String sqlcommandInsert = "INSERT INTO Users(username, [password], roleId) VALUES (?, ?, 2);;";
+            String sqlcommandInsert = "INSERT INTO Users(username, [password], roleId) VALUES (?, ?, 2);";
             PreparedStatement pstmtInsert = con.prepareStatement(sqlcommandInsert, Statement.RETURN_GENERATED_KEYS);
-            pstmtInsert.setString(1,ec.getUsername());
-            pstmtInsert.setString(2,ec.getPassword());
+            pstmtInsert.setString(1, ec.getUsername());
+            pstmtInsert.setString(2, ec.getPassword());
             pstmtInsert.execute();
             ResultSet rs = pstmtInsert.getGeneratedKeys();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 ecCreated = new EventCoordinator(
                         rs.getInt(1),
                         ec.getUsername(),

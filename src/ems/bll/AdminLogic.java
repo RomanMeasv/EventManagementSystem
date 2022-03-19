@@ -14,8 +14,8 @@ public class AdminLogic {
         dataAccess = DAFacade.getInstance();
     }
 
-    public List<EventCoordinator> readEventCoordinators() {
-        return null;
+    public List<EventCoordinator> readAllEventCoordinators() {
+        return DAFacade.readAllEventCoordinators();
     }
 
     public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {

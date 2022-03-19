@@ -11,7 +11,7 @@ import javafx.scene.control.DialogPane;
 
 import java.io.IOException;
 
-public class ECDialog extends Dialog<User> {
+public class ECDialog extends Dialog<EventCoordinator> {
     private ECDialogController controller;
 
     public ECDialog() {
@@ -24,7 +24,7 @@ public class ECDialog extends Dialog<User> {
             this.setDialogPane(dp);
             this.setResultConverter(buttonType -> {
                 if (buttonType == ButtonType.APPLY) {
-                    User created = controller.createFromFields();
+                    EventCoordinator created = controller.createFromFields();
                     return created;
                 }
                 return null;

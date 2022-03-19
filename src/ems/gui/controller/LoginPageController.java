@@ -17,9 +17,9 @@ import javafx.stage.Stage;
 
 public class LoginPageController {
 
-    public TextField tfUsername;
-    public PasswordField pfPassword;
-    public Button loginButton;
+    public TextField txfUsername;
+    public PasswordField psfPassword;
+    public Button btnLogin;
 
     UserModel userModel;
 
@@ -28,9 +28,9 @@ public class LoginPageController {
         userModel = new UserModel();
     }
 
-    public void loginAction(ActionEvent event) {
-        String username = tfUsername.getText();
-        String password = pfPassword.getText();
+    public void handleLogin(ActionEvent event) {
+        String username = txfUsername.getText();
+        String password = psfPassword.getText();
 
         try {
             User loggedUser = userModel.tryLogin(username, password);

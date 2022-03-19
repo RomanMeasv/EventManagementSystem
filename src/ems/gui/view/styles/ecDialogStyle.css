@@ -1,0 +1,31 @@
+.root {
+    -fx-background-color: #DDE9F8;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.5);
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
+
+}
+
+.text-field:focused {
+    -fx-background-color: #F7B449;
+}
+
+.button {
+    -fx-background-color: #fff;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #5847AD;
+    -fx-text-fill: #fff;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 0.0, 0.0);
+}
+
+.dialog-pane > .button-bar > .container{
+
+}

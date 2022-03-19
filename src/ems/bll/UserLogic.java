@@ -4,11 +4,11 @@ import ems.be.User;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 
-public class LoginLogic {
+public class UserLogic {
 
     IDataAccess dataAccess;
 
-    public LoginLogic() {
+    public UserLogic() {
         dataAccess = DAFacade.getInstance();
     }
 

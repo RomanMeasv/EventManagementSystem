@@ -3,7 +3,7 @@ package ems.gui.controller;
 import ems.be.Admin;
 import ems.be.EventCoordinator;
 import ems.be.User;
-import ems.gui.model.LoginModel;
+import ems.gui.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,11 +21,11 @@ public class LoginPageController {
     public PasswordField pfPassword;
     public Button loginButton;
 
-    LoginModel loginModel;
+    UserModel userModel;
 
     public LoginPageController() throws Exception {
 
-        loginModel = new LoginModel();
+        userModel = new UserModel();
     }
 
     public void loginAction(ActionEvent event) {
@@ -33,7 +33,7 @@ public class LoginPageController {
         String password = pfPassword.getText();
 
         try {
-            User loggedUser = loginModel.tryLogin(username, password);
+            User loggedUser = userModel.tryLogin(username, password);
             if(loggedUser.getClass().equals(Admin.class)){
                 Parent root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

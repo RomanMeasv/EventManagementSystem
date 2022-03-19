@@ -19,7 +19,6 @@ public class UserDAO {
     public User tryLogin(String username, String password) throws Exception {
         User user = null;
         try (Connection connection = ConnectionManager.getConnection()) {
-            //check if admin
             String sqlcommandSelect = "SELECT Users.id, username, [password], [name] FROM Users JOIN UserRoles ON roleId = UserRoles.id WHERE username=? AND [password]=?";
             PreparedStatement pstmtSelect = connection.prepareStatement(sqlcommandSelect);
             pstmtSelect.setString(1, username);
@@ -27,9 +26,9 @@ public class UserDAO {
             ResultSet rs = pstmtSelect.executeQuery();
 
             while (rs.next()) {
-                if (rs.getString("name").equals("Admin")) {
+                if (rs.getString("name").equals("Admin")) { //check if admin
                     user = new Admin(rs.getInt("id"), rs.getString("username"), rs.getString("password"));
-                } else if (rs.getString("name").equals("Event Coordinator")) {
+                } else if (rs.getString("name").equals("Event Coordinator")) { //check if event coordinator
                     user = new EventCoordinator(rs.getInt("id"), rs.getString("username"), rs.getString("password"));
                 }
             }

@@ -90,16 +90,18 @@ public class UserDAO {
             pstmtUpdate.setString(1, ec.getUsername());
             pstmtUpdate.setString(2, ec.getPassword());
             pstmtUpdate.setInt(3, ec.getId());
-            pstmtUpdate.execute();
+            pstmtUpdate.executeUpdate();
         }
     }
 
     public void deleteEventCoordinator(EventCoordinator ec) throws Exception{
         try (Connection con = ConnectionManager.getConnection()) {
+
             String sqlcommandDelete = "DELETE FROM Users WHERE id=?;";
-            PreparedStatement pstmtInsert = con.prepareStatement(sqlcommandDelete);
-            pstmtInsert.setInt(1, ec.getId());
-            pstmtInsert.executeUpdate();
+            PreparedStatement pstmtDelete = con.prepareStatement(sqlcommandDelete);
+
+            pstmtDelete.setInt(1, ec.getId());
+            pstmtDelete.executeUpdate();
         }
     }
 }

@@ -35,8 +35,6 @@ public class AdminModel {
 
     public void updateEventCoordinator(EventCoordinator oldEC, EventCoordinator updatedEC) throws Exception {
         adminLogic.updateEventCoordinator(updatedEC);
-        observableEventCoordinators.remove(oldEC);
-        observableEventCoordinators.add(updatedEC);
-
+        observableEventCoordinators.set(observableEventCoordinators.indexOf(oldEC), updatedEC);
     }
 }

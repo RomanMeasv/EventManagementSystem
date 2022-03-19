@@ -28,6 +28,5 @@ public class AdminLogic {
 
     public void updateEventCoordinator(EventCoordinator updatedEC) throws Exception {
         dataAccess.updateEventCoordinator(updatedEC);
-
     }
 }

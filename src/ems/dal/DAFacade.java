@@ -3,6 +3,8 @@ package ems.dal;
 import ems.be.EventCoordinator;
 import ems.be.User;
 
+import java.util.List;
+
 public class DAFacade implements IDataAccess {
 
     private static DAFacade instance; //Singleton instance
@@ -29,5 +31,10 @@ public class DAFacade implements IDataAccess {
     @Override
     public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {
         return userDAO.createEventCoordinator(ec);
+    }
+
+    @Override
+    public List<EventCoordinator> readAllEventCoordinators() throws Exception {
+        return null;
     }
 }

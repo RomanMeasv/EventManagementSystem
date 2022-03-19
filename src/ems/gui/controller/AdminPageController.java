@@ -1,5 +1,7 @@
 package ems.gui.controller;
 
+import ems.be.EventCoordinator;
+import ems.gui.view.ECDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -8,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
@@ -27,6 +30,8 @@ public class AdminPageController implements Initializable {
     }
 
     public void handleCreate(MouseEvent mouseEvent) {
+        ECDialog dialog = new ECDialog();
+        Optional <EventCoordinator> result = dialog.showAndWait();
 
     }
 

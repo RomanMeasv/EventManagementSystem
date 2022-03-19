@@ -1,5 +1,6 @@
 package ems.dal;
 
+import ems.be.EventCoordinator;
 import ems.be.User;
 
 public class DAFacade implements IDataAccess {
@@ -23,5 +24,10 @@ public class DAFacade implements IDataAccess {
     @Override
     public User tryLogin(String username, String password) throws Exception {
         return userDAO.tryLogin(username, password);
+    }
+
+    @Override
+    public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {
+        return null;
     }
 }

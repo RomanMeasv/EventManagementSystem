@@ -13,4 +13,5 @@ public interface IDataAccess {
     List<EventCoordinator> readAllEventCoordinators() throws Exception;
     void updateEventCoordinator(EventCoordinator ec) throws Exception;
     void deleteEventCoordinator(EventCoordinator ec) throws Exception;
+    List<EventCoordinator> filterEventCoordinators(String query) throws Exception;
 }

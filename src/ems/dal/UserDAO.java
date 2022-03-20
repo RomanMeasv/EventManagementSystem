@@ -16,8 +16,8 @@ public class UserDAO {
 
         try (Connection con = ConnectionManager.getConnection()) {
 
-            String sqlcommandSelect = "SELECT Users.id, username, [password], [name] FROM Users JOIN UserRoles ON roleId = UserRoles.id WHERE username=? AND [password]=?";
-            PreparedStatement pstmtSelect = con.prepareStatement(sqlcommandSelect);
+            String sqlCommandSelect = "SELECT Users.id, username, [password], [name] FROM Users JOIN UserRoles ON roleId = UserRoles.id WHERE username=? AND [password]=?";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
 
             pstmtSelect.setString(1, username);
             pstmtSelect.setString(2, password);
@@ -40,8 +40,8 @@ public class UserDAO {
 
         try (Connection con = ConnectionManager.getConnection()) {
 
-            String sqlcommandInsert = "INSERT INTO Users(username, [password], roleId) VALUES (?, ?, 2);";
-            PreparedStatement pstmtInsert = con.prepareStatement(sqlcommandInsert, Statement.RETURN_GENERATED_KEYS);
+            String sqlCommandInsert = "INSERT INTO Users(username, [password], roleId) VALUES (?, ?, 2);";
+            PreparedStatement pstmtInsert = con.prepareStatement(sqlCommandInsert, Statement.RETURN_GENERATED_KEYS);
 
             pstmtInsert.setString(1, ec.getUsername());
             pstmtInsert.setString(2, ec.getPassword());
@@ -65,8 +65,8 @@ public class UserDAO {
 
         try (Connection con = ConnectionManager.getConnection()) {
 
-            String sqlcommandSelect = "SELECT * FROM Users WHERE roleId = 2;";
-            PreparedStatement pstmtSelect = con.prepareStatement(sqlcommandSelect);
+            String sqlCommandSelect = "SELECT * FROM Users WHERE roleId = 2;";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
             ResultSet rs = pstmtSelect.executeQuery();
 
             while (rs.next()) {
@@ -84,8 +84,8 @@ public class UserDAO {
     public void updateEventCoordinator(EventCoordinator ec) throws Exception {
         try(Connection con = ConnectionManager.getConnection()){
 
-            String sqlcommandUpdate = "UPDATE Users SET username = ?, password = ? WHERE id = ?";
-            PreparedStatement pstmtUpdate = con.prepareStatement(sqlcommandUpdate);
+            String sqlCommandUpdate = "UPDATE Users SET username = ?, password = ? WHERE id = ?";
+            PreparedStatement pstmtUpdate = con.prepareStatement(sqlCommandUpdate);
 
             pstmtUpdate.setString(1, ec.getUsername());
             pstmtUpdate.setString(2, ec.getPassword());
@@ -97,11 +97,31 @@ public class UserDAO {
     public void deleteEventCoordinator(EventCoordinator ec) throws Exception{
         try (Connection con = ConnectionManager.getConnection()) {
 
-            String sqlcommandDelete = "DELETE FROM Users WHERE id=?;";
-            PreparedStatement pstmtDelete = con.prepareStatement(sqlcommandDelete);
+            String sqlCommandDelete = "DELETE FROM Users WHERE id=?;";
+            PreparedStatement pstmtDelete = con.prepareStatement(sqlCommandDelete);
 
             pstmtDelete.setInt(1, ec.getId());
             pstmtDelete.executeUpdate();
         }
+    }
+
+    public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
+        List<EventCoordinator> filtered = new ArrayList<>();
+
+        try(Connection con = ConnectionManager.getConnection()){
+
+            String sqlCommandFilter = "SELECT id, username, password FROM Users WHERE roleId = 2 AND username LIKE ?;";
+            PreparedStatement pstmtFilter = con.prepareStatement(sqlCommandFilter);
+            pstmtFilter.setString(1, query+"%");
+            ResultSet rs = pstmtFilter.executeQuery();
+
+            while(rs.next()){
+                filtered.add(new EventCoordinator(rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password")));
+            }
+        }
+
+        return filtered;
     }
 }

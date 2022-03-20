@@ -37,4 +37,9 @@ public class AdminModel {
         adminLogic.updateEventCoordinator(updatedEC);
         observableEventCoordinators.set(observableEventCoordinators.indexOf(oldEC), updatedEC);
     }
+
+    public void filterEventCoordinators(String query) throws Exception {
+        List<EventCoordinator> filtered = adminLogic.filterEventCoordinators(query);
+        observableEventCoordinators.setAll(filtered);
+    }
 }

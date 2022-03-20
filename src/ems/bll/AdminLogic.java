@@ -29,4 +29,11 @@ public class AdminLogic {
     public void updateEventCoordinator(EventCoordinator updatedEC) throws Exception {
         dataAccess.updateEventCoordinator(updatedEC);
     }
+
+    public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
+        if(!query.isEmpty()){
+            return dataAccess.filterEventCoordinators(query);
+        }
+        return readAllEventCoordinators();
+    }
 }

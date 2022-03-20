@@ -3,12 +3,12 @@ package ems.gui.controller;
 import ems.be.EventCoordinator;
 import ems.gui.model.AdminModel;
 import ems.gui.view.ECDialog;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -34,10 +34,6 @@ public class AdminPageController implements Initializable {
         }
     }
 
-
-    public void handleFilter(ActionEvent event) {
-
-    }
 
     public void handleCreate(MouseEvent mouseEvent) {
         try {
@@ -76,6 +72,15 @@ public class AdminPageController implements Initializable {
                     e.printStackTrace();
                 }
             });
+        }
+    }
+
+    public void handleFilter(KeyEvent event) {
+        try{
+            String query = txfFilter.getText();
+            adminModel.filterEventCoordinators(query);
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

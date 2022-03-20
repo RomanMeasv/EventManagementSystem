@@ -47,4 +47,9 @@ public class DAFacade implements IDataAccess {
     public void updateEventCoordinator(EventCoordinator ec) throws Exception {
         userDAO.updateEventCoordinator(ec);
     }
+
+    @Override
+    public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
+        return userDAO.filterEventCoordinators(query);
+    }
 }

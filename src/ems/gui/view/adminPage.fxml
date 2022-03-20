@@ -31,7 +31,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="txfFilter" onAction="#handleFilter" promptText="filter" VBox.vgrow="NEVER" />
+                  <TextField fx:id="txfFilter" onKeyTyped="#handleFilter" promptText="filter" VBox.vgrow="NEVER" />
                </children>
             </VBox>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0">

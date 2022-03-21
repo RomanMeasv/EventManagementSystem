@@ -77,34 +77,34 @@
 
 /* TABLE VIEW BUTTONS */
 .btnCreate {
-    -fx-image: url("../resources/CreateIcoDefault.png");
+    -fx-image: url("../resources/images/CreateIcoDefault.png");
 }
 
 .btnDelete {
-    -fx-image: url("../resources/DeleteIcoDefault.png");
+    -fx-image: url("../resources/images/DeleteIcoDefault.png");
 }
 
 .btnUpdate {
-    -fx-image: url("../resources/UpdateIcoDefault.png");
+    -fx-image: url("../resources/images/UpdateIcoDefault.png");
 }
 
 .btnCreate:hover {
-    -fx-image: url("../resources/CreateIcoActive.png");
+    -fx-image: url("../resources/images/CreateIcoActive.png");
 }
 
 .btnDelete:hover {
-    -fx-image: url("../resources/DeleteIcoActive.png");
+    -fx-image: url("../resources/images/DeleteIcoActive.png");
 }
 
 .btnUpdate:hover {
-    -fx-image: url("../resources/UpdateIcoActive.png");
+    -fx-image: url("../resources/images/UpdateIcoActive.png");
 }
 
 /* TABLE VIEW FILTER */
 .text-field {
     -fx-background-color: #F7B449;
     -fx-background-radius: 0 0 10px 10px;
-    -fx-prompt-text-fill: rgba(0, 0, 0, 0.7);
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.85);
     -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 4.0, 4.0);
 }
 

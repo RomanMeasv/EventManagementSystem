@@ -25,7 +25,7 @@ public class LoginPageController {
 
     UserModel userModel;
 
-    public LoginPageController() throws Exception {
+    public LoginPageController() {
 
         userModel = new UserModel();
     }

@@ -1,19 +1,19 @@
 package ems.gui.model;
 
 import ems.be.EventCoordinator;
-import ems.bll.AdminLogic;
+import ems.bll.EventCoordinatorLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.List;
 
-public class AdminModel {
-    private AdminLogic adminLogic;
+public class EventCoordinatorModel {
+    private EventCoordinatorLogic eventCoordinatorLogic;
     private ObservableList<EventCoordinator> observableEventCoordinators;
 
-    public AdminModel() throws Exception {
-        adminLogic = new AdminLogic();
-        List<EventCoordinator> list = adminLogic.readAllEventCoordinators();
+    public EventCoordinatorModel() throws Exception {
+        eventCoordinatorLogic = new EventCoordinatorLogic();
+        List<EventCoordinator> list = eventCoordinatorLogic.readAllEventCoordinators();
         observableEventCoordinators = FXCollections.observableList(list);
     }
 
@@ -22,24 +22,24 @@ public class AdminModel {
     }
 
     public void createEventCoordinator(EventCoordinator ec) throws Exception {
-        EventCoordinator created = adminLogic.createEventCoordinator(ec);
+        EventCoordinator created = eventCoordinatorLogic.createEventCoordinator(ec);
         if (created != null) {
             observableEventCoordinators.add(created);
         }
     }
 
     public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
-        adminLogic.deleteEventCoordinator(ec);
+        eventCoordinatorLogic.deleteEventCoordinator(ec);
         observableEventCoordinators.remove(ec);
     }
 
     public void updateEventCoordinator(EventCoordinator oldEC, EventCoordinator updatedEC) throws Exception {
-        adminLogic.updateEventCoordinator(updatedEC);
+        eventCoordinatorLogic.updateEventCoordinator(updatedEC);
         observableEventCoordinators.set(observableEventCoordinators.indexOf(oldEC), updatedEC);
     }
 
     public void filterEventCoordinators(String query) throws Exception {
-        List<EventCoordinator> filtered = adminLogic.filterEventCoordinators(query);
+        List<EventCoordinator> filtered = eventCoordinatorLogic.filterEventCoordinators(query);
         observableEventCoordinators.setAll(filtered);
     }
 }

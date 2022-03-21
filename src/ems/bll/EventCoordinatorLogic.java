@@ -6,11 +6,11 @@ import ems.dal.IDataAccess;
 
 import java.util.List;
 
-public class AdminLogic {
+public class EventCoordinatorLogic {
 
     IDataAccess dataAccess;
 
-    public AdminLogic() {
+    public EventCoordinatorLogic() {
         dataAccess = DAFacade.getInstance();
     }
 

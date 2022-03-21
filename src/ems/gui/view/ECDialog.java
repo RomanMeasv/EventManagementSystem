@@ -14,28 +14,23 @@ import java.io.IOException;
 public class ECDialog extends Dialog<EventCoordinator> {
     private ECDialogController controller;
 
-    public ECDialog() {
+    public ECDialog() throws Exception {
         super();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ecDialog.fxml"));
-            DialogPane dp = loader.load();
-            controller = loader.getController();
-            this.setTitle("Create/Edit EC");
-            this.setDialogPane(dp);
-            this.setResultConverter(buttonType -> {
-                if (buttonType == ButtonType.APPLY) {
-                    EventCoordinator created = controller.createFromFields();
-                    return created;
-                }
-                return null;
-            });
-
-        } catch (IOException ioex) {
-            //System.out.println("Couldn't load view!");
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ecDialog.fxml"));
+        DialogPane dp = loader.load();
+        controller = loader.getController();
+        this.setTitle("Create/Edit EC");
+        this.setDialogPane(dp);
+        this.setResultConverter(buttonType -> {
+            if (buttonType == ButtonType.APPLY) {
+                EventCoordinator created = controller.createFromFields();
+                return created;
+            }
+            return null;
+        });
     }
 
-    public void setFields(EventCoordinator ec){
+    public void setFields(EventCoordinator ec) {
         controller.setECName(ec.getUsername());
         controller.setECPassword(ec.getPassword());
     }

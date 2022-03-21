@@ -82,7 +82,7 @@ public class UserDAO {
     }
 
     public void updateEventCoordinator(EventCoordinator ec) throws Exception {
-        try(Connection con = ConnectionManager.getConnection()){
+        try (Connection con = ConnectionManager.getConnection()) {
 
             String sqlCommandUpdate = "UPDATE Users SET username = ?, password = ? WHERE id = ?";
             PreparedStatement pstmtUpdate = con.prepareStatement(sqlCommandUpdate);
@@ -94,7 +94,7 @@ public class UserDAO {
         }
     }
 
-    public void deleteEventCoordinator(EventCoordinator ec) throws Exception{
+    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
         try (Connection con = ConnectionManager.getConnection()) {
 
             String sqlCommandDelete = "DELETE FROM Users WHERE id=?;";
@@ -108,14 +108,14 @@ public class UserDAO {
     public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
         List<EventCoordinator> filtered = new ArrayList<>();
 
-        try(Connection con = ConnectionManager.getConnection()){
+        try (Connection con = ConnectionManager.getConnection()) {
 
             String sqlCommandFilter = "SELECT id, username, password FROM Users WHERE roleId = 2 AND username LIKE ?;";
             PreparedStatement pstmtFilter = con.prepareStatement(sqlCommandFilter);
-            pstmtFilter.setString(1, query+"%");
+            pstmtFilter.setString(1, query + "%");
             ResultSet rs = pstmtFilter.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 filtered.add(new EventCoordinator(rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("password")));

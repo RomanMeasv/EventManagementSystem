@@ -19,17 +19,17 @@
                <children>
                   <ImageView fx:id="ivEvents" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" styleClass="events-active">
                      <image>
-                        <Image url="@../resources/EventsIcoDefault.png" />
+                        <Image url="@../resources/images/EventsIcoDefault.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="ivTickets" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#changeToTicketPage" pickOnBounds="true" preserveRatio="true" styleClass="tickets-default">
                      <image>
-                        <Image url="@../resources/TicketsIcoDefault.png" />
+                        <Image url="@../resources/images/TicketsIcoDefault.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="ivCustomer" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#changeToCustomerPage" pickOnBounds="true" preserveRatio="true" styleClass="customer-default">
                      <image>
-                        <Image url="@../resources/UserIcoDefault.png" />
+                        <Image url="@../resources/images/UserIcoDefault.png" />
                      </image>
                   </ImageView>
                </children>

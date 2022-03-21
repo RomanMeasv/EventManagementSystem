@@ -31,24 +31,24 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="txfFilter" onKeyTyped="#handleFilter" promptText="filter" VBox.vgrow="NEVER" />
+                  <TextField fx:id="txfFilter" onKeyTyped="#handleFilter" promptText="Filter..." VBox.vgrow="NEVER" />
                </children>
             </VBox>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0">
                <children>
                   <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleCreate" pickOnBounds="true" preserveRatio="true" styleClass="btnCreate">
                      <image>
-                        <Image url="@resources/CreateIcoDefault.png" />
+                        <Image url="@resources/images/CreateIcoDefault.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleDelete" pickOnBounds="true" preserveRatio="true" styleClass="btnDelete">
                      <image>
-                        <Image url="@resources/DeleteIcoDefault.png" />
+                        <Image url="@resources/images/DeleteIcoDefault.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleUpdate" pickOnBounds="true" preserveRatio="true" styleClass="btnUpdate">
                      <image>
-                        <Image url="@resources/UpdateIcoDefault.png" />
+                        <Image url="@resources/images/UpdateIcoDefault.png" />
                      </image>
                   </ImageView>
                </children>

@@ -6,7 +6,7 @@ import ems.bll.UserLogic;
 public class UserModel {
     private UserLogic userLogic;
 
-    public UserModel() throws Exception {
+    public UserModel() {
          userLogic = new UserLogic();
     }
 

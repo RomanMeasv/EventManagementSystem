@@ -1,7 +1,7 @@
 package ems.gui.controller;
 
 import ems.be.EventCoordinator;
-import ems.gui.model.AdminModel;
+import ems.gui.model.EventCoordinatorModel;
 import ems.gui.view.ECDialog;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -21,14 +21,14 @@ public class AdminPageController implements Initializable {
     public TableColumn<EventCoordinator, String> colCoordinators;
     public TextField txfFilter;
 
-    private AdminModel adminModel;
+    private EventCoordinatorModel eventCoordinatorModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            adminModel = new AdminModel();
+            eventCoordinatorModel = new EventCoordinatorModel();
             colCoordinators.setCellValueFactory(new PropertyValueFactory<>("username"));
-            tbvCoordinators.setItems(adminModel.getObservableEventCoordinators());
+            tbvCoordinators.setItems(eventCoordinatorModel.getObservableEventCoordinators());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class AdminPageController implements Initializable {
             ECDialog dialog = new ECDialog();
             Optional<EventCoordinator> result = dialog.showAndWait();
             if (result.isPresent()) {
-                adminModel.createEventCoordinator(result.get());
+                eventCoordinatorModel.createEventCoordinator(result.get());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class AdminPageController implements Initializable {
         try {
             EventCoordinator selected = tbvCoordinators.getSelectionModel().getSelectedItem();
             if (selected != null) {
-                adminModel.deleteEventCoordinator(selected);
+                eventCoordinatorModel.deleteEventCoordinator(selected);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,26 +59,28 @@ public class AdminPageController implements Initializable {
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {
-        EventCoordinator oldEC = tbvCoordinators.getSelectionModel().getSelectedItem();
-        if (oldEC != null) {
-            ECDialog dialog = new ECDialog();
-            dialog.setFields(oldEC);
-            Optional<EventCoordinator> result = dialog.showAndWait();
-            result.ifPresent(updatedEC -> {
-                try {
+        try{
+            EventCoordinator oldEC = tbvCoordinators.getSelectionModel().getSelectedItem();
+            if (oldEC != null) {
+                ECDialog dialog = new ECDialog();
+                dialog.setFields(oldEC);
+                Optional<EventCoordinator> result = dialog.showAndWait();
+                if(result.isPresent()){
+                    EventCoordinator updatedEC = result.get();
                     updatedEC.setId(oldEC.getId());
-                    adminModel.updateEventCoordinator(oldEC, updatedEC);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    eventCoordinatorModel.updateEventCoordinator(oldEC, updatedEC);
                 }
-            });
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     public void handleFilter(KeyEvent event) {
         try{
             String query = txfFilter.getText();
-            adminModel.filterEventCoordinators(query);
+            eventCoordinatorModel.filterEventCoordinators(query);
         } catch (Exception e){
             e.printStackTrace();
         }

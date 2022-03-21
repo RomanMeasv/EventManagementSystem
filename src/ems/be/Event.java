@@ -13,7 +13,7 @@ public class Event {
     private String locationGuidance;
 
 
-    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, String name1) {
+    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance) {
         this.name = name;
         this.description = description;
         this.notes = notes;
@@ -21,7 +21,6 @@ public class Event {
         this.end = end;
         this.location = location;
         this.locationGuidance = locationGuidance;
-        this.name = name1;
     }
 
     public Event(int id, String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance) {

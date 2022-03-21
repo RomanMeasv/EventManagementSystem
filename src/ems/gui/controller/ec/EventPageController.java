@@ -46,16 +46,6 @@ public class EventPageController implements Initializable {
         ObservableList<TicketType> ticketTypeList = FXCollections.observableArrayList();
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
-        for (int i = 0; i < 100; i++) {
-            Event e = new Event("Event" + i);
-            TicketType t = new TicketType("TicketType" + i);
-            Customer c = new Customer("Customer" + i);
-
-            eventList.add(e);
-            ticketTypeList.add(t);
-            customerList.add(c);
-        }
-
         tvEvents.setItems(eventList);
         tvTicketTypes.setItems(ticketTypeList);
         tvCustomers.setItems(customerList);

@@ -1,3 +1,5 @@
+/*
+
 package ems.gui.controller.ec;
 
 import ems.be.Customer;
@@ -103,3 +105,5 @@ public class TicketPageController implements Initializable {
         }
     }
 }
+*/
+

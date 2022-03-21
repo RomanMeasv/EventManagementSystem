@@ -33,4 +33,16 @@ public class EventDialog extends Dialog<Event> {
             //System.out.println("Couldn't load view!");
         }
     }
+
+   public void setFields(Event e){
+        controller.setEventName(e.getName());
+        controller.setEventDescription(e.getDescription());
+        controller.setNotes(e.getNotes());
+        controller.setStartDate(e.getStart().toLocalDate());
+        controller.setStartTime(e.getStart().toLocalTime().toString());
+        controller.setEndDate(e.getEnd().toLocalDate());
+        controller.setEndTime(e.getEnd().toLocalTime().toString());
+        controller.setLocation(e.getLocation());
+        controller.setLocationGuidance(e.getLocationGuidance());
+   }
 }

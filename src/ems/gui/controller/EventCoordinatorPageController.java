@@ -2,6 +2,7 @@ package ems.gui.controller;
 
 import ems.be.Event;
 import ems.gui.model.EventModel;
+import ems.gui.view.dialogs.ECDialog;
 import ems.gui.view.dialogs.EventDialog;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -11,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import javax.management.openmbean.OpenMBeanAttributeInfo;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -49,7 +51,7 @@ public class EventCoordinatorPageController implements Initializable {
     public void handleDelete(MouseEvent mouseEvent) {
         try {
             Event selected = tbvEvents.getSelectionModel().getSelectedItem();
-            if(selected != null){
+            if (selected != null) {
                 eventModel.deleteEvent(selected);
             }
         } catch (Exception e) {
@@ -59,7 +61,21 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {
-
+        try {
+            Event oldEvent = tbvEvents.getSelectionModel().getSelectedItem();
+            if (oldEvent != null) {
+                EventDialog dialog = new EventDialog();
+                dialog.setFields(oldEvent);
+                Optional<Event> result = dialog.showAndWait();
+                if (result.isPresent()) {
+                    Event updatedEvent = result.get();
+                    updatedEvent.setId(oldEvent.getId());
+                    eventModel.updateEvent(oldEvent, updatedEvent);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

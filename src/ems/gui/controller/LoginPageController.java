@@ -45,7 +45,7 @@ public class LoginPageController {
                 stage.setScene(scene);
                 stage.show();
             } else if (loggedUser.getClass().equals(EventCoordinator.class)) {
-                Parent root = FXMLLoader.load(getClass().getResource("../view/coordinatorPage.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../view/eventCoordinatorPage.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

@@ -11,11 +11,13 @@ public class EventModel {
     private EventLogic eventLogic;
     private ObservableList<Event> observableAllEvents;
 
+
     public EventModel() throws Exception {
         eventLogic = new EventLogic();
         List<Event> list = eventLogic.readAllEvents();
         observableAllEvents = FXCollections.observableList(list);
     }
+
 
     public void createEvent(Event e) throws Exception {
         eventLogic.createEvent(e);

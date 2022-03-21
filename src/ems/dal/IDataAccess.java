@@ -17,6 +17,6 @@ public interface IDataAccess {
     Event createEvent (Event e) throws Exception;
     void deleteEvent (Event e) throws Exception;
     List<Event> readAllEvents() throws Exception;
-
+    void updateEvent(Event e) throws Exception;
 
 }

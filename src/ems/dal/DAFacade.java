@@ -58,4 +58,14 @@ public class DAFacade implements IDataAccess {
     public Event createEvent(Event e) throws Exception {
         return eventDAO.createEvent(e);
     }
+
+    @Override
+    public void deleteEvent(Event e) throws Exception {
+
+    }
+
+    @Override
+    public List<Event> readAllEvents() throws Exception {
+        return null;
+    }
 }

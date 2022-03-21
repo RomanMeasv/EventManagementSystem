@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -22,7 +23,13 @@ public class EventCoordinatorPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        eventModel = new EventModel();
+        try {
+            eventModel = new EventModel();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        colEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvEvents.setItems(eventModel.getObservableAllEvents());
     }
 
     public void handleCreate(MouseEvent mouseEvent) {
@@ -38,7 +45,6 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleDelete(MouseEvent mouseEvent) {
-
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {

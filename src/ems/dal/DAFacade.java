@@ -4,6 +4,7 @@ import ems.be.Event;
 import ems.be.EventCoordinator;
 import ems.be.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAFacade implements IDataAccess {
@@ -55,6 +56,11 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
+    public List<Event> readAllEvents() throws Exception {
+        return new ArrayList<>();
+    }
+
+    @Override
     public Event createEvent(Event e) throws Exception {
         return eventDAO.createEvent(e);
     }
@@ -62,10 +68,5 @@ public class DAFacade implements IDataAccess {
     @Override
     public void deleteEvent(Event e) throws Exception {
 
-    }
-
-    @Override
-    public List<Event> readAllEvents() throws Exception {
-        return null;
     }
 }

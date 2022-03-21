@@ -1,15 +1,12 @@
-package ems.gui.view;
+package ems.gui.view.dialogs;
 
 
 import ems.be.EventCoordinator;
-import ems.be.User;
 import ems.gui.controller.ECDialogController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
-
-import java.io.IOException;
 
 public class ECDialog extends Dialog<EventCoordinator> {
     private ECDialogController controller;

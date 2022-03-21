@@ -9,28 +9,28 @@ import java.util.List;
 
 public class EventModel {
     private EventLogic eventLogic;
-    private ObservableList<Event> observableAllEvents;
+    private ObservableList<Event> observableEvents;
 
 
     public EventModel() throws Exception {
         eventLogic = new EventLogic();
         List<Event> list = eventLogic.readAllEvents();
-        observableAllEvents = FXCollections.observableList(list);
+        observableEvents = FXCollections.observableList(list);
     }
 
+
+    public ObservableList<Event> getObservableEvents() {
+        return observableEvents;
+    }
 
     public void createEvent(Event e) throws Exception {
-        eventLogic.createEvent(e);
-        observableAllEvents.add(e);
+        Event created = eventLogic.createEvent(e);
+        if(created != null){
+            observableEvents.add(created);
+        }
     }
 
-    public void deleteEvent(Event e) throws Exception{
+    public void deleteEvent(Event e) throws Exception {
         //eventLogic.deleteEvent(e);
     }
-
-    public ObservableList<Event> getObservableAllEvents(){
-        return observableAllEvents;
-    }
-
-
 }

@@ -20,7 +20,7 @@
       <ButtonType fx:constant="CANCEL" />
    </buttonTypes>
    <stylesheets>
-      <URL value="@styles/fontStyle.css" />
-      <URL value="@styles/ecDialogStyle.css" />
+      <URL value="@../styles/fontStyle.css" />
+      <URL value="@../styles/ecDialogStyle.css" />
    </stylesheets>
 </DialogPane>

@@ -9,31 +9,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<DialogPane prefHeight="136.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane prefHeight="136.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventDialogController">
    <content>
       <VBox prefHeight="159.0" prefWidth="360.0">
          <children>
-            <TextField promptText="Event name" />
-            <TextField promptText="Description" />
-            <TextField promptText="Optional Notes" />
+            <TextField fx:id="txfEventName" promptText="Event name" />
+            <TextField fx:id="txfEventDescription" promptText="Description" />
+            <TextField fx:id="txfNotes" promptText="Optional Notes" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField promptText="Start time" />
-                  <DatePicker promptText="Start date" />
+                  <TextField fx:id="txfStartTime" promptText="Start time hh:mm" />
+                  <DatePicker fx:id="dtpStartDate" promptText="Start date" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField promptText="End time" />
-                  <DatePicker promptText="End date" />
+                  <TextField fx:id="txfEndTime" promptText="End time hh:mm" />
+                  <DatePicker fx:id="dtpEndDate" promptText="End date" />
                </children>
             </HBox>
-            <TextField promptText="Location" />
-            <TextField promptText="Location Guidence" />
+            <TextField fx:id="txfLocation" promptText="Location" />
+            <TextField fx:id="txfLocationGuidance" promptText="Location Guidence" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="ltvTicketTypes" prefHeight="200.0" prefWidth="200.0" />
                   <Button mnemonicParsing="false" text="Add Ticket Type" />
                </children>
             </HBox>

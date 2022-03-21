@@ -2,7 +2,7 @@ package ems.gui.controller;
 
 import ems.be.Event;
 import ems.gui.model.EventModel;
-import ems.gui.view.dialogs.CreateEventDialog;
+import ems.gui.view.dialogs.EventDialog;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,7 +16,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
+
     private EventModel eventModel;
+
     public TextField txfFilter;
     public TableView<Event> tbvEvents;
     public TableColumn<Event, String> colEvents;
@@ -29,11 +31,11 @@ public class EventCoordinatorPageController implements Initializable {
             e.printStackTrace();
         }
         colEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tbvEvents.setItems(eventModel.getObservableAllEvents());
+        tbvEvents.setItems(eventModel.getObservableEvents());
     }
 
     public void handleCreate(MouseEvent mouseEvent) {
-        CreateEventDialog dialog = new CreateEventDialog();
+        EventDialog dialog = new EventDialog();
         Optional<Event> result = dialog.showAndWait();
         result.ifPresent(response -> {
             try {

@@ -13,8 +13,8 @@ public class EventLogic {
         dataAccess = DAFacade.getInstance();
     }
 
-    public void createEvent(Event e) throws Exception {
-        dataAccess.createEvent(e);
+    public Event createEvent(Event e) throws Exception {
+        return dataAccess.createEvent(e);
     }
 
     public List<Event> readAllEvents() throws Exception {

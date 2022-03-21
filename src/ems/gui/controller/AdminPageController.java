@@ -2,7 +2,7 @@ package ems.gui.controller;
 
 import ems.be.EventCoordinator;
 import ems.gui.model.EventCoordinatorModel;
-import ems.gui.view.ECDialog;
+import ems.gui.view.dialogs.ECDialog;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;

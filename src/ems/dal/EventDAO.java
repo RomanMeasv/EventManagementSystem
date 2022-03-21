@@ -1,7 +1,6 @@
 package ems.dal;
 
 import ems.be.Event;
-import ems.be.EventCoordinator;
 
 import java.sql.*;
 

@@ -82,4 +82,23 @@ public class EventDAO {
             pstmtDelete.executeUpdate();
         }
     }
+
+    public void updateEvent(Event e) throws Exception{
+        try (Connection con = ConnectionManager.getConnection()) {
+
+            String sqlCommandUpdate = "UPDATE Events SET [name]=?, [description]=?, notes=?, [start]=?, [end]=?, location=?, locationGuidance=? WHERE id = ?";
+            PreparedStatement pstmtUpdate = con.prepareStatement(sqlCommandUpdate);
+
+            pstmtUpdate.setString(1, e.getName());
+            pstmtUpdate.setString(2, e.getDescription());
+            pstmtUpdate.setString(3, e.getNotes());
+            pstmtUpdate.setTimestamp(4, Timestamp.valueOf(e.getStart()));
+            pstmtUpdate.setTimestamp(5, Timestamp.valueOf(e.getEnd()));
+            pstmtUpdate.setString(6, e.getLocation());
+            pstmtUpdate.setString(7, e.getLocationGuidance());
+            pstmtUpdate.setInt(8, e.getId());
+
+            pstmtUpdate.executeUpdate();
+        }
+    }
 }

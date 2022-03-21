@@ -9,9 +9,9 @@ import javafx.scene.control.DialogPane;
 
 import java.io.IOException;
 
-public class CreateMovieDialog extends Dialog<Event> {
+public class CreateEventDialog extends Dialog<Event> {
     public CreateEventViewController controller;
-        public CreateMovieDialog(){
+        public CreateEventDialog(){
             super();
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("createEventDialogView.fxml"));
@@ -21,7 +21,9 @@ public class CreateMovieDialog extends Dialog<Event> {
                 this.setDialogPane(dp);
                 this.setResultConverter(buttonType -> {
                     if(buttonType == ButtonType.APPLY){
-                        return new Event(controller.getEventName());
+                        return new Event(controller.getEventName(), controller.getEventDescription(), controller.getNotes(),
+                                            controller.getStart(), controller.getEnd(), controller.getLocation(),
+                                            controller.getLocationGuidance());
                     }
                     return null;
                 });

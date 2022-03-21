@@ -1,5 +1,6 @@
 package ems.dal;
 
+import ems.be.Event;
 import ems.be.EventCoordinator;
 import ems.be.User;
 
@@ -51,5 +52,10 @@ public class DAFacade implements IDataAccess {
     @Override
     public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
         return userDAO.filterEventCoordinators(query);
+    }
+
+    @Override
+    public Event createEvent(Event e) throws Exception {
+        return eventDAO.createEvent(e);
     }
 }

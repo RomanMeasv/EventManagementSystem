@@ -48,19 +48,22 @@ public class EventCoordinatorPageController implements Initializable {
 
     public void handleDelete(MouseEvent mouseEvent) {
         try {
-            eventModel.deleteEvent(tbvEvents.getSelectionModel().getSelectedItem());
+            Event selected = tbvEvents.getSelectionModel().getSelectedItem();
+            if(selected != null){
+                eventModel.deleteEvent(selected);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {
+
 
     }
 
     public void handleFilter(KeyEvent keyEvent) {
 
     }
-
-
 }

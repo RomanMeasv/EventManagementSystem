@@ -24,7 +24,7 @@ public class ConnectionManager {
         return instance == null ? instance = new ConnectionManager() : instance;
     }
 
-    public static Connection getConnection() throws SQLServerException
+    public static Connection getConnection() throws Exception
     {
         return getInstance().ds.getConnection();
     }

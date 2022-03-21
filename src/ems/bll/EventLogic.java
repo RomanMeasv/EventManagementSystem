@@ -25,7 +25,7 @@ public class EventLogic {
         dataAccess.deleteEvent(e);
     }
 
-    public void updateEvent(Event updatedEvent) {
+    public void updateEvent(Event updatedEvent) throws Exception {
         dataAccess.updateEvent(updatedEvent);
     }
 }

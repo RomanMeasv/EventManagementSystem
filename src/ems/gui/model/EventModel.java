@@ -35,7 +35,7 @@ public class EventModel {
         observableEvents.remove(e);
     }
 
-    public void updateEvent(Event oldEvent, Event updatedEvent) {
+    public void updateEvent(Event oldEvent, Event updatedEvent) throws Exception {
         eventLogic.updateEvent(updatedEvent);
         observableEvents.set(observableEvents.indexOf(oldEvent), updatedEvent);
     }

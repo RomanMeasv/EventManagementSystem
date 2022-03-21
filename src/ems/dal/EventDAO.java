@@ -49,13 +49,13 @@ public class EventDAO {
     public List<Event> readAllEvents() throws Exception {
         List<Event> allEvents = new ArrayList<>();
 
-        try(Connection con = ConnectionManager.getConnection()){
+        try (Connection con = ConnectionManager.getConnection()) {
 
             String sqlCommandSelect = "SELECT * FROM Events;";
             PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
             ResultSet rs = pstmtSelect.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 allEvents.add(
                         new Event(
                                 rs.getInt("id"),

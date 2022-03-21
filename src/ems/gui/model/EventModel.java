@@ -25,7 +25,7 @@ public class EventModel {
 
     public void createEvent(Event e) throws Exception {
         Event created = eventLogic.createEvent(e);
-        if(created != null){
+        if (created != null) {
             observableEvents.add(created);
         }
     }

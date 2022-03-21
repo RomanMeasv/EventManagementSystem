@@ -57,7 +57,6 @@ public class EventCoordinatorPageController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {

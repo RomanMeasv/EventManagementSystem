@@ -20,4 +20,8 @@ public class EventLogic {
     public List<Event> readAllEvents() throws Exception {
         return dataAccess.readAllEvents();
     }
+
+    public void deleteEvent(Event e) throws Exception {
+        dataAccess.deleteEvent(e);
+    }
 }

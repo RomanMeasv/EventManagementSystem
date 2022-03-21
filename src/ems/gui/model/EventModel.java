@@ -31,6 +31,7 @@ public class EventModel {
     }
 
     public void deleteEvent(Event e) throws Exception {
-        //eventLogic.deleteEvent(e);
+        eventLogic.deleteEvent(e);
+        observableEvents.remove(e);
     }
 }

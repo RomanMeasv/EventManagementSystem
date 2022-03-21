@@ -47,15 +47,15 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleDelete(MouseEvent mouseEvent) {
+
     }
 
     public void handleUpdate(MouseEvent mouseEvent) {
+
 
     }
 
     public void handleFilter(KeyEvent keyEvent) {
 
     }
-
-
 }

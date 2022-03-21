@@ -1,8 +1,13 @@
 package ems.dal;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import ems.be.Event;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventDAO {
     public Event createEvent(Event e) throws Exception {
@@ -39,5 +44,31 @@ public class EventDAO {
         }
 
         return eCreated;
+    }
+
+    public List<Event> readAllEvents() throws Exception {
+        List<Event> allEvents = new ArrayList<>();
+
+        try(Connection con = ConnectionManager.getConnection()){
+
+            String sqlCommandSelect = "SELECT * FROM Events;";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
+            ResultSet rs = pstmtSelect.executeQuery();
+
+            while(rs.next()){
+                allEvents.add(
+                        new Event(
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("description"),
+                                rs.getString("notes"),
+                                rs.getTimestamp("start").toLocalDateTime(),
+                                rs.getTimestamp("end").toLocalDateTime(),
+                                rs.getString("location"),
+                                rs.getString("locationGuidance")));
+            }
+        }
+
+        return allEvents;
     }
 }

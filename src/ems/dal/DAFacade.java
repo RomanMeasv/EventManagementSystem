@@ -41,13 +41,13 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
-        userDAO.deleteEventCoordinator(ec);
+    public void updateEventCoordinator(EventCoordinator ec) throws Exception {
+        userDAO.updateEventCoordinator(ec);
     }
 
     @Override
-    public void updateEventCoordinator(EventCoordinator ec) throws Exception {
-        userDAO.updateEventCoordinator(ec);
+    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
+        userDAO.deleteEventCoordinator(ec);
     }
 
     @Override
@@ -56,13 +56,13 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public List<Event> readAllEvents() throws Exception {
-        return new ArrayList<>();
+    public Event createEvent(Event e) throws Exception {
+        return eventDAO.createEvent(e);
     }
 
     @Override
-    public Event createEvent(Event e) throws Exception {
-        return eventDAO.createEvent(e);
+    public List<Event> readAllEvents() throws Exception {
+        return eventDAO.readAllEvents();
     }
 
     @Override

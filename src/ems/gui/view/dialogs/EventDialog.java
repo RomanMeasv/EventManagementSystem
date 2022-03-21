@@ -10,7 +10,7 @@ import javafx.scene.control.DialogPane;
 import java.io.IOException;
 
 public class EventDialog extends Dialog<Event> {
-    public EventDialogController controller;
+    private EventDialogController controller;
 
     public EventDialog() {
         super();

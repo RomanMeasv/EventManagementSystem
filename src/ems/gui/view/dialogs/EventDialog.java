@@ -44,5 +44,8 @@ public class EventDialog extends Dialog<Event> {
         controller.setEndTime(e.getEnd().toLocalTime().toString());
         controller.setLocation(e.getLocation());
         controller.setLocationGuidance(e.getLocationGuidance());
+
+        controller.startDateLimitation();
+        controller.endDateLimitation();
    }
 }

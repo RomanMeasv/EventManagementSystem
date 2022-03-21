@@ -19,13 +19,13 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="txfStartTime" promptText="Start time hh:mm" />
-                  <DatePicker fx:id="dtpStartDate" promptText="Start date" />
+                  <DatePicker fx:id="dtpStartDate" onAction="#startDateChangeHandle" promptText="Start date" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="txfEndTime" promptText="End time hh:mm" />
-                  <DatePicker fx:id="dtpEndDate" promptText="End date" />
+                  <DatePicker fx:id="dtpEndDate" onAction="#endDateChangeHandle" promptText="End date" />
                </children>
             </HBox>
             <TextField fx:id="txfLocation" promptText="Location" />

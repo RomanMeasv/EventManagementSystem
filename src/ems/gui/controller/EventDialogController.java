@@ -1,5 +1,6 @@
 package ems.gui.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DateCell;
@@ -24,23 +25,7 @@ public class EventDialogController implements Initializable {
     private DatePicker dtpEndDate;
 
     public void initialize(URL location, ResourceBundle resources) {
-        LocalDate maxDate = LocalDate.now();
-        dtpStartDate.setDayCellFactory(d ->
-                new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
-                        setDisable(item.isAfter(maxDate));
-                    }
-                });
-        dtpStartDate.setDayCellFactory(d ->
-                new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
-                        setDisable(item.isAfter(maxDate));
-                    }
-                });
+
     }
 
     public String getEventName() {
@@ -116,5 +101,61 @@ public class EventDialogController implements Initializable {
 
     public void handleAddTicketType() {
 
+    }
+
+    public void startDateChangeHandle(ActionEvent event) {
+        startDateLimitation();
+    }
+
+    public void endDateChangeHandle(ActionEvent event) {
+        endDateLimitation();
+    }
+
+    public void startDateLimitation(){
+        LocalDate maxDate = LocalDate.now();
+
+        if (dtpStartDate.getValue() == null) {
+            dtpEndDate.setDayCellFactory(d ->
+                    new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                            setDisable(item.isBefore(maxDate));
+                        }
+                    });
+        } else {
+            dtpEndDate.setDayCellFactory(d ->
+                    new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                            setDisable(item.isBefore(dtpStartDate.getValue()));
+                        }
+                    });
+        }
+    }
+
+    public void endDateLimitation(){
+        LocalDate maxDate = LocalDate.now();
+
+        if (dtpEndDate.getValue() == null) {
+            dtpStartDate.setDayCellFactory(d ->
+                    new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                            setDisable(item.isAfter(maxDate));
+                        }
+                    });
+        } else {
+            dtpStartDate.setDayCellFactory(d ->
+                    new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                            setDisable(item.isAfter(dtpEndDate.getValue()));
+                        }
+                    });
+        }
     }
 }

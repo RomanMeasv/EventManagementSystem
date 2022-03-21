@@ -67,6 +67,6 @@ public class DAFacade implements IDataAccess {
 
     @Override
     public void deleteEvent(Event e) throws Exception {
-
+        eventDAO.deleteEvent(e);
     }
 }

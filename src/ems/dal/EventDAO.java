@@ -71,4 +71,15 @@ public class EventDAO {
 
         return allEvents;
     }
+
+    public void deleteEvent(Event e) throws Exception {
+        try (Connection con = ConnectionManager.getConnection()) {
+
+            String sqlCommandDelete = "DELETE FROM Events WHERE id=?;";
+            PreparedStatement pstmtDelete = con.prepareStatement(sqlCommandDelete);
+
+            pstmtDelete.setInt(1, e.getId());
+            pstmtDelete.executeUpdate();
+        }
+    }
 }

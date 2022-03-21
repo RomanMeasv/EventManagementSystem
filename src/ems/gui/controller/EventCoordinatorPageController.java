@@ -14,11 +14,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class CoordinatorPageController implements Initializable {
-    private EventModel  eventModel;
+public class EventCoordinatorPageController implements Initializable {
+    private EventModel eventModel;
     public TextField txfFilter;
-    public TableView tbvEvents;
-    public TableColumn colEvents;
+    public TableView<Event> tbvEvents;
+    public TableColumn<Event, String> colEvents;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -28,11 +28,10 @@ public class CoordinatorPageController implements Initializable {
     public void handleCreate(MouseEvent mouseEvent) {
         CreateEventDialog dialog = new CreateEventDialog();
         Optional<Event> result = dialog.showAndWait();
-        result.ifPresent(response ->{
-            try{
+        result.ifPresent(response -> {
+            try {
                 eventModel.createEvent(response);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
@@ -47,7 +46,7 @@ public class CoordinatorPageController implements Initializable {
     }
 
     public void handleFilter(KeyEvent keyEvent) {
-        
+
     }
 
 

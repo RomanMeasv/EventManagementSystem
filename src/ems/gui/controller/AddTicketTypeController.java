@@ -22,7 +22,7 @@ public class AddTicketTypeController extends Dialog {
             this.setDialogPane(dp);
             this.setResultConverter(buttonType -> {
                 if(buttonType == ButtonType.APPLY){
-                    return new Event(controller.getEventName());
+                    return null;
                 }
                 return null;
             });
@@ -31,5 +31,5 @@ public class AddTicketTypeController extends Dialog {
             //System.out.println("Couldn't load view!");
         }
     }
-}
+
 }

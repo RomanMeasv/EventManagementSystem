@@ -1,9 +1,13 @@
 package ems.bll;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import ems.be.Event;
 import ems.be.EventCoordinator;
+import ems.bll.exceptions.EventCoordinatorException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class EventCoordinatorLogic {
@@ -14,25 +18,46 @@ public class EventCoordinatorLogic {
         dataAccess = DAFacade.getInstance();
     }
 
-    public List<EventCoordinator> readAllEventCoordinators() throws Exception {
-        return dataAccess.readAllEventCoordinators();
+    public List<EventCoordinator> readAllEventCoordinators() throws EventCoordinatorException {
+        try {
+            return dataAccess.readAllEventCoordinators();
+        } catch (Exception exception)
+        {
+            throw new EventCoordinatorException("Could not read event coordinators!", exception);
+        }
     }
 
-    public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {
-        return dataAccess.createEventCoordinator(ec);
-    }
-    public void deleteEventCoordinator(EventCoordinator ec) throws Exception {
-        dataAccess.deleteEventCoordinator(ec);
-
-    }
-
-    public void updateEventCoordinator(EventCoordinator updatedEC) throws Exception {
-        dataAccess.updateEventCoordinator(updatedEC);
+    public EventCoordinator createEventCoordinator(EventCoordinator ec) throws EventCoordinatorException {
+        try {
+            return dataAccess.createEventCoordinator(ec);
+        } catch (Exception exception) {
+            throw new EventCoordinatorException("Could not create event coordinator!", exception);
+        }
     }
 
-    public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
+    public void deleteEventCoordinator(EventCoordinator ec) throws EventCoordinatorException {
+        try {
+            dataAccess.deleteEventCoordinator(ec);
+        } catch (Exception exception) {
+            throw new EventCoordinatorException("Could not delete event coordinator!", exception);
+        }
+    }
+
+    public void updateEventCoordinator(EventCoordinator updatedEC) throws EventCoordinatorException {
+        try {
+            dataAccess.updateEventCoordinator(updatedEC);
+        } catch (Exception exception) {
+            throw new EventCoordinatorException("Could not update event coordinator!", exception);
+        }
+    }
+
+    public List<EventCoordinator> filterEventCoordinators(String query) throws EventCoordinatorException {
         if(!query.isEmpty()){
-            return dataAccess.filterEventCoordinators(query);
+            try {
+                return dataAccess.filterEventCoordinators(query);
+            } catch (Exception exception) {
+                throw new EventCoordinatorException("Could not filter event coordinators!", exception);
+            }
         }
         return readAllEventCoordinators();
     }

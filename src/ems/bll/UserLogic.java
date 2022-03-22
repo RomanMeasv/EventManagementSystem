@@ -1,6 +1,7 @@
 package ems.bll;
 
 import ems.be.User;
+import ems.bll.exceptions.UserException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 
@@ -12,7 +13,12 @@ public class UserLogic {
         dataAccess = DAFacade.getInstance();
     }
 
-    public User tryLogin(String username, String password) throws Exception {
-        return dataAccess.tryLogin(username, password);
+    public User tryLogin(String username, String password) throws UserException {
+        try {
+            return dataAccess.tryLogin(username, password);
+        } catch (Exception exception)
+        {
+            throw new UserException("Could not log in!", exception);
+        }
     }
 }

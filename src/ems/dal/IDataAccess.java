@@ -18,5 +18,5 @@ public interface IDataAccess {
     void deleteEvent (Event e) throws Exception;
     List<Event> readAllEvents() throws Exception;
     void updateEvent(Event e) throws Exception;
-
+    boolean isUsernameTaken(String username) throws Exception;
 }

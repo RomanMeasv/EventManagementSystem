@@ -1,11 +1,12 @@
 package ems.bll;
 
 import ems.be.User;
-import ems.bll.exceptions.UserException;
+import ems.bll.exceptions.UnconnecedDatabaseException;
+import ems.bll.exceptions.UsernameAlreadyTakenException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 
-public class UserValidator implements IValidator {
+public class UserValidator {
 
     private IDataAccess dataAccess;
 
@@ -13,20 +14,17 @@ public class UserValidator implements IValidator {
         dataAccess = DAFacade.getInstance();
     }
 
-    @Override
-    public boolean validate(Object object) throws Exception {
-        User user = (User) object;
-        if (dataAccess.readAllUsernames().contains(user.getUsername())) {
-            throw new UserException("Username already taken!", new Exception());
+    public boolean validateUsername(String username) throws UsernameAlreadyTakenException, UnconnecedDatabaseException {
+        boolean isUsernameTaken = false;
+        try {
+            isUsernameTaken = dataAccess.readAllUsernames().contains(username);
+        } catch (Exception e) {
+            throw new UnconnecedDatabaseException("Could not read all usernames! Check database connection!", e);
         }
-        return true;
-    }
+        if (isUsernameTaken) {
+            throw new UsernameAlreadyTakenException("Username already taken!");
+        }
 
-    @Override
-    public boolean validate(String username) throws Exception {
-        if (dataAccess.readAllUsernames().contains(username)) {
-            throw new UserException("Username already taken!", new Exception());
-        }
         return true;
     }
 }

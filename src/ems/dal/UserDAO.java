@@ -130,15 +130,14 @@ public class UserDAO {
 
         try (Connection con = ConnectionManager.getConnection()) {
 
-            String sqlCommandSelect = "SELECT username FROM Users";
+            String sqlCommandSelect = "SELECT [username] FROM Users";
             PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
             ResultSet rs = pstmtSelect.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 allUsernames.add(rs.getString("username"));
             }
         }
-
         return allUsernames;
     }
 }

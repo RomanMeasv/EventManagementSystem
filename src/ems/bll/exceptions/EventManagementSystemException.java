@@ -6,9 +6,14 @@ public abstract class EventManagementSystemException extends Exception{
 
     public EventManagementSystemException(String message, Exception exception)
     {
-        this.message = message + " (Check developer console for more details)";
+        this.message = message;
         this.exception = exception;
         exception.printStackTrace();
+    }
+
+    public EventManagementSystemException(String message)
+    {
+        this.message = message;
     }
 
     @Override

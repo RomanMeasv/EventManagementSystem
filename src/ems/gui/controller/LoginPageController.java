@@ -3,6 +3,7 @@ package ems.gui.controller;
 import ems.be.Admin;
 import ems.be.EventCoordinator;
 import ems.be.User;
+import ems.bll.exceptions.UnconnecedDatabaseException;
 import ems.gui.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class LoginPageController {
@@ -51,8 +54,10 @@ public class LoginPageController {
                 stage.setScene(scene);
                 stage.show();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (UnconnecedDatabaseException e) {
+            //pop up? could not connect to db or smtgh
+        } catch (IOException e) {
+            //couldn't load X page
         }
     }
 }

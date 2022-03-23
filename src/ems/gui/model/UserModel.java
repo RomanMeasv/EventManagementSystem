@@ -2,6 +2,7 @@ package ems.gui.model;
 
 import ems.be.User;
 import ems.bll.UserLogic;
+import ems.bll.exceptions.UnconnecedDatabaseException;
 
 public class UserModel {
     private UserLogic userLogic;
@@ -10,7 +11,7 @@ public class UserModel {
          userLogic = new UserLogic();
     }
 
-    public User tryLogin(String username, String password) throws Exception {
+    public User tryLogin(String username, String password) throws UnconnecedDatabaseException {
         return userLogic.tryLogin(username,password);
     }
 }

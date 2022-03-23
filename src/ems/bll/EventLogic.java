@@ -1,7 +1,7 @@
 package ems.bll;
 
 import ems.be.Event;
-import ems.bll.exceptions.EventException;
+import ems.bll.exceptions.UnconnecedDatabaseException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 
@@ -14,39 +14,39 @@ public class EventLogic {
         dataAccess = DAFacade.getInstance();
     }
 
-    public Event createEvent(Event e) throws EventException {
+    public Event createEvent(Event e) throws UnconnecedDatabaseException {
         try {
             return dataAccess.createEvent(e);
         } catch (Exception exception)
         {
-            throw new EventException("Could not create event!", exception);
+            throw new UnconnecedDatabaseException("Could not create event! Check database connection!", exception);
         }
     }
 
-    public List<Event> readAllEvents() throws EventException {
+    public List<Event> readAllEvents() throws UnconnecedDatabaseException {
         try {
             return dataAccess.readAllEvents();
         } catch (Exception exception)
         {
-            throw new EventException("Could not read events!", exception);
+            throw new UnconnecedDatabaseException("Could not read events! Check database connection!", exception);
         }
     }
 
-    public void deleteEvent(Event e) throws EventException {
+    public void deleteEvent(Event e) throws UnconnecedDatabaseException {
         try {
             dataAccess.deleteEvent(e);
         } catch (Exception exception)
         {
-            throw new EventException("Could not delete event!", exception);
+            throw new UnconnecedDatabaseException("Could not delete event! Check database connection!", exception);
         }
     }
 
-    public void updateEvent(Event updatedEvent) throws EventException {
+    public void updateEvent(Event updatedEvent) throws UnconnecedDatabaseException {
         try {
             dataAccess.updateEvent(updatedEvent);
         } catch (Exception exception)
         {
-            throw new EventException("Could not update event!", exception);
+            throw new UnconnecedDatabaseException("Could not update event! Check database connection!", exception);
         }
     }
 }

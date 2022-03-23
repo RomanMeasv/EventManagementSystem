@@ -10,7 +10,7 @@
    <content>
       <VBox prefHeight="400.0" prefWidth="200.0" spacing="10.0">
          <children>
-            <TextField fx:id="txfECName" promptText="username" />
+            <TextField fx:id="txfECName" onKeyTyped="#txfUsernameKeyTypedHandle" promptText="username" />
             <TextField fx:id="txfECPassword" promptText="password" />
          </children>
       </VBox>

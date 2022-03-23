@@ -1,18 +1,14 @@
 package ems.bll;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import ems.be.Event;
 import ems.be.EventCoordinator;
 import ems.bll.exceptions.EventCoordinatorException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
-
-import java.sql.SQLException;
 import java.util.List;
 
 public class EventCoordinatorLogic {
 
-    IDataAccess dataAccess;
+    private IDataAccess dataAccess;
 
     public EventCoordinatorLogic() {
         dataAccess = DAFacade.getInstance();

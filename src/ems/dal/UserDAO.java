@@ -124,4 +124,21 @@ public class UserDAO {
 
         return filtered;
     }
+
+    public List<String> readAllUsernames() throws Exception {
+        List<String> allUsernames = new ArrayList<>();
+
+        try (Connection con = ConnectionManager.getConnection()) {
+
+            String sqlCommandSelect = "SELECT username FROM Users";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
+            ResultSet rs = pstmtSelect.executeQuery();
+
+            if (rs.next()) {
+                allUsernames.add(rs.getString("username"));
+            }
+        }
+
+        return allUsernames;
+    }
 }

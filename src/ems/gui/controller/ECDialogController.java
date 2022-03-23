@@ -1,10 +1,13 @@
 package ems.gui.controller;
 
 import ems.be.EventCoordinator;
+import ems.bll.IValidator;
+import ems.bll.UserValidator;
+import ems.bll.exceptions.UserException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
+import javafx.scene.input.KeyEvent;
 
 
 import java.net.URL;
@@ -14,9 +17,11 @@ public class ECDialogController implements Initializable {
     @FXML
     private TextField txfECName, txfECPassword;
 
+    private IValidator validator;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        validator = new UserValidator();
     }
 
     public String getECName() {
@@ -43,5 +48,11 @@ public class ECDialogController implements Initializable {
         return ret;
     }
 
+    public void txfUsernameKeyTypedHandle(KeyEvent keyEvent) {
+        try{
+            validator.validate(txfECName.getText());
+        } catch (UserException ue){
 
+        }
+    }
 }

@@ -9,14 +9,24 @@ import java.util.List;
 
 public interface IDataAccess {
     User tryLogin(String username, String password) throws Exception;
+
     EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception;
+
     List<EventCoordinator> readAllEventCoordinators() throws Exception;
+
     void updateEventCoordinator(EventCoordinator ec) throws Exception;
+
     void deleteEventCoordinator(EventCoordinator ec) throws Exception;
+
     List<EventCoordinator> filterEventCoordinators(String query) throws Exception;
+
     Event createEvent (Event e) throws Exception;
+
     void deleteEvent (Event e) throws Exception;
+
     List<Event> readAllEvents() throws Exception;
+
     void updateEvent(Event e) throws Exception;
 
+    List<String> readAllUsernames() throws Exception;
 }

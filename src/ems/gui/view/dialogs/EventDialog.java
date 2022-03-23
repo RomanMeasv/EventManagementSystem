@@ -34,18 +34,22 @@ public class EventDialog extends Dialog<Event> {
         }
     }
 
-   public void setFields(Event e){
+    public void setFields(Event e) {
         controller.setEventName(e.getName());
         controller.setEventDescription(e.getDescription());
         controller.setNotes(e.getNotes());
-        controller.setStartDate(e.getStart().toLocalDate());
-        controller.setStartTime(e.getStart().toLocalTime().toString());
-        controller.setEndDate(e.getEnd().toLocalDate());
-        controller.setEndTime(e.getEnd().toLocalTime().toString());
+
+        String startDate = e.getStart().toLocalDate().toString();
+        String startTime = e.getStart().toLocalTime().toString();
+        controller.setStartDate(startDate);
+        controller.setStartTime(startTime);
+
+        String endDate = e.getEnd().toLocalDate().toString();
+        String endTime = e.getEnd().toLocalTime().toString();
+        controller.setEndDate(endDate);
+        controller.setEndTime(endTime);
+
         controller.setLocation(e.getLocation());
         controller.setLocationGuidance(e.getLocationGuidance());
-
-        controller.startDateLimitation();
-        controller.endDateLimitation();
-   }
+    }
 }

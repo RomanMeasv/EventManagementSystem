@@ -1,12 +1,11 @@
 package ems.gui.controller;
 
+import ems.be.TicketType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -16,13 +15,19 @@ import java.util.ResourceBundle;
 
 public class EventDialogController implements Initializable {
     @FXML
-    private TextField txfEventName, txfEventDescription, txfNotes, txfStartTime, txfEndTime, txfLocation, txfLocationGuidance;
+    private TextField txfEventName, txfEventDescription, txfNotes, txfStartDate, txfStartTime;
+
     @FXML
-    private ListView ltvTicketTypes;
+    private TextField txfEndDate, txfEndTime, txfLocation, txfLocationGuidance;
+
     @FXML
-    private DatePicker dtpStartDate;
+    private TableView<TicketType> tbvTicketType;
+
     @FXML
-    private DatePicker dtpEndDate;
+    private TableColumn<TicketType, String> colTicketType;
+
+    @FXML
+    private TextField txfFilter, txfTicketType;
 
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -49,18 +54,13 @@ public class EventDialogController implements Initializable {
     }
 
     public LocalDateTime getStart() {
-        return parseToLocalDateTime(dtpStartDate.getValue(), txfStartTime.getText());
+        return null;
+        // return parseToLocalDateTime(dtpStartDate.getValue(), txfStartTime.getText());
     }
 
     public LocalDateTime getEnd() {
-        return parseToLocalDateTime(dtpEndDate.getValue(), txfEndTime.getText());
-    }
-
-    private LocalDateTime parseToLocalDateTime(LocalDate date, String time) {
-        String now = date + " " + time;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime formatDateTime = LocalDateTime.parse(now, formatter);
-        return formatDateTime;
+        return null;
+        // return parseToLocalDateTime(dtpEndDate.getValue(), txfEndTime.getText());
     }
 
     public void setEventName(String eventName) {
@@ -87,75 +87,84 @@ public class EventDialogController implements Initializable {
         txfStartTime.setText(startTime);
     }
 
-    public void setStartDate(LocalDate startDate) {
-        dtpStartDate.setValue(startDate);
+    public void setStartDate(String startDate) {
+        txfStartDate.setText(startDate);
+
     }
 
     public void setEndTime(String endTime) {
         txfEndTime.setText(endTime);
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        dtpEndDate.setValue(endDate);
-    }
-
-    public void handleAddTicketType() {
 
     }
 
-    public void startDateChangeHandle(ActionEvent event) {
-        startDateLimitation();
+    public void setEndDate(String endDate) {
+        txfEndDate.setText(endDate);
+
     }
 
-    public void endDateChangeHandle(ActionEvent event) {
-        endDateLimitation();
+    public void addTicketTypeHandle(ActionEvent event) {
+
     }
 
-    public void startDateLimitation(){
-        LocalDate maxDate = LocalDate.now();
+    public void removeTicketTypeHandle(ActionEvent event) {
 
-        if (dtpStartDate.getValue() == null) {
-            dtpEndDate.setDayCellFactory(d ->
-                    new DateCell() {
-                        @Override
-                        public void updateItem(LocalDate item, boolean empty) {
-                            super.updateItem(item, empty);
-                            setDisable(item.isBefore(maxDate));
-                        }
-                    });
-        } else {
-            dtpEndDate.setDayCellFactory(d ->
-                    new DateCell() {
-                        @Override
-                        public void updateItem(LocalDate item, boolean empty) {
-                            super.updateItem(item, empty);
-                            setDisable(item.isBefore(dtpStartDate.getValue()));
-                        }
-                    });
+    }
+
+    private String formatDate(String provided){
+        String ret = "";
+        for (char c :
+                provided.toCharArray()) {
+            if((c >= 48 && c <= 57)){ //0-9
+                ret += c;
+            }
+            if((ret.length() == 4) || (ret.length() == 7)){
+                ret += '-';
+            }
         }
+        ret = ret.substring(0, Math.min(ret.length(), 10));
+        return ret;
     }
 
-    public void endDateLimitation(){
-        LocalDate maxDate = LocalDate.now();
-
-        if (dtpEndDate.getValue() == null) {
-            dtpStartDate.setDayCellFactory(d ->
-                    new DateCell() {
-                        @Override
-                        public void updateItem(LocalDate item, boolean empty) {
-                            super.updateItem(item, empty);
-                            setDisable(item.isAfter(maxDate));
-                        }
-                    });
-        } else {
-            dtpStartDate.setDayCellFactory(d ->
-                    new DateCell() {
-                        @Override
-                        public void updateItem(LocalDate item, boolean empty) {
-                            super.updateItem(item, empty);
-                            setDisable(item.isAfter(dtpEndDate.getValue()));
-                        }
-                    });
+    private String formatTime(String provided){
+        String ret = "";
+        for (char c :
+                provided.toCharArray()) {
+            if ((c >= 48 && c <= 57)) { //0-9
+                ret += c;
+            }
+            if (ret.length() == 2) {
+                ret += ':';
+            }
         }
+        ret = ret.substring(0, Math.min(ret.length(), 5));
+        return ret;
+    }
+
+    public void startDateKeyTypedHandle(KeyEvent keyEvent) {
+        String input = txfStartDate.getText();
+        String output = formatDate(input);
+        txfStartDate.setText(output);
+        txfStartDate.positionCaret(output.length());
+    }
+
+    public void startTimeKeyTypedHandle(KeyEvent keyEvent) {
+        String input = txfStartTime.getText();
+        String output = formatTime(input);
+        txfStartTime.setText(output);
+        txfStartTime.positionCaret(output.length());
+    }
+
+    public void endDateKeyTypedHandle(KeyEvent keyEvent) {
+        String input = txfEndDate.getText();
+        String output = formatDate(input);
+        txfEndDate.setText(output);
+        txfEndDate.positionCaret(output.length());
+    }
+
+    public void endTimeKeyTypedHandle(KeyEvent keyEvent) {
+        String input = txfEndTime.getText();
+        String output = formatTime(input);
+        txfEndTime.setText(output);
+        txfEndTime.positionCaret(output.length());
     }
 }

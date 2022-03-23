@@ -1,7 +1,7 @@
 package ems.gui.controller;
 
 import ems.be.EventCoordinator;
-import ems.bll.UserValidator;
+import ems.bll.util.UserNameValidator;
 import ems.bll.exceptions.UnconnecedDatabaseException;
 import ems.bll.exceptions.UsernameAlreadyTakenException;
 import javafx.fxml.FXML;
@@ -17,13 +17,13 @@ public class ECDialogController implements Initializable {
     @FXML
     private TextField txfECName, txfECPassword;
 
-    private UserValidator userValidator;
+    private UserNameValidator userNameValidator;
 
     private String defaultName = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        userValidator = new UserValidator();
+        userNameValidator = new UserNameValidator();
     }
 
     public String getECName() {
@@ -57,7 +57,7 @@ public class ECDialogController implements Initializable {
             boolean isUsernameValid = false;
 
             try{
-                isUsernameValid = userValidator.validateUsername(txfECName.getText());
+                isUsernameValid = userNameValidator.validate(txfECName.getText());
             } catch (UsernameAlreadyTakenException uae){
                 //display error
             } catch (UnconnecedDatabaseException ude) {

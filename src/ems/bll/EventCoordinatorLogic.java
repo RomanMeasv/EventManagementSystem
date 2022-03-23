@@ -61,8 +61,4 @@ public class EventCoordinatorLogic {
         }
         return readAllEventCoordinators();
     }
-
-    public boolean isUsernameTaken(String usernameTyped) throws Exception {
-        return dataAccess.isUsernameTaken(usernameTyped);
-    }
 }

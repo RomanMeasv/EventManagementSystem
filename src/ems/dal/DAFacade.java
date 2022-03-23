@@ -4,6 +4,7 @@ import ems.be.Event;
 import ems.be.EventCoordinator;
 import ems.be.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAFacade implements IDataAccess {
@@ -72,10 +73,5 @@ public class DAFacade implements IDataAccess {
     @Override
     public void deleteEvent(Event e) throws Exception {
         eventDAO.deleteEvent(e);
-    }
-
-    @Override
-    public boolean isUsernameTaken(String username) throws Exception {
-        return userDAO.isUsernameTaken(username);
     }
 }

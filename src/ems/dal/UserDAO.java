@@ -124,19 +124,4 @@ public class UserDAO {
 
         return filtered;
     }
-
-    public boolean isUsernameTaken(String username) throws Exception {
-        try(Connection con = ConnectionManager.getConnection()){
-
-            String sqlCommandSelect = "SELECT username FROM Users WHERE username LIKE ?;";
-            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
-            pstmtSelect.setString(1, username);
-            ResultSet rs = pstmtSelect.executeQuery();
-
-            if(rs.next()){
-                return true;
-            }
-        }
-        return false;
-    }
 }

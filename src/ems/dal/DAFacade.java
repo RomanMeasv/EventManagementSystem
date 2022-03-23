@@ -77,4 +77,9 @@ public class DAFacade implements IDataAccess {
     public List<String> readAllUsernames() throws Exception {
         return userDAO.readAllUsernames();
     }
+
+    @Override
+    public List<String> readAllEventNames() throws Exception {
+        return eventDAO.readAllEventNames();
+    }
 }

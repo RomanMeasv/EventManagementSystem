@@ -49,4 +49,13 @@ public class EventLogic {
             throw new UnconnecedDatabaseException("Could not update event! Check database connection!", exception);
         }
     }
+
+    public List<String> readAllEventNames() throws UnconnecedDatabaseException {
+        try {
+            return dataAccess.readAllEventNames();
+        } catch (Exception exception)
+        {
+            throw new UnconnecedDatabaseException("Could read all event names! Check database connection!", exception);
+        }
+    }
 }

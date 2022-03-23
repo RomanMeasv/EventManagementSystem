@@ -29,4 +29,5 @@ public interface IDataAccess {
     void updateEvent(Event e) throws Exception;
 
     List<String> readAllUsernames() throws Exception;
+    List<String> readAllEventNames() throws Exception;
 }

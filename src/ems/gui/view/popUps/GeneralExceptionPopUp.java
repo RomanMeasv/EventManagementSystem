@@ -18,7 +18,6 @@ public class GeneralExceptionPopUp extends Dialog {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("generalExceptionPopUp.fxml"));
             DialogPane dp = loader.load();
             controller = loader.getController();
-            this.setTitle("Create Event");
             this.setDialogPane(dp);
             controller.setTxfMessage(message);
 

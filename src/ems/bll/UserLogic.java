@@ -5,6 +5,8 @@ import ems.bll.exceptions.UnconnecedDatabaseException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 
+import java.util.List;
+
 public class UserLogic {
 
     IDataAccess dataAccess;
@@ -19,6 +21,14 @@ public class UserLogic {
         } catch (Exception exception)
         {
             throw new UnconnecedDatabaseException("Could not log in! Check database connection!", exception);
+        }
+    }
+
+    public List<String> readAllUsernames() throws UnconnecedDatabaseException {
+        try {
+            return dataAccess.readAllUsernames();
+        } catch (Exception exception) {
+            throw new UnconnecedDatabaseException("Could read all usernames! Check database connection!", exception);
         }
     }
 }

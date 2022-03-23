@@ -101,4 +101,20 @@ public class EventDAO {
             pstmtUpdate.executeUpdate();
         }
     }
+
+    public List<String> readAllEventNames() throws Exception {
+        List<String> allEventNames = new ArrayList<>();
+
+        try (Connection con = ConnectionManager.getConnection()) {
+
+            String sqlCommandSelect = "SELECT [name] FROM Events";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
+            ResultSet rs = pstmtSelect.executeQuery();
+
+            while (rs.next()) {
+                allEventNames.add(rs.getString("username"));
+            }
+        }
+        return allEventNames;
+    }
 }

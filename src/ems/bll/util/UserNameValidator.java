@@ -1,14 +1,9 @@
 package ems.bll.util;
 
-import ems.be.User;
-import ems.bll.exceptions.MissingMandatoryInformationException;
 import ems.bll.exceptions.UnconnecedDatabaseException;
-import ems.bll.exceptions.UsernameAlreadyTakenException;
+import ems.bll.exceptions.NameAlreadyTakenException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserNameValidator {
 
@@ -18,7 +13,7 @@ public class UserNameValidator {
         dataAccess = DAFacade.getInstance();
     }
 
-    public boolean validate(String username) throws UsernameAlreadyTakenException, UnconnecedDatabaseException {
+    public boolean validate(String username) throws NameAlreadyTakenException, UnconnecedDatabaseException {
         boolean isUsernameTaken = false;
         try {
             isUsernameTaken = dataAccess.readAllUsernames().contains(username);
@@ -26,7 +21,7 @@ public class UserNameValidator {
             throw new UnconnecedDatabaseException("Could not read all usernames! Check database connection!", e);
         }
         if (isUsernameTaken) {
-            throw new UsernameAlreadyTakenException("Username already taken!");
+            throw new NameAlreadyTakenException("Username already taken!");
         }
 
         return true;

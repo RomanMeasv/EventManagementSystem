@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -37,15 +38,15 @@ public class LoginPageController {
             User loggedUser = userModel.tryLogin(username, password);
 
             if (loggedUser == null) {
-                showPopUp("Wrong login credentials!");
+                PopUp.showError("Wrong login credentials!");
                 return;
             }
-            
+
             try {
                 boolean isAdmin = loggedUser.getClass().equals(Admin.class);
                 boolean isEC = loggedUser.getClass().equals(EventCoordinator.class);
 
-                Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("../view/cadminPage.fxml")) :
+                Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("../view/adminPage.fxml")) :
                         isEC ? FXMLLoader.load(getClass().getResource("../view/eventCoordinatorPage.fxml")) : null;
 
                 if(root == null){
@@ -58,16 +59,11 @@ public class LoginPageController {
                 stage.show();
 
             } catch (Exception e) {
-                showPopUp("Couldn't load page!");
+                PopUp.showError("Couldn't load page!");
             }
 
         } catch (DatabaseException e) {
-            showPopUp(e.getMessage());
+            PopUp.showError(e.getMessage());
         }
-    }
-
-    private void showPopUp(String message) {
-        PopUp dp = new PopUp(message);
-        dp.showAndWait();
     }
 }

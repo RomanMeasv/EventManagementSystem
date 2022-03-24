@@ -160,7 +160,7 @@
                            </font>
                            <styleClass>
                               <String fx:value="reg-text-field" />
-                              <String fx:value="txf-orange" />
+                              <String fx:value="txf-white" />
                               <String fx:value="drop-shadow" />
                            </styleClass>
                         </TextField>

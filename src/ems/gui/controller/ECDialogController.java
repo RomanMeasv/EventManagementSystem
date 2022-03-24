@@ -3,11 +3,10 @@ package ems.gui.controller;
 import ems.be.EventCoordinator;
 import ems.bll.util.UserNameValidator;
 import ems.bll.exceptions.DatabaseException;
-import ems.bll.exceptions.NameAlreadyTakenException;
+import ems.gui.view.util.PopUp;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 
 import java.net.URL;
@@ -44,30 +43,19 @@ public class ECDialogController implements Initializable {
     }
 
     public EventCoordinator createFromFields() {
-        EventCoordinator ret = null;
-        if (!getECName().isEmpty() && !getECPassword().isEmpty()) {
-            ret = new EventCoordinator(getECName(), getECPassword());
+        if (getECName().isEmpty() || getECPassword().isEmpty()) {
+            PopUp.showError("Please fill in all the mandatory fields! (*)");
+            return null;
         }
-        return ret;
-    }
-
-    public void txfUsernameKeyTypedHandle(KeyEvent keyEvent) {
-        if (!txfECName.getText().equals(defaultName))
-        {
-            boolean isUsernameValid = false;
-
-            try{
-                isUsernameValid = userNameValidator.validate(txfECName.getText());
-            } catch (NameAlreadyTakenException uae){
-                //display error
-            } catch (DatabaseException ude) {
-                //display error
-            }
-
-            if (isUsernameValid)
+        try {
+            if (!userNameValidator.isValid(getECName()) && !getECName().equals(defaultName))
             {
-                //undo/do stuff
+                PopUp.showError("Username already in use!");
+                return null;
             }
+        } catch (DatabaseException e) {
+            PopUp.showError("Could not check if username already exists! Are you connected to the database?");
         }
+        return new EventCoordinator(getECName(), getECPassword());
     }
 }

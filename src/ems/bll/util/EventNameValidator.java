@@ -11,12 +11,7 @@ public class EventNameValidator {
         eventLogic = new EventLogic();
     }
 
-    public boolean validate(String eventName) throws NameAlreadyTakenException, DatabaseException {
-        boolean isEventNameTaken = eventLogic.readAllEventNames().contains(eventName);
-        if (isEventNameTaken) {
-            throw new NameAlreadyTakenException("Event name already taken!");
-        }
-
-        return true;
+    public boolean isValid(String eventName) throws NameAlreadyTakenException, DatabaseException {
+        return !eventLogic.readAllEventNames().contains(eventName);
     }
 }

@@ -1,4 +1,4 @@
-package ems.gui.view.popUps;
+package ems.gui.view.util;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

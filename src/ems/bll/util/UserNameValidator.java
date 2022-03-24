@@ -12,12 +12,7 @@ public class UserNameValidator {
         userLogic = new UserLogic();
     }
 
-    public boolean validate(String username) throws NameAlreadyTakenException, DatabaseException {
-        boolean isUsernameTaken = userLogic.readAllUsernames().contains(username);
-        if (isUsernameTaken) {
-            throw new NameAlreadyTakenException("Username already taken!");
-        }
-
-        return true;
+    public boolean isValid(String username) throws DatabaseException {
+        return !userLogic.readAllUsernames().contains(username);
     }
 }

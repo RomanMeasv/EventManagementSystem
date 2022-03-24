@@ -5,6 +5,7 @@ import ems.be.EventCoordinator;
 import ems.be.User;
 import ems.bll.exceptions.UnconnecedDatabaseException;
 import ems.gui.model.UserModel;
+import ems.gui.view.popUps.GeneralExceptionPopUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 public class LoginPageController {
@@ -55,9 +57,13 @@ public class LoginPageController {
                 stage.show();
             }
         } catch (UnconnecedDatabaseException e) {
-            //pop up? could not connect to db or smtgh
+            GeneralExceptionPopUp dp = new GeneralExceptionPopUp(e.getMessage());
+            Optional result = dp.showAndWait();
         } catch (IOException e) {
             //couldn't load X page
+        } catch (Exception e){
+            GeneralExceptionPopUp dp = new GeneralExceptionPopUp(e.getMessage());
+            Optional result = dp.showAndWait();
         }
     }
 }

@@ -39,4 +39,9 @@ public class EventModel {
         eventLogic.updateEvent(updatedEvent);
         observableEvents.set(observableEvents.indexOf(oldEvent), updatedEvent);
     }
+
+    public void filterEvents(String query) throws Exception {
+        List<Event> filtered = eventLogic.filterEvents(query);
+        observableEvents.setAll(filtered);
+    }
 }

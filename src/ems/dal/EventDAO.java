@@ -83,7 +83,7 @@ public class EventDAO {
         }
     }
 
-    public void updateEvent(Event e) throws Exception{
+    public void updateEvent(Event e) throws Exception {
         try (Connection con = ConnectionManager.getConnection()) {
 
             String sqlCommandUpdate = "UPDATE Events SET [name]=?, [description]=?, notes=?, [start]=?, [end]=?, location=?, locationGuidance=? WHERE id = ?";
@@ -116,5 +116,32 @@ public class EventDAO {
             }
         }
         return allEventNames;
+    }
+
+    public List<Event> filterEvents(String query) throws Exception {
+        List<Event> filtered = new ArrayList<>();
+
+        try (Connection con = ConnectionManager.getConnection()) {
+
+            String sqlCommandFilter = "SELECT * FROM Events WHERE [name] LIKE ?;";
+            PreparedStatement pstmtFilter = con.prepareStatement(sqlCommandFilter);
+            pstmtFilter.setString(1, "%" + query + "%");
+            ResultSet rs = pstmtFilter.executeQuery();
+
+            while (rs.next()) {
+                filtered.add(new Event(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("notes"),
+                        rs.getTimestamp("start").toLocalDateTime(),
+                        rs.getTimestamp("end").toLocalDateTime(),
+                        rs.getString("location"),
+                        rs.getString("locationGuidance")
+                ));
+            }
+        }
+
+        return filtered;
     }
 }

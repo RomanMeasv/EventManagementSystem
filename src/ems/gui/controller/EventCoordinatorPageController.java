@@ -79,6 +79,11 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleFilter(KeyEvent keyEvent) {
-
+        try {
+            String query = txfFilter.getText();
+            eventModel.filterEvents(query);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

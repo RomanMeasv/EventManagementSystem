@@ -30,4 +30,6 @@ public interface IDataAccess {
 
     List<String> readAllUsernames() throws Exception;
     List<String> readAllEventNames() throws Exception;
+
+    List<Event> filterEvents(String query) throws Exception;
 }

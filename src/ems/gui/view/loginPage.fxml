@@ -31,7 +31,7 @@
                   </HBox>
                   <VBox spacing="12.0">
                      <children>
-                        <TextField fx:id="txfUsername" onAction="#handleLogin" promptText="username" styleClass="login-form-field">
+                        <TextField fx:id="txfUsername" onAction="#handleLogin" onKeyTyped="#txfUsernameKeyTypedHandle" promptText="username" styleClass="login-form-field">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -39,7 +39,7 @@
                               <Font name="Roboto" size="12.0" />
                            </font>
                         </TextField>
-                        <PasswordField fx:id="psfPassword" onAction="#handleLogin" promptText="password" styleClass="login-form-field">
+                        <PasswordField fx:id="psfPassword" onAction="#handleLogin" onKeyTyped="#psfPasswordKeyTypedHandle" promptText="password" styleClass="login-form-field">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

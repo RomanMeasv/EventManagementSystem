@@ -82,4 +82,9 @@ public class DAFacade implements IDataAccess {
     public List<String> readAllEventNames() throws Exception {
         return eventDAO.readAllEventNames();
     }
+
+    @Override
+    public List<Event> filterEvents(String query) throws Exception {
+        return eventDAO.filterEvents(query);
+    }
 }

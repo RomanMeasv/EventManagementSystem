@@ -4,6 +4,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import ems.be.Admin;
 import ems.be.EventCoordinator;
 import ems.be.User;
+import ems.bll.exceptions.UnconnecedDatabaseException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,9 +31,9 @@ public class UserDAO {
                     user = new EventCoordinator(rs.getInt("id"), rs.getString("username"), rs.getString("password"));
                 }
             }
-
-            return user;
         }
+
+        return user;
     }
 
     public EventCoordinator createEventCoordinator(EventCoordinator ec) throws Exception {
@@ -112,7 +113,7 @@ public class UserDAO {
 
             String sqlCommandFilter = "SELECT id, username, password FROM Users WHERE roleId = 2 AND username LIKE ?;";
             PreparedStatement pstmtFilter = con.prepareStatement(sqlCommandFilter);
-            pstmtFilter.setString(1, query + "%");
+            pstmtFilter.setString(1, "%" + query + "%");
             ResultSet rs = pstmtFilter.executeQuery();
 
             while (rs.next()) {

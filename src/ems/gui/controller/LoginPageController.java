@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -55,9 +56,17 @@ public class LoginPageController {
                 stage.show();
             }
         } catch (UnconnecedDatabaseException e) {
-            //pop up? could not connect to db or smtgh
+
         } catch (IOException e) {
             //couldn't load X page
         }
+    }
+
+    public void txfUsernameKeyTypedHandle(KeyEvent keyEvent) {
+        lblWrongCredentials.setStyle("visibility: hidden;");
+    }
+
+    public void psfPasswordKeyTypedHandle(KeyEvent keyEvent) {
+        lblWrongCredentials.setStyle("visibility: hidden;");
     }
 }

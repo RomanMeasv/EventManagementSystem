@@ -58,4 +58,15 @@ public class EventLogic {
             throw new UnconnecedDatabaseException("Could read all event names! Check database connection!", exception);
         }
     }
+
+    public List<Event> filterEvents(String query) throws UnconnecedDatabaseException {
+        if(!query.isEmpty()){
+            try{
+                return dataAccess.filterEvents(query);
+            } catch (Exception e){
+                throw new UnconnecedDatabaseException("Could not filter events! Check database connection!", e);
+            }
+        }
+        return readAllEvents();
+    }
 }

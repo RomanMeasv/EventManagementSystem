@@ -54,13 +54,15 @@ public class EventDialogController implements Initializable {
     }
 
     public LocalDateTime getStart() {
-        return null;
-        // return parseToLocalDateTime(dtpStartDate.getValue(), txfStartTime.getText());
+        String startDate = txfStartDate.getText();
+        String startTime = txfStartTime.getText();
+        return parseToLocalDateTime(startDate, startTime);
     }
 
     public LocalDateTime getEnd() {
-        return null;
-        // return parseToLocalDateTime(dtpEndDate.getValue(), txfEndTime.getText());
+        String endDate = txfEndDate.getText();
+        String endTime = txfEndTime.getText();
+        return parseToLocalDateTime(endDate, endTime);
     }
 
     public void setEventName(String eventName) {
@@ -110,14 +112,14 @@ public class EventDialogController implements Initializable {
 
     }
 
-    private String formatDate(String provided){
+    private String formatDate(String provided) {
         String ret = "";
         for (char c :
                 provided.toCharArray()) {
-            if((c >= 48 && c <= 57)){ //0-9
+            if ((c >= 48 && c <= 57)) { //0-9
                 ret += c;
             }
-            if((ret.length() == 4) || (ret.length() == 7)){
+            if ((ret.length() == 4) || (ret.length() == 7)) {
                 ret += '-';
             }
         }
@@ -125,7 +127,7 @@ public class EventDialogController implements Initializable {
         return ret;
     }
 
-    private String formatTime(String provided){
+    private String formatTime(String provided) {
         String ret = "";
         for (char c :
                 provided.toCharArray()) {
@@ -166,5 +168,11 @@ public class EventDialogController implements Initializable {
         String output = formatTime(input);
         txfEndTime.setText(output);
         txfEndTime.positionCaret(output.length());
+    }
+
+    private LocalDateTime parseToLocalDateTime(String date, String time) {
+        String DT = date + " " + time;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(DT, formatter);
     }
 }

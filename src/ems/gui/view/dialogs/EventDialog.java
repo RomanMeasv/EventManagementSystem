@@ -22,8 +22,9 @@ public class EventDialog extends Dialog<Event> {
             this.setDialogPane(dp);
             this.setResultConverter(buttonType -> {
                 if (buttonType == ButtonType.APPLY) {
-                    return new Event(controller.getEventName(), controller.getEventDescription(), controller.getNotes(),
-                            controller.getStart(), controller.getEnd(), controller.getLocation(),
+                    return new Event(controller.getEventName(), controller.getEventDescription(),
+                            controller.getNotes(), controller.getStart(),
+                            controller.getEnd(), controller.getLocation(),
                             controller.getLocationGuidance());
                 }
                 return null;

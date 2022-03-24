@@ -8,11 +8,11 @@ import javafx.scene.control.DialogPane;
 
 import java.io.IOException;
 
-public class GeneralExceptionPopUp extends Dialog {
+public class PopUp extends Dialog {
 
     private GeneralExceptionPopUpController controller;
 
-    public GeneralExceptionPopUp(String message) {
+    public PopUp(String message) {
         super();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("generalExceptionPopUp.fxml"));

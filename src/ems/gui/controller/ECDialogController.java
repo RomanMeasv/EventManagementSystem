@@ -2,7 +2,7 @@ package ems.gui.controller;
 
 import ems.be.EventCoordinator;
 import ems.bll.util.UserNameValidator;
-import ems.bll.exceptions.UnconnecedDatabaseException;
+import ems.bll.exceptions.DatabaseException;
 import ems.bll.exceptions.NameAlreadyTakenException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,7 +60,7 @@ public class ECDialogController implements Initializable {
                 isUsernameValid = userNameValidator.validate(txfECName.getText());
             } catch (NameAlreadyTakenException uae){
                 //display error
-            } catch (UnconnecedDatabaseException ude) {
+            } catch (DatabaseException ude) {
                 //display error
             }
 

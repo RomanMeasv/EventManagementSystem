@@ -1,10 +1,8 @@
 package ems.bll.util;
 
 import ems.bll.UserLogic;
-import ems.bll.exceptions.UnconnecedDatabaseException;
+import ems.bll.exceptions.DatabaseException;
 import ems.bll.exceptions.NameAlreadyTakenException;
-import ems.dal.DAFacade;
-import ems.dal.IDataAccess;
 
 public class UserNameValidator {
 
@@ -14,7 +12,7 @@ public class UserNameValidator {
         userLogic = new UserLogic();
     }
 
-    public boolean validate(String username) throws NameAlreadyTakenException, UnconnecedDatabaseException {
+    public boolean validate(String username) throws NameAlreadyTakenException, DatabaseException {
         boolean isUsernameTaken = userLogic.readAllUsernames().contains(username);
         if (isUsernameTaken) {
             throw new NameAlreadyTakenException("Username already taken!");

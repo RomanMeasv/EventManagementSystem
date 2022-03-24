@@ -1,10 +1,8 @@
 package ems.dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import ems.be.Admin;
 import ems.be.EventCoordinator;
 import ems.be.User;
-import ems.bll.exceptions.UnconnecedDatabaseException;
 
 import java.sql.*;
 import java.util.ArrayList;

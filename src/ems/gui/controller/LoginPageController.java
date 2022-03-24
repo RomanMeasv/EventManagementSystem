@@ -3,28 +3,22 @@ package ems.gui.controller;
 import ems.be.Admin;
 import ems.be.EventCoordinator;
 import ems.be.User;
-import ems.bll.exceptions.UnconnecedDatabaseException;
+import ems.bll.exceptions.DatabaseException;
 import ems.gui.model.UserModel;
-import ems.gui.view.popUps.GeneralExceptionPopUp;
+import ems.gui.view.popUps.PopUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Optional;
 
 
 public class LoginPageController {
 
-    public Label lblWrongCredentials;
     public TextField txfUsername;
     public PasswordField psfPassword;
     public Button btnLogin;
@@ -32,7 +26,6 @@ public class LoginPageController {
     UserModel userModel;
 
     public LoginPageController() {
-
         userModel = new UserModel();
     }
 
@@ -42,38 +35,39 @@ public class LoginPageController {
 
         try {
             User loggedUser = userModel.tryLogin(username, password);
-            if (loggedUser == null) {
-                lblWrongCredentials.setStyle("visibility: visible;");
-            } else if (loggedUser.getClass().equals(Admin.class)) {
-                Parent root = FXMLLoader.load(getClass().getResource("../view/adminPage.fxml"));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } else if (loggedUser.getClass().equals(EventCoordinator.class)) {
-                Parent root = FXMLLoader.load(getClass().getResource("../view/eventCoordinatorPage.fxml"));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        } catch (UnconnecedDatabaseException e) {
-            GeneralExceptionPopUp dp = new GeneralExceptionPopUp(e.getMessage());
-            Optional result = dp.showAndWait();
 
-        } catch (IOException e) {
-            //couldn't load X page
-        } catch (Exception e){
-            GeneralExceptionPopUp dp = new GeneralExceptionPopUp(e.getMessage());
-            Optional result = dp.showAndWait();
+            if (loggedUser == null) {
+                showPopUp("Wrong login credentials!");
+                return;
+            }
+            
+            try {
+                boolean isAdmin = loggedUser.getClass().equals(Admin.class);
+                boolean isEC = loggedUser.getClass().equals(EventCoordinator.class);
+
+                Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("../view/cadminPage.fxml")) :
+                        isEC ? FXMLLoader.load(getClass().getResource("../view/eventCoordinatorPage.fxml")) : null;
+
+                if(root == null){
+                    return;
+                }
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (Exception e) {
+                showPopUp("Couldn't load page!");
+            }
+
+        } catch (DatabaseException e) {
+            showPopUp(e.getMessage());
         }
     }
 
-    public void txfUsernameKeyTypedHandle(KeyEvent keyEvent) {
-        lblWrongCredentials.setStyle("visibility: hidden;");
-    }
-
-    public void psfPasswordKeyTypedHandle(KeyEvent keyEvent) {
-        lblWrongCredentials.setStyle("visibility: hidden;");
+    private void showPopUp(String message) {
+        PopUp dp = new PopUp(message);
+        dp.showAndWait();
     }
 }

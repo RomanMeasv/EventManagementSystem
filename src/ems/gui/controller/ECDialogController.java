@@ -48,8 +48,7 @@ public class ECDialogController implements Initializable {
             return null;
         }
         try {
-            if (!userNameValidator.isValid(getECName()) && !getECName().equals(defaultName))
-            {
+            if (!userNameValidator.isValid(getECName()) && !getECName().equals(defaultName)) {
                 PopUp.showError("Username already in use!");
                 return null;
             }

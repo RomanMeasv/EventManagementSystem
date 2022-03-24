@@ -41,6 +41,7 @@ public class EventCoordinatorPageController implements Initializable {
         Optional<Event> result = dialog.showAndWait();
         result.ifPresent(response -> {
             try {
+
                 eventModel.createEvent(response);
             } catch (Exception e) {
                 e.printStackTrace();

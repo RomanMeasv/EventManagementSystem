@@ -1,6 +1,13 @@
 package ems.gui.controller;
 
+import ems.be.Event;
+import ems.be.EventCoordinator;
 import ems.be.TicketType;
+import ems.bll.exceptions.DatabaseException;
+import ems.bll.exceptions.NameAlreadyTakenException;
+import ems.bll.util.EventNameValidator;
+
+import ems.gui.view.util.PopUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +21,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EventDialogController implements Initializable {
+    EventNameValidator eventNameValidator;
+
+    String defaultEventName = null;
     @FXML
     private TextField txfEventName, txfEventDescription, txfNotes, txfStartDate, txfStartTime;
 
@@ -30,7 +40,7 @@ public class EventDialogController implements Initializable {
     private TextField txfFilter, txfTicketType;
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        eventNameValidator = new EventNameValidator();
     }
 
     public String getEventName() {
@@ -66,6 +76,7 @@ public class EventDialogController implements Initializable {
     }
 
     public void setEventName(String eventName) {
+        defaultEventName = eventName;
         txfEventName.setText(eventName);
     }
 
@@ -171,8 +182,44 @@ public class EventDialogController implements Initializable {
     }
 
     private LocalDateTime parseToLocalDateTime(String date, String time) {
-        String DT = date + " " + time;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(DT, formatter);
+        if (!date.isEmpty() && !time.isEmpty()) {
+            String DT = date + " " + time;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            try {
+                return LocalDateTime.parse(DT, formatter);
+            } catch (Exception e) {
+                return null;
+            }
+
+        } else
+            return null;
+    }
+
+
+    public Event createFromFields() {
+        if (getEventName().isEmpty() || txfStartDate.getText().isEmpty() || txfStartTime.getText().isEmpty() ||
+                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty()) {
+            PopUp.showError("Please fill in all the mandatory fields! (*)");
+            return null;
+        }
+        try {
+            if (!eventNameValidator.isValid(getEventName()) && !getEventName().equals(defaultEventName)) {
+                PopUp.showError("Username already in use!");
+                return null;
+            }
+        } catch (DatabaseException e) {
+            PopUp.showError("Could not check if username already exists! Are you connected to the database?");
+            return null;
+        }
+
+        if (getStart() == null || getEnd() == null) {
+            PopUp.showError("Day time invalid!");
+            return null;
+        }
+        if (getStart().isAfter(getEnd())) {
+            PopUp.showError("Start date cannot be placed after end date");
+            return null;
+        }
+        return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance());
     }
 }

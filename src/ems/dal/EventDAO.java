@@ -112,7 +112,7 @@ public class EventDAO {
             ResultSet rs = pstmtSelect.executeQuery();
 
             while (rs.next()) {
-                allEventNames.add(rs.getString("username"));
+                allEventNames.add(rs.getString("name"));
             }
         }
         return allEventNames;

@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+;
+
 
 import java.io.IOException;
 
@@ -22,11 +24,9 @@ public class EventDialog extends Dialog<Event> {
             this.setDialogPane(dp);
             this.setResultConverter(buttonType -> {
                 if (buttonType == ButtonType.APPLY) {
-                    return new Event(controller.getEventName(), controller.getEventDescription(),
-                            controller.getNotes(), controller.getStart(),
-                            controller.getEnd(), controller.getLocation(),
-                            controller.getLocationGuidance());
+                    return controller.createFromFields();
                 }
+
                 return null;
             });
 

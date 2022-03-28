@@ -34,6 +34,7 @@ public class Event {
         this.end = end;
         this.location = location;
         this.locationGuidance = locationGuidance;
+        this.ticketTypes = ticketTypes;
     }
 
     public int getId() {

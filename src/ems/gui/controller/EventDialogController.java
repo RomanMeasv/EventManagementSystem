@@ -17,6 +17,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventDialogController implements Initializable {
@@ -115,7 +116,7 @@ public class EventDialogController implements Initializable {
 
     }
 
-    public void setTicketType(ArrayList<String> ticketType){
+    public void setTicketTypes(List<String> ticketType){
         ltvTicketType.setItems(FXCollections.observableList(ticketType));
     }
 

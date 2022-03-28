@@ -15,6 +15,8 @@ public class Event {
     private ArrayList<String> ticketType;
 
 
+
+
     public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, ArrayList<String> ticketType) {
         this.name = name;
         this.description = description;
@@ -99,6 +101,13 @@ public class Event {
 
     public void setLocationGuidance(String locationGuidance) {
         this.locationGuidance = locationGuidance;
+    }
+
+    public ArrayList<String> getTicketType() {
+        return ticketType;
+    }
+    public void setTicketType(ArrayList<String> ticketType) {
+        this.ticketType = ticketType;
     }
 
     @Override

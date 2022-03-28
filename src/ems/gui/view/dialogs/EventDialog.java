@@ -52,5 +52,7 @@ public class EventDialog extends Dialog<Event> {
 
         controller.setLocation(e.getLocation());
         controller.setLocationGuidance(e.getLocationGuidance());
+
+        controller.setTicketType(e.getTicketType());
     }
 }

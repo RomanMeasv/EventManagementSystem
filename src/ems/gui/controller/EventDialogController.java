@@ -6,7 +6,6 @@ import ems.bll.util.EventNameValidator;
 
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,14 +16,14 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventDialogController implements Initializable {
-    EventNameValidator eventNameValidator;
 
-    String defaultEventName = null;
+    private EventNameValidator eventNameValidator;
+    private String defaultEventName = null;
+
     @FXML
     private TextField txfEventName, txfEventDescription, txfNotes, txfStartDate, txfStartTime;
 
@@ -35,7 +34,7 @@ public class EventDialogController implements Initializable {
     private ListView<String> ltvTicketType;
 
     @FXML
-    private TextField txfFilter, txfTicketType;
+    private TextField txfTicketType;
 
     public void initialize(URL location, ResourceBundle resources) {
         eventNameValidator = new EventNameValidator();
@@ -74,7 +73,7 @@ public class EventDialogController implements Initializable {
     }
 
     public List<String> getTicketTypes(){
-        return List.copyOf(ltvTicketType.getItems());
+        return new ArrayList<>(ltvTicketType.getItems());
     }
 
     public void setEventName(String eventName) {

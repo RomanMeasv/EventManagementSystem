@@ -41,12 +41,12 @@ public class EventDialog extends Dialog<Event> {
         controller.setNotes(e.getNotes());
 
         String startDate = e.getStart().toLocalDate().toString();
-        String startTime = e.getStart().toLocalTime().toString();
+        String startTime = e.getStart().getHour() + ":" + e.getStart().getMinute();
         controller.setStartDate(startDate);
         controller.setStartTime(startTime);
 
         String endDate = e.getEnd().toLocalDate().toString();
-        String endTime = e.getEnd().toLocalTime().toString();
+        String endTime = e.getEnd().getHour() + ":" + e.getEnd().getMinute();
         controller.setEndDate(endDate);
         controller.setEndTime(endTime);
 

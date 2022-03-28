@@ -77,13 +77,13 @@
 
 /* TABLE VIEW FILTER */
 .tbv-text-field {
-    -fx-background-color: #F7B449;
+    -fx-background-color: #FFF;
     -fx-background-radius: 0 0 10px 10px;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
 }
 
 .tbv-text-field:focused {
-    -fx-background-color: #F7B449;
+    /*-fx-background-color: #F7B449;*/
 }
 
 /* TEXT FIELDS */
@@ -125,6 +125,6 @@
 }
 
 .list-view .list-cell {
-    -fx-text-fill: #FFF;
+    -fx-text-fill: #000;
     -fx-background-color: #F7B449;
 }

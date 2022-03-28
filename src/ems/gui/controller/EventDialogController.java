@@ -6,7 +6,6 @@ import ems.bll.util.EventNameValidator;
 
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +16,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,7 +30,7 @@ public class EventDialogController implements Initializable {
     private TextField txfEndDate, txfEndTime, txfLocation, txfLocationGuidance;
 
     @FXML
-    private ListView<String> ltvTicketType;
+    private ListView<String> ltvTicketTypes;
 
     @FXML
     private TextField txfFilter, txfTicketType;
@@ -74,7 +72,7 @@ public class EventDialogController implements Initializable {
     }
 
     public List<String> getTicketTypes(){
-        return List.copyOf(ltvTicketType.getItems());
+        return List.copyOf(ltvTicketTypes.getItems());
     }
 
     public void setEventName(String eventName) {
@@ -115,21 +113,22 @@ public class EventDialogController implements Initializable {
         txfEndDate.setText(endDate);
     }
 
-    public void setTicketTypes(List<String> ticketType){
-        ltvTicketType.setItems(FXCollections.observableList(ticketType));
+    public void setTicketTypes(List<String> ticketTypes){
+        ltvTicketTypes.setItems(FXCollections.observableList(new ArrayList<>(ticketTypes)));
     }
 
     public void handleAddTicketType(ActionEvent event) {
         String ticketType = txfTicketType.getText();
-        if (!ltvTicketType.getItems().contains(ticketType)) {
-            ltvTicketType.getItems().add(txfTicketType.getText());
+        if (!ltvTicketTypes.getItems().contains(ticketType) && !ticketType.isEmpty()) {
+            ltvTicketTypes.getItems().add(txfTicketType.getText());
         }
         txfTicketType.clear();
     }
 
     public void handleRemoveTicketType(ActionEvent event) {
-        if (ltvTicketType.getSelectionModel().getSelectedItem() != null) {
-            ltvTicketType.getItems().remove(ltvTicketType.getSelectionModel().getSelectedItem());
+        String selecedTicketType = ltvTicketTypes.getSelectionModel().getSelectedItem();
+        if (selecedTicketType != null) {
+            ltvTicketTypes.getItems().remove(selecedTicketType);
         }
     }
 
@@ -205,10 +204,9 @@ public class EventDialogController implements Initializable {
             return null;
     }
 
-
     public Event createFromFields() {
         if (getEventName().isEmpty() || txfStartDate.getText().isEmpty() || txfStartTime.getText().isEmpty() ||
-                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || ltvTicketType.getItems().isEmpty()) {
+                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || ltvTicketTypes.getItems().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");
             return null;
         }
@@ -230,6 +228,7 @@ public class EventDialogController implements Initializable {
             PopUp.showError("Start date cannot be placed after end date");
             return null;
         }
+
         return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance(), getTicketTypes());
     }
 }

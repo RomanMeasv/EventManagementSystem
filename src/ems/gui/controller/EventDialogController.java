@@ -73,7 +73,7 @@ public class EventDialogController implements Initializable {
     }
 
     public List<String> getTicketTypes(){
-        return new ArrayList<>(ltvTicketType.getItems());
+        return new ArrayList<>(ltvTicketTypes.getItems());
     }
 
     public void setEventName(String eventName) {

@@ -198,9 +198,9 @@ public class EventDialogController implements Initializable {
             try {
                 return LocalDateTime.parse(DT, formatter);
             } catch (Exception e) {
+
                 return null;
             }
-
         } else
             return null;
     }

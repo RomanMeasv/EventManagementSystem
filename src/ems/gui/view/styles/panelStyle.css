@@ -1,36 +1,36 @@
 /* LEFT SIDE PANEL */
 .events-default {
-    -fx-image: url("../resources/images/EventsIcoDefault.png");
+    -fx-image: url("../resources/navbar/Events-ico.png");
 }
 
 .tickets-default {
-    -fx-image: url("../resources/images/TicketsIcoDefault.png");
+    -fx-image: url("../resources/navbar/Tickets-ico.png");
 }
 
 .user-default {
-    -fx-image: url("../resources/images/UserIcoDefault.png");
+    -fx-image: url("../resources/navbar/Customer-ico.png");
 }
 
 .events-default:hover {
-    -fx-image: url("../resources/images/EventsIcoActive.png");
+    -fx-image: url("../resources/navbar/Events-ico-active.png");
 }
 
 .tickets-default:hover {
-    -fx-image: url("../resources/images/TicketsIcoActive.png");
+    -fx-image: url("../resources/navbar/Tickets-ico-active.png");
 }
 
 .user-default:hover {
-    -fx-image: url("../resources/images/UserIcoActive.png");
+    -fx-image: url("../resources/navbar/Customer-ico-active.png");
 }
 
 .events-active {
-    -fx-image: url("../resources/images/EventsIcoActive.png");
+    -fx-image: url("../resources/navbar/Events-ico-active.png");
 }
 
 .tickets-active {
-    -fx-image: url("../resources/images/TicketsIcoActive.png");
+    -fx-image: url("../resources/navbar/Tickets-ico-active.png");
 }
 
 .user-active {
-    -fx-image: url("../resources/images/UserIcoActive.png");
+    -fx-image: url("../resources/navbar/Customer-ico-active.png");
 }

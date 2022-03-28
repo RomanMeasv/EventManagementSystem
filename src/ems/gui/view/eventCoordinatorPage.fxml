@@ -35,17 +35,17 @@
                <children>
                   <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleCreate" pickOnBounds="true" preserveRatio="true" styleClass="btnCreate">
                      <image>
-                        <Image url="@resources/images/CreateIcoDefault.png" />
+                        <Image url="@resources/buttons/Create-ico.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleDelete" pickOnBounds="true" preserveRatio="true" styleClass="btnDelete">
                      <image>
-                        <Image url="@resources/images/DeleteIcoDefault.png" />
+                        <Image url="@resources/buttons/Delete-ico.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleUpdate" pickOnBounds="true" preserveRatio="true" styleClass="btnUpdate">
                      <image>
-                        <Image url="@resources/images/UpdateIcoDefault.png" />
+                        <Image url="@resources/buttons/Update-ico.png" />
                      </image>
                   </ImageView>
                </children>

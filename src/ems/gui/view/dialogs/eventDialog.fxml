@@ -164,7 +164,7 @@
                               <String fx:value="drop-shadow" />
                            </styleClass>
                         </TextField>
-                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#addTicketTypeHandle" text="ADD" HBox.hgrow="NEVER">
+                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddTicketType" text="ADD" HBox.hgrow="NEVER">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -172,7 +172,7 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#removeTicketTypeHandle" text="REMOVE" HBox.hgrow="NEVER">
+                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveTicketType" text="REMOVE" HBox.hgrow="NEVER">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

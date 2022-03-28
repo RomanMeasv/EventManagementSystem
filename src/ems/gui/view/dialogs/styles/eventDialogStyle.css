@@ -120,6 +120,10 @@
     -fx-background-radius: 10px 10px 0 0;
 }
 
+.list-view .list-cell:selected {
+    -fx-background-color: #8293E3;
+}
+
 .list-cell {
     -fx-text-fill: #FFF;
 }

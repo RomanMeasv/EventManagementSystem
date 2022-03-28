@@ -1,10 +1,7 @@
 package ems.gui.controller;
 
 import ems.be.Event;
-import ems.be.EventCoordinator;
-import ems.be.TicketType;
 import ems.bll.exceptions.DatabaseException;
-import ems.bll.exceptions.NameAlreadyTakenException;
 import ems.bll.util.EventNameValidator;
 
 import ems.gui.view.util.PopUp;
@@ -15,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -31,10 +27,10 @@ public class EventDialogController implements Initializable {
     private TextField txfEndDate, txfEndTime, txfLocation, txfLocationGuidance;
 
     @FXML
-    private TableView<TicketType> tbvTicketType;
+    private TableView<String> tbvTicketType;
 
     @FXML
-    private TableColumn<TicketType, String> colTicketType;
+    private TableColumn<String, String> colTicketType;
 
     @FXML
     private TextField txfFilter, txfTicketType;
@@ -115,11 +111,11 @@ public class EventDialogController implements Initializable {
 
     }
 
-    public void addTicketTypeHandle(ActionEvent event) {
+    public void handleAddTicketType(ActionEvent event) {
 
     }
 
-    public void removeTicketTypeHandle(ActionEvent event) {
+    public void handleRemoveTicketType(ActionEvent event) {
 
     }
 

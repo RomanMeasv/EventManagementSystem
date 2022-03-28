@@ -31,7 +31,7 @@ public class EventDialogController implements Initializable {
     private TextField txfEndDate, txfEndTime, txfLocation, txfLocationGuidance;
 
     @FXML
-    private ListView<String> ltvTicketType;
+    private ListView<String> ltvTicketTypes;
 
     @FXML
     private TextField txfTicketType;
@@ -114,21 +114,22 @@ public class EventDialogController implements Initializable {
         txfEndDate.setText(endDate);
     }
 
-    public void setTicketTypes(List<String> ticketType){
-        ltvTicketType.setItems(FXCollections.observableList(ticketType));
+    public void setTicketTypes(List<String> ticketTypes){
+        ltvTicketTypes.setItems(FXCollections.observableList(new ArrayList<>(ticketTypes)));
     }
 
     public void handleAddTicketType(ActionEvent event) {
         String ticketType = txfTicketType.getText();
-        if (!ltvTicketType.getItems().contains(ticketType)) {
-            ltvTicketType.getItems().add(txfTicketType.getText());
+        if (!ltvTicketTypes.getItems().contains(ticketType) && !ticketType.isEmpty()) {
+            ltvTicketTypes.getItems().add(txfTicketType.getText());
         }
         txfTicketType.clear();
     }
 
     public void handleRemoveTicketType(ActionEvent event) {
-        if (ltvTicketType.getSelectionModel().getSelectedItem() != null) {
-            ltvTicketType.getItems().remove(ltvTicketType.getSelectionModel().getSelectedItem());
+        String selecedTicketType = ltvTicketTypes.getSelectionModel().getSelectedItem();
+        if (selecedTicketType != null) {
+            ltvTicketTypes.getItems().remove(selecedTicketType);
         }
     }
 
@@ -197,17 +198,16 @@ public class EventDialogController implements Initializable {
             try {
                 return LocalDateTime.parse(DT, formatter);
             } catch (Exception e) {
+
                 return null;
             }
-
         } else
             return null;
     }
 
-
     public Event createFromFields() {
         if (getEventName().isEmpty() || txfStartDate.getText().isEmpty() || txfStartTime.getText().isEmpty() ||
-                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || ltvTicketType.getItems().isEmpty()) {
+                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || ltvTicketTypes.getItems().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");
             return null;
         }
@@ -229,6 +229,7 @@ public class EventDialogController implements Initializable {
             PopUp.showError("Start date cannot be placed after end date");
             return null;
         }
+
         return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance(), getTicketTypes());
     }
 }

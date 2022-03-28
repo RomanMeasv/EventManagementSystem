@@ -14,11 +14,6 @@ public class Event {
     private String locationGuidance;
     private List<String> ticketTypes;
 
-
-    public List<String> getTicketTypes() {
-        return ticketTypes;
-    }
-
     public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketType) {
         this.name = name;
         this.description = description;
@@ -103,6 +98,14 @@ public class Event {
 
     public void setLocationGuidance(String locationGuidance) {
         this.locationGuidance = locationGuidance;
+    }
+
+    public List<String> getTicketType() {
+        return ticketTypes;
+    }
+
+    public List<String> getTicketTypes() {
+        return ticketTypes;
     }
 
     @Override

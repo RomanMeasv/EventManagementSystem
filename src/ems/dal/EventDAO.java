@@ -1,35 +1,47 @@
 package ems.dal;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import ems.be.Event;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventDAO {
+
     public Event createEvent(Event e) throws Exception {
         Event eCreated = null;
 
         try (Connection con = ConnectionManager.getConnection()) {
+            con.setAutoCommit(false);
 
-            String sqlCommandInsert = "INSERT INTO Events([name], [description], notes, [start], [end], location, locationGuidance) VALUES (?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement pstmtInsert = con.prepareStatement(sqlCommandInsert, Statement.RETURN_GENERATED_KEYS);
+            //create tuple in Events table
+            String sqlCommandInsertEvent = "INSERT INTO Events([name], [description], notes, [start], [end], location, locationGuidance) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmtInsertEvent = con.prepareStatement(sqlCommandInsertEvent, Statement.RETURN_GENERATED_KEYS);
 
-            pstmtInsert.setString(1, e.getName());
-            pstmtInsert.setString(2, e.getDescription());
-            pstmtInsert.setString(3, e.getNotes());
-            pstmtInsert.setTimestamp(4, Timestamp.valueOf(e.getStart()));
-            pstmtInsert.setTimestamp(5, Timestamp.valueOf(e.getEnd()));
-            pstmtInsert.setString(6, e.getLocation());
-            pstmtInsert.setString(7, e.getLocationGuidance());
+            pstmtInsertEvent.setString(1, e.getName());
+            pstmtInsertEvent.setString(2, e.getDescription());
+            pstmtInsertEvent.setString(3, e.getNotes());
+            pstmtInsertEvent.setTimestamp(4, Timestamp.valueOf(e.getStart()));
+            pstmtInsertEvent.setTimestamp(5, Timestamp.valueOf(e.getEnd()));
+            pstmtInsertEvent.setString(6, e.getLocation());
+            pstmtInsertEvent.setString(7, e.getLocationGuidance());
 
-            pstmtInsert.executeUpdate();
-            ResultSet rs = pstmtInsert.getGeneratedKeys();
+            pstmtInsertEvent.executeUpdate();
+            ResultSet rs = pstmtInsertEvent.getGeneratedKeys();
 
-            while (rs.next()) {
+            while(rs.next()) {
+                //create tuples in TicketTypes table
+                String sqlCommandInsertTicketTypes = "INSERT INTO TicketTypes(eventId, [type]) VALUES (?, ?);";
+                PreparedStatement pstmtInsertTicketTypes = con.prepareStatement(sqlCommandInsertTicketTypes);
+                for (String type : e.getTicketTypes()) {
+                    pstmtInsertTicketTypes.setInt(1, rs.getInt(1));
+                    pstmtInsertTicketTypes.setString(2, type);
+                    pstmtInsertTicketTypes.addBatch();
+                }
+
+                pstmtInsertTicketTypes.executeBatch();
+
+                //construct Event object
                 eCreated = new Event(
                         rs.getInt(1),
                         e.getName(),
@@ -38,9 +50,13 @@ public class EventDAO {
                         e.getStart(),
                         e.getEnd(),
                         e.getLocation(),
-                        e.getLocationGuidance()
+                        e.getLocationGuidance(),
+                        e.getTicketTypes()
                 );
             }
+
+            con.commit();
+            con.setAutoCommit(true);
         }
 
         return eCreated;
@@ -65,7 +81,8 @@ public class EventDAO {
                                 rs.getTimestamp("start").toLocalDateTime(),
                                 rs.getTimestamp("end").toLocalDateTime(),
                                 rs.getString("location"),
-                                rs.getString("locationGuidance")));
+                                rs.getString("locationGuidance"),
+                                readTicketTypes(rs.getInt("id"))));
             }
         }
 
@@ -81,11 +98,14 @@ public class EventDAO {
             pstmtDelete.setInt(1, e.getId());
             pstmtDelete.executeUpdate();
         }
+        //no need to delete ticket types, since they are cascade deleted
     }
 
     public void updateEvent(Event e) throws Exception {
         try (Connection con = ConnectionManager.getConnection()) {
+            con.setAutoCommit(false);
 
+            //update Event tuple
             String sqlCommandUpdate = "UPDATE Events SET [name]=?, [description]=?, notes=?, [start]=?, [end]=?, location=?, locationGuidance=? WHERE id = ?";
             PreparedStatement pstmtUpdate = con.prepareStatement(sqlCommandUpdate);
 
@@ -99,6 +119,25 @@ public class EventDAO {
             pstmtUpdate.setInt(8, e.getId());
 
             pstmtUpdate.executeUpdate();
+
+            //delete all TicketTypes tuples related to the event
+            String sqlCommandDeleteTicketTypes = "DELETE FROM TicketTypes WHERE eventId=?;";
+            PreparedStatement pstmtDeleteTicketTypes = con.prepareStatement(sqlCommandDeleteTicketTypes);
+            pstmtDeleteTicketTypes.setInt(1, e.getId());
+            pstmtDeleteTicketTypes.executeUpdate();
+
+            //recreate updated TicketTypes tuples
+            String sqlCommandInsertTicketTypes = "INSERT INTO TicketTypes(eventId, [type]) VALUES (?, ?);";
+            PreparedStatement pstmtInsertTicketTypes = con.prepareStatement(sqlCommandInsertTicketTypes);
+            for (String type : e.getTicketTypes()) {
+                pstmtInsertTicketTypes.setInt(1, e.getId());
+                pstmtInsertTicketTypes.setString(2, type);
+                pstmtInsertTicketTypes.addBatch();
+            }
+            pstmtInsertTicketTypes.executeBatch();
+
+            con.commit();
+            con.setAutoCommit(true);
         }
     }
 
@@ -137,11 +176,29 @@ public class EventDAO {
                         rs.getTimestamp("start").toLocalDateTime(),
                         rs.getTimestamp("end").toLocalDateTime(),
                         rs.getString("location"),
-                        rs.getString("locationGuidance")
+                        rs.getString("locationGuidance"),
+                        readTicketTypes(rs.getInt("id"))
                 ));
             }
         }
 
         return filtered;
+    }
+
+    private List<String> readTicketTypes(int eventId) throws Exception {
+        List<String> ticketTypes = new ArrayList<>();
+
+        try (Connection con = ConnectionManager.getConnection()) {
+
+            String sqlCommandSelect = "SELECT [type] FROM TicketTypes WHERE eventId=?;";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
+            pstmtSelect.setInt(1, eventId);
+            ResultSet rs = pstmtSelect.executeQuery();
+
+            while (rs.next()) {
+                ticketTypes.add(rs.getString("type"));
+            }
+        }
+        return ticketTypes;
     }
 }

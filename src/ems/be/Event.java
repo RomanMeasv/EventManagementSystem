@@ -1,7 +1,7 @@
 package ems.be;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Event {
     private int id;
@@ -12,12 +12,9 @@ public class Event {
     private LocalDateTime end;
     private String location;
     private String locationGuidance;
-    private ArrayList<String> ticketType;
+    private List<String> ticketTypes;
 
-
-
-
-    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, ArrayList<String> ticketType) {
+    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketType) {
         this.name = name;
         this.description = description;
         this.notes = notes;
@@ -25,10 +22,10 @@ public class Event {
         this.end = end;
         this.location = location;
         this.locationGuidance = locationGuidance;
-        this.ticketType = ticketType;
+        this.ticketTypes = ticketType;
     }
 
-    public Event(int id, String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance) {
+    public Event(int id, String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketTypes) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -37,6 +34,7 @@ public class Event {
         this.end = end;
         this.location = location;
         this.locationGuidance = locationGuidance;
+        this.ticketTypes = ticketTypes;
     }
 
     public int getId() {
@@ -103,11 +101,12 @@ public class Event {
         this.locationGuidance = locationGuidance;
     }
 
-    public ArrayList<String> getTicketType() {
-        return ticketType;
+    public List<String> getTicketType() {
+        return ticketTypes;
     }
-    public void setTicketType(ArrayList<String> ticketType) {
-        this.ticketType = ticketType;
+
+    public List<String> getTicketTypes() {
+        return ticketTypes;
     }
 
     @Override

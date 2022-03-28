@@ -74,7 +74,7 @@ public class EventDialogController implements Initializable {
     }
 
     public ArrayList<String> getTicketTypes(){
-        return (ArrayList<String>)tbvTicketType.getItems();
+        return (ArrayList<String>) ltvTicketType.getItems();
     }
 
     public void setEventName(String eventName) {
@@ -118,7 +118,7 @@ public class EventDialogController implements Initializable {
     }
 
     public void setTicketType(ArrayList<String> ticketType){
-        tbvTicketType.setItems(FXCollections.observableList(ticketType));
+        ltvTicketType.setItems(FXCollections.observableList(ticketType));
     }
 
     public void handleAddTicketType(ActionEvent event) {
@@ -207,7 +207,7 @@ public class EventDialogController implements Initializable {
 
     public Event createFromFields() {
         if (getEventName().isEmpty() || txfStartDate.getText().isEmpty() || txfStartTime.getText().isEmpty() ||
-                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || !tbvTicketType.getItems().isEmpty()) {
+                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || !ltvTicketType.getItems().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");
             return null;
         }

@@ -6,6 +6,8 @@ import ems.bll.util.EventNameValidator;
 
 import ems.gui.view.util.PopUp;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EventDialogController implements Initializable {
@@ -73,6 +76,10 @@ public class EventDialogController implements Initializable {
         return parseToLocalDateTime(endDate, endTime);
     }
 
+    public ArrayList<String> getTicketTypes(){
+        return (ArrayList<String>)tbvTicketType.getItems();
+    }
+
     public void setEventName(String eventName) {
         defaultEventName = eventName;
         txfEventName.setText(eventName);
@@ -111,6 +118,10 @@ public class EventDialogController implements Initializable {
     public void setEndDate(String endDate) {
         txfEndDate.setText(endDate);
 
+    }
+
+    public void setTicketType(ArrayList<String> ticketType){
+        tbvTicketType.setItems(FXCollections.observableList(ticketType));
     }
 
     public void handleAddTicketType(ActionEvent event) {
@@ -196,7 +207,7 @@ public class EventDialogController implements Initializable {
 
     public Event createFromFields() {
         if (getEventName().isEmpty() || txfStartDate.getText().isEmpty() || txfStartTime.getText().isEmpty() ||
-                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty()) {
+                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || !tbvTicketType.getItems().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");
             return null;
         }
@@ -218,6 +229,6 @@ public class EventDialogController implements Initializable {
             PopUp.showError("Start date cannot be placed after end date");
             return null;
         }
-        return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance());
+        return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance(), getTicketTypes());
     }
 }

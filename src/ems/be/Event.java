@@ -1,6 +1,7 @@
 package ems.be;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Event {
     private int id;
@@ -11,9 +12,10 @@ public class Event {
     private LocalDateTime end;
     private String location;
     private String locationGuidance;
+    private ArrayList<String> ticketType;
 
 
-    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance) {
+    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, ArrayList<String> ticketType) {
         this.name = name;
         this.description = description;
         this.notes = notes;
@@ -21,6 +23,7 @@ public class Event {
         this.end = end;
         this.location = location;
         this.locationGuidance = locationGuidance;
+        this.ticketType = ticketType;
     }
 
     public Event(int id, String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance) {

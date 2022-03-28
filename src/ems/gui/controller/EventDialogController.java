@@ -5,6 +5,8 @@ import ems.bll.exceptions.DatabaseException;
 import ems.bll.util.EventNameValidator;
 
 import ems.gui.view.util.PopUp;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EventDialogController implements Initializable {
@@ -68,6 +71,10 @@ public class EventDialogController implements Initializable {
         return parseToLocalDateTime(endDate, endTime);
     }
 
+    public ArrayList<String> getTicketTypes(){
+        return (ArrayList<String>) ltvTicketType.getItems();
+    }
+
     public void setEventName(String eventName) {
         defaultEventName = eventName;
         txfEventName.setText(eventName);
@@ -108,12 +115,19 @@ public class EventDialogController implements Initializable {
 
     }
 
-    public void handleAddTicketType(ActionEvent event) {
+    public void setTicketType(ArrayList<String> ticketType){
+        ltvTicketType.setItems(FXCollections.observableList(ticketType));
+    }
 
+    public void handleAddTicketType(ActionEvent event) {
+        ltvTicketType.getItems().add(txfTicketType.getText());
+        txfTicketType.clear();
     }
 
     public void handleRemoveTicketType(ActionEvent event) {
-
+        if (ltvTicketType.getSelectionModel().getSelectedItem() != null) {
+            ltvTicketType.getItems().remove(ltvTicketType.getSelectionModel().getSelectedItem());
+        }
     }
 
     private String formatDate(String provided) {
@@ -191,7 +205,7 @@ public class EventDialogController implements Initializable {
 
     public Event createFromFields() {
         if (getEventName().isEmpty() || txfStartDate.getText().isEmpty() || txfStartTime.getText().isEmpty() ||
-                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty()) {
+                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || !ltvTicketType.getItems().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");
             return null;
         }
@@ -213,6 +227,6 @@ public class EventDialogController implements Initializable {
             PopUp.showError("Start date cannot be placed after end date");
             return null;
         }
-        return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance());
+        return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance(), getTicketTypes());
     }
 }

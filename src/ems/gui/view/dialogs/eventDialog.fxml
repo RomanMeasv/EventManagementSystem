@@ -134,7 +134,7 @@
             </VBox>
             <VBox maxWidth="1.7976931348623157E308" prefHeight="270.0" prefWidth="290.0" HBox.hgrow="ALWAYS">
                <children>
-                  <ListView fx:id="ltvTicketType" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="ltvTicketType" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                   <TextField fx:id="txfFilter" promptText="Filter...">
                      <font>
                         <Font size="16.0" />

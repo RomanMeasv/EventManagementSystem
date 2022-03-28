@@ -111,11 +111,14 @@ public class EventDialogController implements Initializable {
     }
 
     public void handleAddTicketType(ActionEvent event) {
-
+        ltvTicketType.getItems().add(txfTicketType.getText());
+        txfTicketType.clear();
     }
 
     public void handleRemoveTicketType(ActionEvent event) {
-
+        if (ltvTicketType.getSelectionModel().getSelectedItem() != null) {
+            ltvTicketType.getItems().remove(ltvTicketType.getSelectionModel().getSelectedItem());
+        }
     }
 
     private String formatDate(String provided) {

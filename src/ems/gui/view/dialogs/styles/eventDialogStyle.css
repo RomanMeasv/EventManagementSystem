@@ -124,6 +124,7 @@
     -fx-background-color: #8293E3;
 }
 
-.list-cell {
+.list-view .list-cell {
     -fx-text-fill: #FFF;
+    -fx-background-color: #F7B449;
 }

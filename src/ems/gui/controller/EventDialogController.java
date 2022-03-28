@@ -17,6 +17,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -72,8 +73,8 @@ public class EventDialogController implements Initializable {
         return parseToLocalDateTime(endDate, endTime);
     }
 
-    public ArrayList<String> getTicketTypes(){
-        return (ArrayList<String>) ltvTicketType.getItems();
+    public List<String> getTicketTypes(){
+        return List.copyOf(ltvTicketType.getItems());
     }
 
     public void setEventName(String eventName) {
@@ -108,12 +109,10 @@ public class EventDialogController implements Initializable {
 
     public void setEndTime(String endTime) {
         txfEndTime.setText(endTime);
-
     }
 
     public void setEndDate(String endDate) {
         txfEndDate.setText(endDate);
-
     }
 
     public void setTicketTypes(List<String> ticketType){
@@ -209,7 +208,7 @@ public class EventDialogController implements Initializable {
 
     public Event createFromFields() {
         if (getEventName().isEmpty() || txfStartDate.getText().isEmpty() || txfStartTime.getText().isEmpty() ||
-                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || !ltvTicketType.getItems().isEmpty()) {
+                txfEndDate.getText().isEmpty() || txfEndTime.getText().isEmpty() || getLocation().isEmpty() || ltvTicketType.getItems().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");
             return null;
         }

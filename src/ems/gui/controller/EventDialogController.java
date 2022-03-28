@@ -29,10 +29,7 @@ public class EventDialogController implements Initializable {
     private TextField txfEndDate, txfEndTime, txfLocation, txfLocationGuidance;
 
     @FXML
-    private TableView<String> tbvTicketType;
-
-    @FXML
-    private TableColumn<String, String> colTicketType;
+    private ListView<String> ltvTicketType;
 
     @FXML
     private TextField txfFilter, txfTicketType;

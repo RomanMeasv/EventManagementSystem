@@ -7,8 +7,7 @@
 <?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -135,14 +134,7 @@
             </VBox>
             <VBox maxWidth="1.7976931348623157E308" prefHeight="270.0" prefWidth="290.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TableView fx:id="tbvTicketType" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn fx:id="colTicketType" prefWidth="75.0" text="Ticket type" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
+                  <ListView fx:id="ltvTicketType" prefHeight="200.0" prefWidth="200.0" />
                   <TextField fx:id="txfFilter" promptText="Filter...">
                      <font>
                         <Font size="16.0" />

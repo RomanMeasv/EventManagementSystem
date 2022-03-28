@@ -121,7 +121,10 @@ public class EventDialogController implements Initializable {
     }
 
     public void handleAddTicketType(ActionEvent event) {
-        ltvTicketType.getItems().add(txfTicketType.getText());
+        String ticketType = txfTicketType.getText();
+        if (!ltvTicketType.getItems().contains(ticketType)) {
+            ltvTicketType.getItems().add(txfTicketType.getText());
+        }
         txfTicketType.clear();
     }
 

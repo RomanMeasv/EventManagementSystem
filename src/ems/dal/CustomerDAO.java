@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDAO {
     public Customer createCustomer(Customer customer) throws Exception {
@@ -33,4 +35,28 @@ public class CustomerDAO {
         }
         return customerCreated;
     }
+
+    //read all customers
+    public List<Customer> readAllCustomers() throws Exception {
+        List<Customer> allCustomers = null;
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlCommandReadAllCustomers = "SELECT * FROM Customers;";
+            Statement stmtReadAllCustomers = con.createStatement();
+            ResultSet rs = stmtReadAllCustomers.executeQuery(sqlCommandReadAllCustomers);
+
+            allCustomers = new ArrayList<>();
+            while (rs.next()) {
+                allCustomers.add(new Customer(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("notes")));
+            }
+        }
+        return allCustomers;
+    }
+
+
+
 }

@@ -1,5 +1,10 @@
 package ems.gui.controller;
 
+import ems.be.Customer;
+import ems.gui.model.CustomerModel;
+import ems.gui.view.util.PopUp;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import ems.be.Event;
 import ems.gui.model.EventModel;
 import ems.gui.view.dialogs.EventDialog;
@@ -17,19 +22,20 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 
 public class EventCoordinatorPageControllerNew implements Initializable {
-    private EventModel eventModel;
+
+    public TabPane tbpEventCoordinator;
 
     public TableView<Event> tbvEvents;
     public TableColumn<Event, String> colEvents;
+
     public TextField txfFilterEvents;
     public VBox boxEvents;
     public HBox boxEventsButtons;
 
-    public TableView tbvCustomers;
-    public TableColumn colCustomers;
+    public TableView<Customer> tbvCustomers;
+    public TableColumn<Customer, String> colCustomers;
     public TextField txfFilterCustomers;
     public VBox boxCustomers;
     public HBox boxCustomersButtons;
@@ -40,18 +46,28 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public VBox boxTickets;
     public HBox boxTicketsButtons;
 
+    private CustomerModel customerModel;
+    private EventModel eventModel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            customerModel = new CustomerModel();
             eventModel = new EventModel();
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage()); //error is custom handled within the logic
         }
+
         boxEventsButtons.managedProperty().bind(boxEventsButtons.visibleProperty());
         boxCustomersButtons.managedProperty().bind(boxCustomersButtons.visibleProperty());
         boxTicketsButtons.managedProperty().bind(boxTicketsButtons.visibleProperty());
+        tbpEventCoordinator.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            tabChangeListener(newValue.intValue());
+        });
 
-        //Event set up
+        colCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvCustomers.setItems(customerModel.getObservableCustomers());
+
         colEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbvEvents.setItems(eventModel.getObservableEvents());
     }
@@ -142,31 +158,20 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     /* TAB CHANGING */
-    public void selectionChangedOverviewTab(Event event) {
-
-    }
-
-    public void selectionChangedEventTab(Event event) {
-
-    }
-
-    public void selectionChangedCustomerTab(Event event) {
-
-    }
-
-    public void selectionChangedTicketTab(Event event) {
-
-    }
-
-    public void selectionChangedOverviewTab(javafx.event.Event event) {
-    }
-
-    public void selectionChangedEventTab(javafx.event.Event event) {
-    }
-
-    public void selectionChangedCustomerTab(javafx.event.Event event) {
-    }
-
-    public void selectionChangedTicketTab(javafx.event.Event event) {
+    public void tabChangeListener(int newValue){
+        switch (newValue){
+            case 0 -> {
+                System.out.println("overview");
+            }
+            case 1 -> {
+                System.out.println("events");
+            }
+            case 2 -> {
+                System.out.println("customers");
+            }
+            case 3 -> {
+                System.out.println("tickets");
+            }
+        }
     }
 }

@@ -48,6 +48,11 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public VBox boxTickets;
     public HBox boxTicketsButtons;
 
+    public HBox boxOverviewTab;
+    public HBox boxEventsTab;
+    public HBox boxCustomersTab;
+    public HBox boxTicketsTab;
+
     private CustomerModel customerModel;
     private EventModel eventModel;
 
@@ -63,6 +68,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         boxEventsButtons.managedProperty().bind(boxEventsButtons.visibleProperty());
         boxCustomersButtons.managedProperty().bind(boxCustomersButtons.visibleProperty());
         boxTicketsButtons.managedProperty().bind(boxTicketsButtons.visibleProperty());
+
         tbpEventCoordinator.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             tabChangeListener(newValue.intValue());
         });
@@ -190,20 +196,48 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     /* TAB CHANGING */
-    public void tabChangeListener(int newValue){
+    public void tabChangeListener(int newValue) {
         switch (newValue){
             case 0 -> {
-                System.out.println("overview");
+                changeToOverviewTab();
             }
             case 1 -> {
-                System.out.println("events");
+                changeToEventsTab();
             }
             case 2 -> {
-                System.out.println("customers");
+                changeToCustomersTab();
             }
             case 3 -> {
-                System.out.println("tickets");
+                changeToTicketsTab();
             }
         }
+    }
+
+    private void changeToOverviewTab() {
+        boxEventsButtons.setVisible(false);
+        boxCustomersButtons.setVisible(false);
+        boxTicketsButtons.setVisible(false);
+
+        boxEventsTab.getChildren().remove(boxEvents);
+        boxCustomersTab.getChildren().remove(boxCustomers);
+        boxTicketsTab.getChildren().remove(boxTickets);
+
+        boxOverviewTab.getChildren().removeAll(boxEvents, boxCustomers, boxTickets);
+        boxOverviewTab.getChildren().addAll(boxEvents, boxCustomers, boxTickets);
+    }
+
+    private void changeToEventsTab() {
+        boxEventsButtons.setVisible(true);
+        boxEventsTab.getChildren().add(boxEvents);
+    }
+
+    private void changeToCustomersTab() {
+        boxCustomersButtons.setVisible(true);
+        boxCustomersTab.getChildren().add(boxCustomers);
+    }
+
+    private void changeToTicketsTab() {
+        boxTicketsButtons.setVisible(true);
+        boxTicketsTab.getChildren().add(boxTickets);
     }
 }

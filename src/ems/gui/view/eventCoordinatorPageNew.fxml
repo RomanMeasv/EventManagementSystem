@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" stylesheets="@styles/eventCoordinatorPageStyleNew.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
+<TabPane fx:id="tbpEventCoordinator" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" stylesheets="@styles/eventCoordinatorPageStyleNew.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
     <tabs>
-        <Tab closable="false" onSelectionChanged="#selectionChangedOverviewTab" styleClass="overview-tab">
+        <Tab closable="false" styleClass="overview-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -157,7 +157,7 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab closable="false" onSelectionChanged="#selectionChangedEventTab" styleClass="event-tab">
+        <Tab closable="false" styleClass="event-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -176,7 +176,7 @@
                </children></AnchorPane>
             </content>
         </Tab>
-        <Tab closable="false" onSelectionChanged="#selectionChangedCustomerTab" styleClass="customer-tab">
+        <Tab closable="false" styleClass="customer-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -195,7 +195,7 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab closable="false" onSelectionChanged="#selectionChangedTicketTab" styleClass="ticket-tab">
+        <Tab closable="false" styleClass="ticket-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>

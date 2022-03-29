@@ -1,10 +1,10 @@
 package ems.gui.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -14,6 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageControllerNew implements Initializable {
+    public TabPane tbpEventCoordinator;
+
     public TableView tbvEvents;
     public TableColumn colEvents;
     public TextField txfFilterEvents;
@@ -37,6 +39,9 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         boxEventsButtons.managedProperty().bind(boxEventsButtons.visibleProperty());
         boxCustomersButtons.managedProperty().bind(boxCustomersButtons.visibleProperty());
         boxTicketsButtons.managedProperty().bind(boxTicketsButtons.visibleProperty());
+        tbpEventCoordinator.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            tabChangeListener(newValue.intValue());
+        });
     }
 
     /* EVENTS */
@@ -91,19 +96,20 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     /* TAB CHANGING */
-    public void selectionChangedOverviewTab(Event event) {
-
-    }
-
-    public void selectionChangedEventTab(Event event) {
-        
-    }
-
-    public void selectionChangedCustomerTab(Event event) {
-
-    }
-
-    public void selectionChangedTicketTab(Event event) {
-
+    public void tabChangeListener(int newValue){
+        switch (newValue){
+            case 0 -> {
+                System.out.println("overview");
+            }
+            case 1 -> {
+                System.out.println("events");
+            }
+            case 2 -> {
+                System.out.println("customers");
+            }
+            case 3 -> {
+                System.out.println("tickets");
+            }
+        }
     }
 }

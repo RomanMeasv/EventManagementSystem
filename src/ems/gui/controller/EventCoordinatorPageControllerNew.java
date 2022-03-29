@@ -3,6 +3,7 @@ package ems.gui.controller;
 import ems.be.Event;
 import ems.gui.model.EventModel;
 import ems.gui.view.dialogs.EventDialog;
+import ems.gui.view.util.PopUp;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -72,7 +73,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             try {
                 eventModel.createEvent(response);
             } catch (Exception e) {
-                e.printStackTrace();
+                PopUp.showError(e.getMessage());
             }
         });
     }
@@ -84,7 +85,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
                 eventModel.deleteEvent(selected);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage());
         }
     }
 
@@ -102,7 +103,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
                 }
             }
         } catch (Exception e) {
-            //don't do anything
+            PopUp.showError(e.getMessage());
         }
     }
 

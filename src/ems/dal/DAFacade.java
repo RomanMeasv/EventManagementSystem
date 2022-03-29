@@ -100,4 +100,14 @@ public class DAFacade implements IDataAccess {
     public List<Customer> readAllCustomers() throws Exception {
         return customerDAO.readAllCustomers();
     }
+
+    @Override
+    public void updateCustomer(Customer c) throws Exception {
+        customerDAO.updateCustomer(c);
+    }
+
+    @Override
+    public void deleteCustomer(Customer c) throws Exception {
+        customerDAO.deleteCustomer(c);
+    }
 }

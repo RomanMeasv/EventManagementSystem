@@ -36,7 +36,6 @@ public class CustomerDAO {
         return customerCreated;
     }
 
-    //read all customers
     public List<Customer> readAllCustomers() throws Exception {
         List<Customer> allCustomers = null;
         try (Connection con = ConnectionManager.getConnection()) {
@@ -57,6 +56,31 @@ public class CustomerDAO {
         return allCustomers;
     }
 
+    //update customer by id
+    public void updateCustomer(Customer customer) throws Exception {
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlCommandUpdateCustomer = "UPDATE Customers SET [name] = ?, email = ?, phoneNumber = ?, notes = ? WHERE id = ?;";
+            PreparedStatement pstmtUpdateCustomer = con.prepareStatement(sqlCommandUpdateCustomer);
 
+            pstmtUpdateCustomer.setString(1, customer.getName());
+            pstmtUpdateCustomer.setString(2, customer.getEmail());
+            pstmtUpdateCustomer.setString(3, customer.getPhoneNumber());
+            pstmtUpdateCustomer.setString(4, customer.getNotes());
+            pstmtUpdateCustomer.setInt(5, customer.getId());
 
+            pstmtUpdateCustomer.executeUpdate();
+        }
+    }
+
+    //delete customer
+    public void deleteCustomer(Customer c) throws Exception {
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlCommandDeleteCustomer = "DELETE FROM Customers WHERE id = ?;";
+            PreparedStatement pstmtDeleteCustomer = con.prepareStatement(sqlCommandDeleteCustomer);
+
+            pstmtDeleteCustomer.setInt(1, c.getId());
+
+            pstmtDeleteCustomer.executeUpdate();
+        }
+    }
 }

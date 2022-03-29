@@ -1,36 +1,52 @@
-/* LEFT SIDE PANEL */
-.events-default {
+/* SIDE PANEL */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 5;
+}
+
+.tab:selected {
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 16, 0, 0.0, 0.0);
+}
+
+.tab:hover {
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 16, 0, 0.0, 0.0);
+}
+
+.overview-tab .image-view {
+    -fx-image: url("../resources/navbar/Overview-ico.png");
+}
+
+.overview-tab:selected .image-view {
+    -fx-image: url("../resources/navbar/Overview-ico-active.png");
+}
+
+
+.event-tab .image-view {
     -fx-image: url("../resources/navbar/Events-ico.png");
 }
 
-.tickets-default {
-    -fx-image: url("../resources/navbar/Tickets-ico.png");
+.event-tab:selected .image-view {
+    -fx-image: url("../resources/navbar/Events-ico-active.png");
 }
 
-.user-default {
+.customer-tab .image-view {
     -fx-image: url("../resources/navbar/Customer-ico.png");
 }
 
-.events-default:hover {
-    -fx-image: url("../resources/navbar/Events-ico-active.png");
-}
-
-.tickets-default:hover {
-    -fx-image: url("../resources/navbar/Tickets-ico-active.png");
-}
-
-.user-default:hover {
+.customer-tab:selected .image-view {
     -fx-image: url("../resources/navbar/Customer-ico-active.png");
 }
 
-.events-active {
-    -fx-image: url("../resources/navbar/Events-ico-active.png");
+.ticket-tab .image-view {
+    -fx-image: url("../resources/navbar/Tickets-ico.png");
 }
 
-.tickets-active {
+.ticket-tab:selected .image-view {
     -fx-image: url("../resources/navbar/Tickets-ico-active.png");
-}
-
-.user-active {
-    -fx-image: url("../resources/navbar/Customer-ico-active.png");
 }

@@ -3,21 +3,19 @@ package ems.gui.controller;
 import ems.be.Customer;
 import ems.gui.model.CustomerModel;
 import ems.gui.view.util.PopUp;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import ems.be.Event;
 import ems.gui.model.EventModel;
 import ems.gui.view.dialogs.EventDialog;
-import ems.gui.view.util.PopUp;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.Optional;
@@ -25,32 +23,37 @@ import java.util.ResourceBundle;
 
 public class EventCoordinatorPageControllerNew implements Initializable {
 
-    public TabPane tbpEventCoordinator;
+    /* OVERVIEW TAB */
+        /* EVENTS */
+    public TableView<Event> tbvOverviewEvents;
+    public TableColumn<Event, String> colOverviewEvents;
+    public TextField txfFilterOverviewEvents;
 
-    public TableView<Event> tbvEvents;
-    public TableColumn<Event, String> colEvents;
+        /* CUSTOMERS */
+    public TableView<Customer> tbvOverviewCustomers;
+    public TableColumn<Customer, String> colOverviewCustomers;
+    public TextField txfFilterOverviewCustomers;
 
-    public TextField txfFilterEvents;
-    public VBox boxEvents;
-    public HBox boxEventsButtons;
+        /* TICKETS */
+    public TableView tbvOverviewTickets;
+    public TableColumn colOverviewTickets;
+    public TextField txfFilterOverviewTickets;
 
-    public TableView<Customer> tbvCustomers;
-    public TableColumn<Customer, String> colCustomers;
-    public TextField txfFilterCustomers;
-    public VBox boxCustomers;
-    public HBox boxCustomersButtons;
+    /* EVENTS TAB */
+        /* TABLE VIEW */
+    public TableView<Event> tbvEventTabEvents;
+    public TableColumn<Event, String> colEventTabEvents;
+    public TextField txfFilterEventTabEvents;
 
-    public TableView tbvTickets;
-    public TableColumn colTickets;
-    public TextField txfFilterTickets;
-    public VBox boxTickets;
-    public HBox boxTicketsButtons;
+        /* DIALOG PANE */
+    public TextField txfEventName, txfEventDescription, txfEventNotes,
+                txfStartDate, txfStartTime,
+                txfEndDate, txfEndTime,
+                txfLocation, txfLocationGuidance;
+    public ListView<String> ltvTicketTypes;
+    public TextField txfTicketType;
 
-    public HBox boxOverviewTab;
-    public HBox boxEventsTab;
-    public HBox boxCustomersTab;
-    public HBox boxTicketsTab;
-
+    /* MODELS */
     private CustomerModel customerModel;
     private EventModel eventModel;
 
@@ -63,25 +66,21 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             PopUp.showError(e.getMessage()); //error is custom handled within the logic
         }
 
-        boxEventsButtons.managedProperty().bind(boxEventsButtons.visibleProperty());
-        boxCustomersButtons.managedProperty().bind(boxCustomersButtons.visibleProperty());
-        boxTicketsButtons.managedProperty().bind(boxTicketsButtons.visibleProperty());
+        /* SET UP OVERVIEW TAB */
+        colOverviewEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvOverviewEvents.setItems(eventModel.getObservableEvents());
+        colOverviewCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvOverviewCustomers.setItems(customerModel.getObservableCustomers());
 
-        tbpEventCoordinator.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            tabChangeListener(newValue.intValue());
-        });
-
-        colCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tbvCustomers.setItems(customerModel.getObservableCustomers());
-
-        colEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tbvEvents.setItems(eventModel.getObservableEvents());
+        /* SET UP EVENTS TAB */
+        colEventTabEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvEventTabEvents.setItems(eventModel.getObservableEvents());
     }
 
     /* EVENTS */
     public void handleFilterEvents(KeyEvent keyEvent) {
         try {
-            String query = txfFilterEvents.getText();
+            String query = ((TextField)keyEvent.getSource()).getText();
             eventModel.filterEvents(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +88,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     public void handleCreateEvent(MouseEvent mouseEvent) {
-        EventDialog dialog = new EventDialog();
+
+        /*EventDialog dialog = new EventDialog();
         Optional<Event> result = dialog.showAndWait();
         result.ifPresent(response -> {
             try {
@@ -97,12 +97,12 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             } catch (Exception e) {
                 PopUp.showError(e.getMessage());
             }
-        });
+        });*/
     }
 
     public void handleDeleteEvent(MouseEvent mouseEvent) {
         try {
-            Event selected = tbvEvents.getSelectionModel().getSelectedItem();
+            Event selected = tbvEventTabEvents.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 eventModel.deleteEvent(selected);
             }
@@ -113,8 +113,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     public void handleUpdateEvent(MouseEvent mouseEvent) {
         try {
-            Event oldEvent = tbvEvents.getSelectionModel().getSelectedItem();
-            if (oldEvent != null) {
+            Event oldEvent = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+            /*if (oldEvent != null) {
                 EventDialog dialog = new EventDialog();
                 dialog.setFields(oldEvent);
                 Optional<Event> result = dialog.showAndWait();
@@ -123,7 +123,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
                     updatedEvent.setId(oldEvent.getId());
                     eventModel.updateEvent(oldEvent, updatedEvent);
                 }
-            }
+            }*/
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
@@ -131,7 +131,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     /* CUSTOMERS */
     public void handleFilterCustomers(KeyEvent keyEvent) {
-
+        //txfFilterOverviewCustomers
     }
 
     public void handleCreateCustomer(MouseEvent mouseEvent) {
@@ -163,49 +163,27 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     }
 
-    /* TAB CHANGING */
-    public void tabChangeListener(int newValue) {
-        switch (newValue){
-            case 0 -> {
-                changeToOverviewTab();
-            }
-            case 1 -> {
-                changeToEventsTab();
-            }
-            case 2 -> {
-                changeToCustomersTab();
-            }
-            case 3 -> {
-                changeToTicketsTab();
-            }
-        }
+    public void startDateKeyTypedHandle(KeyEvent keyEvent) {
+
     }
 
-    private void changeToOverviewTab() {
-        boxEventsButtons.setVisible(false);
-        boxCustomersButtons.setVisible(false);
-        boxTicketsButtons.setVisible(false);
+    public void startTimeKeyTypedHandle(KeyEvent keyEvent) {
 
-        boxEventsTab.getChildren().remove(boxEvents);
-        boxCustomersTab.getChildren().remove(boxCustomers);
-        boxTicketsTab.getChildren().remove(boxTickets);
-
-        boxOverviewTab.getChildren().removeAll(boxEvents, boxCustomers, boxTickets);
-        boxOverviewTab.getChildren().addAll(boxEvents, boxCustomers, boxTickets);
     }
 
-    private void changeToEventsTab() {
-        boxEventsButtons.setVisible(true);
-        boxEventsTab.getChildren().add(boxEvents);
+    public void endDateKeyTypedHandle(KeyEvent keyEvent) {
+
     }
 
-    private void changeToCustomersTab() {
-        boxCustomersButtons.setVisible(true);
-        boxCustomersTab.getChildren().add(boxCustomers);
+    public void endTimeKeyTypedHandle(KeyEvent keyEvent) {
+
     }
 
-    private void changeToTicketsTab() {
-        boxTicketsButtons.setVisible(true);
-        boxTicketsTab.getChildren().add(boxTickets);
+    public void handleAddTicketType(ActionEvent event) {
+
+    }
+
+    public void handleRemoveTicketType(ActionEvent event) {
+
     }
 }

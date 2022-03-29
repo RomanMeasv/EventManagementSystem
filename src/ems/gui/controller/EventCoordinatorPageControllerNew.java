@@ -33,8 +33,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public VBox boxEvents;
     public HBox boxEventsButtons;
 
-    public TableView tbvCustomers;
-    public TableColumn colCustomers;
+    public TableView<Customer> tbvCustomers;
+    public TableColumn<Customer, String> colCustomers;
     public TextField txfFilterCustomers;
     public VBox boxCustomers;
     public HBox boxCustomersButtons;

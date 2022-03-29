@@ -37,7 +37,7 @@ public class CustomerDAO {
     }
 
     public List<Customer> readAllCustomers() throws Exception {
-        List<Customer> allCustomers = null;
+        List<Customer> allCustomers;
         try (Connection con = ConnectionManager.getConnection()) {
             String sqlCommandReadAllCustomers = "SELECT * FROM Customers;";
             Statement stmtReadAllCustomers = con.createStatement();

@@ -24,6 +24,10 @@ public class Customer{
         this.notes = notes;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

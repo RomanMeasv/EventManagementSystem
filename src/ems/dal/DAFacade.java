@@ -1,5 +1,6 @@
 package ems.dal;
 
+import ems.be.Customer;
 import ems.be.Event;
 import ems.be.EventCoordinator;
 import ems.be.User;
@@ -12,11 +13,13 @@ public class DAFacade implements IDataAccess {
     UserDAO userDAO;
     TicketDAO ticketDAO;
     EventDAO eventDAO;
+    CustomerDAO customerDAO;
 
     private DAFacade() {
         userDAO = new UserDAO();
         ticketDAO = new TicketDAO();
         eventDAO = new EventDAO();
+        customerDAO = new CustomerDAO();
     }
 
     public static DAFacade getInstance() {
@@ -86,5 +89,10 @@ public class DAFacade implements IDataAccess {
     @Override
     public List<Event> filterEvents(String query) throws Exception {
         return eventDAO.filterEvents(query);
+    }
+
+    @Override
+    public Customer createCustomer(Customer c) throws Exception {
+        return customerDAO.createCustomer(c);
     }
 }

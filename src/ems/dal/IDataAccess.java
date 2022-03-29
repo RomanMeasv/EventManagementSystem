@@ -1,5 +1,6 @@
 package ems.dal;
 
+import ems.be.Customer;
 import ems.be.Event;
 import ems.be.EventCoordinator;
 import ems.be.User;
@@ -32,4 +33,5 @@ public interface IDataAccess {
     List<String> readAllEventNames() throws Exception;
 
     List<Event> filterEvents(String query) throws Exception;
+    Customer createCustomer(Customer c) throws Exception;
 }

@@ -214,11 +214,11 @@ public class EventDialogController implements Initializable {
         }
         try {
             if (!eventNameValidator.isValid(getEventName()) && !getEventName().equals(defaultEventName)) {
-                PopUp.showError("Username already in use!");
+                PopUp.showError("Event name already in use!");
                 return null;
             }
         } catch (DatabaseException e) {
-            PopUp.showError("Could not check if username already exists! Are you connected to the database?");
+            PopUp.showError("Could not check if event name already exists! Are you connected to the database?");
             return null;
         }
 

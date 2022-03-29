@@ -156,4 +156,16 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public void selectionChangedTicketTab(Event event) {
 
     }
+
+    public void selectionChangedOverviewTab(javafx.event.Event event) {
+    }
+
+    public void selectionChangedEventTab(javafx.event.Event event) {
+    }
+
+    public void selectionChangedCustomerTab(javafx.event.Event event) {
+    }
+
+    public void selectionChangedTicketTab(javafx.event.Event event) {
+    }
 }

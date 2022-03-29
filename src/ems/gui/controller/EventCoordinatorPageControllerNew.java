@@ -2,6 +2,7 @@ package ems.gui.controller;
 
 import ems.be.Customer;
 import ems.gui.model.CustomerModel;
+import ems.gui.view.dialogs.CustomerDialog;
 import ems.gui.view.util.PopUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -135,15 +137,45 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     public void handleCreateCustomer(MouseEvent mouseEvent) {
+            CustomerDialog dialog = new CustomerDialog();
+            Optional<Customer> result = dialog.showAndWait();
+            result.ifPresent(response -> {
+                try {
+                    customerModel.createCustomer(response);
+                } catch (Exception e) {
+                    PopUp.showError(e.getMessage());
+                }
+            });
 
     }
 
     public void handleDeleteCustomer(MouseEvent mouseEvent) {
-
+        try{
+            Customer selected = tbvCustomers.getSelectionModel().getSelectedItem();
+            if(selected != null){
+                customerModel.deleteCustomer(selected);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void handleUpdateCustomer(MouseEvent mouseEvent) {
+        try{
+            Customer oldCustomer = tbvCustomers.getSelectionModel().getSelectedItem();
+            if(oldCustomer != null){
+                CustomerDialog dialog = new CustomerDialog();
+                dialog.setFields(oldCustomer);
+                Optional<Customer> result = dialog.showAndWait();
+                if (result.isPresent()) {
+                Customer updatedCustomer = result.get();
+                updatedCustomer.setId(oldCustomer.getId());
+                customerModel.updateCustomer(oldCustomer, updatedCustomer);
+                }
+            }
+        }catch(Exception e){
 
+        }
     }
 
     /* TICKETS */

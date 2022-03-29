@@ -18,4 +18,21 @@ public class CustomerModel {
     public ObservableList<Customer> getObservableCustomers() {
         return observableCustomers;
     }
+
+    public void createCustomer(Customer c) throws Exception {
+        Customer created = customerLogic.createCustomer(c);
+        if(created != null){
+            observableCustomers.add(c);
+        }
+    }
+
+    public void deleteCustomer(Customer c) throws DatabaseException {
+        customerLogic.deleteCustomer(c);
+        observableCustomers.remove(c);
+    }
+
+    public void updateCustomer(Customer oldCustomer, Customer updatedCustomer) throws Exception {
+        customerLogic.updateCustomer(updatedCustomer);
+        observableCustomers.set(oldCustomer.getId(), updatedCustomer);
+    }
 }

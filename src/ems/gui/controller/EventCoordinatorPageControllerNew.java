@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import ems.be.Event;
 import ems.gui.model.EventModel;
 import ems.gui.view.dialogs.EventDialog;
+import ems.gui.view.util.PopUp;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,8 +34,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public VBox boxEvents;
     public HBox boxEventsButtons;
 
-    public TableView tbvCustomers;
-    public TableColumn colCustomers;
+    public TableView<Customer> tbvCustomers;
+    public TableColumn<Customer, String> colCustomers;
     public TextField txfFilterCustomers;
     public VBox boxCustomers;
     public HBox boxCustomersButtons;
@@ -94,7 +95,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             try {
                 eventModel.createEvent(response);
             } catch (Exception e) {
-                e.printStackTrace();
+                PopUp.showError(e.getMessage());
             }
         });
     }
@@ -106,7 +107,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
                 eventModel.deleteEvent(selected);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage());
         }
     }
 
@@ -124,7 +125,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
                 }
             }
         } catch (Exception e) {
-            //don't do anything
+            PopUp.showError(e.getMessage());
         }
     }
 

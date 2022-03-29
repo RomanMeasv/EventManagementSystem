@@ -21,15 +21,10 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 
 public class EventCoordinatorPageControllerNew implements Initializable {
 
     public TabPane tbpEventCoordinator;
-
-    public TableView tbvEvents;
-    public TableColumn colEvents;
-    private EventModel eventModel;
 
     public TableView<Event> tbvEvents;
     public TableColumn<Event, String> colEvents;
@@ -49,6 +44,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public TextField txfFilterTickets;
     public VBox boxTickets;
     public HBox boxTicketsButtons;
+
+    private EventModel eventModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -1,8 +1,8 @@
 package ems.gui.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
+import ems.be.Customer;
+import ems.gui.model.CustomerModel;
+import ems.gui.view.util.PopUp;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import ems.be.Event;
@@ -45,15 +45,18 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public VBox boxTickets;
     public HBox boxTicketsButtons;
 
+    private CustomerModel customerModel;
     private EventModel eventModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            customerModel = new CustomerModel();
             eventModel = new EventModel();
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage()); //error is custom handled within the logic
         }
+
         boxEventsButtons.managedProperty().bind(boxEventsButtons.visibleProperty());
         boxCustomersButtons.managedProperty().bind(boxCustomersButtons.visibleProperty());
         boxTicketsButtons.managedProperty().bind(boxTicketsButtons.visibleProperty());
@@ -61,10 +64,11 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             tabChangeListener(newValue.intValue());
         });
 
-        //Event set up
+        colCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvCustomers.setItems(customerModel.getObservableCustomers());
+
         colEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbvEvents.setItems(eventModel.getObservableEvents());
-
     }
 
     /* EVENTS */
@@ -168,17 +172,5 @@ public class EventCoordinatorPageControllerNew implements Initializable {
                 System.out.println("tickets");
             }
         }
-    }
-
-    public void selectionChangedOverviewTab(javafx.event.Event event) {
-    }
-
-    public void selectionChangedEventTab(javafx.event.Event event) {
-    }
-
-    public void selectionChangedCustomerTab(javafx.event.Event event) {
-    }
-
-    public void selectionChangedTicketTab(javafx.event.Event event) {
     }
 }

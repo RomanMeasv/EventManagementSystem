@@ -15,7 +15,7 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" stylesheets="@styles/eventCoordinatorPageStyleNew.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
     <tabs>
-        <Tab styleClass="overview-tab">
+        <Tab closable="false" onSelectionChanged="#selectionChangedOverviewTab" styleClass="overview-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -28,7 +28,7 @@
                     <children>
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                <VBox fx:id="boxEvents" spacing="10.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <VBox VBox.vgrow="ALWAYS">
                                             <children>
@@ -68,7 +68,7 @@
                                         </HBox>
                                     </children>
                                 </VBox>
-                        <VBox HBox.hgrow="ALWAYS">
+                        <VBox fx:id="boxCustomers" HBox.hgrow="ALWAYS">
                            <children>
                                       <VBox spacing="10.0" VBox.vgrow="ALWAYS">
                                           <children>
@@ -108,7 +108,7 @@
                                       </VBox>
                            </children>
                         </VBox>
-                        <VBox HBox.hgrow="ALWAYS">
+                        <VBox fx:id="boxTickets" HBox.hgrow="ALWAYS">
                            <children>
                                       <VBox spacing="10.0" VBox.vgrow="ALWAYS">
                                           <children>
@@ -125,7 +125,7 @@
                                                       <Font size="16.0" />
                                                   </font>
                                               </TextField>
-                                    <HBox fx:id="boxTicketsButtons" spacing="10.0" VBox.vgrow="NEVER">
+                                    <HBox fx:id="boxTicketsButtons" spacing="10.0" visible="false" VBox.vgrow="NEVER">
                                        <children>
                                           <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleCreateTicket" pickOnBounds="true" preserveRatio="true" styleClass="btnCreate" HBox.hgrow="NEVER">
                                              <image>
@@ -157,7 +157,7 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab styleClass="event-tab">
+        <Tab closable="false" onSelectionChanged="#selectionChangedEventTab" styleClass="event-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -166,10 +166,17 @@
                 </ImageView>
             </graphic>
             <content>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane>
+               <children>
+                  <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children></AnchorPane>
             </content>
         </Tab>
-        <Tab styleClass="customer-tab">
+        <Tab closable="false" onSelectionChanged="#selectionChangedCustomerTab" styleClass="customer-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -178,14 +185,17 @@
                 </ImageView>
             </graphic>
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <padding>
+                <AnchorPane>
+               <children>
+                  <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </padding>
+                     </padding></HBox>
+               </children>
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab styleClass="ticket-tab">
+        <Tab closable="false" onSelectionChanged="#selectionChangedTicketTab" styleClass="ticket-tab">
             <graphic>
                 <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -194,7 +204,13 @@
                 </ImageView>
             </graphic>
             <content>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane>
+               <children>
+                  <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding></HBox>
+               </children></AnchorPane>
             </content>
         </Tab>
     </tabs>

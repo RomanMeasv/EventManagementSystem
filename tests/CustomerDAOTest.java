@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class CustomerDAOTest {
     @Test
-    @Disabled
     public void testCreateCustomer() throws Exception {
         CustomerDAO customerDAO = new CustomerDAO();
         Customer customer = new Customer("Name", "myemail@gmail.com", "1234567", "notes");
@@ -19,6 +18,7 @@ public class CustomerDAOTest {
     }
 
     @Test
+    @Disabled
     public void testReadAllCustomers() throws Exception {
         CustomerDAO customerDAO = new CustomerDAO();
         int size = customerDAO.readAllCustomers().size();

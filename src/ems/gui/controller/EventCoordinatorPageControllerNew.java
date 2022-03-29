@@ -1,10 +1,14 @@
 package ems.gui.controller;
 
+import ems.be.Customer;
+import ems.gui.model.CustomerModel;
+import ems.gui.view.util.PopUp;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -32,11 +36,22 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public VBox boxTickets;
     public HBox boxTicketsButtons;
 
+    CustomerModel customerModel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            customerModel = new CustomerModel();
+        } catch (Exception e) {
+            PopUp.showError(e.getMessage()); //error is custom handled within the logic
+        }
+
         boxEventsButtons.managedProperty().bind(boxEventsButtons.visibleProperty());
         boxCustomersButtons.managedProperty().bind(boxCustomersButtons.visibleProperty());
         boxTicketsButtons.managedProperty().bind(boxTicketsButtons.visibleProperty());
+
+        colCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvCustomers.setItems(customerModel.getObservableCustomers());
     }
 
     /* EVENTS */

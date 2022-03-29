@@ -74,7 +74,7 @@ public class EventCoordinatorPageController implements Initializable {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //don't do anything
         }
 
     }

@@ -1,7 +1,5 @@
 package ems;
 
-import ems.be.EventCoordinator;
-import ems.dal.UserDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

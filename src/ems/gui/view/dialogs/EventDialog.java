@@ -10,6 +10,7 @@ import javafx.scene.control.DialogPane;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class EventDialog extends Dialog<Event> {
     private EventDialogController controller;

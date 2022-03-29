@@ -134,16 +134,7 @@
             </VBox>
             <VBox maxWidth="1.7976931348623157E308" prefHeight="270.0" prefWidth="290.0" HBox.hgrow="ALWAYS">
                <children>
-                  <ListView fx:id="ltvTicketType" prefHeight="200.0" prefWidth="200.0" styleClass="drop-shadow" VBox.vgrow="ALWAYS" />
-                  <TextField fx:id="txfFilter" promptText="Filter...">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="tbv-text-field" />
-                        <String fx:value="drop-shadow" />
-                     </styleClass>
-                  </TextField>
+                  <ListView fx:id="ltvTicketTypes" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                   <HBox maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="NEVER">
                      <children>
                         <TextField fx:id="txfTicketType" prefHeight="30.0" promptText="Ticket type" HBox.hgrow="ALWAYS">
@@ -156,7 +147,7 @@
                               <String fx:value="drop-shadow" />
                            </styleClass>
                         </TextField>
-                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddTicketType" text="ADD" HBox.hgrow="NEVER">
+                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddTicketType" styleClass="type-button" text="ADD" HBox.hgrow="NEVER">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -164,7 +155,7 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveTicketType" text="REMOVE" HBox.hgrow="NEVER">
+                        <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveTicketType" styleClass="type-button" text="REMOVE" HBox.hgrow="NEVER">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

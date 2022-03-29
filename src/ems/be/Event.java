@@ -57,53 +57,26 @@ public class Event {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getNotes() {
         return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
     }
 
     public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
-    }
-
     public LocalDateTime getEnd() {
         return end;
-    }
-
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getLocationGuidance() {
         return locationGuidance;
     }
 
-    public void setLocationGuidance(String locationGuidance) {
-        this.locationGuidance = locationGuidance;
-    }
-
-    public List<String> getTicketType() {
-        return ticketTypes;
-    }
 
     public List<String> getTicketTypes() {
         return ticketTypes;

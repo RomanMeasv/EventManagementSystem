@@ -77,27 +77,27 @@
 
 /* TABLE VIEW BUTTONS */
 .btnCreate {
-    -fx-image: url("../resources/images/CreateIcoDefault.png");
+    -fx-image: url("../resources/buttons/Create-ico.png");
 }
 
 .btnDelete {
-    -fx-image: url("../resources/images/DeleteIcoDefault.png");
+    -fx-image: url("../resources/buttons/Delete-ico.png");
 }
 
 .btnUpdate {
-    -fx-image: url("../resources/images/UpdateIcoDefault.png");
+    -fx-image: url("../resources/buttons/Update-ico.png");
 }
 
 .btnCreate:hover {
-    -fx-image: url("../resources/images/CreateIcoActive.png");
+    -fx-image: url("../resources/buttons/Create-ico-active.png");
 }
 
 .btnDelete:hover {
-    -fx-image: url("../resources/images/DeleteIcoActive.png");
+    -fx-image: url("../resources/buttons/Delete-ico-active.png");
 }
 
 .btnUpdate:hover {
-    -fx-image: url("../resources/images/UpdateIcoActive.png");
+    -fx-image: url("../resources/buttons/Update-ico-active.png");
 }
 
 /* TABLE VIEW FILTER */

@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
     <tabs>
         <Tab closable="false" styleClass="overview-tab">
             <graphic>
@@ -123,7 +123,7 @@
                            <children>
                               <VBox VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView fx:id="tbvEventTabEvents" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                    <TableView fx:id="tbvEventTabEvents" maxWidth="1.7976931348623157E308" onMouseClicked="#handleSelectEvent" VBox.vgrow="ALWAYS">
                                        <columns>
                                           <TableColumn fx:id="colEventTabEvents" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" text="Events" />
                                        </columns>
@@ -280,7 +280,7 @@
                            <children>
                                       <VBox VBox.vgrow="ALWAYS">
                                           <children>
-                                              <TableView fx:id="tbvCustomers" VBox.vgrow="ALWAYS">
+                                              <TableView fx:id="tbvCustomers" onMouseClicked="#handleSelectCustomer" VBox.vgrow="ALWAYS">
                                                   <columns>
                                                       <TableColumn fx:id="colCustomers" prefWidth="75.0" text="Customers" />
                                                   </columns>

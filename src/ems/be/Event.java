@@ -14,11 +14,11 @@ public class Event {
     private String location;
     private String locationGuidance;
     private List<String> ticketTypes;
-    private List<EventCoordinator> eventCoordinators;
+    //private List<EventCoordinator> eventCoordinators;
 
 
 
-    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketType, ArrayList<EventCoordinator> eventCoordinators) {
+    public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketType) {
         this.name = name;
         this.description = description;
         this.notes = notes;
@@ -27,7 +27,8 @@ public class Event {
         this.location = location;
         this.locationGuidance = locationGuidance;
         this.ticketTypes = ticketType;
-        this.eventCoordinators = eventCoordinators;
+
+        //this.eventCoordinators = eventCoordinators;
     }
 
     public Event(int id, String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketTypes) {
@@ -86,11 +87,11 @@ public class Event {
         return ticketTypes;
     }
 
-    public List<EventCoordinator> getEventCoordinators() {return eventCoordinators;}
-
-    public void setEventCoordinators(List<EventCoordinator> eventCoordinators) {
-        this.eventCoordinators = eventCoordinators;
-    }
+//    public List<EventCoordinator> getEventCoordinators() {return eventCoordinators;}
+//
+//    public void setEventCoordinators(List<EventCoordinator> eventCoordinators) {
+//        this.eventCoordinators = eventCoordinators;
+//    }
 
     @Override
     public String toString(){

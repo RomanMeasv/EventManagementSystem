@@ -38,6 +38,10 @@
     -fx-padding: 2 0 2 8px;
 }
 
+.table-row-cell {
+    -fx-background-color: #FFF;
+}
+
 .table-row-cell:selected, .table-row-cell:filled:hover {
     -fx-background-color: #8293E3;
 }

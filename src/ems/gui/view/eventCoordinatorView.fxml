@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageController">
     <tabs>
         <Tab closable="false" styleClass="overview-tab">
             <graphic>
@@ -132,51 +132,51 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="250.0" spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="txfEventName" alignment="TOP_LEFT" minWidth="280.0" promptText="Event name*" styleClass="mandatory-field" VBox.vgrow="NEVER">
+                                    <TextField fx:id="txfEventName" alignment="TOP_LEFT" minHeight="-Infinity" promptText="Event name*" styleClass="mandatory-field" VBox.vgrow="NEVER">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </TextField>
                                     <TextArea fx:id="txaEventDescription" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="120.0" promptText="Event description" wrapText="true" VBox.vgrow="ALWAYS" />
                                     <TextArea fx:id="txaEventNotes" maxHeight="180.0" minHeight="-Infinity" prefHeight="90.0" promptText="Optional notes" wrapText="true" VBox.vgrow="ALWAYS" />
-                                    <HBox spacing="10.0">
+                                    <HBox spacing="10.0" VBox.vgrow="NEVER">
                                        <children>
-                                          <TextField fx:id="txfEventStartDate" alignment="TOP_LEFT" prefHeight="30.0" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="txfEventStartDate" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </TextField>
-                                          <TextField fx:id="txfEventStartTime" alignment="TOP_LEFT" prefHeight="30.0" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="txfEventStartTime" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </TextField>
                                        </children>
                                     </HBox>
-                                    <HBox spacing="10.0">
+                                    <HBox spacing="10.0" VBox.vgrow="NEVER">
                                        <children>
-                                          <TextField fx:id="txfEventEndDate" alignment="TOP_LEFT" prefHeight="30.0" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="txfEventEndDate" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </TextField>
-                                          <TextField fx:id="txfEventEndTime" alignment="TOP_LEFT" prefHeight="30.0" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="txfEventEndTime" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </TextField>
                                        </children>
                                     </HBox>
-                                    <TextArea fx:id="txaEventLocation" prefHeight="60.0" promptText="Event location*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                                    <TextArea fx:id="txaEventLocation" maxHeight="-Infinity" prefHeight="60.0" promptText="Event location*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                     <TextArea fx:id="txaEventLocationGuidance" maxHeight="180.0" minHeight="-Infinity" prefHeight="90.0" promptText="Location guidance" wrapText="true" VBox.vgrow="ALWAYS" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box" stylesheets="@styles/ticketTypeStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextFlow styleClass="text-flow" textAlignment="CENTER">
                                        <children>
@@ -210,6 +210,10 @@
                                        </children>
                                     </HBox>
                                  </children>
+                                 <stylesheets>
+                                    <URL value="@styles/ticketTypeStyle.css" />
+                                    <URL value="@styles/listViewStyle.css" />
+                                 </stylesheets>
                               </VBox>
                            </children>
                         </HBox>
@@ -242,7 +246,7 @@
                      <children>
                         <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="250.0" styleClass="table-box" stylesheets="@styles/tabTableViewStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" styleClass="table-box" stylesheets="@styles/tabTableViewStyle.css" HBox.hgrow="ALWAYS">
                                  <children>
                                               <TableView fx:id="tbvCustomerTabCustomers" onMouseClicked="#handleSelectCustomer" VBox.vgrow="ALWAYS">
                                                   <columns>
@@ -254,7 +258,7 @@
                                               </TableView>
                                     <HBox VBox.vgrow="NEVER">
                                        <children>
-                                                    <TextField fx:id="txfFilterCustomers" onKeyTyped="#handleFilterCustomers" promptText="Filter..." HBox.hgrow="ALWAYS">
+                                                    <TextField fx:id="txfFilterCustomers" minWidth="100.0" onKeyTyped="#handleFilterCustomers" promptText="Filter..." HBox.hgrow="ALWAYS">
                                                         <font>
                                                             <Font size="16.0" />
                                                         </font>
@@ -272,10 +276,10 @@
                                           <TextField fx:id="txfCustomerName" promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextField fx:id="txfCustomerEmail" promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextField fx:id="txfCustomerPhoneNumber" promptText="Phone number*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                          <TextArea fx:id="txaCustomerDescription" maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Description" VBox.vgrow="ALWAYS" />
+                                          <TextArea fx:id="txaCustomerNotes" maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Notes" VBox.vgrow="ALWAYS" />
                                        </children>
                                     </VBox>
-                                    <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" stylesheets="@styles/attendingListStyle.css" VBox.vgrow="ALWAYS">
+                                    <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" VBox.vgrow="ALWAYS">
                                        <children>
                                           <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                                              <children>
@@ -292,6 +296,10 @@
                                              </font>
                                           </TextField>
                                        </children>
+                                       <stylesheets>
+                                          <URL value="@styles/attendingListStyle.css" />
+                                          <URL value="@styles/listViewStyle.css" />
+                                       </stylesheets>
                                     </VBox>
                                  </children>
                               </VBox>

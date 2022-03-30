@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class EventCoordinatorPageControllerNew implements Initializable {
+public class EventCoordinatorPageController implements Initializable {
     /* OVERVIEW TAB */
     /* EVENTS */
     public TableView<Event> tbvOverviewEvents;
@@ -58,8 +58,11 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public TableColumn<Customer, String> colCustomerTabCustomers;
     public TextField txfCustomerName, txfCustomerEmail,
             txfCustomerPhoneNumber;
+
     public TextArea txaCustomerDescription;
     public Button btnApplyCustomer, btnCancelCustomer;
+
+    public TextArea txaCustomerNotes;
 
     /* MODELS */
     private CustomerModel customerModel;
@@ -278,7 +281,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             txfCustomerName.setText(c.getName());
             txfCustomerEmail.setText(c.getEmail());
             txfCustomerPhoneNumber.setText(c.getPhoneNumber());
-            txaCustomerDescription.setText(c.getNotes());
+            txaCustomerNotes.setText(c.getNotes());
         }
     }
 

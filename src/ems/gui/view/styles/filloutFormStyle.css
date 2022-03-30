@@ -1,7 +1,7 @@
 .text-field, .text-area {
     -fx-background-color: #FFF;
     -fx-background-radius: 10px;
-    -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.5);
 }
 
 .mandatory-field {

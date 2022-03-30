@@ -1,6 +1,8 @@
 package ems.gui.controller;
 
 import ems.be.Customer;
+import ems.bll.exceptions.DatabaseException;
+import ems.bll.util.EventNameValidator;
 import ems.gui.model.CustomerModel;
 import ems.gui.view.dialogs.CustomerDialog;
 import ems.gui.view.util.PopUp;
@@ -21,7 +23,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageControllerNew implements Initializable {
-
+    EventNameValidator eventNameValidator;
     /* OVERVIEW TAB */
         /* EVENTS */
     public TableView<Event> tbvOverviewEvents;
@@ -63,6 +65,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        eventNameValidator = new EventNameValidator();
         try {
             customerModel = new CustomerModel();
             eventModel = new EventModel();
@@ -82,7 +85,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     // region EVENTS TAB
-    public void handleFilterEvents(KeyEvent keyEvent) {
+    public void handleFilterEvents(KeyEvent keyEvent) { /*
         try {
             String query = ((TextField)keyEvent.getSource()).getText();
             eventModel.filterEvents(query);
@@ -92,8 +95,32 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     public void handleCreateEvent(MouseEvent mouseEvent) {
+        if (txfEventName.getText().isEmpty() || txfEventStartDate.getText().isEmpty() || txfEventStartTime.getText().isEmpty() ||
+                txfEventEndDate.getText().isEmpty() || txfEventEndTime.getText().isEmpty() || txaEventLocation.getText().isEmpty() || ltvEventTicketTypes.getItems().isEmpty()) {
+            PopUp.showError("Please fill in all the mandatory fields! (*)");
+        }
+        try {
+            if (!eventNameValidator.isValid(txfEventName.getText()) && !getEventName().equals(defaultEventName)) {
+                PopUp.showError("Event name already in use!");
+                return null;
+            }
+        } catch (DatabaseException e) {
+            PopUp.showError("Could not check if event name already exists! Are you connected to the database?");
+            return null;
+        }
 
-        /*EventDialog dialog = new EventDialog();
+        if (getStart() == null || getEnd() == null) {
+            PopUp.showError("Day time invalid!");
+            return null;
+        }
+        if (getStart().isAfter(getEnd())) {
+            PopUp.showError("Start date cannot be placed after end date");
+            return null;
+        }
+
+        return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance(), getTicketTypes());
+    }
+       EventDialog dialog = new EventDialog();
         Optional<Event> result = dialog.showAndWait();
         result.ifPresent(response -> {
             try {

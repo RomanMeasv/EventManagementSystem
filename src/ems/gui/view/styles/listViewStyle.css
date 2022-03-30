@@ -6,7 +6,7 @@
 
 .text-flow {
     -fx-background-color: transparent;
-    -fx-padding: 5px 0 0 0;
+    -fx-padding: 5px 0 5px 0;
 }
 
 .list-view-header {
@@ -29,4 +29,31 @@
 
 .list-cell:selected .text, .list-cell:filled:hover .text {
     -fx-fill: #FFF;
+}
+
+.decrement-arrow, .increment-arrow, .decrement-button, .increment-button {
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-insets: 0 1 0 1;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-insets: 1 0 1 0;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
+    -fx-padding: 2;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(0, 0, 0, .2);
+    -fx-background-radius: 1000;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
 }

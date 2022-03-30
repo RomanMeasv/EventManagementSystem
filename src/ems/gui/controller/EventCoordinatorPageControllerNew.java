@@ -103,6 +103,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         btnApplyEvent.setDisable(false);
         btnCancelEvent.setDisable(false);
 
+        tbvEventTabEvents.getSelectionModel().clearSelection();
+
         txfEventName.clear();
         txaEventDescription.clear();
         txaEventNotes.clear();
@@ -137,10 +139,17 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             return;
         }
 
-        if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())
-                && !txfEventName.getText().equals(e.getName())) {
-            PopUp.showError("Event name already in use!");
-            return;
+        if (e != null) {
+            if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())
+                    && !txfEventName.getText().equals(e.getName())) {
+                PopUp.showError("Event name already in use!");
+                return;
+            }
+        } else {
+            if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())) {
+                PopUp.showError("Event name already in use!");
+                return;
+            }
         }
 
         //check if dates can be parsed (if they are valid)
@@ -162,11 +171,12 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         if (e == null) { //it's a new event
             try {
                 eventModel.createEvent(new Event(txfEventName.getText(), txaEventDescription.getText(), txaEventNotes.getText(), start, end, txaEventLocation.getText(), txaEventLocationGuidance.getText(), ltvEventTicketTypes.getItems()));
+                btnApplyEvent.setDisable(true);
+                btnCancelEvent.setDisable(true);
+                clearEventDetails();
             } catch (Exception ex) {
                 PopUp.showError(ex.getMessage());
             }
-            btnApplyEvent.setDisable(true);
-            btnCancelEvent.setDisable(true);
         } else //it's an existing event
         {
             try {

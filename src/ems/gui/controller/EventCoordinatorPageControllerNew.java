@@ -85,7 +85,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     // region EVENTS TAB
-    public void handleFilterEvents(KeyEvent keyEvent) { /*
+    public void handleFilterEvents(KeyEvent keyEvent) {
         try {
             String query = ((TextField)keyEvent.getSource()).getText();
             eventModel.filterEvents(query);
@@ -94,7 +94,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
-    public void handleCreateEvent(MouseEvent mouseEvent) {
+    public void handleCreateEvent(MouseEvent mouseEvent) {/*
         if (txfEventName.getText().isEmpty() || txfEventStartDate.getText().isEmpty() || txfEventStartTime.getText().isEmpty() ||
                 txfEventEndDate.getText().isEmpty() || txfEventEndTime.getText().isEmpty() || txaEventLocation.getText().isEmpty() || ltvEventTicketTypes.getItems().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");

@@ -8,6 +8,7 @@ import ems.gui.view.dialogs.CustomerDialog;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import ems.be.Event;
 import ems.gui.model.EventModel;
@@ -51,18 +52,21 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     /* "DIALOG PANE" */
     public TextField txfEventName,
             txfEventStartDate, txfEventStartTime,
-            txfEventEndDate, txfEventEndTime,
-            txfCustomerName, txfCustomerEmail,
-            txfCustomerPhoneNumber;
+            txfEventEndDate, txfEventEndTime;
 
-    public TextArea txaEventDescription, txaEventNotes, txaEventLocation, txaEventLocationGuidance,
-                    txaCustomerDescription;
+    public TextArea txaEventDescription, txaEventNotes, txaEventLocation, txaEventLocationGuidance;
     public ListView<String> ltvEventTicketTypes;
     public TextField txfEventTicketType;
+
+    public Button btnEventApply, btnEventCancel;
+
 
     /* CUSTOMERS TAB */
     /* TABLE VIEW */
     public TableView<Customer> tbvCustomers;
+    public TextField txfCustomerName, txfCustomerEmail,
+            txfCustomerPhoneNumber;
+    public TextArea txaCustomerDescription;
 
     /* MODELS */
     private CustomerModel customerModel;
@@ -87,6 +91,10 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         /* SET UP EVENTS TAB */
         colEventTabEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbvEventTabEvents.setItems(eventModel.getObservableEvents());
+
+        /* Disable cancel/apply buttons */
+        btnEventApply.setDisable(true);
+        btnEventCancel.setDisable(true);
     }
 
     // region EVENTS TAB
@@ -99,41 +107,10 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
-    public void handleCreateEvent(MouseEvent mouseEvent) {/*
-        if (txfEventName.getText().isEmpty() || txfEventStartDate.getText().isEmpty() || txfEventStartTime.getText().isEmpty() ||
-                txfEventEndDate.getText().isEmpty() || txfEventEndTime.getText().isEmpty() || txaEventLocation.getText().isEmpty() || ltvEventTicketTypes.getItems().isEmpty()) {
-            PopUp.showError("Please fill in all the mandatory fields! (*)");
-        }
-        try {
-            if (!eventNameValidator.isValid(txfEventName.getText()) && !getEventName().equals(defaultEventName)) {
-                PopUp.showError("Event name already in use!");
-                return null;
-            }
-        } catch (DatabaseException e) {
-            PopUp.showError("Could not check if event name already exists! Are you connected to the database?");
-            return null;
-        }
-
-        if (getStart() == null || getEnd() == null) {
-            PopUp.showError("Day time invalid!");
-            return null;
-        }
-        if (getStart().isAfter(getEnd())) {
-            PopUp.showError("Start date cannot be placed after end date");
-            return null;
-        }
-
-        return new Event(getEventName(), getEventDescription(), getNotes(), getStart(), getEnd(), getLocation(), getLocationGuidance(), getTicketTypes());
-    }
-       EventDialog dialog = new EventDialog();
-        Optional<Event> result = dialog.showAndWait();
-        result.ifPresent(response -> {
-            try {
-                eventModel.createEvent(response);
-            } catch (Exception e) {
-                PopUp.showError(e.getMessage());
-            }
-        });*/
+    public void handleCreateEvent(MouseEvent mouseEvent) {
+        btnEventApply.setDisable(false);
+        btnEventCancel.setDisable(false);
+        
     }
 
     public void handleDeleteEvent(MouseEvent mouseEvent) {

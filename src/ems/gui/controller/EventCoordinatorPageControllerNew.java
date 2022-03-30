@@ -55,6 +55,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     /* CUSTOMERS TAB */
     /* TABLE VIEW */
     public TableView<Customer> tbvCustomers;
+    public TableColumn<Customer, String> colCustomers;
     public TextField txfCustomerName, txfCustomerEmail,
             txfCustomerPhoneNumber;
     public TextArea txaCustomerDescription;
@@ -83,7 +84,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         tbvEventTabEvents.setItems(eventModel.getObservableEvents());
 
         /* SET UP CUSTOMERS TAB */
-        colOverviewCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbvCustomers.setItems(customerModel.getObservableCustomers());
 
         /* Disable cancel/apply buttons */
@@ -273,6 +274,18 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
+    public void handleCreateCustomer(ActionEvent event) {
+    }
+
+    public void handleDeleteCustomer(ActionEvent event) {
+    }
+
+    public void handleCancelCustomer(ActionEvent event) {
+    }
+
+    public void handleApplyCustomer(ActionEvent event) {
+    }
+
     //endregion
 
     //region TICKET TAB
@@ -291,5 +304,9 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public void handleUpdateTicket(MouseEvent mouseEvent) {
 
     }
+
+
+
+
     //endregion
 }

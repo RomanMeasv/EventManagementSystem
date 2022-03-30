@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageControllerNew">
     <tabs>
         <Tab closable="false" styleClass="overview-tab">
             <graphic>
@@ -259,8 +259,8 @@
                                                             <Font size="16.0" />
                                                         </font>
                                                     </TextField>
-                                          <Button maxHeight="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" text="NEW" HBox.hgrow="ALWAYS" />
-                                          <Button maxHeight="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" styleClass="remove-button" text="REMOVE" HBox.hgrow="ALWAYS" />
+                                          <Button maxHeight="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCreateCustomer" text="NEW" HBox.hgrow="ALWAYS" />
+                                          <Button maxHeight="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteCustomer" styleClass="remove-button" text="REMOVE" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -269,10 +269,10 @@
                                  <children>
                                     <VBox spacing="10.0" stylesheets="@styles/filloutFormStyle.css">
                                        <children>
-                                          <TextField promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                          <TextField promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                          <TextField promptText="Phone number*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                          <TextArea maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Description" VBox.vgrow="ALWAYS" />
+                                          <TextField fx:id="txfCustomerName" promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                                          <TextField fx:id="txfCustomerEmail" promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                                          <TextField fx:id="txfCustomerPhoneNumber" promptText="Phone number*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                                          <TextArea fx:id="txaCustomerDescription" maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Description" VBox.vgrow="ALWAYS" />
                                        </children>
                                     </VBox>
                                     <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" stylesheets="@styles/attendingListStyle.css" VBox.vgrow="ALWAYS">
@@ -299,8 +299,8 @@
                         </HBox>
                         <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <Button mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER" />
-                              <Button mnemonicParsing="false" text="Apply" HBox.hgrow="NEVER" />
+                              <Button mnemonicParsing="false" onAction="#handleCancelCustomer" text="Cancel" HBox.hgrow="NEVER" />
+                              <Button mnemonicParsing="false" onAction="#handleApplyCustomer" text="Apply" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
                      </children>

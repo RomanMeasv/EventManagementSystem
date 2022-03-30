@@ -132,7 +132,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="200.0" spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="250.0" spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextField fx:id="txfEventName" alignment="TOP_LEFT" minHeight="-Infinity" promptText="Event name*" styleClass="mandatory-field" VBox.vgrow="NEVER">
                                        <font>
@@ -176,7 +176,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box" stylesheets="@styles/ticketTypeStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextFlow styleClass="text-flow" textAlignment="CENTER">
                                        <children>
@@ -210,6 +210,10 @@
                                        </children>
                                     </HBox>
                                  </children>
+                                 <stylesheets>
+                                    <URL value="@styles/ticketTypeStyle.css" />
+                                    <URL value="@styles/listViewStyle.css" />
+                                 </stylesheets>
                               </VBox>
                            </children>
                         </HBox>
@@ -272,10 +276,10 @@
                                           <TextField fx:id="txfCustomerName" promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextField fx:id="txfCustomerEmail" promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextField fx:id="txfCustomerPhoneNumber" promptText="Phone number*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                          <TextArea fx:id="txaCustomerDescription" maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Description" VBox.vgrow="ALWAYS" />
+                                          <TextArea fx:id="txaCustomerNotes" maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Notes" VBox.vgrow="ALWAYS" />
                                        </children>
                                     </VBox>
-                                    <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" stylesheets="@styles/attendingListStyle.css" VBox.vgrow="ALWAYS">
+                                    <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" VBox.vgrow="ALWAYS">
                                        <children>
                                           <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                                              <children>
@@ -292,6 +296,10 @@
                                              </font>
                                           </TextField>
                                        </children>
+                                       <stylesheets>
+                                          <URL value="@styles/attendingListStyle.css" />
+                                          <URL value="@styles/listViewStyle.css" />
+                                       </stylesheets>
                                     </VBox>
                                  </children>
                               </VBox>

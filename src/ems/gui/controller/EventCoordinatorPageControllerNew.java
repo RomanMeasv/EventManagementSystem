@@ -58,7 +58,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public TableColumn<Customer, String> colCustomerTabCustomers;
     public TextField txfCustomerName, txfCustomerEmail,
             txfCustomerPhoneNumber;
-    public TextArea txaCustomerDescription;
+    public TextArea txaCustomerNotes;
 
     /* MODELS */
     private CustomerModel customerModel;
@@ -270,7 +270,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             txfCustomerName.setText(c.getName());
             txfCustomerEmail.setText(c.getEmail());
             txfCustomerPhoneNumber.setText(c.getPhoneNumber());
-            txaCustomerDescription.setText(c.getNotes());
+            txaCustomerNotes.setText(c.getNotes());
         }
     }
 

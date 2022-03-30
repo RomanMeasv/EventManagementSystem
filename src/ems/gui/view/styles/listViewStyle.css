@@ -1,0 +1,32 @@
+.list-box {
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
+}
+
+.text-flow {
+    -fx-background-color: transparent;
+    -fx-padding: 5px 0 0 0;
+}
+
+.list-view-header {
+    -fx-font-size: 16pt;
+}
+
+.list-view {
+    -fx-background-color: #FFF;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-cell {
+    -fx-background-color: #FFF;
+}
+
+.list-cell:selected, .list-cell:filled:hover {
+    -fx-background-color: #8293E3;
+}
+
+.list-cell:selected .text, .list-cell:filled:hover .text {
+    -fx-fill: #FFF;
+}

@@ -20,25 +20,6 @@
 
 .text-field {
     -fx-background-color: #FFF;
-    -fx-background-radius: 0 0 0 10px;
+    -fx-background-radius: 0 0 10px 10px;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
-}
-
-.button {
-    -fx-background-color: #8293E3;
-    -fx-background-radius: 0;
-    -fx-text-fill: #FFF;
-    -fx-background-insets: 0;
-}
-
-.button:hover {
-    -fx-background-color: #5847AD;
-}
-
-.remove-button {
-    -fx-background-radius: 0 0 10px 0;
-}
-
-.add-button {
-    -fx-background-radius: 10px 0 0 0;
 }

@@ -150,7 +150,7 @@
                                           <Image url="@resources/buttons/Delete-ico.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleUpdateEvent" pickOnBounds="true" preserveRatio="true" styleClass="btnUpdate" HBox.hgrow="NEVER">
+                                    <ImageView disable="true" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleUpdateEvent" pickOnBounds="true" preserveRatio="true" styleClass="btnUpdate" HBox.hgrow="NEVER">
                                        <image>
                                           <Image url="@resources/buttons/Update-ico.png" />
                                        </image>
@@ -225,7 +225,7 @@
                                                       <Font size="16.0" />
                                                    </font>
                                                 </TextField>
-                                                <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddTicketType" text="ADD" HBox.hgrow="NEVER">
+                                                <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddTicketType" styleClass="add-button" text="ADD" HBox.hgrow="NEVER">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -249,8 +249,8 @@
                               </HBox>
                               <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
                                  <children>
-                                    <Button fx:id="btnEventCancel" mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER" />
-                                    <Button fx:id="btnEventApply" mnemonicParsing="false" text="Apply" HBox.hgrow="NEVER" />
+                                    <Button mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER" />
+                                    <Button mnemonicParsing="false" text="Apply" HBox.hgrow="NEVER" />
                                  </children>
                               </HBox>
                            </children>
@@ -316,22 +316,37 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <TextField fx:id="txfCustomerName" promptText="Name*" styleClass="mandatory-field" />
-                              <TextField fx:id="txfCustomerEmail" promptText="Email*" styleClass="mandatory-field" />
-                              <TextField fx:id="txfCustomerPhoneNumber" promptText="Phone number" />
-                              <TextArea fx:id="txaCustomerDescription" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" minWidth="200.0" styleClass="list-box" stylesheets="@styles/ticketTypeStyle.css">
+                              <VBox spacing="10.0" stylesheets="@styles/filloutFormStyle.css">
                                  <children>
-                                    <TextFlow styleClass="text-flow" textAlignment="CENTER">
+                                    <TextField promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                                    <TextField promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                                    <TextField promptText="Phone number" VBox.vgrow="NEVER" />
+                                    <TextArea prefHeight="200.0" promptText="Description" VBox.vgrow="NEVER" />
+                                 </children>
+                              </VBox>
+                              <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" stylesheets="@styles/attendingListStyle.css" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                                        <children>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Attending events" />
                                        </children>
                                     </TextFlow>
-                                    <ListView fx:id="ltvCustomersEvents" VBox.vgrow="ALWAYS" />
+                                    <ListView fx:id="ltvEventTicketTypes1" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                                    <TextField fx:id="txfFilterAttending" minWidth="50.0" promptText="Filter..." VBox.vgrow="NEVER">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
                                  </children>
                               </VBox>
+                              <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@styles/dialogButtonStyle.css">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER" />
+                                    <Button mnemonicParsing="false" text="Apply" HBox.hgrow="NEVER" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>

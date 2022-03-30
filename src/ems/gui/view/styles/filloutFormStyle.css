@@ -1,4 +1,4 @@
-.text-field {
+.text-field, .text-area {
     -fx-background-color: #FFF;
     -fx-background-radius: 10px;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
@@ -7,11 +7,6 @@
 .mandatory-field {
     -fx-background-color: #F7B449;
     -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
-}
-
-.text-area {
-    -fx-background-color: #FFF;
-    -fx-background-radius: 10px;
 }
 
 .text-area .scroll-pane {

@@ -83,7 +83,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         tbvEventTabEvents.setItems(eventModel.getObservableEvents());
     }
 
-    /* EVENTS */
+    // region EVENTS TAB
     public void handleFilterEvents(KeyEvent keyEvent) {
         try {
             String query = ((TextField)keyEvent.getSource()).getText();
@@ -134,8 +134,9 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             PopUp.showError(e.getMessage());
         }
     }
+    //endregion
 
-    /* CUSTOMERS */
+    // region CUSTOMER TAB
     public void handleFilterCustomers(KeyEvent keyEvent) {
         //txfFilterOverviewCustomers
     }
@@ -181,8 +182,9 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
         }
     }
+    //endregion
 
-    /* TICKETS */
+    //region TICKET TAB
     public void handleFilterTickets(KeyEvent keyEvent) {
 
     }
@@ -222,4 +224,5 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public void handleRemoveTicketType(ActionEvent event) {
 
     }
+    //endregion
 }

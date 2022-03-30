@@ -1,24 +1,63 @@
 package ems.be;
 
+import java.util.UUID;
+
 public class Ticket {
-    //QR Code
-    //1D Barcode
-    //Event information (excluding participants)
-    //Type of ticket
+    UUID uuid;
+    boolean isValid;
+    Event event;
+    String ticketType;
+    Customer customer;
 
-
-    //Print tickets and/or show them at event
-    private String name;
-
-    public Ticket(String name){
-        this.name = name;
+    public Ticket(Event event, String ticketType, Customer customer) {
+        this.uuid = UUID.randomUUID();
+        this.isValid = true;
+        this.event = event;
+        this.ticketType = ticketType;
+        this.customer = customer;
     }
 
-    public String getName() {
-        return name;
+    public Ticket(UUID uuid, Event event, String ticketType, Customer customer) {
+        this.uuid = uuid;
+        this.isValid = true;
+        this.event = event;
+        this.ticketType = ticketType;
+        this.customer = customer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public String getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(String ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

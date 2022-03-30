@@ -32,69 +32,57 @@
             <content>
                 <AnchorPane>
                     <children>
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <VBox spacing="10.0" styleClass="table-box" stylesheets="@styles/tableViewStyle.css" HBox.hgrow="ALWAYS">
+                                <VBox styleClass="table-box" stylesheets="@styles/tableViewStyle.css" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <VBox VBox.vgrow="ALWAYS">
-                                            <children>
-                                                <TableView fx:id="tbvOverviewEvents" VBox.vgrow="ALWAYS">
-                                                    <columns>
-                                                        <TableColumn fx:id="colOverviewEvents" prefWidth="75.0" text="Events" />
-                                                    </columns>
-                                                    <columnResizePolicy>
-                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                    </columnResizePolicy>
-                                                </TableView>
-                                                <TextField fx:id="txfFilterOverviewEvents" onKeyTyped="#handleFilterEvents" promptText="Filter..." VBox.vgrow="NEVER">
-                                                    <font>
-                                                        <Font size="16.0" />
-                                                    </font>
-                                                </TextField>
-                                            </children>
-                                        </VBox>
+                                          <TableView fx:id="tbvOverviewEvents" VBox.vgrow="ALWAYS">
+                                              <columns>
+                                                  <TableColumn fx:id="colOverviewEvents" prefWidth="75.0" text="Events" />
+                                              </columns>
+                                              <columnResizePolicy>
+                                                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                              </columnResizePolicy>
+                                          </TableView>
+                                          <TextField fx:id="txfFilterOverviewEvents" onKeyTyped="#handleFilterEvents" promptText="Filter..." VBox.vgrow="NEVER">
+                                              <font>
+                                                  <Font size="16.0" />
+                                              </font>
+                                          </TextField>
                                     </children>
                                 </VBox>
                         <VBox styleClass="table-box" stylesheets="@styles/tableViewStyle.css" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <TableView fx:id="tbvOverviewCustomers" VBox.vgrow="ALWAYS">
-                                       <columns>
-                                          <TableColumn fx:id="colOverviewCustomers" prefWidth="75.0" text="Customers" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                    <TextField fx:id="txfFilterOverviewCustomers" onKeyTyped="#handleFilterCustomers" promptText="Filter..." VBox.vgrow="NEVER">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </VBox>
+                              <TableView fx:id="tbvOverviewCustomers" VBox.vgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="colOverviewCustomers" prefWidth="75.0" text="Customers" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <TextField fx:id="txfFilterOverviewCustomers" onKeyTyped="#handleFilterCustomers" promptText="Filter..." VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
                            </children>
                         </VBox>
                         <VBox styleClass="table-box" stylesheets="@styles/tableViewStyle.css" HBox.hgrow="ALWAYS">
                            <children>
-                              <VBox VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <TableView fx:id="tbvOverviewTickets" VBox.vgrow="ALWAYS">
-                                       <columns>
-                                          <TableColumn fx:id="colOverviewTickets" prefWidth="75.0" text="Tickets" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                    <TextField fx:id="txfFilterOverviewTickets" onKeyTyped="#handleFilterTickets" promptText="Filter..." VBox.vgrow="NEVER">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </VBox>
+                              <TableView fx:id="tbvOverviewTickets" VBox.vgrow="ALWAYS">
+                                 <columns>
+                                    <TableColumn fx:id="colOverviewTickets" prefWidth="75.0" text="Tickets" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <TextField fx:id="txfFilterOverviewTickets" onKeyTyped="#handleFilterTickets" promptText="Filter..." VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
                            </children>
                         </VBox>
                             </children>
@@ -121,7 +109,7 @@
                      <children>
                         <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="250.0" styleClass="table-box" stylesheets="@styles/tabTableViewStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" styleClass="table-box" stylesheets="@styles/tabTableViewStyle.css" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TableView fx:id="tbvEventTabEvents" maxWidth="1.7976931348623157E308" onMouseClicked="#handleSelectEvent" VBox.vgrow="ALWAYS">
                                        <columns>
@@ -133,7 +121,7 @@
                                     </TableView>
                                     <HBox VBox.vgrow="NEVER">
                                        <children>
-                                          <TextField fx:id="txfFilterEventTabEvents" onKeyTyped="#handleFilterEvents" promptText="Filter..." HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="txfFilterEventTabEvents" minWidth="100.0" onKeyTyped="#handleFilterEvents" promptText="Filter..." HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -144,7 +132,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextField fx:id="txfEventName" alignment="TOP_LEFT" minWidth="280.0" promptText="Event name*" styleClass="mandatory-field" VBox.vgrow="NEVER">
                                        <font>
@@ -188,7 +176,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" minWidth="200.0" styleClass="list-box" stylesheets="@styles/ticketTypeStyle.css" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box" stylesheets="@styles/ticketTypeStyle.css" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextFlow styleClass="text-flow" textAlignment="CENTER">
                                        <children>
@@ -198,7 +186,7 @@
                                     <ListView fx:id="ltvEventTicketTypes" VBox.vgrow="ALWAYS" />
                                     <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                                        <children>
-                                          <TextField fx:id="txfEventTicketType" minWidth="50.0" promptText="Ticket type" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="txfEventTicketType" minWidth="100.0" promptText="Ticket type" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -250,7 +238,7 @@
             <content>
                 <AnchorPane>
                <children>
-                  <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox minWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
@@ -293,6 +281,9 @@
                                              <children>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Attending events" />
                                              </children>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" />
+                                             </padding>
                                           </TextFlow>
                                           <ListView fx:id="ltvEventTicketTypes1" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                                           <TextField fx:id="txfFilterAttending" minWidth="50.0" promptText="Filter..." VBox.vgrow="NEVER">

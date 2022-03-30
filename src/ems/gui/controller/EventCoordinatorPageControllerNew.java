@@ -6,6 +6,7 @@ import ems.bll.util.EventNameValidator;
 import ems.gui.model.CustomerModel;
 import ems.gui.view.dialogs.CustomerDialog;
 import ems.gui.view.util.PopUp;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import ems.be.Event;
@@ -19,44 +20,48 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageControllerNew implements Initializable {
     EventNameValidator eventNameValidator;
     /* OVERVIEW TAB */
-        /* EVENTS */
+    /* EVENTS */
     public TableView<Event> tbvOverviewEvents;
     public TableColumn<Event, String> colOverviewEvents;
     public TextField txfFilterOverviewEvents;
 
-        /* CUSTOMERS */
+    /* CUSTOMERS */
     public TableView<Customer> tbvOverviewCustomers;
     public TableColumn<Customer, String> colOverviewCustomers;
     public TextField txfFilterOverviewCustomers;
 
-        /* TICKETS */
+    /* TICKETS */
     public TableView tbvOverviewTickets;
     public TableColumn colOverviewTickets;
     public TextField txfFilterOverviewTickets;
 
     /* EVENTS TAB */
-        /* TABLE VIEW */
+    /* TABLE VIEW */
     public TableView<Event> tbvEventTabEvents;
     public TableColumn<Event, String> colEventTabEvents;
     public TextField txfFilterEventTabEvents;
 
-        /* "DIALOG PANE" */
+    /* "DIALOG PANE" */
     public TextField txfEventName,
-                txfEventStartDate, txfEventStartTime,
-                txfEventEndDate, txfEventEndTime;
+            txfEventStartDate, txfEventStartTime,
+            txfEventEndDate, txfEventEndTime,
+            txfCustomerName, txfCustomerEmail,
+            txfCustomerPhoneNumber;
 
-    public TextArea txaEventDescription, txaEventNotes, txaEventLocation, txaEventLocationGuidance;
+    public TextArea txaEventDescription, txaEventNotes, txaEventLocation, txaEventLocationGuidance,
+                    txaCustomerDescription;
     public ListView<String> ltvEventTicketTypes;
     public TextField txfEventTicketType;
 
     /* CUSTOMERS TAB */
-        /* TABLE VIEW */
+    /* TABLE VIEW */
     public TableView<Customer> tbvCustomers;
 
     /* MODELS */
@@ -87,7 +92,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     // region EVENTS TAB
     public void handleFilterEvents(KeyEvent keyEvent) {
         try {
-            String query = ((TextField)keyEvent.getSource()).getText();
+            String query = ((TextField) keyEvent.getSource()).getText();
             eventModel.filterEvents(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -159,6 +164,24 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             PopUp.showError(e.getMessage());
         }
     }
+
+    public void handleSelectEvent(MouseEvent mouseEvent) {
+        Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+        if (e != null) {
+            txfEventName.setText(e.getName());
+            txaEventDescription.setText(e.getDescription());
+            txaEventNotes.setText(e.getNotes());
+            txfEventStartTime.setText(e.getStart().toLocalTime().toString());
+            txfEventStartDate.setText(e.getStart().toLocalDate().toString());
+            txfEventEndTime.setText(e.getEnd().toLocalTime().toString());
+            txfEventEndDate.setText(e.getEnd().toLocalDate().toString());
+            txaEventLocation.setText(e.getLocation());
+            txaEventLocationGuidance.setText(e.getLocationGuidance());
+            ltvEventTicketTypes.setItems(FXCollections.observableList(new ArrayList<>(e.getTicketTypes())));
+        }
+    }
+
+
     //endregion
 
     // region CUSTOMER TAB
@@ -167,44 +190,54 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     public void handleCreateCustomer(MouseEvent mouseEvent) {
-            CustomerDialog dialog = new CustomerDialog();
-            Optional<Customer> result = dialog.showAndWait();
-            result.ifPresent(response -> {
-                try {
-                    customerModel.createCustomer(response);
-                } catch (Exception e) {
-                    PopUp.showError(e.getMessage());
-                }
-            });
+        CustomerDialog dialog = new CustomerDialog();
+        Optional<Customer> result = dialog.showAndWait();
+        result.ifPresent(response -> {
+            try {
+                customerModel.createCustomer(response);
+            } catch (Exception e) {
+                PopUp.showError(e.getMessage());
+            }
+        });
 
     }
 
     public void handleDeleteCustomer(MouseEvent mouseEvent) {
-        try{
+        try {
             Customer selected = tbvCustomers.getSelectionModel().getSelectedItem();
-            if(selected != null){
+            if (selected != null) {
                 customerModel.deleteCustomer(selected);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void handleUpdateCustomer(MouseEvent mouseEvent) {
-        try{
+        try {
             Customer oldCustomer = tbvCustomers.getSelectionModel().getSelectedItem();
-            if(oldCustomer != null){
+            if (oldCustomer != null) {
                 CustomerDialog dialog = new CustomerDialog();
                 dialog.setFields(oldCustomer);
                 Optional<Customer> result = dialog.showAndWait();
                 if (result.isPresent()) {
-                Customer updatedCustomer = result.get();
-                updatedCustomer.setId(oldCustomer.getId());
-                customerModel.updateCustomer(oldCustomer, updatedCustomer);
+                    Customer updatedCustomer = result.get();
+                    updatedCustomer.setId(oldCustomer.getId());
+                    customerModel.updateCustomer(oldCustomer, updatedCustomer);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
+        }
+    }
+
+    public void handleSelectCustomer(MouseEvent mouseEvent) {
+        Customer c = tbvCustomers.getSelectionModel().getSelectedItem();
+        if(c != null){
+            txfCustomerName.setText(c.getName());
+            txfCustomerEmail.setText(c.getEmail());
+            txfCustomerPhoneNumber.setText(c.getPhoneNumber());
+            txaCustomerDescription.setText(c.getNotes());
         }
     }
     //endregion
@@ -249,5 +282,9 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public void handleRemoveTicketType(ActionEvent event) {
 
     }
+
+
+
+
     //endregion
 }

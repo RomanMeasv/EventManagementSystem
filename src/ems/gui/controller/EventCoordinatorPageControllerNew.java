@@ -58,7 +58,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public ListView<String> ltvEventTicketTypes;
     public TextField txfEventTicketType;
 
-    public Button btnEventApply, btnEventCancel;
+    public Button btnApplyEvent, btnCancelEvent;
 
 
     /* CUSTOMERS TAB */
@@ -93,8 +93,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         tbvEventTabEvents.setItems(eventModel.getObservableEvents());
 
         /* Disable cancel/apply buttons */
-        btnEventApply.setDisable(true);
-        btnEventCancel.setDisable(true);
+        btnApplyEvent.setDisable(true);
+        btnCancelEvent.setDisable(true);
     }
 
     // region EVENTS TAB
@@ -107,13 +107,13 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
-    public void handleCreateEvent(MouseEvent mouseEvent) {
-        btnEventApply.setDisable(false);
-        btnEventCancel.setDisable(false);
+    public void handleNewEvent(MouseEvent mouseEvent) {
+        btnApplyEvent.setDisable(false);
+        btnCancelEvent.setDisable(false);
         
     }
 
-    public void handleDeleteEvent(MouseEvent mouseEvent) {
+    public void handleRemoveEvent(MouseEvent mouseEvent) {
         try {
             Event selected = tbvEventTabEvents.getSelectionModel().getSelectedItem();
             if (selected != null) {
@@ -124,7 +124,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
-    public void handleUpdateEvent(MouseEvent mouseEvent) {
+    public void handleApplyEvent(MouseEvent mouseEvent) {
         try {
             Event oldEvent = tbvEventTabEvents.getSelectionModel().getSelectedItem();
             /*if (oldEvent != null) {
@@ -164,48 +164,6 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     // region CUSTOMER TAB
     public void handleFilterCustomers(KeyEvent keyEvent) {
         //txfFilterOverviewCustomers
-    }
-
-    public void handleCreateCustomer(MouseEvent mouseEvent) {
-        CustomerDialog dialog = new CustomerDialog();
-        Optional<Customer> result = dialog.showAndWait();
-        result.ifPresent(response -> {
-            try {
-                customerModel.createCustomer(response);
-            } catch (Exception e) {
-                PopUp.showError(e.getMessage());
-            }
-        });
-
-    }
-
-    public void handleDeleteCustomer(MouseEvent mouseEvent) {
-        try {
-            Customer selected = tbvCustomers.getSelectionModel().getSelectedItem();
-            if (selected != null) {
-                customerModel.deleteCustomer(selected);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void handleUpdateCustomer(MouseEvent mouseEvent) {
-        try {
-            Customer oldCustomer = tbvCustomers.getSelectionModel().getSelectedItem();
-            if (oldCustomer != null) {
-                CustomerDialog dialog = new CustomerDialog();
-                dialog.setFields(oldCustomer);
-                Optional<Customer> result = dialog.showAndWait();
-                if (result.isPresent()) {
-                    Customer updatedCustomer = result.get();
-                    updatedCustomer.setId(oldCustomer.getId());
-                    customerModel.updateCustomer(oldCustomer, updatedCustomer);
-                }
-            }
-        } catch (Exception e) {
-
-        }
     }
 
     public void handleSelectCustomer(MouseEvent mouseEvent) {

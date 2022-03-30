@@ -59,6 +59,7 @@ public class LoginPageController {
 
             } catch (Exception e) {
                 PopUp.showError("Couldn't load page!");
+                e.printStackTrace();
             }
 
         } catch (DatabaseException e) {

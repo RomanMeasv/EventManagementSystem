@@ -1,8 +1,13 @@
 /* TABLE VIEW WITH BUTTONS AND FILTER */
+.table-box {
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
+}
+
 .table-view {
     -fx-background-color: transparent;
     -fx-padding: 0;
-    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
 }
 
 .table-view .column-header-background .filler {
@@ -101,7 +106,6 @@
     -fx-background-color: #F7B449;
     -fx-background-radius: 0 0 10px 10px;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
-    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
 }
 
 .text-field:focused {

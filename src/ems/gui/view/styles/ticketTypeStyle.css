@@ -24,6 +24,10 @@
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
 }
 
+.text-field:focused {
+    -fx-background-color: #F7B449;
+}
+
 .button {
     -fx-background-color: #8293E3;
     -fx-background-radius: 0;

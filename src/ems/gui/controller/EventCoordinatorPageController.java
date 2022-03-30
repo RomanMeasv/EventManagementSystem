@@ -308,8 +308,48 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleApplyCustomer(ActionEvent event) {
+        Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
+        if(txfCustomerName.getText().isEmpty() || txfCustomerEmail.getText().isEmpty() || txfCustomerPhoneNumber.getText().isEmpty()){
+            PopUp.showError("Please fill in all fields");
+            return;
+        }
+        if(c != null){
+            if(customerModel.getObservableCustomers().stream().map(Customer :: getName).toList().contains(txfCustomerName.getText())){
+                PopUp.showError("Customer with that name already exists");
+                return;
+            }
+        }
+
+        if(c == null){
+            try{customerModel.createCustomer(new Customer(txfCustomerName.getText(), txfCustomerEmail.getText(), txfCustomerPhoneNumber.getText(), txaCustomerNotes.getText()));
+            btnApplyCustomer.setDisable(true);
+            btnCancelCustomer.setDisable(true);
+            clearEventDetails();
+        }catch (Exception e){
+            PopUp.showError(e.getMessage());
+            }
+
+        } else {
+            try{
+                c.setName(txfCustomerName.getText());
+                c.setEmail(txfCustomerEmail.getText());
+                c.setPhoneNumber(txfCustomerPhoneNumber.getText());
+                c.setNotes(txaCustomerNotes.getText());
+                customerModel.updateCustomer(c);
+            }catch (Exception e){
+                PopUp.showError(e.getMessage());
+            }
+        }
     }
     public void handleCancelCustomer(ActionEvent event) {
+        Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
+        if(c == null){
+           clearCustomerDetails();
+        } else {
+            fillCustomerDetails(c);
+        }
+        btnApplyCustomer.setDisable(true);
+        btnCancelCustomer.setDisable(true);
     }
 
 
@@ -318,6 +358,13 @@ public class EventCoordinatorPageController implements Initializable {
         txfCustomerEmail.clear();
         txfCustomerPhoneNumber.clear();
         txaCustomerDescription.clear();
+    }
+
+    private void fillCustomerDetails(Customer c){
+        txfCustomerName.setText(c.getName());
+        txfCustomerEmail.setText(c.getEmail());
+        txfCustomerPhoneNumber.setText(c.getPhoneNumber());
+        txaCustomerNotes.setText(c.getNotes());
     }
 
     //endregion

@@ -33,9 +33,9 @@ public class CustomerModel {
         observableCustomers.remove(c);
     }
 
-    public void updateCustomer(Customer oldCustomer, Customer updatedCustomer) throws Exception {
-        customerLogic.updateCustomer(updatedCustomer);
-        observableCustomers.set(oldCustomer.getId(), updatedCustomer);
+    public void updateCustomer(Customer customer) throws Exception {
+        customerLogic.updateCustomer(customer);
+        observableCustomers.set(observableCustomers.indexOf(customer), customer);
     }
 
     public List<Customer> filterCustomers(String query) throws Exception {

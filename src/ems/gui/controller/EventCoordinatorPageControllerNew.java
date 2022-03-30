@@ -216,39 +216,6 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         btnCancelEvent.setDisable(true);
     }
 
-    public void startDateKeyTypedHandle(KeyEvent keyEvent) {
-        //check if date string is contain only numbers and delete
-        if (!keyEvent.getCharacter().matches("[0-9]")) {
-            keyEvent.consume();
-        }
-    }
-
-    public void startTimeKeyTypedHandle(KeyEvent keyEvent) {
-        if (keyEvent.getCharacter().matches("[0-9]")) {
-            if (txfEventStartTime.getText().length() == 2) {
-                txfEventStartTime.appendText(":");
-            }
-        }
-    }
-
-    public void endDateKeyTypedHandle(KeyEvent keyEvent) {
-        if (keyEvent.getCharacter().matches("[0-9]")) {
-            if (txfEventEndDate.getText().length() == 4) {
-                txfEventEndDate.appendText("-");
-            } else if (txfEventEndDate.getText().length() == 7) {
-                txfEventEndDate.appendText("-");
-            }
-        }
-    }
-
-    public void endTimeKeyTypedHandle(KeyEvent keyEvent) {
-        if (keyEvent.getCharacter().matches("[0-9]")) {
-            if (txfEventEndTime.getText().length() == 2) {
-                txfEventEndTime.appendText(":");
-            }
-        }
-    }
-
     public void handleSelectEvent() {
         btnApplyEvent.setDisable(false);
         btnCancelEvent.setDisable(false);

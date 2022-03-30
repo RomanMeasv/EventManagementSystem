@@ -107,55 +107,100 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
-    public void handleNewEvent(MouseEvent mouseEvent) {
+    public void handleNewEvent(ActionEvent actionEvent) {
         btnApplyEvent.setDisable(false);
         btnCancelEvent.setDisable(false);
-        
+
+        txfEventName.clear();
+        txaEventDescription.clear();
+        txaEventNotes.clear();
+        txfEventStartDate.clear();
+        txfEventStartTime.clear();
+        txfEventEndDate.clear();
+        txfEventEndTime.clear();
+        txaEventLocation.clear();
+        txaEventLocationGuidance.clear();
+        ltvEventTicketTypes.getItems().clear();
+        txfEventTicketType.clear();
     }
 
-    public void handleRemoveEvent(MouseEvent mouseEvent) {
+    public void handleRemoveEvent() {
         try {
             Event selected = tbvEventTabEvents.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 eventModel.deleteEvent(selected);
             }
+            clearEventDetails();
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }
 
-    public void handleApplyEvent(MouseEvent mouseEvent) {
-        try {
-            Event oldEvent = tbvEventTabEvents.getSelectionModel().getSelectedItem();
-            /*if (oldEvent != null) {
-                EventDialog dialog = new EventDialog();
-                dialog.setFields(oldEvent);
-                Optional<Event> result = dialog.showAndWait();
-                if (result.isPresent()) {
-                    Event updatedEvent = result.get();
-                    updatedEvent.setId(oldEvent.getId());
-                    eventModel.updateEvent(oldEvent, updatedEvent);
-                }
-            }*/
-        } catch (Exception e) {
-            PopUp.showError(e.getMessage());
+    public void handleApplyEvent() {
+        Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+        if (e == null) { //it's a new event
+            //check if everything is correct
+            //create new event
         }
+        else //it's an existing event
+        {
+            //edit existing event
+        }
+
+        btnApplyEvent.setDisable(true);
+        btnCancelEvent.setDisable(true);
     }
 
-    public void handleSelectEvent(MouseEvent mouseEvent) {
+    public void handleCancelEvent() {
+        Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+        if (e == null) { //a new event was about to be created
+            clearEventDetails();
+        }
+        else //an existing event was about to be edited
+        {
+            fillEventDetails(e);
+        }
+
+        btnApplyEvent.setDisable(true);
+        btnCancelEvent.setDisable(true);
+    }
+
+    public void handleSelectEvent() {
+        btnApplyEvent.setDisable(false);
+        btnCancelEvent.setDisable(false);
         Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
         if (e != null) {
-            txfEventName.setText(e.getName());
-            txaEventDescription.setText(e.getDescription());
-            txaEventNotes.setText(e.getNotes());
-            txfEventStartTime.setText(e.getStart().toLocalTime().toString());
-            txfEventStartDate.setText(e.getStart().toLocalDate().toString());
-            txfEventEndTime.setText(e.getEnd().toLocalTime().toString());
-            txfEventEndDate.setText(e.getEnd().toLocalDate().toString());
-            txaEventLocation.setText(e.getLocation());
-            txaEventLocationGuidance.setText(e.getLocationGuidance());
-            ltvEventTicketTypes.setItems(FXCollections.observableList(new ArrayList<>(e.getTicketTypes())));
+            fillEventDetails(e);
         }
+    }
+
+    private void clearEventDetails()
+    {
+        txfEventName.clear();
+        txaEventDescription.clear();
+        txaEventNotes.clear();
+        txfEventStartDate.clear();
+        txfEventStartTime.clear();
+        txfEventEndDate.clear();
+        txfEventEndTime.clear();
+        txaEventLocation.clear();
+        txaEventLocationGuidance.clear();
+        ltvEventTicketTypes.getItems().clear();
+        txfEventTicketType.clear();
+    }
+
+    private void fillEventDetails(Event e)
+    {
+        txfEventName.setText(e.getName());
+        txaEventDescription.setText(e.getDescription());
+        txaEventNotes.setText(e.getNotes());
+        txfEventStartTime.setText(e.getStart().toLocalTime().toString());
+        txfEventStartDate.setText(e.getStart().toLocalDate().toString());
+        txfEventEndTime.setText(e.getEnd().toLocalTime().toString());
+        txfEventEndDate.setText(e.getEnd().toLocalDate().toString());
+        txaEventLocation.setText(e.getLocation());
+        txaEventLocationGuidance.setText(e.getLocationGuidance());
+        ltvEventTicketTypes.setItems(FXCollections.observableList(new ArrayList<>(e.getTicketTypes())));
     }
 
 

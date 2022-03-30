@@ -29,10 +29,6 @@ public class Ticket {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
     public boolean isValid() {
         return isValid;
     }

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -118,7 +119,7 @@
                <children>
                   <HBox layoutX="9.0" layoutY="9.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" spacing="10.0" stylesheets="@styles/tableViewStyle.css" HBox.hgrow="ALWAYS">
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="200.0" spacing="10.0" stylesheets="@styles/tableViewStyle.css" HBox.hgrow="ALWAYS">
                            <children>
                               <VBox VBox.vgrow="ALWAYS">
                                  <children>
@@ -168,24 +169,16 @@
                                     <Font size="16.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="txfEventDescription" alignment="TOP_LEFT" minWidth="280.0" promptText="Description" VBox.vgrow="NEVER">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfEventNotes" alignment="TOP_LEFT" minWidth="280.0" promptText="Optional notes" VBox.vgrow="NEVER">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </TextField>
+                              <TextArea fx:id="txaEventDescription" prefHeight="120.0" promptText="Event description" VBox.vgrow="ALWAYS" />
+                              <TextArea fx:id="txaEventNotes" prefHeight="90.0" promptText="Optional notes" VBox.vgrow="NEVER" />
                               <HBox spacing="10.0">
                                  <children>
-                                    <TextField fx:id="txfStartDate" alignment="TOP_LEFT" onKeyTyped="#startDateKeyTypedHandle" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="txfEventStartDate" alignment="TOP_LEFT" onKeyTyped="#startDateKeyTypedHandle" prefHeight="30.0" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </TextField>
-                                    <TextField fx:id="txfStartTime" alignment="TOP_LEFT" onKeyTyped="#startTimeKeyTypedHandle" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="txfEventStartTime" alignment="TOP_LEFT" onKeyTyped="#startTimeKeyTypedHandle" prefHeight="30.0" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
@@ -194,28 +187,20 @@
                               </HBox>
                               <HBox spacing="10.0">
                                  <children>
-                                    <TextField fx:id="txfEndDate" alignment="TOP_LEFT" onKeyTyped="#endDateKeyTypedHandle" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="txfEventEndDate" alignment="TOP_LEFT" onKeyTyped="#endDateKeyTypedHandle" prefHeight="30.0" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </TextField>
-                                    <TextField fx:id="txfEndTime" alignment="TOP_LEFT" onKeyTyped="#endTimeKeyTypedHandle" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="txfEventEndTime" alignment="TOP_LEFT" onKeyTyped="#endTimeKeyTypedHandle" prefHeight="30.0" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </TextField>
                                  </children>
                               </HBox>
-                              <TextField fx:id="txfLocation" alignment="TOP_LEFT" minWidth="280.0" promptText="Location*" styleClass="mandatory-field" VBox.vgrow="NEVER">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfLocationGuidance" alignment="TOP_LEFT" minWidth="280.0" promptText="Location guidance" VBox.vgrow="NEVER">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </TextField>
+                              <TextArea fx:id="txaEventLocation" prefHeight="60.0" promptText="Event location" VBox.vgrow="NEVER" />
+                              <TextArea fx:id="txaEventLocationGuidance" prefHeight="90.0" promptText="Location guidance" VBox.vgrow="NEVER" />
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -224,7 +209,7 @@
                               <Insets />
                            </HBox.margin>
                         </VBox>
-                        <VBox maxWidth="1.7976931348623157E308" prefHeight="270.0" prefWidth="290.0" styleClass="list-box" stylesheets="@styles/ticketTypeStyle.css" HBox.hgrow="ALWAYS">
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" minWidth="200.0" styleClass="list-box" stylesheets="@styles/ticketTypeStyle.css" HBox.hgrow="ALWAYS">
                            <children>
                               <TextFlow styleClass="text-flow" textAlignment="CENTER">
                                  <children>
@@ -234,7 +219,7 @@
                               <ListView fx:id="ltvTicketTypes" VBox.vgrow="ALWAYS" />
                               <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                                  <children>
-                                    <TextField fx:id="txfTicketType" promptText="Ticket type" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="txfEventTicketType" minWidth="50.0" promptText="Ticket type" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="16.0" />
                                        </font>

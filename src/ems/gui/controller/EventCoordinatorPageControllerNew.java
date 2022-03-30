@@ -105,17 +105,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
         tbvEventTabEvents.getSelectionModel().clearSelection();
 
-        txfEventName.clear();
-        txaEventDescription.clear();
-        txaEventNotes.clear();
-        txfEventStartDate.clear();
-        txfEventStartTime.clear();
-        txfEventEndDate.clear();
-        txfEventEndTime.clear();
-        txaEventLocation.clear();
-        txaEventLocationGuidance.clear();
-        ltvEventTicketTypes.getItems().clear();
-        txfEventTicketType.clear();
+        clearEventDetails();
     }
 
     public void handleRemoveEvent() {
@@ -124,6 +114,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             if (selected != null) {
                 eventModel.deleteEvent(selected);
             }
+            btnApplyEvent.setDisable(true);
+            btnCancelEvent.setDisable(true);
             clearEventDetails();
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
@@ -221,18 +213,17 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         {
             fillEventDetails(e);
         }
-
         btnApplyEvent.setDisable(true);
         btnCancelEvent.setDisable(true);
     }
 
     public void handleSelectEvent() {
-        btnApplyEvent.setDisable(false);
-        btnCancelEvent.setDisable(false);
         Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
         if (e != null) {
             fillEventDetails(e);
         }
+        btnApplyEvent.setDisable(false);
+        btnCancelEvent.setDisable(false);
     }
 
     private void clearEventDetails() {

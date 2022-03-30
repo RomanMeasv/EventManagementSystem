@@ -46,11 +46,9 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public TextField txfEventName,
             txfEventStartDate, txfEventStartTime,
             txfEventEndDate, txfEventEndTime;
-
     public TextArea txaEventDescription, txaEventNotes, txaEventLocation, txaEventLocationGuidance;
     public ListView<String> ltvEventTicketTypes;
     public TextField txfEventTicketType;
-
     public Button btnApplyEvent, btnCancelEvent;
 
 
@@ -83,6 +81,10 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         /* SET UP EVENTS TAB */
         colEventTabEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
         tbvEventTabEvents.setItems(eventModel.getObservableEvents());
+
+        /* SET UP CUSTOMERS TAB */
+        colOverviewCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvCustomers.setItems(customerModel.getObservableCustomers());
 
         /* Disable cancel/apply buttons */
         btnApplyEvent.setDisable(true);
@@ -270,6 +272,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             txaCustomerDescription.setText(c.getNotes());
         }
     }
+
     //endregion
 
     //region TICKET TAB

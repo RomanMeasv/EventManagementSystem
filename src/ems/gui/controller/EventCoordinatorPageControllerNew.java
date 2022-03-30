@@ -201,7 +201,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
 
         if (ltvEventTicketTypes.getItems().contains(txfEventTicketType.getText())) {
-            txfEventName.clear();
+            txfEventTicketType.clear();
             return;
         }
 

@@ -165,8 +165,9 @@ public class EventCoordinatorPageControllerNew implements Initializable {
             } catch (Exception ex) {
                 PopUp.showError(ex.getMessage());
             }
-        }
-        else //it's an existing event
+            btnApplyEvent.setDisable(true);
+            btnCancelEvent.setDisable(true);
+        } else //it's an existing event
         {
             try {
                 e.setName(txfEventName.getText());
@@ -182,23 +183,70 @@ public class EventCoordinatorPageControllerNew implements Initializable {
                 PopUp.showError(ex.getMessage());
             }
         }
+    }
 
-        btnApplyEvent.setDisable(true);
-        btnCancelEvent.setDisable(true);
+    public void handleAddTicketType(ActionEvent event) {
+        if (txfEventTicketType.getText().isEmpty()) {
+            return;
+        }
+
+        if (ltvEventTicketTypes.getItems().contains(txfEventTicketType.getText())) {
+            txfEventName.clear();
+            return;
+        }
+
+        ltvEventTicketTypes.getItems().add(txfEventTicketType.getText());
+        txfEventTicketType.clear();
+    }
+
+    public void handleRemoveTicketType(ActionEvent event) {
+        ltvEventTicketTypes.getItems().remove(ltvEventTicketTypes.getSelectionModel().getSelectedItem());
     }
 
     public void handleCancelEvent() {
         Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
         if (e == null) { //a new event was about to be created
             clearEventDetails();
-        }
-        else //an existing event was about to be edited
+        } else //an existing event was about to be edited
         {
             fillEventDetails(e);
         }
 
         btnApplyEvent.setDisable(true);
         btnCancelEvent.setDisable(true);
+    }
+
+    public void startDateKeyTypedHandle(KeyEvent keyEvent) {
+        //check if date string is contain only numbers and delete
+        if (!keyEvent.getCharacter().matches("[0-9]")) {
+            keyEvent.consume();
+        }
+    }
+
+    public void startTimeKeyTypedHandle(KeyEvent keyEvent) {
+        if (keyEvent.getCharacter().matches("[0-9]")) {
+            if (txfEventStartTime.getText().length() == 2) {
+                txfEventStartTime.appendText(":");
+            }
+        }
+    }
+
+    public void endDateKeyTypedHandle(KeyEvent keyEvent) {
+        if (keyEvent.getCharacter().matches("[0-9]")) {
+            if (txfEventEndDate.getText().length() == 4) {
+                txfEventEndDate.appendText("-");
+            } else if (txfEventEndDate.getText().length() == 7) {
+                txfEventEndDate.appendText("-");
+            }
+        }
+    }
+
+    public void endTimeKeyTypedHandle(KeyEvent keyEvent) {
+        if (keyEvent.getCharacter().matches("[0-9]")) {
+            if (txfEventEndTime.getText().length() == 2) {
+                txfEventEndTime.appendText(":");
+            }
+        }
     }
 
     public void handleSelectEvent() {
@@ -210,8 +258,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
-    private void clearEventDetails()
-    {
+    private void clearEventDetails() {
         txfEventName.clear();
         txaEventDescription.clear();
         txaEventNotes.clear();
@@ -225,8 +272,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         txfEventTicketType.clear();
     }
 
-    private void fillEventDetails(Event e)
-    {
+    private void fillEventDetails(Event e) {
         txfEventName.setText(e.getName());
         txaEventDescription.setText(e.getDescription());
         txaEventNotes.setText(e.getNotes());
@@ -249,7 +295,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     public void handleSelectCustomer(MouseEvent mouseEvent) {
         Customer c = tbvCustomers.getSelectionModel().getSelectedItem();
-        if(c != null){
+        if (c != null) {
             txfCustomerName.setText(c.getName());
             txfCustomerEmail.setText(c.getEmail());
             txfCustomerPhoneNumber.setText(c.getPhoneNumber());
@@ -274,33 +320,5 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public void handleUpdateTicket(MouseEvent mouseEvent) {
 
     }
-
-    public void startDateKeyTypedHandle(KeyEvent keyEvent) {
-
-    }
-
-    public void startTimeKeyTypedHandle(KeyEvent keyEvent) {
-
-    }
-
-    public void endDateKeyTypedHandle(KeyEvent keyEvent) {
-
-    }
-
-    public void endTimeKeyTypedHandle(KeyEvent keyEvent) {
-
-    }
-
-    public void handleAddTicketType(ActionEvent event) {
-
-    }
-
-    public void handleRemoveTicketType(ActionEvent event) {
-
-    }
-
-
-
-
     //endregion
 }

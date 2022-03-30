@@ -37,6 +37,7 @@ public class EventModel {
 
     public void updateEvent(Event event) throws Exception {
         eventLogic.updateEvent(event);
+        observableEvents.set(observableEvents.indexOf(event), event);
     }
 
     public void filterEvents(String query) throws Exception {

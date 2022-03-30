@@ -1,0 +1,41 @@
+.list-box {
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
+}
+
+.text-flow {
+    -fx-background-color: transparent;
+    -fx-padding: 2px;
+}
+
+.list-view-header {
+    -fx-font-size: 16pt;
+}
+
+.list-view {
+    -fx-background-color: #FFF;
+    -fx-background-insets: 0;
+}
+
+.text-field {
+    -fx-background-color: #FFF;
+    -fx-background-radius: 0 0 0 10px;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
+
+}
+
+.button {
+    -fx-background-color: #5847AD;
+    -fx-background-radius: 0;
+    -fx-text-fill: #FFF;
+    -fx-background-insets: 0;
+}
+
+.button:hover {
+    -fx-text-fill: #F7B449;
+}
+
+.remove-button {
+    -fx-background-radius: 0 0 10px 0;
+}

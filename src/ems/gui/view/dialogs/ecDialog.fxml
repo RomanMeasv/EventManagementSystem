@@ -10,8 +10,8 @@
    <content>
       <VBox prefHeight="400.0" prefWidth="200.0" spacing="10.0">
          <children>
-            <TextField fx:id="txfECName" promptText="Username*" />
-            <TextField fx:id="txfECPassword" promptText="Password*" />
+            <TextField fx:id="txfECName" promptText="Username*" styleClass="mandatory-field" />
+            <TextField fx:id="txfECPassword" promptText="Password*" styleClass="mandatory-field" />
          </children>
       </VBox>
    </content>
@@ -20,7 +20,7 @@
       <ButtonType fx:constant="CANCEL" />
    </buttonTypes>
    <stylesheets>
-      <URL value="@../styles/fontStyle.css" />
-      <URL value="@../styles/ecDialogStyle.css" />
+      <URL value="@../styles/sceneStyle.css" />
+      <URL value="@../styles/filloutFormStyle.css" />
    </stylesheets>
 </DialogPane>

@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class EventCoordinatorPageControllerNew implements Initializable {
+public class EventCoordinatorPageController implements Initializable {
     /* OVERVIEW TAB */
     /* EVENTS */
     public TableView<Event> tbvOverviewEvents;

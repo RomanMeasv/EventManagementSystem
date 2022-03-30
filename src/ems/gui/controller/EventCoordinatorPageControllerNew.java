@@ -59,6 +59,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public TextField txfCustomerName, txfCustomerEmail,
             txfCustomerPhoneNumber;
     public TextArea txaCustomerDescription;
+    public Button btnApplyCustomer, btnCancelCustomer;
 
     /* MODELS */
     private CustomerModel customerModel;
@@ -90,6 +91,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         /* Disable cancel/apply buttons */
         btnApplyEvent.setDisable(true);
         btnCancelEvent.setDisable(true);
+        btnApplyCustomer.setDisable(true);
+        btnCancelCustomer.setDisable(true);
     }
 
     // region EVENTS TAB
@@ -261,7 +264,12 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     // region CUSTOMER TAB
     public void handleFilterCustomers(KeyEvent keyEvent) {
-        //txfFilterOverviewCustomers
+        try {
+            String query = ((TextField) keyEvent.getSource()).getText();
+            customerModel.filterCustomers(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleSelectCustomer(MouseEvent mouseEvent) {
@@ -274,16 +282,39 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         }
     }
 
-    public void handleCreateCustomer(ActionEvent event) {
+    public void handleNewCustomer(ActionEvent event) {
+        btnApplyCustomer.setDisable(false);
+        btnCancelCustomer.setDisable(false);
+        tbvCustomerTabCustomers.getSelectionModel().clearSelection();
+        clearCustomerDetails();
+
     }
 
-    public void handleDeleteCustomer(ActionEvent event) {
-    }
-
-    public void handleCancelCustomer(ActionEvent event) {
+    public void handleRemoveCustomer(ActionEvent event) {
+        try{
+            Customer selected = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
+            if(selected != null){
+                customerModel.deleteCustomer(selected);
+            }
+            btnApplyCustomer.setDisable(true);
+            btnCancelCustomer.setDisable(true);
+            clearCustomerDetails();
+        }catch(Exception e){
+            PopUp.showError(e.getMessage());
+        }
     }
 
     public void handleApplyCustomer(ActionEvent event) {
+    }
+    public void handleCancelCustomer(ActionEvent event) {
+    }
+
+
+    public void clearCustomerDetails(){
+        txfCustomerName.clear();
+        txfCustomerEmail.clear();
+        txfCustomerPhoneNumber.clear();
+        txaCustomerDescription.clear();
     }
 
     //endregion

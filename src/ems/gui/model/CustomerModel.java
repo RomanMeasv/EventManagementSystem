@@ -6,6 +6,8 @@ import ems.bll.exceptions.DatabaseException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class CustomerModel {
     private CustomerLogic customerLogic;
     private ObservableList<Customer> observableCustomers;
@@ -34,5 +36,9 @@ public class CustomerModel {
     public void updateCustomer(Customer oldCustomer, Customer updatedCustomer) throws Exception {
         customerLogic.updateCustomer(updatedCustomer);
         observableCustomers.set(oldCustomer.getId(), updatedCustomer);
+    }
+
+    public List<Customer> filterCustomers(String query) throws Exception {
+        return customerLogic.filterCustomers(query);
     }
 }

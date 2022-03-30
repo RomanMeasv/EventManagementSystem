@@ -110,4 +110,9 @@ public class DAFacade implements IDataAccess {
     public void deleteCustomer(Customer c) throws Exception {
         customerDAO.deleteCustomer(c);
     }
+
+    @Override
+    public List<Customer> filterCustomer(String query) throws Exception {
+        return customerDAO.filterCustomers(query);
+    }
 }

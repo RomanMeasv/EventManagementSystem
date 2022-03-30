@@ -231,8 +231,8 @@
                         </HBox>
                         <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <Button fx:id="btnCancelEvent" mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER" />
-                              <Button fx:id="btnApplyEvent" mnemonicParsing="false" text="Apply" HBox.hgrow="NEVER" />
+                              <Button fx:id="btnCancelEvent" mnemonicParsing="false" onAction="#handleCancelEvent" text="Cancel" HBox.hgrow="NEVER" />
+                              <Button fx:id="btnApplyEvent" mnemonicParsing="false" onAction="#handleApplyEvent" text="Apply" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
                      </children>

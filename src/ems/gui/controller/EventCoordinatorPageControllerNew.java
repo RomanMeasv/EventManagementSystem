@@ -1,32 +1,25 @@
 package ems.gui.controller;
 
 import ems.be.Customer;
-import ems.bll.exceptions.DatabaseException;
-import ems.bll.util.EventNameValidator;
 import ems.gui.model.CustomerModel;
-import ems.gui.view.dialogs.CustomerDialog;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import ems.be.Event;
 import ems.gui.model.EventModel;
-import ems.gui.view.dialogs.EventDialog;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageControllerNew implements Initializable {
-    EventNameValidator eventNameValidator;
     /* OVERVIEW TAB */
     /* EVENTS */
     public TableView<Event> tbvOverviewEvents;
@@ -74,7 +67,6 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        eventNameValidator = new EventNameValidator();
         try {
             customerModel = new CustomerModel();
             eventModel = new EventModel();
@@ -138,13 +130,57 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     public void handleApplyEvent() {
         Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+        //check if everything is correct
+        if (txfEventName.getText().isEmpty() || txfEventStartDate.getText().isEmpty() || txfEventStartTime.getText().isEmpty() ||
+                txfEventEndDate.getText().isEmpty() || txfEventEndTime.getText().isEmpty() || txaEventLocation.getText().isEmpty() || ltvEventTicketTypes.getItems().isEmpty()) {
+            PopUp.showError("Please fill in all the mandatory fields and add at least one ticket type! (*)");
+            return;
+        }
+
+        if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())
+                && !txfEventName.getText().equals(e.getName())) {
+            PopUp.showError("Event name already in use!");
+            return;
+        }
+
+        //check if dates can be parsed (if they are valid)
+        LocalDateTime start;
+        LocalDateTime end;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            start = LocalDateTime.parse(txfEventStartDate.getText() + " " + txfEventStartTime.getText(), formatter);
+            end = LocalDateTime.parse(txfEventEndDate.getText() + " " + txfEventEndTime.getText(), formatter);
+            if (start.isAfter(end)) {
+                PopUp.showError("Start date cannot be after end date!");
+                return;
+            }
+        } catch (Exception exception) {
+            PopUp.showError("Invalid date format!");
+            return;
+        }
+
         if (e == null) { //it's a new event
-            //check if everything is correct
-            //create new event
+            try {
+                eventModel.createEvent(new Event(txfEventName.getText(), txaEventDescription.getText(), txaEventNotes.getText(), start, end, txaEventLocation.getText(), txaEventLocationGuidance.getText(), ltvEventTicketTypes.getItems()));
+            } catch (Exception ex) {
+                PopUp.showError(ex.getMessage());
+            }
         }
         else //it's an existing event
         {
-            //edit existing event
+            try {
+                e.setName(txfEventName.getText());
+                e.setDescription(txaEventDescription.getText());
+                e.setNotes(txaEventNotes.getText());
+                e.setStart(start);
+                e.setEnd(end);
+                e.setLocation(txaEventLocation.getText());
+                e.setLocationGuidance(txaEventLocationGuidance.getText());
+                e.setTicketTypes(ltvEventTicketTypes.getItems());
+                eventModel.updateEvent(e);
+            } catch (Exception ex) {
+                PopUp.showError(ex.getMessage());
+            }
         }
 
         btnApplyEvent.setDisable(true);

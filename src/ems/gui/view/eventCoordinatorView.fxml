@@ -139,8 +139,8 @@
                                           <Font size="16.0" />
                                        </font>
                                     </TextField>
-                                    <TextArea fx:id="txaEventDescription" prefHeight="120.0" promptText="Event description" VBox.vgrow="ALWAYS" />
-                                    <TextArea fx:id="txaEventNotes" prefHeight="90.0" promptText="Optional notes" VBox.vgrow="NEVER" />
+                                    <TextArea fx:id="txaEventDescription" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="120.0" promptText="Event description" VBox.vgrow="ALWAYS" />
+                                    <TextArea fx:id="txaEventNotes" maxHeight="180.0" minHeight="-Infinity" prefHeight="90.0" promptText="Optional notes" VBox.vgrow="ALWAYS" />
                                     <HBox spacing="10.0">
                                        <children>
                                           <TextField fx:id="txfEventStartDate" alignment="TOP_LEFT" prefHeight="30.0" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
@@ -170,7 +170,7 @@
                                        </children>
                                     </HBox>
                                     <TextArea fx:id="txaEventLocation" prefHeight="60.0" promptText="Event location*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                    <TextArea fx:id="txaEventLocationGuidance" prefHeight="90.0" promptText="Location guidance" VBox.vgrow="NEVER" />
+                                    <TextArea fx:id="txaEventLocationGuidance" maxHeight="180.0" minHeight="-Infinity" prefHeight="90.0" promptText="Location guidance" VBox.vgrow="ALWAYS" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -271,7 +271,7 @@
                                        <children>
                                           <TextField promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextField promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                          <TextField promptText="Phone number" VBox.vgrow="NEVER" />
+                                          <TextField promptText="Phone number*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextArea prefHeight="200.0" promptText="Description" VBox.vgrow="NEVER" />
                                        </children>
                                     </VBox>

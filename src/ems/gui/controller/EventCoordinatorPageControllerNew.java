@@ -103,6 +103,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         btnApplyEvent.setDisable(false);
         btnCancelEvent.setDisable(false);
 
+        tbvEventTabEvents.getSelectionModel().clearSelection();
+
         txfEventName.clear();
         txaEventDescription.clear();
         txaEventNotes.clear();

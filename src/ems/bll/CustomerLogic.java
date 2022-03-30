@@ -50,7 +50,7 @@ public class CustomerLogic {
 
      public List<Customer> filterCustomers(String query) throws DatabaseException {
          try {
-             return  dataAccess.filterCustomer(query);
+             return  dataAccess.filterCustomers(query);
          } catch (Exception exception) {
              throw new DatabaseException("Could not filter Customers! Check database connection!", exception);
          }

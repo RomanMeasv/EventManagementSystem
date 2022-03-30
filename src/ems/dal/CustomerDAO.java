@@ -87,13 +87,13 @@ public class CustomerDAO {
     public List<Customer> filterCustomers(String query) throws Exception {
         List<Customer> filtered = new ArrayList<>();
 
-        try(Connection con = ConnectionManager.getConnection()){
+        try (Connection con = ConnectionManager.getConnection()) {
             String sqlCommandFilter = "SElECT * FROM Customers WHERE [name] LIKE ?;";
             PreparedStatement pstmtFilter = con.prepareStatement(sqlCommandFilter);
             pstmtFilter.setString(1, "%" + query + "%");
             ResultSet rs = pstmtFilter.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 filtered.add(new Customer(
                         rs.getInt("id"),
                         rs.getString("name"),
@@ -102,7 +102,8 @@ public class CustomerDAO {
                         rs.getString("notes")
                 ));
             }
-            return filtered;
+
         }
+        return filtered;
     }
 }

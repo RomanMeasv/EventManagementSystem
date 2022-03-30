@@ -112,7 +112,7 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public List<Customer> filterCustomer(String query) throws Exception {
+    public List<Customer> filterCustomers(String query) throws Exception {
         return customerDAO.filterCustomers(query);
     }
 }

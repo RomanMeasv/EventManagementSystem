@@ -37,5 +37,5 @@ public interface IDataAccess {
     List<Customer> readAllCustomers() throws Exception;
     void updateCustomer(Customer c) throws Exception;
     void deleteCustomer(Customer c) throws Exception;
-    List<Customer> filterCustomer(String query) throws Exception;
+    List<Customer> filterCustomers(String query) throws Exception;
 }

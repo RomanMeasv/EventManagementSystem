@@ -1,6 +1,7 @@
 package ems.gui.model;
 
 import ems.be.Customer;
+import ems.be.Event;
 import ems.bll.CustomerLogic;
 import ems.bll.exceptions.DatabaseException;
 import javafx.collections.FXCollections;
@@ -38,7 +39,8 @@ public class CustomerModel {
         observableCustomers.set(observableCustomers.indexOf(customer), customer);
     }
 
-    public List<Customer> filterCustomers(String query) throws Exception {
-        return customerLogic.filterCustomers(query);
+    public void filterCustomers(String query) throws Exception {
+        List<Customer> filtered = customerLogic.filterCustomers(query);
+        observableCustomers.setAll(filtered);
     }
 }

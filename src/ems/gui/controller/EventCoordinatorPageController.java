@@ -271,7 +271,7 @@ public class EventCoordinatorPageController implements Initializable {
             String query = ((TextField) keyEvent.getSource()).getText();
             customerModel.filterCustomers(query);
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage());
         }
     }
 
@@ -282,6 +282,8 @@ public class EventCoordinatorPageController implements Initializable {
             txfCustomerEmail.setText(c.getEmail());
             txfCustomerPhoneNumber.setText(c.getPhoneNumber());
             txaCustomerNotes.setText(c.getNotes());
+            btnApplyCustomer.setDisable(false);
+            btnCancelCustomer.setDisable(false);
         }
     }
 
@@ -294,57 +296,53 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleRemoveCustomer(ActionEvent event) {
-        try{
+        try {
             Customer selected = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
-            if(selected != null){
+            if (selected != null) {
                 customerModel.deleteCustomer(selected);
             }
             btnApplyCustomer.setDisable(true);
             btnCancelCustomer.setDisable(true);
             clearCustomerDetails();
-        }catch(Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }
 
     public void handleApplyCustomer(ActionEvent event) {
         Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
-        if(txfCustomerName.getText().isEmpty() || txfCustomerEmail.getText().isEmpty() || txfCustomerPhoneNumber.getText().isEmpty()){
+        if (txfCustomerName.getText().isEmpty() || txfCustomerEmail.getText().isEmpty() || txfCustomerPhoneNumber.getText().isEmpty()) {
             PopUp.showError("Please fill in all fields");
             return;
         }
-        if(c != null){
-            if(customerModel.getObservableCustomers().stream().map(Customer :: getName).toList().contains(txfCustomerName.getText())){
-                PopUp.showError("Customer with that name already exists");
-                return;
-            }
-        }
 
-        if(c == null){
-            try{customerModel.createCustomer(new Customer(txfCustomerName.getText(), txfCustomerEmail.getText(), txfCustomerPhoneNumber.getText(), txaCustomerNotes.getText()));
-            btnApplyCustomer.setDisable(true);
-            btnCancelCustomer.setDisable(true);
-            clearEventDetails();
-        }catch (Exception e){
-            PopUp.showError(e.getMessage());
+        if (c == null) {
+            try {
+                customerModel.createCustomer(new Customer(txfCustomerName.getText(), txfCustomerEmail.getText(), txfCustomerPhoneNumber.getText(), txaCustomerNotes.getText()));
+                btnApplyCustomer.setDisable(true);
+                btnCancelCustomer.setDisable(true);
+                clearCustomerDetails();
+            } catch (Exception e) {
+                PopUp.showError(e.getMessage());
             }
 
         } else {
-            try{
+            try {
                 c.setName(txfCustomerName.getText());
                 c.setEmail(txfCustomerEmail.getText());
                 c.setPhoneNumber(txfCustomerPhoneNumber.getText());
                 c.setNotes(txaCustomerNotes.getText());
                 customerModel.updateCustomer(c);
-            }catch (Exception e){
+            } catch (Exception e) {
                 PopUp.showError(e.getMessage());
             }
         }
     }
+
     public void handleCancelCustomer(ActionEvent event) {
         Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
-        if(c == null){
-           clearCustomerDetails();
+        if (c == null) {
+            clearCustomerDetails();
         } else {
             fillCustomerDetails(c);
         }
@@ -353,14 +351,14 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
 
-    public void clearCustomerDetails(){
+    public void clearCustomerDetails() {
         txfCustomerName.clear();
         txfCustomerEmail.clear();
         txfCustomerPhoneNumber.clear();
-        txaCustomerDescription.clear();
+        txaCustomerNotes.clear();
     }
 
-    private void fillCustomerDetails(Customer c){
+    private void fillCustomerDetails(Customer c) {
         txfCustomerName.setText(c.getName());
         txfCustomerEmail.setText(c.getEmail());
         txfCustomerPhoneNumber.setText(c.getPhoneNumber());
@@ -385,8 +383,6 @@ public class EventCoordinatorPageController implements Initializable {
     public void handleUpdateTicket(MouseEvent mouseEvent) {
 
     }
-
-
 
 
     //endregion

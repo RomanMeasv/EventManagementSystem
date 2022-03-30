@@ -47,13 +47,17 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public TableColumn<Event, String> colEventTabEvents;
     public TextField txfFilterEventTabEvents;
 
-        /* DIALOG PANE */
+        /* "DIALOG PANE" */
     public TextField txfEventName, txfEventDescription, txfEventNotes,
                 txfStartDate, txfStartTime,
                 txfEndDate, txfEndTime,
                 txfLocation, txfLocationGuidance;
     public ListView<String> ltvTicketTypes;
     public TextField txfTicketType;
+
+    /* CUSTOMERS TAB */
+        /* TABLE VIEW */
+    public TableView<Customer> tbvCustomers;
 
     /* MODELS */
     private CustomerModel customerModel;

@@ -10,10 +10,7 @@ import ems.be.Event;
 import ems.gui.model.EventModel;
 import ems.gui.view.dialogs.EventDialog;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -48,12 +45,13 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     public TextField txfFilterEventTabEvents;
 
         /* "DIALOG PANE" */
-    public TextField txfEventName, txfEventDescription, txfEventNotes,
-                txfStartDate, txfStartTime,
-                txfEndDate, txfEndTime,
-                txfLocation, txfLocationGuidance;
-    public ListView<String> ltvTicketTypes;
-    public TextField txfTicketType;
+    public TextField txfEventName,
+                txfEventStartDate, txfEventStartTime,
+                txfEventEndDate, txfEventEndTime;
+
+    public TextArea txaEventDescription, txaEventNotes, txaEventLocation, txaEventLocationGuidance;
+    public ListView<String> ltvEventTicketTypes;
+    public TextField txfEventTicketType;
 
     /* CUSTOMERS TAB */
         /* TABLE VIEW */

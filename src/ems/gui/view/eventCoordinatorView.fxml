@@ -216,7 +216,7 @@
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Ticket types" />
                                  </children>
                               </TextFlow>
-                              <ListView fx:id="ltvTicketTypes" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="ltvEventTicketTypes" VBox.vgrow="ALWAYS" />
                               <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                                  <children>
                                     <TextField fx:id="txfEventTicketType" minWidth="50.0" promptText="Ticket type" HBox.hgrow="ALWAYS">

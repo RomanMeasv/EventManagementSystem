@@ -38,7 +38,3 @@
 .remove-button {
     -fx-background-radius: 0 0 10px 0;
 }
-
-.add-button {
-    -fx-background-radius: 10px 0 0 0;
-}

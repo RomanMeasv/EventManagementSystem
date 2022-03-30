@@ -272,7 +272,7 @@
                                           <TextField promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextField promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                                           <TextField promptText="Phone number*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                                          <TextArea prefHeight="200.0" promptText="Description" VBox.vgrow="NEVER" />
+                                          <TextArea maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Description" VBox.vgrow="ALWAYS" />
                                        </children>
                                     </VBox>
                                     <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" stylesheets="@styles/attendingListStyle.css" VBox.vgrow="ALWAYS">

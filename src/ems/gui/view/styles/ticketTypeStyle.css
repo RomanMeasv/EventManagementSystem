@@ -6,7 +6,7 @@
 
 .text-flow {
     -fx-background-color: transparent;
-    -fx-padding: 2px;
+    -fx-padding: 5px 0 0 0;
 }
 
 .list-view-header {

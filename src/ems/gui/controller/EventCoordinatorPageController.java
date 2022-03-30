@@ -59,7 +59,6 @@ public class EventCoordinatorPageController implements Initializable {
     public TextField txfCustomerName, txfCustomerEmail,
             txfCustomerPhoneNumber;
 
-    public TextArea txaCustomerDescription;
     public Button btnApplyCustomer, btnCancelCustomer;
 
     public TextArea txaCustomerNotes;
@@ -126,6 +125,7 @@ public class EventCoordinatorPageController implements Initializable {
             btnApplyEvent.setDisable(true);
             btnCancelEvent.setDisable(true);
             clearEventDetails();
+            tbvEventTabEvents.getSelectionModel().clearSelection();
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
@@ -218,12 +218,12 @@ public class EventCoordinatorPageController implements Initializable {
         Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
         if (e == null) { //a new event was about to be created
             clearEventDetails();
+            btnApplyEvent.setDisable(true);
+            btnCancelEvent.setDisable(true);
         } else //an existing event was about to be edited
         {
             fillEventDetails(e);
         }
-        btnApplyEvent.setDisable(true);
-        btnCancelEvent.setDisable(true);
     }
 
     public void handleSelectEvent() {
@@ -278,13 +278,10 @@ public class EventCoordinatorPageController implements Initializable {
     public void handleSelectCustomer(MouseEvent mouseEvent) {
         Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
         if (c != null) {
-            txfCustomerName.setText(c.getName());
-            txfCustomerEmail.setText(c.getEmail());
-            txfCustomerPhoneNumber.setText(c.getPhoneNumber());
-            txaCustomerNotes.setText(c.getNotes());
-            btnApplyCustomer.setDisable(false);
-            btnCancelCustomer.setDisable(false);
+            fillCustomerDetails(c);
         }
+        btnApplyCustomer.setDisable(false);
+        btnCancelCustomer.setDisable(false);
     }
 
     public void handleNewCustomer(ActionEvent event) {
@@ -292,7 +289,6 @@ public class EventCoordinatorPageController implements Initializable {
         btnCancelCustomer.setDisable(false);
         tbvCustomerTabCustomers.getSelectionModel().clearSelection();
         clearCustomerDetails();
-
     }
 
     public void handleRemoveCustomer(ActionEvent event) {
@@ -304,6 +300,7 @@ public class EventCoordinatorPageController implements Initializable {
             btnApplyCustomer.setDisable(true);
             btnCancelCustomer.setDisable(true);
             clearCustomerDetails();
+            tbvCustomerTabCustomers.getSelectionModel().clearSelection();
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
@@ -312,7 +309,7 @@ public class EventCoordinatorPageController implements Initializable {
     public void handleApplyCustomer(ActionEvent event) {
         Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
         if (txfCustomerName.getText().isEmpty() || txfCustomerEmail.getText().isEmpty() || txfCustomerPhoneNumber.getText().isEmpty()) {
-            PopUp.showError("Please fill in all fields");
+            PopUp.showError("Please fill in all the mandatory fields! (*)");
             return;
         }
 
@@ -343,11 +340,11 @@ public class EventCoordinatorPageController implements Initializable {
         Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
         if (c == null) {
             clearCustomerDetails();
+            btnApplyCustomer.setDisable(true);
+            btnCancelCustomer.setDisable(true);
         } else {
             fillCustomerDetails(c);
         }
-        btnApplyCustomer.setDisable(true);
-        btnCancelCustomer.setDisable(true);
     }
 
 

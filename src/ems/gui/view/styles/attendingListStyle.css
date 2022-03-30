@@ -23,3 +23,7 @@
     -fx-background-radius: 0 0 10px 10px;
     -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
 }
+
+.text-field:focused {
+    -fx-background-color: #F7B449;
+}

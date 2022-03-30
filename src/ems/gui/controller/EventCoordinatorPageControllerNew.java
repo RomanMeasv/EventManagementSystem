@@ -54,8 +54,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
 
     /* CUSTOMERS TAB */
     /* TABLE VIEW */
-    public TableView<Customer> tbvCustomers;
-    public TableColumn<Customer, String> colCustomers;
+    public TableView<Customer> tbvCustomerTabCustomers;
+    public TableColumn<Customer, String> colCustomerTabCustomers;
     public TextField txfCustomerName, txfCustomerEmail,
             txfCustomerPhoneNumber;
     public TextArea txaCustomerDescription;
@@ -84,8 +84,8 @@ public class EventCoordinatorPageControllerNew implements Initializable {
         tbvEventTabEvents.setItems(eventModel.getObservableEvents());
 
         /* SET UP CUSTOMERS TAB */
-        colCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tbvCustomers.setItems(customerModel.getObservableCustomers());
+        colCustomerTabCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbvCustomerTabCustomers.setItems(customerModel.getObservableCustomers());
 
         /* Disable cancel/apply buttons */
         btnApplyEvent.setDisable(true);
@@ -265,7 +265,7 @@ public class EventCoordinatorPageControllerNew implements Initializable {
     }
 
     public void handleSelectCustomer(MouseEvent mouseEvent) {
-        Customer c = tbvCustomers.getSelectionModel().getSelectedItem();
+        Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
         if (c != null) {
             txfCustomerName.setText(c.getName());
             txfCustomerEmail.setText(c.getEmail());

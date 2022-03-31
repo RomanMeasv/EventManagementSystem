@@ -60,4 +60,9 @@ public class Ticket {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    @Override
+    public String toString() {
+        return uuid + "(" + event.getName() + ", " + customer.getName() + ")";
+    }
 }

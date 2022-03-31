@@ -3,6 +3,7 @@ package ems.gui.controller;
 import ems.be.Customer;
 import ems.gui.model.CustomerModel;
 import ems.gui.view.util.PopUp;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -77,17 +78,18 @@ public class EventCoordinatorPageController implements Initializable {
         }
 
         /* SET UP OVERVIEW TAB */
-        colOverviewEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
+        //set col overview events cell value factory to simple string property
+        colOverviewEvents.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().toString()));
         tbvOverviewEvents.setItems(eventModel.getObservableEvents());
-        colOverviewCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colOverviewCustomers.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().toString()));
         tbvOverviewCustomers.setItems(customerModel.getObservableCustomers());
 
         /* SET UP EVENTS TAB */
-        colEventTabEvents.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colEventTabEvents.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().toString()));
         tbvEventTabEvents.setItems(eventModel.getObservableEvents());
 
         /* SET UP CUSTOMERS TAB */
-        colCustomerTabCustomers.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colCustomerTabCustomers.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().toString()));
         tbvCustomerTabCustomers.setItems(customerModel.getObservableCustomers());
 
         /* Disable cancel/apply buttons */

@@ -106,4 +106,26 @@ public class CustomerDAO {
         }
         return filtered;
     }
+
+    //get customer by id
+    public Customer getCustomerById(int id) throws Exception {
+        Customer customer = null;
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlCommandGetCustomerById = "SELECT * FROM Customers WHERE id = ?;";
+            PreparedStatement pstmtGetCustomerById = con.prepareStatement(sqlCommandGetCustomerById);
+            pstmtGetCustomerById.setInt(1, id);
+            ResultSet rs = pstmtGetCustomerById.executeQuery();
+
+            while (rs.next()) {
+                customer = new Customer(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("notes")
+                );
+            }
+        }
+        return customer;
+    }
 }

@@ -14,8 +14,7 @@ public class EventModel {
 
     public EventModel() throws Exception {
         eventLogic = new EventLogic();
-        List<Event> list = eventLogic.readAllEvents();
-        observableEvents = FXCollections.observableList(list);
+        observableEvents = FXCollections.observableList(eventLogic.readAllEvents());
     }
 
 

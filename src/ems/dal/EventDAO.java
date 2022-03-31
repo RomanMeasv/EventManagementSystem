@@ -201,4 +201,32 @@ public class EventDAO {
         }
         return ticketTypes;
     }
+
+    //get event by id
+    public Event getEventById(int id) throws Exception {
+        Event e = null;
+
+        try (Connection con = ConnectionManager.getConnection()) {
+
+            String sqlCommandSelect = "SELECT * FROM Events WHERE id=?;";
+            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
+            pstmtSelect.setInt(1, id);
+            ResultSet rs = pstmtSelect.executeQuery();
+
+            if (rs.next()) {
+                e = new Event(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("notes"),
+                        rs.getTimestamp("start").toLocalDateTime(),
+                        rs.getTimestamp("end").toLocalDateTime(),
+                        rs.getString("location"),
+                        rs.getString("locationGuidance"),
+                        readTicketTypes(rs.getInt("id"))
+                );
+            }
+        }
+        return e;
+    }
 }

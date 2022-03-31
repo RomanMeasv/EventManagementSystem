@@ -1,9 +1,7 @@
 package ems.dal;
 
-import ems.be.Customer;
-import ems.be.Event;
-import ems.be.EventCoordinator;
-import ems.be.User;
+import ems.be.*;
+
 import java.util.List;
 
 public class DAFacade implements IDataAccess {
@@ -114,5 +112,10 @@ public class DAFacade implements IDataAccess {
     @Override
     public List<Customer> filterCustomers(String query) throws Exception {
         return customerDAO.filterCustomers(query);
+    }
+
+    @Override
+    public List<Ticket> readAllTickets() throws Exception {
+        return ticketDAO.readAllTickets();
     }
 }

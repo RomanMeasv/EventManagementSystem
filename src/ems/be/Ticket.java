@@ -17,9 +17,9 @@ public class Ticket {
         this.customer = customer;
     }
 
-    public Ticket(UUID uuid, Event event, String ticketType, Customer customer) {
+    public Ticket(UUID uuid, boolean isValid, Event event, String ticketType, Customer customer) {
         this.uuid = uuid;
-        this.isValid = true;
+        this.isValid = isValid;
         this.event = event;
         this.ticketType = ticketType;
         this.customer = customer;

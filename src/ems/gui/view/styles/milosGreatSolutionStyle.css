@@ -1,0 +1,27 @@
+/* TEXT FIELD */
+.text-field {
+    -fx-background-color: #FFF;
+    -fx-background-radius: 10px 0 0 10px;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
+}
+
+.text-field:focused {
+    -fx-background-color : #F7B449;
+}
+
+/* COMBO BOX */
+.combo-box-base {
+    -fx-background-color: #F7B449;
+    -fx-background-radius: 0 10px 10px 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.combo-box-base:showing {
+    -fx-background-radius: 0 10px 0 0;
+}
+
+/* NUMBER OF TICKETS */
+.tickets-number {
+    -fx-background-radius: 10px;
+}

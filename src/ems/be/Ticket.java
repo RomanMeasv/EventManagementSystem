@@ -3,11 +3,11 @@ package ems.be;
 import java.util.UUID;
 
 public class Ticket {
-    UUID uuid;
-    boolean isValid;
-    Event event;
-    String ticketType;
-    Customer customer;
+    private UUID uuid;
+    private boolean isValid;
+    private Event event;
+    private String ticketType;
+    private Customer customer;
 
     public Ticket(Event event, String ticketType, Customer customer) {
         this.uuid = UUID.randomUUID();
@@ -63,6 +63,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return uuid + "(" + event.getName() + ", " + customer.getName() + ")";
+        return "..." + uuid.toString().substring(uuid.toString().length()-4) + " (" + event.getName() + ", " + customer.getName() + ")";
     }
 }

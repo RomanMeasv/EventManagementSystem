@@ -3,6 +3,7 @@ package ems.gui.controller;
 import ems.be.Customer;
 import ems.be.Ticket;
 import ems.gui.model.CustomerModel;
+import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -93,12 +94,14 @@ public class EventCoordinatorPageController implements Initializable {
     /* MODELS */
     private CustomerModel customerModel;
     private EventModel eventModel;
+    private TicketModel ticketModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             customerModel = new CustomerModel();
             eventModel = new EventModel();
+            ticketModel = new TicketModel();
         } catch (Exception e) {
             PopUp.showError(e.getMessage()); //error is custom handled within the logic
         }
@@ -118,7 +121,9 @@ public class EventCoordinatorPageController implements Initializable {
         colCustomerTabCustomers.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().toString()));
         tbvCustomerTabCustomers.setItems(customerModel.getObservableCustomers());
 
-        /* SET UP TICETS TAB */
+        /* SET UP TICKETS TAB */
+        colTicketTabTickets.setCellValueFactory(t -> new SimpleStringProperty(t.getValue().toString()));
+        tbvTicketTabTickets.setItems(ticketModel.getObservableTickets());
 
 
         /* Disable cancel/apply buttons */

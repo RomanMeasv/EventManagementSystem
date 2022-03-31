@@ -389,9 +389,12 @@
                                     </HBox>
                                     <HBox spacing="10.0" VBox.vgrow="NEVER">
                                        <children>
-                                          <TextField fx:id="txfNoTickets" maxWidth="300.0" minWidth="-Infinity" prefWidth="200.0" promptText="no. tickets" styleClass="tickets-number" HBox.hgrow="SOMETIMES" />
+                                          <TextField fx:id="txfNoTickets" maxWidth="200.0" minWidth="-Infinity" prefWidth="50.0" promptText="no. tickets" styleClass="tickets-number" HBox.hgrow="SOMETIMES" />
                                           <Label fx:id="lblTicketUUID" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="168.0" text="UUID:" HBox.hgrow="SOMETIMES" />
-                                          <CheckBox fx:id="chbTicketValidation" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="valid" HBox.hgrow="NEVER" />
+                                          <CheckBox fx:id="chbTicketValidation" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="valid" HBox.hgrow="NEVER">
+                                             <padding>
+                                                <Insets right="4.0" />
+                                             </padding></CheckBox>
                                        </children>
                                     </HBox>
                                  </children>

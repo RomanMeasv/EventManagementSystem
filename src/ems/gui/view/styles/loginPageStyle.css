@@ -1,38 +1,47 @@
-.root {
-    -fx-background-color: #DDE9F8;
+.background-holder {
+    -fx-opacity: 0.75;
 }
 
-.login-label {
-    -fx-font-size: 20pt;
+.background {
+    -fx-background-image: url("../resources/images/event.jpg");
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
 }
 
-.login-form-field {
+.header {
+    -fx-font-size: 20;
+}
+
+.form {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 2.0, 2.0);
+}
+
+.form:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+}
+
+.field {
     -fx-border-width: 0 0 2px 0;
-    -fx-border-color: #7B61FF;
-    -fx-background-color: -fx-control-inner-background;
-    -fx-font-size: 10pt;
+    -fx-border-color: rgba(123, 97, 255, 0.8);
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #000;
 }
 
-.login-form-field:focused {
-    -fx-border-color: #5847AD;
-    -fx-border-width: 0 0 2px 0;
+.field:hover, .field:focused {
+    -fx-border-color: #7b61ff;
 }
 
-.login-button {
+.button {
     -fx-background-color: #8293E3;
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 0;
-    -fx-font-size: 11pt;
-    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-insets: 0 0 -1 0;
 }
 
-.login-button:hover {
+.button:hover, .button:focused {
     -fx-background-color: #5847AD;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.5, 0.0, 0.0);
-}
-
-.wrong-credentials {
-    -fx-font-size: 10pt;
-    -fx-text-fill: #ff0000;
-    visibility: hidden;
 }

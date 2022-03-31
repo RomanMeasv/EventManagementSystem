@@ -7,6 +7,7 @@ import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import ems.be.Event;
@@ -20,6 +21,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
@@ -427,11 +429,70 @@ public class EventCoordinatorPageController implements Initializable {
     //endregion
 
     //region TICKET TAB
+    public void handleSelectTicket(MouseEvent mouseEvent) {
+        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
+        if(t != null){
+            fillTicketDetails(t);
+        }
+        btnApplyTicket.setDisable(false);
+        btnCancelTicket.setDisable(false);
+    }
+
+    private void fillTicketDetails(Ticket t) {
+        //setting up textfields
+        /*txfTicketTabFilterEvents.setText(t.getEvent().getName());
+        txfTicketTabFilterTicketType.setText(t.getTicketType());
+        txfTicketTabFilterCustomers.setText(t.getCustomer().getName());*/
+
+        //fill up ComboBoxes
+        cmbEvents.setItems(FXCollections.observableArrayList(t.getEvent()));
+        cmbTicketTypes.setItems(FXCollections.observableArrayList(t.getEvent().getTicketTypes()));
+        cmbCustomers.setItems(FXCollections.observableArrayList(t.getCustomer()));
+
+        cmbEvents.getSelectionModel().select(0);
+        cmbTicketTypes.getSelectionModel().select(t.getEvent().getTicketTypes().indexOf(t.getTicketType()));
+        cmbCustomers.getSelectionModel().select(0);
+    }
+
     public void handleFilterTickets(KeyEvent keyEvent) {
 
     }
 
     public void handleNewTicket(ActionEvent actionEvent) {
+        //enable buttons
+        btnApplyTicket.setDisable(false);
+        btnCancelTicket.setDisable(false);
+
+        //unselect table view selection
+        tbvTicketTabTickets.getSelectionModel().clearSelection();
+
+        clearTicketDetails();
+
+        populateBoxes();
+    }
+
+    private void populateBoxes() {
+        try {
+            eventModel.filterEvents("");
+            customerModel.filterCustomers("");
+        } catch (Exception e){
+            PopUp.showError(e.getMessage());
+            return;
+        }
+        
+        cmbEvents.setItems(eventModel.getObservableEvents());
+        cmbTicketTypes.setItems(FXCollections.observableArrayList(new ArrayList<>()));
+        cmbCustomers.setItems(customerModel.getObservableCustomers());
+
+        cmbEvents.getSelectionModel().select(0);
+        cmbCustomers.getSelectionModel().select(0);
+    }
+
+    private void clearTicketDetails() {
+        //clear filters
+        txfTicketTabFilterEvents.clear();
+        txfTicketTabFilterTicketType.clear();
+        txfTicketTabFilterCustomers.clear();
     }
 
     public void handleRemoveTicket(ActionEvent actionEvent) {

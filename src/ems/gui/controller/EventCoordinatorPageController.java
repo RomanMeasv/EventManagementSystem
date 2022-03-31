@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
-        /* OVERVIEW TAB */
+    /* OVERVIEW TAB */
     /* EVENTS */
     public TableView<Event> tbvOverviewEvents;
     public TableColumn<Event, String> colOverviewEvents;
@@ -35,12 +35,12 @@ public class EventCoordinatorPageController implements Initializable {
     public TextField txfFilterOverviewCustomers;
 
     /* TICKETS */
-    public TableView tbvOverviewTickets;
-    public TableColumn colOverviewTickets;
+    public TableView<Ticket> tbvOverviewTickets;
+    public TableColumn<Ticket, String> colOverviewTickets;
     public TextField txfFilterOverviewTickets;
 
 
-        /* EVENTS TAB */
+    /* EVENTS TAB */
     /* TABLE VIEW */
     public TableView<Event> tbvEventTabEvents;
     public TableColumn<Event, String> colEventTabEvents;
@@ -56,7 +56,7 @@ public class EventCoordinatorPageController implements Initializable {
     public Button btnApplyEvent, btnCancelEvent;
 
 
-        /* CUSTOMERS TAB */
+    /* CUSTOMERS TAB */
     /* TABLE VIEW */
     public TableView<Customer> tbvCustomerTabCustomers;
     public TableColumn<Customer, String> colCustomerTabCustomers;
@@ -71,7 +71,7 @@ public class EventCoordinatorPageController implements Initializable {
     public Button btnApplyCustomer, btnCancelCustomer;
 
 
-        /* TICKETS TAB */
+    /* TICKETS TAB */
     /* TABLE VIEW */
     public TableView<Ticket> tbvTicketTabTickets;
     public TableColumn<Ticket, String> colTicketTabTickets;
@@ -112,6 +112,8 @@ public class EventCoordinatorPageController implements Initializable {
         tbvOverviewEvents.setItems(eventModel.getObservableEvents());
         colOverviewCustomers.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().toString()));
         tbvOverviewCustomers.setItems(customerModel.getObservableCustomers());
+        colOverviewTickets.setCellValueFactory(t -> new SimpleStringProperty(t.getValue().toString()));
+        tbvOverviewTickets.setItems(ticketModel.getObservableTickets());
 
         /* SET UP EVENTS TAB */
         colEventTabEvents.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().toString()));
@@ -232,6 +234,15 @@ public class EventCoordinatorPageController implements Initializable {
             } catch (Exception ex) {
                 PopUp.showError(ex.getMessage());
             }
+        }
+
+        //refresh ticket data
+        try{
+            ticketModel.readAllTickets();
+            tbvOverviewTickets.setItems(ticketModel.getObservableTickets());
+            tbvTicketTabTickets.setItems(ticketModel.getObservableTickets());
+        } catch (Exception ex){
+            PopUp.showError(ex.getMessage());
         }
     }
 
@@ -375,6 +386,15 @@ public class EventCoordinatorPageController implements Initializable {
             } catch (Exception e) {
                 PopUp.showError(e.getMessage());
             }
+        }
+
+        //refresh tickets data
+        try{
+            ticketModel.readAllTickets();
+            tbvOverviewTickets.setItems(ticketModel.getObservableTickets());
+            tbvTicketTabTickets.setItems(ticketModel.getObservableTickets());
+        } catch (Exception ex){
+            PopUp.showError(ex.getMessage());
         }
     }
 

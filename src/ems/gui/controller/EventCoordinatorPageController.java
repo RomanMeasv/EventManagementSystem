@@ -1,6 +1,7 @@
 package ems.gui.controller;
 
 import ems.be.Customer;
+import ems.be.Ticket;
 import ems.gui.model.CustomerModel;
 import ems.gui.view.util.PopUp;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
-    /* OVERVIEW TAB */
+        /* OVERVIEW TAB */
     /* EVENTS */
     public TableView<Event> tbvOverviewEvents;
     public TableColumn<Event, String> colOverviewEvents;
@@ -37,7 +38,8 @@ public class EventCoordinatorPageController implements Initializable {
     public TableColumn colOverviewTickets;
     public TextField txfFilterOverviewTickets;
 
-    /* EVENTS TAB */
+
+        /* EVENTS TAB */
     /* TABLE VIEW */
     public TableView<Event> tbvEventTabEvents;
     public TableColumn<Event, String> colEventTabEvents;
@@ -53,16 +55,38 @@ public class EventCoordinatorPageController implements Initializable {
     public Button btnApplyEvent, btnCancelEvent;
 
 
-    /* CUSTOMERS TAB */
+        /* CUSTOMERS TAB */
     /* TABLE VIEW */
     public TableView<Customer> tbvCustomerTabCustomers;
     public TableColumn<Customer, String> colCustomerTabCustomers;
+    public TextField txfFilterCustomers;
+
+    /* "DIALOG PANE" */
     public TextField txfCustomerName, txfCustomerEmail,
             txfCustomerPhoneNumber;
-
+    public TextArea txaCustomerNotes;
+    public ListView<Event> ltvCustomerAttendingEvents;
+    public TextField txfFilterAttendingEvents;
     public Button btnApplyCustomer, btnCancelCustomer;
 
-    public TextArea txaCustomerNotes;
+
+        /* TICKETS TAB */
+    /* TABLE VIEW */
+    public TableView<Ticket> tbvTicketTabTickets;
+    public TableColumn<Ticket, String> colTicketTabTickets;
+    public TextField txfFilterTickets;
+
+    /* "DIALOG PANE" */
+    public TextField txfTicketTabFilterEvents,
+            txfTicketTabFilterTicketType,
+            txfTicketTabFilterCustomers;
+    public ComboBox<Ticket> cmbEvents, cmbTicketTypes, cmbCustomers;
+    public TextField txfNoTickets;
+    public Label lblTicketUUID;
+    public CheckBox chbTicketValidation;
+    public Button btnCancelTicket;
+    public Button btnApplyTicket;
+
 
     /* MODELS */
     private CustomerModel customerModel;
@@ -116,6 +140,9 @@ public class EventCoordinatorPageController implements Initializable {
         tbvEventTabEvents.getSelectionModel().clearSelection();
 
         clearEventDetails();
+    }
+
+    public void handleFilterTicketTypes(KeyEvent keyEvent) {
     }
 
     public void handleRemoveEvent() {
@@ -308,6 +335,9 @@ public class EventCoordinatorPageController implements Initializable {
         }
     }
 
+    public void handleFilterAttendingEvents(KeyEvent keyEvent) {
+    }
+
     public void handleApplyCustomer(ActionEvent event) {
         Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
         if (txfCustomerName.getText().isEmpty() || txfCustomerEmail.getText().isEmpty() || txfCustomerPhoneNumber.getText().isEmpty()) {
@@ -371,18 +401,25 @@ public class EventCoordinatorPageController implements Initializable {
 
     }
 
-    public void handleCreateTicket(MouseEvent mouseEvent) {
-
+    public void handleNewTicket(ActionEvent actionEvent) {
     }
 
-    public void handleDeleteTicket(MouseEvent mouseEvent) {
-
+    public void handleRemoveTicket(ActionEvent actionEvent) {
     }
 
-    public void handleUpdateTicket(MouseEvent mouseEvent) {
-
+    public void handleFilterEventComboBox(KeyEvent keyEvent) {
     }
 
+    public void handleFilterTicketTypeComboBox(KeyEvent keyEvent) {
+    }
 
+    public void handleFilterCustomerComboBox(KeyEvent keyEvent) {
+    }
+
+    public void handleCancelTicket(ActionEvent actionEvent) {
+    }
+
+    public void handleApplyTicket(ActionEvent actionEvent) {
+    }
     //endregion
 }

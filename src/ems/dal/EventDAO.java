@@ -125,7 +125,6 @@ public class EventDAO {
                                         IF NOT EXISTS(SELECT * FROM TicketTypes WHERE eventId = ? AND [type] = ?) 
                                         BEGIN 
                                             INSERT INTO TicketTypes (eventId, type) VALUES (?, ?) 
-                                            WHERE NOT EXISTS (SELECT * FROM TicketTypes WHERE eventId = ? AND type = ?) 
                                         END""";
             PreparedStatement pstmtInsert = con.prepareStatement(sqlCommandInsert);
             for (String type : e.getTicketTypes()) {
@@ -133,8 +132,6 @@ public class EventDAO {
                 pstmtInsert.setString(2, type);
                 pstmtInsert.setInt(3, e.getId());
                 pstmtInsert.setString(4, type);
-                pstmtInsert.setInt(5, e.getId());
-                pstmtInsert.setString(6, type);
                 pstmtInsert.addBatch();
             }
             pstmtInsert.executeUpdate();

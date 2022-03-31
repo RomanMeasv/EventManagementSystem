@@ -1,87 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 
-<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.LoginPageController">
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.LoginPageController">
    <children>
-      <AnchorPane id="login-form-holder" accessibleText=" dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 8, 0, 4, 4)" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20;">
+      <AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="background-holder" StackPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
-               <children>
-                  <HBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0">
-                     <children>
-                        <Label styleClass="login-label" text="EMS Login">
-                           <font>
-                              <Font name="Roboto" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <VBox spacing="12.0">
-                     <children>
-                        <TextField fx:id="txfUsername" onAction="#handleLogin" promptText="username" styleClass="login-form-field">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Roboto" size="12.0" />
-                           </font>
-                        </TextField>
-                        <PasswordField fx:id="psfPassword" onAction="#handleLogin" promptText="password" styleClass="login-form-field">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </PasswordField>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </VBox>
-                  <HBox>
-                     <children>
-                        <HBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="btnLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogin" prefHeight="30.0" prefWidth="80.0" styleClass="login-button" text="Login">
-                                 <font>
-                                    <Font name="Roboto" size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
+            <Pane styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-         <effect>
-            <DropShadow blurType="ONE_PASS_BOX" height="17.0" offsetX="4.0" offsetY="4.0" radius="8.0" width="17.0">
-               <color>
-                  <Color opacity="0.25" />
-               </color>
-            </DropShadow>
-         </effect>
+      </AnchorPane>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" styleClass="form" StackPane.alignment="CENTER">
+         <children>
+            <Label layoutX="64.0" layoutY="20.0" styleClass="header" text="Event Management" />
+            <TextField fx:id="txfUsername" alignment="TOP_LEFT" layoutX="51.0" layoutY="128.0" onAction="#handleLogin" promptText="username" styleClass="field" />
+            <PasswordField fx:id="psfPassword" layoutX="51.0" layoutY="167.0" onAction="#handleLogin" promptText="password" styleClass="field" />
+            <Button layoutX="149.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogin" prefWidth="100.0" text="Login" />
+         </children>
       </AnchorPane>
    </children>
    <stylesheets>
       <URL value="@styles/loginPageStyle.css" />
       <URL value="@styles/sceneStyle.css" />
    </stylesheets>
-</VBox>
+</StackPane>

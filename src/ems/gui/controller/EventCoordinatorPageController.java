@@ -80,7 +80,9 @@ public class EventCoordinatorPageController implements Initializable {
     public TextField txfTicketTabFilterEvents,
             txfTicketTabFilterTicketType,
             txfTicketTabFilterCustomers;
-    public ComboBox<Ticket> cmbEvents, cmbTicketTypes, cmbCustomers;
+    public ComboBox<Event> cmbEvents;
+    public ComboBox<String> cmbTicketTypes;
+    public ComboBox<Customer> cmbCustomers;
     public TextField txfNoTickets;
     public Label lblTicketUUID;
     public CheckBox chbTicketValidation;
@@ -115,6 +117,9 @@ public class EventCoordinatorPageController implements Initializable {
         /* SET UP CUSTOMERS TAB */
         colCustomerTabCustomers.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().toString()));
         tbvCustomerTabCustomers.setItems(customerModel.getObservableCustomers());
+
+        /* SET UP TICETS TAB */
+
 
         /* Disable cancel/apply buttons */
         btnApplyEvent.setDisable(true);

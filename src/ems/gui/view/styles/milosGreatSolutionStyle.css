@@ -25,3 +25,25 @@
 .tickets-number {
     -fx-background-radius: 10px;
 }
+
+.label {
+    -fx-background-color: #FFF;
+    -fx-background-radius: 10px;
+    -fx-label-padding: 0 0 0 10px;
+}
+
+.check-box .box {
+    -fx-background-color: #FFF;
+    -fx-background-radius: 0;
+
+}
+
+.check-box:selected .box {
+    -fx-background-color: #F7B449;
+    -fx-background-radius: 10px 0 0 0;
+
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #FFF;
+}

@@ -43,4 +43,8 @@ public class CustomerModel {
         List<Customer> filtered = customerLogic.filterCustomers(query);
         observableCustomers.setAll(filtered);
     }
+
+    public List<Customer> getFilteredCustomerList(String query) throws Exception {
+        return customerLogic.filterCustomers(query);
+    }
 }

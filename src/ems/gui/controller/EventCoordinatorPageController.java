@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
@@ -135,6 +136,11 @@ public class EventCoordinatorPageController implements Initializable {
         btnCancelEvent.setDisable(true);
         btnApplyCustomer.setDisable(true);
         btnCancelCustomer.setDisable(true);
+
+        /*Fill comboBoxes with data*/
+        cmbEvents.setItems((ObservableList<Event>) eventModel.getObservableEvents());
+        cmbCustomers.setItems((ObservableList<Customer>) customerModel.getObservableCustomers());
+
     }
 
     // region EVENTS TAB
@@ -499,12 +505,47 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleFilterEventComboBox(KeyEvent keyEvent) {
+        String query = txfTicketTabFilterEvents.getText();
+        try {
+            if(txfTicketTabFilterEvents.getText().isEmpty()){
+                cmbEvents.hide();
+            }
+            else{
+                List<Event> filtered = eventModel.getListOfFiteredEvents(query);
+                cmbEvents.setItems(FXCollections.observableArrayList(filtered));
+                cmbEvents.hide();
+                cmbEvents.setVisibleRowCount(filtered.size());
+                cmbEvents.show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void handleFilterTicketTypeComboBox(KeyEvent keyEvent) {
+
     }
 
     public void handleFilterCustomerComboBox(KeyEvent keyEvent) {
+        String query = txfTicketTabFilterCustomers.getText();
+        try {
+            if(txfTicketTabFilterCustomers.getText().isEmpty()){
+                cmbCustomers.hide();
+            }
+            else{
+                List<Customer> filtered = customerModel.getFilteredCustomerList(query);
+                cmbCustomers.setItems(FXCollections.observableArrayList(filtered));
+                cmbCustomers.hide();
+                cmbCustomers.setVisibleRowCount(filtered.size());
+                cmbCustomers.show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleCancelTicket(ActionEvent actionEvent) {

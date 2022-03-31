@@ -43,4 +43,9 @@ public class EventModel {
         List<Event> filtered = eventLogic.filterEvents(query);
         observableEvents.setAll(filtered);
     }
+
+    public List<Event> getListOfFiteredEvents(String query) throws Exception {
+        return eventLogic.filterEvents(query);
+    }
+
 }

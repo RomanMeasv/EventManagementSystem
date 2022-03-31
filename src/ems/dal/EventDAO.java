@@ -120,21 +120,30 @@ public class EventDAO {
 
             pstmtUpdate.executeUpdate();
 
-            //delete all TicketTypes tuples related to the event
-            String sqlCommandDeleteTicketTypes = "DELETE FROM TicketTypes WHERE eventId=?;";
-            PreparedStatement pstmtDeleteTicketTypes = con.prepareStatement(sqlCommandDeleteTicketTypes);
-            pstmtDeleteTicketTypes.setInt(1, e.getId());
-            pstmtDeleteTicketTypes.executeUpdate();
-
-            //recreate updated TicketTypes tuples
-            String sqlCommandInsertTicketTypes = "INSERT INTO TicketTypes(eventId, [type]) VALUES (?, ?);";
-            PreparedStatement pstmtInsertTicketTypes = con.prepareStatement(sqlCommandInsertTicketTypes);
+            //insert ticket types that are not yet present
+            String sqlCommandInsert = """
+                                        IF NOT EXISTS(SELECT * FROM TicketTypes WHERE eventId = ? AND [type] = ?) 
+                                        BEGIN 
+                                            INSERT INTO TicketTypes (eventId, type) VALUES (?, ?) 
+                                            WHERE NOT EXISTS (SELECT * FROM TicketTypes WHERE eventId = ? AND type = ?) 
+                                        END""";
+            PreparedStatement pstmtInsert = con.prepareStatement(sqlCommandInsert);
             for (String type : e.getTicketTypes()) {
-                pstmtInsertTicketTypes.setInt(1, e.getId());
-                pstmtInsertTicketTypes.setString(2, type);
-                pstmtInsertTicketTypes.addBatch();
+                pstmtInsert.setInt(1, e.getId());
+                pstmtInsert.setString(2, type);
+                pstmtInsert.setInt(3, e.getId());
+                pstmtInsert.setString(4, type);
+                pstmtInsert.setInt(5, e.getId());
+                pstmtInsert.setString(6, type);
+                pstmtInsert.addBatch();
             }
-            pstmtInsertTicketTypes.executeBatch();
+            pstmtInsert.executeUpdate();
+
+            //remove old ticket type tuples
+            String sqlCommandDelete = "DELETE FROM TicketTypes WHERE eventId=? AND type NOT IN (?)";
+            PreparedStatement pstmtDelete = con.prepareStatement(sqlCommandDelete);
+            pstmtDelete.setInt(1, e.getId());
+            pstmtDelete.setString(2, String.join(",", e.getTicketTypes()));
 
             con.commit();
             con.setAutoCommit(true);

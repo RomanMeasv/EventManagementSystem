@@ -250,7 +250,7 @@ public class EventCoordinatorPageController implements Initializable {
         refreshTickets();
     }
 
-    private void refreshTickets() //DOESNT WORK
+    private void refreshTickets()
     {
         try{
             ticketModel.clearFilter();

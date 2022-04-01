@@ -494,9 +494,6 @@ public class EventCoordinatorPageController implements Initializable {
         cmbEvents.setItems(eventModel.getObservableEvents());
         cmbTicketTypes.setItems(FXCollections.observableArrayList(new ArrayList<>()));
         cmbCustomers.setItems(customerModel.getObservableCustomers());
-
-        cmbEvents.getSelectionModel().select(0);
-        cmbCustomers.getSelectionModel().select(0);
     }
 
     private void clearTicketDetails() {
@@ -551,6 +548,11 @@ public class EventCoordinatorPageController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void handleTicketEventSelected()
+    {
+        cmbTicketTypes.setItems(FXCollections.observableArrayList(cmbEvents.getSelectionModel().getSelectedItem().getTicketTypes()));
     }
 
     public void handleCancelTicket(ActionEvent actionEvent) {

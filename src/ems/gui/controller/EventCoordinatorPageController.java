@@ -139,10 +139,10 @@ public class EventCoordinatorPageController implements Initializable {
         btnApplyTicket.setDisable(true);
         btnCancelTicket.setDisable(true);
 
-        /*Fill comboBoxes with data*/
-        cmbEvents.setItems((ObservableList<Event>) eventModel.getObservableEvents());
-        cmbCustomers.setItems((ObservableList<Customer>) customerModel.getObservableCustomers());
-
+        //hide ticket creation/edit specific fields
+        lblTicketUUID.setVisible(false);
+        txfNoTickets.setVisible(false);
+        chbTicketValidation.setVisible(false);
     }
 
     // region EVENTS TAB
@@ -244,6 +244,7 @@ public class EventCoordinatorPageController implements Initializable {
 
             } catch (Exception ex) {
                 PopUp.showError(ex.getMessage());
+                ex.printStackTrace();
             }
         }
         refreshTickets();

@@ -65,4 +65,22 @@ public class Ticket {
     public String toString() {
         return "..." + uuid.toString().substring(uuid.toString().length()-4) + " (" + event.getName() + ", " + customer.getName() + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ticket other = (Ticket) obj;
+        if (!this.uuid.equals(other.uuid)) {
+            return false;
+        }
+        return true;
+    }
 }

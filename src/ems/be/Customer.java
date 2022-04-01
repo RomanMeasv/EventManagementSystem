@@ -67,4 +67,14 @@ public class Customer{
     public String toString() {
         return name + " (" + email + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        return id == customer.id;
+    }
 }

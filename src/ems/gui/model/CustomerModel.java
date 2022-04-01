@@ -29,6 +29,10 @@ public class CustomerModel {
         }
     }
 
+    public void clearFilter() throws Exception {
+        observableCustomers = FXCollections.observableList(customerLogic.readAllCustomers());
+    }
+
     public void deleteCustomer(Customer c) throws DatabaseException {
         customerLogic.deleteCustomer(c);
         observableCustomers.remove(c);

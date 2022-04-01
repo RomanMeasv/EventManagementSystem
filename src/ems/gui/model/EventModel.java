@@ -48,4 +48,8 @@ public class EventModel {
         return eventLogic.filterEvents(query);
     }
 
+    public void clearFilter() throws Exception {
+        observableEvents = FXCollections.observableList(eventLogic.readAllEvents());
+    }
+
 }

@@ -239,6 +239,9 @@ public class EventCoordinatorPageController implements Initializable {
                 e.setLocationGuidance(txaEventLocationGuidance.getText());
                 e.setTicketTypes(ltvEventTicketTypes.getItems());
                 eventModel.updateEvent(e);
+                ticketModel.clearFilter();
+                ticketModel.getObservableTickets().stream().filter(t -> t.getEvent().equals(e)).forEach(t -> t.setEvent(e));
+
             } catch (Exception ex) {
                 PopUp.showError(ex.getMessage());
             }
@@ -391,6 +394,8 @@ public class EventCoordinatorPageController implements Initializable {
                 c.setPhoneNumber(txfCustomerPhoneNumber.getText());
                 c.setNotes(txaCustomerNotes.getText());
                 customerModel.updateCustomer(c);
+                ticketModel.clearFilter();
+                ticketModel.getObservableTickets().stream().filter(t -> t.getCustomer().equals(c)).forEach(t -> t.setCustomer(c));
             } catch (Exception e) {
                 PopUp.showError(e.getMessage());
             }
@@ -479,8 +484,8 @@ public class EventCoordinatorPageController implements Initializable {
 
     private void populateBoxes() {
         try {
-            eventModel.filterEvents("");
-            customerModel.filterCustomers("");
+            eventModel.clearFilter();
+            customerModel.clearFilter();
         } catch (Exception e){
             PopUp.showError(e.getMessage());
             return;

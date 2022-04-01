@@ -18,10 +18,6 @@ public class TicketModel {
         return observableTickets;
     }
 
-    public void readAllTickets() throws Exception{
-        observableTickets = FXCollections.observableList(ticketLogic.readAllTickets());
-    }
-
     public void clearFilter() throws Exception {
         observableTickets = FXCollections.observableList(ticketLogic.readAllTickets());
     }

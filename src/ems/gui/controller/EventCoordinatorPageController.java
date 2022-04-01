@@ -136,6 +136,8 @@ public class EventCoordinatorPageController implements Initializable {
         btnCancelEvent.setDisable(true);
         btnApplyCustomer.setDisable(true);
         btnCancelCustomer.setDisable(true);
+        btnApplyTicket.setDisable(true);
+        btnCancelTicket.setDisable(true);
 
         /*Fill comboBoxes with data*/
         cmbEvents.setItems((ObservableList<Event>) eventModel.getObservableEvents());
@@ -179,6 +181,7 @@ public class EventCoordinatorPageController implements Initializable {
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
+        refreshTickets();
     }
 
     public void handleApplyEvent() {
@@ -238,17 +241,18 @@ public class EventCoordinatorPageController implements Initializable {
                 e.setLocationGuidance(txaEventLocationGuidance.getText());
                 e.setTicketTypes(ltvEventTicketTypes.getItems());
                 eventModel.updateEvent(e);
-                ticketModel.clearFilter();
-                ticketModel.getObservableTickets().stream().filter(t -> t.getEvent().equals(e)).forEach(t -> t.setEvent(e));
 
             } catch (Exception ex) {
                 PopUp.showError(ex.getMessage());
             }
         }
+        refreshTickets();
+    }
 
-        //refresh ticket data
+    private void refreshTickets()
+    {
         try{
-            ticketModel.readAllTickets();
+            ticketModel.clearFilter();
             tbvOverviewTickets.setItems(ticketModel.getObservableTickets());
             tbvTicketTabTickets.setItems(ticketModel.getObservableTickets());
         } catch (Exception ex){
@@ -365,6 +369,7 @@ public class EventCoordinatorPageController implements Initializable {
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
+        refreshTickets();
     }
 
     public void handleFilterAttendingEvents(KeyEvent keyEvent) {
@@ -400,15 +405,7 @@ public class EventCoordinatorPageController implements Initializable {
                 PopUp.showError(e.getMessage());
             }
         }
-
-        //refresh tickets data
-        try{
-            ticketModel.readAllTickets();
-            tbvOverviewTickets.setItems(ticketModel.getObservableTickets());
-            tbvTicketTabTickets.setItems(ticketModel.getObservableTickets());
-        } catch (Exception ex){
-            PopUp.showError(ex.getMessage());
-        }
+        refreshTickets();
     }
 
     public void handleCancelCustomer(ActionEvent event) {

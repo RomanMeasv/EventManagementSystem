@@ -441,20 +441,31 @@ public class EventCoordinatorPageController implements Initializable {
 
     //region TICKET TAB
     public void handleSelectTicket(MouseEvent mouseEvent) {
+        clearTicketComboBoxFilters();
+
         Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
         if(t != null){
             fillTicketDetails(t);
         }
+
+
         btnApplyTicket.setDisable(false);
         btnCancelTicket.setDisable(false);
+
+        txfNoTickets.setVisible(false);
+
+        lblTicketUUID.setVisible(true);
+        chbTicketValidation.setVisible(true);
+    }
+
+    private void clearTicketComboBoxFilters()
+    {
+        txfTicketTabFilterEvents.clear();
+        txfTicketTabFilterTicketType.clear();
+        txfTicketTabFilterCustomers.clear();
     }
 
     private void fillTicketDetails(Ticket t) {
-        //setting up textfields
-        /*txfTicketTabFilterEvents.setText(t.getEvent().getName());
-        txfTicketTabFilterTicketType.setText(t.getTicketType());
-        txfTicketTabFilterCustomers.setText(t.getCustomer().getName());*/
-
         //fill up ComboBoxes
         cmbEvents.setItems(FXCollections.observableArrayList(t.getEvent()));
         cmbTicketTypes.setItems(FXCollections.observableArrayList(t.getEvent().getTicketTypes()));
@@ -463,6 +474,9 @@ public class EventCoordinatorPageController implements Initializable {
         cmbEvents.getSelectionModel().select(0);
         cmbTicketTypes.getSelectionModel().select(t.getEvent().getTicketTypes().indexOf(t.getTicketType()));
         cmbCustomers.getSelectionModel().select(0);
+
+        lblTicketUUID.setText(t.getUuid().toString());
+        chbTicketValidation.setSelected(t.isValid());
     }
 
     public void handleFilterTickets(KeyEvent keyEvent) {
@@ -474,15 +488,14 @@ public class EventCoordinatorPageController implements Initializable {
         btnApplyTicket.setDisable(false);
         btnCancelTicket.setDisable(false);
 
-        //unselect table view selection
         tbvTicketTabTickets.getSelectionModel().clearSelection();
-
+        clearTicketComboBoxFilters();
         clearTicketDetails();
-
-        populateBoxes();
+        setUpFieldsForNewTicket();
     }
 
-    private void populateBoxes() {
+    private void setUpFieldsForNewTicket() {
+        //set up ComboBoxes
         try {
             eventModel.clearFilter();
             customerModel.clearFilter();
@@ -494,13 +507,21 @@ public class EventCoordinatorPageController implements Initializable {
         cmbEvents.setItems(eventModel.getObservableEvents());
         cmbTicketTypes.setItems(FXCollections.observableArrayList(new ArrayList<>()));
         cmbCustomers.setItems(customerModel.getObservableCustomers());
+
+        //set hide ticketValidation (is not taken into account when constructing a new ticket)
+        chbTicketValidation.setVisible(false);
+        //hide uuid
+        lblTicketUUID.setVisible(false);
+        //show no of tickets
+        txfNoTickets.setVisible(true);
+        //default value = 1
+        txfNoTickets.setText("1");
     }
 
     private void clearTicketDetails() {
-        //clear filters
-        txfTicketTabFilterEvents.clear();
-        txfTicketTabFilterTicketType.clear();
-        txfTicketTabFilterCustomers.clear();
+        cmbEvents.getSelectionModel().clearSelection();
+        cmbTicketTypes.getSelectionModel().clearSelection();
+        cmbCustomers.getSelectionModel().clearSelection();
     }
 
     public void handleRemoveTicket(ActionEvent actionEvent) {
@@ -550,16 +571,61 @@ public class EventCoordinatorPageController implements Initializable {
         }
     }
 
-    public void handleTicketEventSelected()
+    public void handleEventForTicketSelected()
     {
         if (cmbEvents.getSelectionModel().getSelectedItem() != null)
             cmbTicketTypes.setItems(FXCollections.observableArrayList(cmbEvents.getSelectionModel().getSelectedItem().getTicketTypes()));
     }
 
     public void handleCancelTicket(ActionEvent actionEvent) {
+        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
+        if (t == null) {
+            clearTicketDetails();
+            btnCancelTicket.setDisable(true);
+            btnApplyTicket.setDisable(true);
+        } else {
+            fillTicketDetails(t);
+        }
+        clearTicketComboBoxFilters();
     }
 
     public void handleApplyTicket(ActionEvent actionEvent) {
+        //if a ticket is not selected, create a new ticket
+        if(tbvTicketTabTickets.getSelectionModel().getSelectedItem() == null)
+        {
+            try {
+                //chech if all necessary fields are filled
+                if (cmbEvents.getSelectionModel().getSelectedItem() == null || cmbTicketTypes.getSelectionModel().getSelectedItem() == null || cmbCustomers.getSelectionModel().getSelectedItem() == null || txfNoTickets.getText().isEmpty()) {
+                    PopUp.showError("Please provide all necessary fields");
+                    return;
+                }
+                //check if no of tickets is a number
+                if (!txfNoTickets.getText().matches("\\d*")) {
+                    PopUp.showError("Please provide a number for the number of tickets");
+                    return;
+                }
+                //check if no of tickets is a number between 1 and 100
+                if (Integer.parseInt(txfNoTickets.getText()) < 1 || Integer.parseInt(txfNoTickets.getText()) > 100) {
+                    PopUp.showError("Please provide a number between 1 and 100!");
+                    return;
+                }
+                //create new tickets from fields
+                Event event = cmbEvents.getSelectionModel().getSelectedItem();
+                String ticketType = cmbTicketTypes.getSelectionModel().getSelectedItem();
+                Customer customer = cmbCustomers.getSelectionModel().getSelectedItem();
+                for (int i = 0; i < Integer.parseInt(txfNoTickets.getText()); i++) {
+                    ticketModel.createTicket(new Ticket(event, ticketType, customer));
+                }
+            } catch (Exception e) {
+                PopUp.showError(e.getMessage());
+                return;
+            }
+        }
+        else //TODO: update the ticket
+        {
+
+        }
+        clearTicketComboBoxFilters();
     }
     //endregion
 }

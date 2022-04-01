@@ -41,4 +41,19 @@ public class TicketDAO {
 
         return tickets;
     }
+
+    //create ticket
+    public Ticket createTicket(Ticket ticket) throws Exception {
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlCommandInsert = "INSERT INTO Tickets (uuid, isValid, eventId, ticketType, customerId) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement pstmtInsert = con.prepareStatement(sqlCommandInsert);
+            pstmtInsert.setString(1, ticket.getUuid().toString());
+            pstmtInsert.setBoolean(2, ticket.isValid());
+            pstmtInsert.setInt(3, ticket.getEvent().getId());
+            pstmtInsert.setString(4, ticket.getTicketType());
+            pstmtInsert.setInt(5, ticket.getCustomer().getId());
+            pstmtInsert.executeUpdate();
+        }
+        return ticket;
+    }
 }

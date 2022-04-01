@@ -372,7 +372,7 @@
                                     <HBox maxHeight="-Infinity" stylesheets="@styles/milosGreatSolutionStyle.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <TextField fx:id="txfTicketTabFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEventComboBox" promptText="Event" HBox.hgrow="ALWAYS" />
-                                          <ComboBox fx:id="cmbEvents" maxWidth="200.0" minWidth="-Infinity" onAction="#handleTicketEventSelected" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
+                                          <ComboBox fx:id="cmbEvents" maxWidth="200.0" minWidth="-Infinity" onAction="#handleEventForTicketSelected" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                                        </children>
                                     </HBox>
                                     <HBox maxHeight="-Infinity" stylesheets="@styles/milosGreatSolutionStyle.css">

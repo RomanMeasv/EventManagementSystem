@@ -118,4 +118,9 @@ public class DAFacade implements IDataAccess {
     public List<Ticket> readAllTickets() throws Exception {
         return ticketDAO.readAllTickets();
     }
+
+    @Override
+    public Ticket createTicket(Ticket t) throws Exception {
+        return ticketDAO.createTicket(t);
+    }
 }

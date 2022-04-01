@@ -25,4 +25,9 @@ public class TicketModel {
     public void clearFilter() throws Exception {
         observableTickets = FXCollections.observableList(ticketLogic.readAllTickets());
     }
+
+    public void createTicket(Ticket ticket) throws Exception {
+        ticketLogic.createTicket(ticket);
+        observableTickets.add(ticket);
+    }
 }

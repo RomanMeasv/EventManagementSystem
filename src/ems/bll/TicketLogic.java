@@ -22,4 +22,12 @@ public class TicketLogic {
             throw new DatabaseException("Could not read tickets!", e);
         }
     }
+
+    public void createTicket(Ticket ticket) throws Exception {
+        try {
+            dataAccess.createTicket(ticket);
+        } catch (Exception e) {
+            throw new DatabaseException("Could not create ticket!", e);
+        }
+    }
 }

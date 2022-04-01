@@ -25,7 +25,7 @@ public class CustomerModel {
     public void createCustomer(Customer c) throws Exception {
         Customer created = customerLogic.createCustomer(c);
         if(created != null){
-            observableCustomers.add(c);
+            observableCustomers.add(created);
         }
     }
 

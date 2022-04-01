@@ -250,12 +250,14 @@ public class EventCoordinatorPageController implements Initializable {
         refreshTickets();
     }
 
-    private void refreshTickets()
+    private void refreshTickets() //DOESNT WORK
     {
         try{
             ticketModel.clearFilter();
-            tbvOverviewTickets.setItems(ticketModel.getObservableTickets());
-            tbvTicketTabTickets.setItems(ticketModel.getObservableTickets());
+            tbvOverviewTickets.getItems().clear();
+            tbvOverviewTickets.getItems().addAll(ticketModel.getObservableTickets());
+            tbvTicketTabTickets.getItems().clear();
+            tbvTicketTabTickets.getItems().addAll(ticketModel.getObservableTickets());
         } catch (Exception ex){
             PopUp.showError(ex.getMessage());
         }
@@ -400,8 +402,6 @@ public class EventCoordinatorPageController implements Initializable {
                 c.setPhoneNumber(txfCustomerPhoneNumber.getText());
                 c.setNotes(txaCustomerNotes.getText());
                 customerModel.updateCustomer(c);
-                ticketModel.clearFilter();
-                ticketModel.getObservableTickets().stream().filter(t -> t.getCustomer().equals(c)).forEach(t -> t.setCustomer(c));
             } catch (Exception e) {
                 PopUp.showError(e.getMessage());
             }

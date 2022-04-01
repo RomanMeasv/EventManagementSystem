@@ -552,7 +552,8 @@ public class EventCoordinatorPageController implements Initializable {
 
     public void handleTicketEventSelected()
     {
-        cmbTicketTypes.setItems(FXCollections.observableArrayList(cmbEvents.getSelectionModel().getSelectedItem().getTicketTypes()));
+        if (cmbEvents.getSelectionModel().getSelectedItem() != null)
+            cmbTicketTypes.setItems(FXCollections.observableArrayList(cmbEvents.getSelectionModel().getSelectedItem().getTicketTypes()));
     }
 
     public void handleCancelTicket(ActionEvent actionEvent) {

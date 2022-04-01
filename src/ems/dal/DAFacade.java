@@ -123,4 +123,9 @@ public class DAFacade implements IDataAccess {
     public Ticket createTicket(Ticket t) throws Exception {
         return ticketDAO.createTicket(t);
     }
+
+    @Override
+    public void updateTicket(Ticket t) throws Exception {
+        ticketDAO.updateTicket(t);
+    }
 }

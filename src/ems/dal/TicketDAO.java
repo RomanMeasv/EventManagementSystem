@@ -56,4 +56,16 @@ public class TicketDAO {
         }
         return ticket;
     }
+
+    //update ticket
+    public void updateTicket(Ticket ticket) throws Exception {
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlCommandUpdate = "UPDATE Tickets SET isValid = ?, ticketType = ? WHERE uuid = ?";
+            PreparedStatement pstmtUpdate = con.prepareStatement(sqlCommandUpdate);
+            pstmtUpdate.setBoolean(1, ticket.isValid());
+            pstmtUpdate.setString(2, ticket.getTicketType());
+            pstmtUpdate.setString(3, ticket.getUuid().toString());
+            pstmtUpdate.executeUpdate();
+        }
+    }
 }

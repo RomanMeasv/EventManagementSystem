@@ -26,4 +26,5 @@ public interface IDataAccess {
     List<Customer> filterCustomers(String query) throws Exception;
     List<Ticket> readAllTickets() throws Exception;
     Ticket createTicket(Ticket t) throws Exception;
+    void updateTicket(Ticket t) throws Exception;
 }

@@ -189,19 +189,6 @@ public class EventCoordinatorPageController implements Initializable {
             return;
         }
 
-        if (e != null) {
-            if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())
-                    && !txfEventName.getText().equals(e.getName())) {
-                PopUp.showError("Event name already in use!");
-                return;
-            }
-        } else {
-            if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())) {
-                PopUp.showError("Event name already in use!");
-                return;
-            }
-        }
-
         //check if dates can be parsed (if they are valid)
         LocalDateTime start;
         LocalDateTime end;
@@ -219,6 +206,11 @@ public class EventCoordinatorPageController implements Initializable {
         }
 
         if (e == null) { //it's a new event
+            if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())) {
+                PopUp.showError("Event name already in use!");
+                return;
+            }
+
             try {
                 eventModel.createEvent(new Event(txfEventName.getText(), txaEventDescription.getText(), txaEventNotes.getText(), start, end, txaEventLocation.getText(), txaEventLocationGuidance.getText(), ltvEventTicketTypes.getItems()));
                 btnApplyEvent.setDisable(true);
@@ -229,6 +221,12 @@ public class EventCoordinatorPageController implements Initializable {
             }
         } else //it's an existing event
         {
+            if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())
+                    && !txfEventName.getText().equals(e.getName())) {
+                PopUp.showError("Event name already in use!");
+                return;
+            }
+
             try {
                 e.setName(txfEventName.getText());
                 e.setDescription(txaEventDescription.getText());
@@ -590,40 +588,51 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleApplyTicket(ActionEvent actionEvent) {
-        //if a ticket is not selected, create a new ticket
-        if(tbvTicketTabTickets.getSelectionModel().getSelectedItem() == null)
+        //chech if all necessary fields are filled
+        if (cmbEvents.getSelectionModel().getSelectedItem() == null || cmbTicketTypes.getSelectionModel().getSelectedItem() == null || cmbCustomers.getSelectionModel().getSelectedItem() == null) {
+            PopUp.showError("Please provide all necessary fields");
+            return;
+        }
+
+        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
+        if(t == null)
         {
+            //check if no of tickets is a number
+            if (!txfNoTickets.getText().matches("\\d*")) {
+                PopUp.showError("Please provide a number for the number of tickets");
+                return;
+            }
+            //check if no of tickets is a number between 1 and 100
+            if (Integer.parseInt(txfNoTickets.getText()) < 1 || Integer.parseInt(txfNoTickets.getText()) > 100) {
+                PopUp.showError("Please provide a number between 1 and 100!");
+                return;
+            }
+
+            //create new tickets from fields
+            Event event = cmbEvents.getSelectionModel().getSelectedItem();
+            String ticketType = cmbTicketTypes.getSelectionModel().getSelectedItem();
+            Customer customer = cmbCustomers.getSelectionModel().getSelectedItem();
             try {
-                //chech if all necessary fields are filled
-                if (cmbEvents.getSelectionModel().getSelectedItem() == null || cmbTicketTypes.getSelectionModel().getSelectedItem() == null || cmbCustomers.getSelectionModel().getSelectedItem() == null || txfNoTickets.getText().isEmpty()) {
-                    PopUp.showError("Please provide all necessary fields");
-                    return;
-                }
-                //check if no of tickets is a number
-                if (!txfNoTickets.getText().matches("\\d*")) {
-                    PopUp.showError("Please provide a number for the number of tickets");
-                    return;
-                }
-                //check if no of tickets is a number between 1 and 100
-                if (Integer.parseInt(txfNoTickets.getText()) < 1 || Integer.parseInt(txfNoTickets.getText()) > 100) {
-                    PopUp.showError("Please provide a number between 1 and 100!");
-                    return;
-                }
-                //create new tickets from fields
-                Event event = cmbEvents.getSelectionModel().getSelectedItem();
-                String ticketType = cmbTicketTypes.getSelectionModel().getSelectedItem();
-                Customer customer = cmbCustomers.getSelectionModel().getSelectedItem();
                 for (int i = 0; i < Integer.parseInt(txfNoTickets.getText()); i++) {
                     ticketModel.createTicket(new Ticket(event, ticketType, customer));
                 }
             } catch (Exception e) {
-                PopUp.showError(e.getMessage());
-                return;
+                e.printStackTrace();
             }
+            clearTicketDetails();
+            clearTicketComboBoxFilters();
+            btnCancelTicket.setDisable(true);
+            btnApplyTicket.setDisable(true);
         }
         else //TODO: update the ticket
         {
-
+            t.setValid(chbTicketValidation.isSelected());
+            t.setTicketType(cmbTicketTypes.getSelectionModel().getSelectedItem());
+            try {
+                ticketModel.updateTicket(t);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         clearTicketComboBoxFilters();
     }

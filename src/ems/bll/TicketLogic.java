@@ -30,4 +30,12 @@ public class TicketLogic {
             throw new DatabaseException("Could not create ticket!", e);
         }
     }
+
+    public void updateTicket(Ticket ticket) throws Exception {
+        try {
+            dataAccess.updateTicket(ticket);
+        } catch (Exception e) {
+            throw new DatabaseException("Could not update ticket!", e);
+        }
+    }
 }

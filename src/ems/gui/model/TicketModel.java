@@ -30,4 +30,9 @@ public class TicketModel {
         ticketLogic.createTicket(ticket);
         observableTickets.add(ticket);
     }
+
+    public void updateTicket(Ticket ticket) throws Exception {
+        ticketLogic.updateTicket(ticket);
+        observableTickets.set(observableTickets.indexOf(ticket), ticket);
+    }
 }

@@ -27,4 +27,5 @@ public interface IDataAccess {
     List<Ticket> readAllTickets() throws Exception;
     Ticket createTicket(Ticket t) throws Exception;
     void updateTicket(Ticket t) throws Exception;
+    void deleteTicket(Ticket t) throws Exception;
 }

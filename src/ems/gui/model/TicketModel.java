@@ -35,4 +35,9 @@ public class TicketModel {
         ticketLogic.updateTicket(ticket);
         observableTickets.set(observableTickets.indexOf(ticket), ticket);
     }
+
+    public void deleteTicket(Ticket ticket) throws Exception {
+        ticketLogic.deleteTicket(ticket);
+        observableTickets.remove(ticket);
+    }
 }

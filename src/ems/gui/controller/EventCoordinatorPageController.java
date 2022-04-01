@@ -171,6 +171,7 @@ public class EventCoordinatorPageController implements Initializable {
             if (selected != null) {
                 eventModel.deleteEvent(selected);
             }
+
             btnApplyEvent.setDisable(true);
             btnCancelEvent.setDisable(true);
             clearEventDetails();
@@ -356,6 +357,7 @@ public class EventCoordinatorPageController implements Initializable {
             if (selected != null) {
                 customerModel.deleteCustomer(selected);
             }
+
             btnApplyCustomer.setDisable(true);
             btnCancelCustomer.setDisable(true);
             clearCustomerDetails();
@@ -523,6 +525,19 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleRemoveTicket(ActionEvent actionEvent) {
+        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
+        if(t != null){
+            try {
+                ticketModel.deleteTicket(t);
+                tbvTicketTabTickets.getSelectionModel().clearSelection();
+                clearTicketDetails();
+                clearTicketComboBoxFilters();
+                btnApplyTicket.setDisable(true);
+                btnCancelTicket.setDisable(true);
+            } catch (Exception e){
+                PopUp.showError(e.getMessage());
+            }
+        }
     }
 
     public void handleFilterEventComboBox(KeyEvent keyEvent) {

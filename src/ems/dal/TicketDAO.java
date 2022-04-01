@@ -68,4 +68,13 @@ public class TicketDAO {
             pstmtUpdate.executeUpdate();
         }
     }
+
+    public void deleteTicket(Ticket ticket) throws Exception {
+        try (Connection con = ConnectionManager.getConnection()) {
+            String sqlCommandDelete = "DELETE FROM Tickets WHERE uuid = ?";
+            PreparedStatement pstmtDelete = con.prepareStatement(sqlCommandDelete);
+            pstmtDelete.setString(1, ticket.getUuid().toString());
+            pstmtDelete.executeUpdate();
+        }
+    }
 }

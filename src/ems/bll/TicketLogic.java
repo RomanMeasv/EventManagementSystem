@@ -38,4 +38,12 @@ public class TicketLogic {
             throw new DatabaseException("Could not update ticket!", e);
         }
     }
+
+    public void deleteTicket(Ticket ticket) throws Exception {
+        try {
+            dataAccess.deleteTicket(ticket);
+        } catch (Exception e) {
+            throw new DatabaseException("Could not delete ticket!", e);
+        }
+    }
 }

@@ -99,9 +99,9 @@ public class EventCoordinatorPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            customerModel = new CustomerModel();
-            eventModel = new EventModel();
-            ticketModel = new TicketModel();
+            customerModel = CustomerModel.getInstance();
+            eventModel = EventModel.getInstance();
+            ticketModel = TicketModel.getInstance();
         } catch (Exception e) {
             PopUp.showError(e.getMessage()); //error is custom handled within the logic
         }

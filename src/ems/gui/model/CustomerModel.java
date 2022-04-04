@@ -13,9 +13,18 @@ public class CustomerModel {
     private CustomerLogic customerLogic;
     private ObservableList<Customer> observableCustomers;
 
-    public CustomerModel() throws Exception {
+    private static CustomerModel instance;
+
+    private CustomerModel() throws Exception {
         customerLogic = new CustomerLogic();
         observableCustomers = FXCollections.observableList(customerLogic.readAllCustomers());
+    }
+
+    public static CustomerModel getInstance() throws Exception {
+        if (instance == null) {
+            instance = new CustomerModel();
+        }
+        return instance;
     }
 
     public ObservableList<Customer> getObservableCustomers() {
@@ -24,7 +33,7 @@ public class CustomerModel {
 
     public void createCustomer(Customer c) throws Exception {
         Customer created = customerLogic.createCustomer(c);
-        if(created != null){
+        if (created != null) {
             observableCustomers.add(created);
         }
     }

@@ -63,25 +63,25 @@
                         </HBox>
                      </children>
                      <stylesheets>
-                        <URL value="@styles/ticketTypeStyle.css" />
-                        <URL value="@styles/listViewStyle.css" />
+                        <URL value="@../styles/ticketTypeStyle.css" />
+                        <URL value="@../styles/listViewStyle.css" />
                      </stylesheets>
                   </VBox>
-                  <VBox spacing="10.0" stylesheets="@styles/milosGreatSolutionStyle.css" HBox.hgrow="ALWAYS">
+                  <VBox spacing="10.0" stylesheets="@../styles/milosGreatSolutionStyle.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox maxHeight="-Infinity" stylesheets="@styles/milosGreatSolutionStyle.css" VBox.vgrow="ALWAYS">
+                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="ALWAYS">
                            <children>
                               <TextField fx:id="txfTicketTabFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEventComboBox" promptText="Event" HBox.hgrow="ALWAYS" />
                               <ComboBox fx:id="cmbEvents" maxWidth="200.0" minWidth="-Infinity" onAction="#handleEventForTicketSelected" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
-                        <HBox maxHeight="-Infinity" stylesheets="@styles/milosGreatSolutionStyle.css">
+                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css">
                            <children>
                               <TextField fx:id="txfTicketTabFilterTicketType" minWidth="200.0" onKeyTyped="#handleFilterTicketTypeComboBox" promptText="Ticket type" HBox.hgrow="ALWAYS" />
                               <ComboBox fx:id="cmbTicketTypes" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
-                        <HBox maxHeight="-Infinity" stylesheets="@styles/milosGreatSolutionStyle.css">
+                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css">
                            <children>
                               <TextField fx:id="txfTicketTabFilterCustomers" minWidth="200.0" onKeyTyped="#handleFilterCustomerComboBox" promptText="Customer" HBox.hgrow="ALWAYS" />
                               <ComboBox fx:id="cmbCustomers" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
@@ -102,7 +102,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
+            <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@../styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
                <children>
                   <Button fx:id="btnCancelTicket" mnemonicParsing="false" onAction="#handleCancelTicket" text="Cancel" HBox.hgrow="NEVER" />
                   <Button fx:id="btnApplyTicket" mnemonicParsing="false" onAction="#handleApplyTicket" text="Apply" HBox.hgrow="NEVER" />

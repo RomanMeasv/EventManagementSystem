@@ -42,4 +42,8 @@ public class CustomerModel {
     public List<Customer> getFilteredCustomerList(String query) throws Exception {
         return customerLogic.filterCustomers(query);
     }
+
+    public void filterCustomers(String query) {
+
+    }
 }

@@ -11,11 +11,11 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="600.0" stylesheets="@../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.tabs.OverviewTabController">
    <children>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box">
+            <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" styleClass="list-box" HBox.hgrow="ALWAYS">
                <children>
                   <TextFlow styleClass="text-flow" textAlignment="CENTER">
                      <children>
@@ -29,7 +29,7 @@
                   </ListView>
                   <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                      <children>
-                        <TextField minWidth="100.0" onKeyTyped="#handleFilterEvents" promptText="Filter events..." HBox.hgrow="ALWAYS">
+                        <TextField fx:id="txfFilterEvents" minWidth="100.0" onKeyTyped="#handleFilterEvents" promptText="Filter events..." HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -41,11 +41,11 @@
                   </HBox>
                </children>
                <stylesheets>
-                  <URL value="@styles/ticketTypeStyle.css" />
-                  <URL value="@styles/listViewStyle.css" />
+                  <URL value="@../styles/listViewStyle.css" />
+                  <URL value="@../styles/overviewStyle.css" />
                </stylesheets>
             </VBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box">
+            <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" styleClass="list-box" HBox.hgrow="ALWAYS">
                <children>
                   <TextFlow styleClass="text-flow" textAlignment="CENTER">
                      <children>
@@ -59,7 +59,7 @@
                   </ListView>
                   <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                      <children>
-                        <TextField minWidth="100.0" onKeyTyped="#handleFilterCustomers" promptText="Filter customers..." HBox.hgrow="ALWAYS">
+                        <TextField fx:id="txfFilterCustomers" minWidth="100.0" onKeyTyped="#handleFilterCustomers" promptText="Filter customers..." HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -71,11 +71,11 @@
                   </HBox>
                </children>
                <stylesheets>
-                  <URL value="@styles/ticketTypeStyle.css" />
-                  <URL value="@styles/listViewStyle.css" />
+                  <URL value="@../styles/listViewStyle.css" />
+                  <URL value="@../styles/overviewStyle.css" />
                </stylesheets>
             </VBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box">
+            <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" styleClass="list-box" HBox.hgrow="ALWAYS">
                <children>
                   <TextFlow styleClass="text-flow" textAlignment="CENTER">
                      <children>
@@ -89,7 +89,7 @@
                   </ListView>
                   <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                      <children>
-                        <TextField minWidth="100.0" onKeyTyped="#handleFilterTickets" promptText="Filter tickets..." HBox.hgrow="ALWAYS">
+                        <TextField fx:id="txfFilterTickets" minWidth="100.0" onKeyTyped="#handleFilterTickets" promptText="Filter tickets..." HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -101,14 +101,14 @@
                   </HBox>
                </children>
                <stylesheets>
-                  <URL value="@styles/ticketTypeStyle.css" />
-                  <URL value="@styles/listViewStyle.css" />
+                  <URL value="@../styles/listViewStyle.css" />
+                  <URL value="@../styles/overviewStyle.css" />
                </stylesheets>
             </VBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
       </HBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </AnchorPane>

@@ -19,7 +19,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="overviewTabView.fxml"/>
+            <fx:include source="tabs/overviewTabView.fxml"/>
         </Tab>
         <Tab closable="false" styleClass="event-tab">
             <graphic>
@@ -29,7 +29,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="eventTabView.fxml"/>
+            <fx:include source="tabs/eventTabView.fxml"/>
         </Tab>
         <Tab closable="false" styleClass="customer-tab">
             <graphic>
@@ -39,7 +39,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="customerTabView.fxml"/>
+            <fx:include source="tabs/customerTabView.fxml"/>
         </Tab>
         <Tab closable="false" styleClass="ticket-tab">
             <graphic>
@@ -49,7 +49,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="ticketTabView.fxml"/>
+            <fx:include source="tabs/ticketTabView.fxml"/>
         </Tab>
     </tabs>
     <stylesheets>

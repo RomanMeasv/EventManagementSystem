@@ -61,13 +61,13 @@
                         </HBox>
                      </children>
                      <stylesheets>
-                        <URL value="@styles/ticketTypeStyle.css" />
-                        <URL value="@styles/listViewStyle.css" />
+                        <URL value="@../styles/ticketTypeStyle.css" />
+                        <URL value="@../styles/listViewStyle.css" />
                      </stylesheets>
                   </VBox>
                   <VBox spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox spacing="10.0" stylesheets="@styles/filloutFormStyle.css">
+                        <VBox spacing="10.0" stylesheets="@../styles/filloutFormStyle.css">
                            <children>
                               <TextField fx:id="txfCustomerName" promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                               <TextField fx:id="txfCustomerEmail" promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
@@ -93,15 +93,15 @@
                               </TextField>
                            </children>
                            <stylesheets>
-                              <URL value="@styles/attendingListStyle.css" />
-                              <URL value="@styles/listViewStyle.css" />
+                              <URL value="@../styles/attendingListStyle.css" />
+                              <URL value="@../styles/listViewStyle.css" />
                            </stylesheets>
                         </VBox>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
+            <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@../styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
                <children>
                   <Button fx:id="btnCancelCustomer" mnemonicParsing="false" onAction="#handleCancelCustomer" text="Cancel" HBox.hgrow="NEVER" />
                   <Button fx:id="btnApplyCustomer" mnemonicParsing="false" onAction="#handleApplyCustomer" text="Apply" HBox.hgrow="NEVER" />

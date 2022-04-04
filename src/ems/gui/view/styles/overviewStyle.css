@@ -1,0 +1,11 @@
+.text-field {
+    -fx-background-color: #F7B449;
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.8);
+}
+
+.text-field:focused {
+    -fx-background-color: #7b61ff;
+    -fx-text-fill: #FFF;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.8);
+}

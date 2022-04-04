@@ -1,19 +1,17 @@
 package ems.gui.controller;
 
 import ems.be.Customer;
+import ems.be.Event;
 import ems.be.Ticket;
 import ems.gui.model.CustomerModel;
+import ems.gui.model.EventModel;
 import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import ems.be.Event;
-import ems.gui.model.EventModel;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -21,7 +19,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box">
+                     <children>
+                        <TextFlow styleClass="text-flow" textAlignment="CENTER">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Events" />
+                           </children>
+                        </TextFlow>
+                        <ListView fx:id="ltvEvents" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                           <children>
+                              <TextField minWidth="100.0" onKeyTyped="#handleFilterEvents" promptText="Filter events..." HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNewEvent" text="NEW" HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveEvent" styleClass="remove-button" text="REMOVE" HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <stylesheets>
+                        <URL value="@styles/ticketTypeStyle.css" />
+                        <URL value="@styles/listViewStyle.css" />
+                     </stylesheets>
+                  </VBox>
+                  <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="250.0" spacing="10.0" stylesheets="@styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TextField fx:id="txfEventName" alignment="TOP_LEFT" minHeight="-Infinity" promptText="Event name*" styleClass="mandatory-field" VBox.vgrow="NEVER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <TextArea fx:id="txaEventDescription" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="120.0" promptText="Event description" wrapText="true" VBox.vgrow="ALWAYS" />
+                        <TextArea fx:id="txaEventNotes" maxHeight="180.0" minHeight="-Infinity" prefHeight="90.0" promptText="Optional notes" wrapText="true" VBox.vgrow="ALWAYS" />
+                        <HBox spacing="10.0" VBox.vgrow="NEVER">
+                           <children>
+                              <TextField fx:id="txfEventStartDate" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="txfEventStartTime" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox spacing="10.0" VBox.vgrow="NEVER">
+                           <children>
+                              <TextField fx:id="txfEventEndDate" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="yyyy-MM-dd*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="txfEventEndTime" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" promptText="HH:mm*" styleClass="mandatory-field" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="txaEventLocation" maxHeight="-Infinity" prefHeight="60.0" promptText="Event location*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                        <TextArea fx:id="txaEventLocationGuidance" maxHeight="180.0" minHeight="-Infinity" prefHeight="90.0" promptText="Location guidance" wrapText="true" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TextFlow styleClass="text-flow" textAlignment="CENTER">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Ticket types" />
+                           </children>
+                        </TextFlow>
+                        <ListView fx:id="ltvEventTicketTypes" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                           <children>
+                              <TextField fx:id="txfEventTicketType" minWidth="100.0" onKeyTyped="#handleFilterTicketTypes" promptText="Ticket type" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddTicketType" text="ADD" HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveTicketType" styleClass="remove-button" text="REMOVE" HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <stylesheets>
+                        <URL value="@styles/ticketTypeStyle.css" />
+                        <URL value="@styles/listViewStyle.css" />
+                     </stylesheets>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@styles/dialogButtonStyle.css" VBox.vgrow="NEVER">
+               <children>
+                  <Button fx:id="btnCancelEvent" mnemonicParsing="false" onAction="#handleCancelEvent" text="Cancel" HBox.hgrow="NEVER" />
+                  <Button fx:id="btnApplyEvent" mnemonicParsing="false" onAction="#handleApplyEvent" text="Apply" HBox.hgrow="NEVER" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -5,6 +5,8 @@ import ems.bll.TicketLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class TicketModel {
     private TicketLogic ticketLogic;
     private ObservableList<Ticket> observableTickets;
@@ -35,5 +37,10 @@ public class TicketModel {
     public void deleteTicket(Ticket ticket) throws Exception {
         ticketLogic.deleteTicket(ticket);
         observableTickets.remove(ticket);
+    }
+
+    public void filterTickets(String query) throws Exception{
+        List<Ticket> filtered = ticketLogic.filterTickets(query);
+        observableTickets.setAll(filtered);
     }
 }

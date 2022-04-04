@@ -46,4 +46,15 @@ public class TicketLogic {
             throw new DatabaseException("Could not delete ticket!", e);
         }
     }
+
+    public List<Ticket> filterTickets(String query) throws Exception{
+        if(!query.isEmpty()){
+            try{
+                return dataAccess.filterTickets(query);
+            } catch (Exception e){
+                throw new DatabaseException("Could not filter events! Check database connection!", e);
+            }
+        }
+        return readAllTickets();
+    }
 }

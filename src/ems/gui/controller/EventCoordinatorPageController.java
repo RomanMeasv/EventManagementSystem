@@ -1,53 +1,34 @@
 package ems.gui.controller;
 
 import ems.be.Customer;
+import ems.be.Event;
 import ems.be.Ticket;
 import ems.gui.model.CustomerModel;
+import ems.gui.model.EventModel;
 import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import ems.be.Event;
-import ems.gui.model.EventModel;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventCoordinatorPageController implements Initializable {
     /* OVERVIEW TAB */
-    /* EVENTS */
-    public TableView<Event> tbvOverviewEvents;
-    public TableColumn<Event, String> colOverviewEvents;
-    public TextField txfFilterOverviewEvents;
-
-    /* CUSTOMERS */
-    public TableView<Customer> tbvOverviewCustomers;
-    public TableColumn<Customer, String> colOverviewCustomers;
-    public TextField txfFilterOverviewCustomers;
-
-    /* TICKETS */
-    public TableView<Ticket> tbvOverviewTickets;
-    public TableColumn<Ticket, String> colOverviewTickets;
-    public TextField txfFilterOverviewTickets;
+    public ListView<Event> ltvOverviewEvents;
+    public ListView<Customer> ltvOverviewCustomers;
+    public ListView<Ticket> ltvOverviewTickets;
 
 
     /* EVENTS TAB */
-    /* TABLE VIEW */
-    public TableView<Event> tbvEventTabEvents;
-    public TableColumn<Event, String> colEventTabEvents;
-    public TextField txfFilterEventTabEvents;
+    public ListView<Event> ltvEvents;
 
     /* "DIALOG PANE" */
     public TextField txfEventName,
@@ -60,10 +41,7 @@ public class EventCoordinatorPageController implements Initializable {
 
 
     /* CUSTOMERS TAB */
-    /* TABLE VIEW */
-    public TableView<Customer> tbvCustomerTabCustomers;
-    public TableColumn<Customer, String> colCustomerTabCustomers;
-    public TextField txfFilterCustomers;
+    public ListView<Customer> ltvCustomers;
 
     /* "DIALOG PANE" */
     public TextField txfCustomerName, txfCustomerEmail,
@@ -75,10 +53,7 @@ public class EventCoordinatorPageController implements Initializable {
 
 
     /* TICKETS TAB */
-    /* TABLE VIEW */
-    public TableView<Ticket> tbvTicketTabTickets;
-    public TableColumn<Ticket, String> colTicketTabTickets;
-    public TextField txfFilterTickets;
+    public ListView<Ticket> ltvTickets;
 
     /* "DIALOG PANE" */
     public TextField txfTicketTabFilterEvents,
@@ -93,7 +68,6 @@ public class EventCoordinatorPageController implements Initializable {
     public Button btnCancelTicket;
     public Button btnApplyTicket;
 
-
     /* MODELS */
     private CustomerModel customerModel;
     private EventModel eventModel;
@@ -102,90 +76,144 @@ public class EventCoordinatorPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            customerModel = new CustomerModel();
             eventModel = new EventModel();
+            customerModel = new CustomerModel();
             ticketModel = new TicketModel();
         } catch (Exception e) {
             PopUp.showError(e.getMessage()); //error is custom handled within the logic
         }
 
         /* SET UP OVERVIEW TAB */
-        //set col overview events cell value factory to simple string property
-        colOverviewEvents.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().toString()));
-        tbvOverviewEvents.setItems(eventModel.getObservableEvents());
-        colOverviewCustomers.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().toString()));
-        tbvOverviewCustomers.setItems(customerModel.getObservableCustomers());
-        colOverviewTickets.setCellValueFactory(t -> new SimpleStringProperty(t.getValue().toString()));
-        tbvOverviewTickets.setItems(ticketModel.getObservableTickets());
+        ltvOverviewEvents.setItems(eventModel.getObservableEvents());
+        ltvOverviewCustomers.setItems(customerModel.getObservableCustomers());
+        ltvOverviewTickets.setItems(ticketModel.getObservableTickets());
 
         /* SET UP EVENTS TAB */
-        colEventTabEvents.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().toString()));
-        tbvEventTabEvents.setItems(eventModel.getObservableEvents());
+        ltvEvents.setItems(eventModel.getObservableEvents());
+        ltvEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedEventListener(newValue);
+        });
 
         /* SET UP CUSTOMERS TAB */
-        colCustomerTabCustomers.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().toString()));
-        tbvCustomerTabCustomers.setItems(customerModel.getObservableCustomers());
+        ltvCustomers.setItems(customerModel.getObservableCustomers());
+        ltvCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedCustomerListener(newValue);
+        });
 
         /* SET UP TICKETS TAB */
-        colTicketTabTickets.setCellValueFactory(t -> new SimpleStringProperty(t.getValue().toString()));
-        tbvTicketTabTickets.setItems(ticketModel.getObservableTickets());
+        ltvTickets.setItems(ticketModel.getObservableTickets());
+        ltvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedTicketListener(newValue);
+        });
 
 
         /* Disable cancel/apply buttons */
-        btnApplyEvent.setDisable(true);
-        btnCancelEvent.setDisable(true);
-        btnApplyCustomer.setDisable(true);
-        btnCancelCustomer.setDisable(true);
-        btnApplyTicket.setDisable(true);
-        btnCancelTicket.setDisable(true);
+        disableAllCancelApplyButtons();
 
         //hide ticket creation/edit specific fields
+        handleTicketCreationEditSpecificFields();
+    }
+
+    private void handleTicketCreationEditSpecificFields() {
         lblTicketUUID.setVisible(false);
         txfNoTickets.setVisible(false);
         chbTicketValidation.setVisible(false);
     }
 
+    private void disableAllCancelApplyButtons() {
+        setDisableApplyEventButtons(true);
+        setDisableApplyCustomerButtons(true);
+        setDisableApplyTicketsButtons(true);
+    }
+
+    private void setDisableApplyEventButtons(boolean disable) {
+        btnApplyEvent.setDisable(disable);
+        btnCancelEvent.setDisable(disable);
+    }
+
+    private void setDisableApplyCustomerButtons(boolean disable) {
+        btnApplyCustomer.setDisable(disable);
+        btnCancelCustomer.setDisable(disable);
+    }
+
+    private void setDisableApplyTicketsButtons(boolean disable) {
+        btnApplyTicket.setDisable(disable);
+        btnCancelTicket.setDisable(disable);
+    }
+
     // region EVENTS TAB
+    private void selectedEventListener(Event newValue) {
+        setDisableApplyEventButtons(false);
+        fillEventDetails(newValue);
+    }
+
+    private void fillEventDetails(Event event) {
+        txfEventName.setText(event.getName());
+        txaEventDescription.setText(event.getDescription());
+        txaEventNotes.setText(event.getNotes());
+        txfEventStartTime.setText(event.getStart().toLocalTime().toString());
+        txfEventStartDate.setText(event.getStart().toLocalDate().toString());
+        txfEventEndTime.setText(event.getEnd().toLocalTime().toString());
+        txfEventEndDate.setText(event.getEnd().toLocalDate().toString());
+        txaEventLocation.setText(event.getLocation());
+        txaEventLocationGuidance.setText(event.getLocationGuidance());
+        ltvEventTicketTypes.setItems(FXCollections.observableList(event.getTicketTypes()));
+    }
+
     public void handleFilterEvents(KeyEvent keyEvent) {
         try {
             String query = ((TextField) keyEvent.getSource()).getText();
             eventModel.filterEvents(query);
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage());
         }
     }
 
     public void handleNewEvent(ActionEvent actionEvent) {
-        btnApplyEvent.setDisable(false);
-        btnCancelEvent.setDisable(false);
-
-        tbvEventTabEvents.getSelectionModel().clearSelection();
-
+        setDisableApplyEventButtons(false);
+        ltvEvents.getSelectionModel().clearSelection();
         clearEventDetails();
-    }
-
-    public void handleFilterTicketTypes(KeyEvent keyEvent) {
     }
 
     public void handleRemoveEvent() {
         try {
-            Event selected = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+            Event selected = ltvEvents.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 eventModel.deleteEvent(selected);
             }
 
-            btnApplyEvent.setDisable(true);
-            btnCancelEvent.setDisable(true);
+            setDisableApplyEventButtons(true);
+            ltvEvents.getSelectionModel().clearSelection();
             clearEventDetails();
-            tbvEventTabEvents.getSelectionModel().clearSelection();
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
         refreshTickets();
     }
 
+    public void handleFilterTicketTypes(KeyEvent keyEvent) {
+    }
+
+    public void handleAddTicketType(ActionEvent event) {
+        if (txfEventTicketType.getText().isEmpty()) {
+            return;
+        }
+
+        if (ltvEventTicketTypes.getItems().contains(txfEventTicketType.getText())) {
+            txfEventTicketType.clear();
+            return;
+        }
+
+        ltvEventTicketTypes.getItems().add(txfEventTicketType.getText());
+        txfEventTicketType.clear();
+    }
+
+    public void handleRemoveTicketType(ActionEvent event) {
+        ltvEventTicketTypes.getItems().remove(ltvEventTicketTypes.getSelectionModel().getSelectedItem());
+    }
+
     public void handleApplyEvent() {
-        Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+        Event selectedEvent = ltvEvents.getSelectionModel().getSelectedItem();
         //check if everything is correct
         if (txfEventName.getText().isEmpty() || txfEventStartDate.getText().isEmpty() || txfEventStartTime.getText().isEmpty() ||
                 txfEventEndDate.getText().isEmpty() || txfEventEndTime.getText().isEmpty() || txaEventLocation.getText().isEmpty() || ltvEventTicketTypes.getItems().isEmpty()) {
@@ -209,7 +237,7 @@ public class EventCoordinatorPageController implements Initializable {
             return;
         }
 
-        if (e == null) { //it's a new event
+        if (selectedEvent == null) { //it's a new event
             if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())) {
                 PopUp.showError("Event name already in use!");
                 return;
@@ -226,63 +254,31 @@ public class EventCoordinatorPageController implements Initializable {
         } else //it's an existing event
         {
             if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())
-                    && !txfEventName.getText().equals(e.getName())) {
+                    && !txfEventName.getText().equals(selectedEvent.getName())) {
                 PopUp.showError("Event name already in use!");
                 return;
             }
 
             try {
-                e.setName(txfEventName.getText());
-                e.setDescription(txaEventDescription.getText());
-                e.setNotes(txaEventNotes.getText());
-                e.setStart(start);
-                e.setEnd(end);
-                e.setLocation(txaEventLocation.getText());
-                e.setLocationGuidance(txaEventLocationGuidance.getText());
-                e.setTicketTypes(ltvEventTicketTypes.getItems());
-                eventModel.updateEvent(e);
+                selectedEvent.setName(txfEventName.getText());
+                selectedEvent.setDescription(txaEventDescription.getText());
+                selectedEvent.setNotes(txaEventNotes.getText());
+                selectedEvent.setStart(start);
+                selectedEvent.setEnd(end);
+                selectedEvent.setLocation(txaEventLocation.getText());
+                selectedEvent.setLocationGuidance(txaEventLocationGuidance.getText());
+                selectedEvent.setTicketTypes(ltvEventTicketTypes.getItems());
+                eventModel.updateEvent(selectedEvent);
 
             } catch (Exception ex) {
                 PopUp.showError(ex.getMessage());
-                ex.printStackTrace();
             }
         }
         refreshTickets();
     }
 
-    private void refreshTickets()
-    {
-        try{
-            ticketModel.clearFilter();
-            tbvOverviewTickets.getItems().clear();
-            tbvOverviewTickets.getItems().addAll(ticketModel.getObservableTickets());
-            tbvTicketTabTickets.getItems().clear();
-            tbvTicketTabTickets.getItems().addAll(ticketModel.getObservableTickets());
-        } catch (Exception ex){
-            PopUp.showError(ex.getMessage());
-        }
-    }
-
-    public void handleAddTicketType(ActionEvent event) {
-        if (txfEventTicketType.getText().isEmpty()) {
-            return;
-        }
-
-        if (ltvEventTicketTypes.getItems().contains(txfEventTicketType.getText())) {
-            txfEventTicketType.clear();
-            return;
-        }
-
-        ltvEventTicketTypes.getItems().add(txfEventTicketType.getText());
-        txfEventTicketType.clear();
-    }
-
-    public void handleRemoveTicketType(ActionEvent event) {
-        ltvEventTicketTypes.getItems().remove(ltvEventTicketTypes.getSelectionModel().getSelectedItem());
-    }
-
     public void handleCancelEvent() {
-        Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
+        Event e = ltvEvents.getSelectionModel().getSelectedItem();
         if (e == null) { //a new event was about to be created
             clearEventDetails();
             btnApplyEvent.setDisable(true);
@@ -291,15 +287,6 @@ public class EventCoordinatorPageController implements Initializable {
         {
             fillEventDetails(e);
         }
-    }
-
-    public void handleSelectEvent() {
-        Event e = tbvEventTabEvents.getSelectionModel().getSelectedItem();
-        if (e != null) {
-            fillEventDetails(e);
-        }
-        btnApplyEvent.setDisable(false);
-        btnCancelEvent.setDisable(false);
     }
 
     private void clearEventDetails() {
@@ -316,23 +303,33 @@ public class EventCoordinatorPageController implements Initializable {
         txfEventTicketType.clear();
     }
 
-    private void fillEventDetails(Event e) {
-        txfEventName.setText(e.getName());
-        txaEventDescription.setText(e.getDescription());
-        txaEventNotes.setText(e.getNotes());
-        txfEventStartTime.setText(e.getStart().toLocalTime().toString());
-        txfEventStartDate.setText(e.getStart().toLocalDate().toString());
-        txfEventEndTime.setText(e.getEnd().toLocalTime().toString());
-        txfEventEndDate.setText(e.getEnd().toLocalDate().toString());
-        txaEventLocation.setText(e.getLocation());
-        txaEventLocationGuidance.setText(e.getLocationGuidance());
-        ltvEventTicketTypes.setItems(FXCollections.observableList(new ArrayList<>(e.getTicketTypes())));
+    private void refreshTickets() {
+        try {
+            ticketModel.clearFilter();
+            ltvOverviewTickets.getItems().clear();
+            ltvOverviewTickets.getItems().addAll(ticketModel.getObservableTickets());
+            ltvTickets.getItems().clear();
+            ltvTickets.getItems().addAll(ticketModel.getObservableTickets());
+        } catch (Exception ex) {
+            PopUp.showError(ex.getMessage());
+        }
     }
-
-
     //endregion
 
     // region CUSTOMER TAB
+    private void selectedCustomerListener(Customer newValue) {
+        btnApplyCustomer.setDisable(false);
+        btnCancelCustomer.setDisable(false);
+        fillCustomerDetails(newValue);
+    }
+
+    private void fillCustomerDetails(Customer customer) {
+        txfCustomerName.setText(customer.getName());
+        txfCustomerEmail.setText(customer.getEmail());
+        txfCustomerPhoneNumber.setText(customer.getPhoneNumber());
+        txaCustomerNotes.setText(customer.getNotes());
+    }
+
     public void handleFilterCustomers(KeyEvent keyEvent) {
         try {
             String query = ((TextField) keyEvent.getSource()).getText();
@@ -342,25 +339,16 @@ public class EventCoordinatorPageController implements Initializable {
         }
     }
 
-    public void handleSelectCustomer(MouseEvent mouseEvent) {
-        Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
-        if (c != null) {
-            fillCustomerDetails(c);
-        }
-        btnApplyCustomer.setDisable(false);
-        btnCancelCustomer.setDisable(false);
-    }
-
     public void handleNewCustomer(ActionEvent event) {
         btnApplyCustomer.setDisable(false);
         btnCancelCustomer.setDisable(false);
-        tbvCustomerTabCustomers.getSelectionModel().clearSelection();
+        ltvCustomers.getSelectionModel().clearSelection();
         clearCustomerDetails();
     }
 
     public void handleRemoveCustomer(ActionEvent event) {
         try {
-            Customer selected = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
+            Customer selected = ltvCustomers.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 customerModel.deleteCustomer(selected);
             }
@@ -368,7 +356,7 @@ public class EventCoordinatorPageController implements Initializable {
             btnApplyCustomer.setDisable(true);
             btnCancelCustomer.setDisable(true);
             clearCustomerDetails();
-            tbvCustomerTabCustomers.getSelectionModel().clearSelection();
+            ltvCustomers.getSelectionModel().clearSelection();
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
@@ -379,7 +367,7 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleApplyCustomer(ActionEvent event) {
-        Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
+        Customer c = ltvCustomers.getSelectionModel().getSelectedItem();
         if (txfCustomerName.getText().isEmpty() || txfCustomerEmail.getText().isEmpty() || txfCustomerPhoneNumber.getText().isEmpty()) {
             PopUp.showError("Please fill in all the mandatory fields! (*)");
             return;
@@ -410,7 +398,7 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleCancelCustomer(ActionEvent event) {
-        Customer c = tbvCustomerTabCustomers.getSelectionModel().getSelectedItem();
+        Customer c = ltvCustomers.getSelectionModel().getSelectedItem();
         if (c == null) {
             clearCustomerDetails();
             btnApplyCustomer.setDisable(true);
@@ -427,25 +415,11 @@ public class EventCoordinatorPageController implements Initializable {
         txfCustomerPhoneNumber.clear();
         txaCustomerNotes.clear();
     }
-
-    private void fillCustomerDetails(Customer c) {
-        txfCustomerName.setText(c.getName());
-        txfCustomerEmail.setText(c.getEmail());
-        txfCustomerPhoneNumber.setText(c.getPhoneNumber());
-        txaCustomerNotes.setText(c.getNotes());
-    }
-
     //endregion
 
     //region TICKET TAB
-    public void handleSelectTicket(MouseEvent mouseEvent) {
+    private void selectedTicketListener(Ticket newValue) {
         clearTicketComboBoxFilters();
-
-        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
-        if(t != null){
-            fillTicketDetails(t);
-        }
-
 
         btnApplyTicket.setDisable(false);
         btnCancelTicket.setDisable(false);
@@ -454,31 +428,37 @@ public class EventCoordinatorPageController implements Initializable {
 
         lblTicketUUID.setVisible(true);
         chbTicketValidation.setVisible(true);
+
+        fillTicketDetails(newValue);
     }
 
-    private void clearTicketComboBoxFilters()
-    {
+    private void clearTicketComboBoxFilters() {
         txfTicketTabFilterEvents.clear();
         txfTicketTabFilterTicketType.clear();
         txfTicketTabFilterCustomers.clear();
     }
 
-    private void fillTicketDetails(Ticket t) {
+    private void fillTicketDetails(Ticket ticket) {
         //fill up ComboBoxes
-        cmbEvents.setItems(FXCollections.observableArrayList(t.getEvent()));
-        cmbTicketTypes.setItems(FXCollections.observableArrayList(t.getEvent().getTicketTypes()));
-        cmbCustomers.setItems(FXCollections.observableArrayList(t.getCustomer()));
+        cmbEvents.setItems(FXCollections.observableArrayList(ticket.getEvent()));
+        cmbTicketTypes.setItems(FXCollections.observableArrayList(ticket.getEvent().getTicketTypes()));
+        cmbCustomers.setItems(FXCollections.observableArrayList(ticket.getCustomer()));
 
         cmbEvents.getSelectionModel().select(0);
-        cmbTicketTypes.getSelectionModel().select(t.getEvent().getTicketTypes().indexOf(t.getTicketType()));
+        cmbTicketTypes.getSelectionModel().select(ticket.getEvent().getTicketTypes().indexOf(ticket.getTicketType()));
         cmbCustomers.getSelectionModel().select(0);
 
-        lblTicketUUID.setText(t.getUuid().toString());
-        chbTicketValidation.setSelected(t.isValid());
+        lblTicketUUID.setText(ticket.getUuid().toString());
+        chbTicketValidation.setSelected(ticket.isValid());
     }
 
     public void handleFilterTickets(KeyEvent keyEvent) {
-
+        try {
+            String query = ((TextField) keyEvent.getSource()).getText();
+            ticketModel.filterTickets(query);
+        } catch (Exception e) {
+            PopUp.showError(e.getMessage());
+        }
     }
 
     public void handleNewTicket(ActionEvent actionEvent) {
@@ -486,7 +466,7 @@ public class EventCoordinatorPageController implements Initializable {
         btnApplyTicket.setDisable(false);
         btnCancelTicket.setDisable(false);
 
-        tbvTicketTabTickets.getSelectionModel().clearSelection();
+        ltvTickets.getSelectionModel().clearSelection();
         clearTicketComboBoxFilters();
         clearTicketDetails();
         setUpFieldsForNewTicket();
@@ -497,11 +477,11 @@ public class EventCoordinatorPageController implements Initializable {
         try {
             eventModel.clearFilter();
             customerModel.clearFilter();
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
             return;
         }
-        
+
         cmbEvents.setItems(eventModel.getObservableEvents());
         cmbTicketTypes.setItems(FXCollections.observableArrayList(new ArrayList<>()));
         cmbCustomers.setItems(customerModel.getObservableCustomers());
@@ -523,16 +503,16 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     public void handleRemoveTicket(ActionEvent actionEvent) {
-        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
-        if(t != null){
+        Ticket t = ltvTickets.getSelectionModel().getSelectedItem();
+        if (t != null) {
             try {
                 ticketModel.deleteTicket(t);
-                tbvTicketTabTickets.getSelectionModel().clearSelection();
+                ltvTickets.getSelectionModel().clearSelection();
                 clearTicketDetails();
                 clearTicketComboBoxFilters();
                 btnApplyTicket.setDisable(true);
                 btnCancelTicket.setDisable(true);
-            } catch (Exception e){
+            } catch (Exception e) {
                 PopUp.showError(e.getMessage());
             }
         }
@@ -541,10 +521,9 @@ public class EventCoordinatorPageController implements Initializable {
     public void handleFilterEventComboBox(KeyEvent keyEvent) {
         String query = txfTicketTabFilterEvents.getText();
         try {
-            if(txfTicketTabFilterEvents.getText().isEmpty()){
+            if (txfTicketTabFilterEvents.getText().isEmpty()) {
                 cmbEvents.hide();
-            }
-            else{
+            } else {
                 List<Event> filtered = eventModel.getListOfFiteredEvents(query);
                 cmbEvents.setItems(FXCollections.observableArrayList(filtered));
                 cmbEvents.hide();
@@ -553,7 +532,7 @@ public class EventCoordinatorPageController implements Initializable {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage());
         }
 
 
@@ -566,10 +545,9 @@ public class EventCoordinatorPageController implements Initializable {
     public void handleFilterCustomerComboBox(KeyEvent keyEvent) {
         String query = txfTicketTabFilterCustomers.getText();
         try {
-            if(txfTicketTabFilterCustomers.getText().isEmpty()){
+            if (txfTicketTabFilterCustomers.getText().isEmpty()) {
                 cmbCustomers.hide();
-            }
-            else{
+            } else {
                 List<Customer> filtered = customerModel.getFilteredCustomerList(query);
                 cmbCustomers.setItems(FXCollections.observableArrayList(filtered));
                 cmbCustomers.hide();
@@ -578,18 +556,17 @@ public class EventCoordinatorPageController implements Initializable {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage());
         }
     }
 
-    public void handleEventForTicketSelected()
-    {
+    public void handleEventForTicketSelected() {
         if (cmbEvents.getSelectionModel().getSelectedItem() != null)
             cmbTicketTypes.setItems(FXCollections.observableArrayList(cmbEvents.getSelectionModel().getSelectedItem().getTicketTypes()));
     }
 
     public void handleCancelTicket(ActionEvent actionEvent) {
-        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
+        Ticket t = ltvTickets.getSelectionModel().getSelectedItem();
         if (t == null) {
             clearTicketDetails();
             btnCancelTicket.setDisable(true);
@@ -607,9 +584,8 @@ public class EventCoordinatorPageController implements Initializable {
             return;
         }
 
-        Ticket t = tbvTicketTabTickets.getSelectionModel().getSelectedItem();
-        if(t == null)
-        {
+        Ticket t = ltvTickets.getSelectionModel().getSelectedItem();
+        if (t == null) {
             //check if no of tickets is a number
             if (!txfNoTickets.getText().matches("\\d*")) {
                 PopUp.showError("Please provide a number for the number of tickets");
@@ -630,21 +606,20 @@ public class EventCoordinatorPageController implements Initializable {
                     ticketModel.createTicket(new Ticket(event, ticketType, customer));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                PopUp.showError(e.getMessage());
             }
             clearTicketDetails();
             clearTicketComboBoxFilters();
             btnCancelTicket.setDisable(true);
             btnApplyTicket.setDisable(true);
-        }
-        else //TODO: update the ticket
+        } else //TODO: update the ticket
         {
             t.setValid(chbTicketValidation.isSelected());
             t.setTicketType(cmbTicketTypes.getSelectionModel().getSelectedItem());
             try {
                 ticketModel.updateTicket(t);
             } catch (Exception e) {
-                e.printStackTrace();
+                PopUp.showError(e.getMessage());
             }
         }
         clearTicketComboBoxFilters();

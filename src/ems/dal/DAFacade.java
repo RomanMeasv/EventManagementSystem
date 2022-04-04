@@ -133,4 +133,9 @@ public class DAFacade implements IDataAccess {
     public void deleteTicket(Ticket t) throws Exception {
         ticketDAO.deleteTicket(t);
     }
+
+    @Override
+    public List<Ticket> filterTickets(String query) {
+        return null;
+    }
 }

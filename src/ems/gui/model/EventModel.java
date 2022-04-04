@@ -2,6 +2,7 @@ package ems.gui.model;
 
 import ems.be.Event;
 import ems.bll.EventLogic;
+import ems.bll.exceptions.DatabaseException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,11 +12,19 @@ public class EventModel {
     private EventLogic eventLogic;
     private ObservableList<Event> observableEvents;
 
+    private static EventModel instance;
 
-    public EventModel() throws Exception {
+    private EventModel() throws Exception {
         eventLogic = new EventLogic();
         observableEvents = FXCollections.observableList(eventLogic.readAllEvents());
     }
+    public static EventModel getInstance() throws Exception {
+        if(instance == null){
+            instance = new EventModel();
+        }
+        return instance;
+    }
+
 
 
     public ObservableList<Event> getObservableEvents() {

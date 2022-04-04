@@ -209,7 +209,7 @@ public class EventDAO {
     }
 
     //get event by id
-    public Event getEventById(int id) throws Exception {
+    public Event readEvent(int id) throws Exception {
         Event e = null;
 
         try (Connection con = ConnectionManager.getConnection()) {

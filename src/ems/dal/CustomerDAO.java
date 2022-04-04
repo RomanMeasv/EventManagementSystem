@@ -108,7 +108,7 @@ public class CustomerDAO {
     }
 
     //get customer by id
-    public Customer getCustomerById(int id) throws Exception {
+    public Customer readCustomer(int id) throws Exception {
         Customer customer = null;
         try (Connection con = ConnectionManager.getConnection()) {
             String sqlCommandGetCustomerById = "SELECT * FROM Customers WHERE id = ?;";

@@ -32,9 +32,9 @@ public class TicketDAO {
                         new Ticket(
                             UUID.fromString(rs.getString("uuid")),
                             rs.getBoolean("isValid"),
-                            eventDAO.getEventById(rs.getInt("eventId")),
+                            eventDAO.readEvent(rs.getInt("eventId")),
                             rs.getString("ticketType"),
-                            customerDAO.getCustomerById(rs.getInt("customerId")))
+                            customerDAO.readCustomer(rs.getInt("customerId")))
                 );
             }
         }

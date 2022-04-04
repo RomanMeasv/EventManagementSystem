@@ -147,12 +147,8 @@ public class EventCoordinatorPageController implements Initializable {
 
     // region EVENTS TAB
     public void handleFilterEvents(KeyEvent keyEvent) {
-        try {
-            String query = ((TextField) keyEvent.getSource()).getText();
-            eventModel.filterEvents(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String query = ((TextField) keyEvent.getSource()).getText();
+        tbvEventTabEvents.setItems(eventModel.getObservableEvents().filtered(e -> e.toString().contains(query)));
     }
 
     public void handleNewEvent(ActionEvent actionEvent) {
@@ -334,12 +330,8 @@ public class EventCoordinatorPageController implements Initializable {
 
     // region CUSTOMER TAB
     public void handleFilterCustomers(KeyEvent keyEvent) {
-        try {
             String query = ((TextField) keyEvent.getSource()).getText();
-            customerModel.filterCustomers(query);
-        } catch (Exception e) {
-            PopUp.showError(e.getMessage());
-        }
+            tbvCustomerTabCustomers.setItems(customerModel.getObservableCustomers().filtered(c -> c.toString().contains(query.toLowerCase())));
     }
 
     public void handleSelectCustomer(MouseEvent mouseEvent) {
@@ -493,15 +485,6 @@ public class EventCoordinatorPageController implements Initializable {
     }
 
     private void setUpFieldsForNewTicket() {
-        //set up ComboBoxes
-        try {
-            eventModel.clearFilter();
-            customerModel.clearFilter();
-        } catch (Exception e){
-            PopUp.showError(e.getMessage());
-            return;
-        }
-        
         cmbEvents.setItems(eventModel.getObservableEvents());
         cmbTicketTypes.setItems(FXCollections.observableArrayList(new ArrayList<>()));
         cmbCustomers.setItems(customerModel.getObservableCustomers());

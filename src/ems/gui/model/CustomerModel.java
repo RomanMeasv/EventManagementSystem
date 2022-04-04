@@ -29,10 +29,6 @@ public class CustomerModel {
         }
     }
 
-    public void clearFilter() throws Exception {
-        observableCustomers = FXCollections.observableList(customerLogic.readAllCustomers());
-    }
-
     public void deleteCustomer(Customer c) throws DatabaseException {
         customerLogic.deleteCustomer(c);
         observableCustomers.remove(c);
@@ -41,11 +37,6 @@ public class CustomerModel {
     public void updateCustomer(Customer customer) throws Exception {
         customerLogic.updateCustomer(customer);
         observableCustomers.set(observableCustomers.indexOf(customer), customer);
-    }
-
-    public void filterCustomers(String query) throws Exception {
-        List<Customer> filtered = customerLogic.filterCustomers(query);
-        observableCustomers.setAll(filtered);
     }
 
     public List<Customer> getFilteredCustomerList(String query) throws Exception {

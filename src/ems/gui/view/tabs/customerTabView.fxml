@@ -13,15 +13,15 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.tabs.CustomerTabController">
    <children>
-      <VBox minWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="400.0" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="SOMETIMES">
                      <children>
-                        <TextFlow styleClass="text-flow" textAlignment="CENTER">
+                        <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Customers" />
                            </children>
@@ -33,7 +33,7 @@
                         </ListView>
                         <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                            <children>
-                              <TextField minWidth="100.0" onKeyTyped="#handleFilterCustomers" promptText="Filter customers..." HBox.hgrow="ALWAYS">
+                              <TextField fx:id="txfFilterCustomers" onKeyTyped="#handleFilterCustomers" promptText="Filter customers..." HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -65,17 +65,17 @@
                         <URL value="@../styles/listViewStyle.css" />
                      </stylesheets>
                   </VBox>
-                  <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                  <VBox spacing="20.0" HBox.hgrow="SOMETIMES">
                      <children>
-                        <VBox spacing="10.0" stylesheets="@../styles/filloutFormStyle.css">
+                        <VBox spacing="10.0" stylesheets="@../styles/filloutFormStyle.css" VBox.vgrow="ALWAYS">
                            <children>
                               <TextField fx:id="txfCustomerName" promptText="Name*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                               <TextField fx:id="txfCustomerEmail" promptText="Email*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
                               <TextField fx:id="txfCustomerPhoneNumber" promptText="Phone number*" styleClass="mandatory-field" VBox.vgrow="NEVER" />
-                              <TextArea fx:id="txaCustomerNotes" maxHeight="1.7976931348623157E308" minWidth="90.0" promptText="Notes" VBox.vgrow="ALWAYS" />
+                              <TextArea fx:id="txaCustomerNotes" promptText="Notes" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <VBox maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="list-box" VBox.vgrow="ALWAYS">
+                        <VBox styleClass="list-box" VBox.vgrow="ALWAYS">
                            <children>
                               <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                                  <children>
@@ -85,8 +85,8 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" />
                                  </padding>
                               </TextFlow>
-                              <ListView fx:id="ltvCustomerAttendingEvents" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                              <TextField fx:id="txfFilterAttendingEvents" minWidth="50.0" onKeyTyped="#handleFilterAttendingEvents" promptText="Filter..." VBox.vgrow="NEVER">
+                              <ListView fx:id="ltvCustomerAttendingEvents" VBox.vgrow="ALWAYS" />
+                              <TextField fx:id="txfFilterAttendingEvents" onKeyTyped="#handleFilterAttendingEvents" promptText="Filter..." VBox.vgrow="NEVER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -108,9 +108,9 @@
                </children>
             </HBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
       </VBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </AnchorPane>

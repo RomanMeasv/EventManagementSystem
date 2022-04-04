@@ -32,16 +32,18 @@ public class OverviewTabController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            eventModel = new EventModel();
-            customerModel = new CustomerModel();
-            ticketModel = new TicketModel();
-
             ltvOverviewEvents.setItems(eventModel.getObservableEvents());
             ltvOverviewCustomers.setItems(customerModel.getObservableCustomers());
             ltvOverviewTickets.setItems(ticketModel.getObservableTickets());
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
+    }
+
+    public void setModels(EventModel eventModel, CustomerModel customerModel, TicketModel ticketModel){
+        this.eventModel = eventModel;
+        this.customerModel = customerModel;
+        this.ticketModel = ticketModel;
     }
 
     public void handleFilterEvents(KeyEvent keyEvent) {

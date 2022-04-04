@@ -13,18 +13,9 @@ public class CustomerModel {
     private CustomerLogic customerLogic;
     private ObservableList<Customer> observableCustomers;
 
-    private static CustomerModel instance;
-
-    private CustomerModel() throws Exception {
+    public CustomerModel() throws Exception {
         customerLogic = new CustomerLogic();
         observableCustomers = FXCollections.observableList(customerLogic.readAllCustomers());
-    }
-
-    public static CustomerModel getInstance() throws Exception {
-        if (instance == null) {
-            instance = new CustomerModel();
-        }
-        return instance;
     }
 
     public ObservableList<Customer> getObservableCustomers() {

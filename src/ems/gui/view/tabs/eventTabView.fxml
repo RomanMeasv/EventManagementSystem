@@ -13,13 +13,13 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="900.0" stylesheets="@../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.tabs.EventTabController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.tabs.EventTabController">
    <children>
       <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" minWidth="-Infinity" prefWidth="200.0" styleClass="list-box" HBox.hgrow="ALWAYS">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="400.0" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="SOMETIMES">
                      <children>
                         <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                            <children>
@@ -33,7 +33,7 @@
                         </ListView>
                         <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                            <children>
-                              <TextField onKeyTyped="#handleFilterEvents" promptText="Filter events..." HBox.hgrow="SOMETIMES">
+                              <TextField fx:id="txfFilterEvent" onKeyTyped="#handleFilterEvents" promptText="Filter events..." HBox.hgrow="SOMETIMES">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -65,7 +65,7 @@
                         <URL value="@../styles/listViewStyle.css" />
                      </stylesheets>
                   </VBox>
-                  <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" spacing="10.0" stylesheets="@../styles/filloutFormStyle.css" HBox.hgrow="ALWAYS">
+                  <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="250.0" spacing="10.0" stylesheets="@../styles/filloutFormStyle.css" HBox.hgrow="SOMETIMES">
                      <children>
                         <TextField fx:id="txfEventName" alignment="TOP_LEFT" minHeight="-Infinity" promptText="Event name*" styleClass="mandatory-field" VBox.vgrow="NEVER">
                            <font>
@@ -109,7 +109,7 @@
                         <Insets />
                      </opaqueInsets>
                   </VBox>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" minWidth="-Infinity" prefWidth="200.0" styleClass="list-box" HBox.hgrow="ALWAYS">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="350.0" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="SOMETIMES">
                      <children>
                         <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                            <children>

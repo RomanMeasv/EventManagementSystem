@@ -11,20 +11,10 @@ public class TicketModel {
     private TicketLogic ticketLogic;
     private ObservableList<Ticket> observableTickets;
 
-    private static TicketModel instance;
-
-    private TicketModel() throws Exception {
+    public TicketModel() throws Exception {
         ticketLogic = new TicketLogic();
         observableTickets = FXCollections.observableList(ticketLogic.readAllTickets());
     }
-
-    public static TicketModel getInstance() throws Exception {
-        if(instance == null){
-            instance = new TicketModel();
-        }
-        return instance;
-    }
-
 
     public ObservableList<Ticket> getObservableTickets() {
         return observableTickets;

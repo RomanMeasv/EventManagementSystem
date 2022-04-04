@@ -15,15 +15,15 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.tabs.TicketTabController">
    <children>
       <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="450.0" styleClass="list-box">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="400.0" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="SOMETIMES">
                      <children>
-                        <TextFlow styleClass="text-flow" textAlignment="CENTER">
+                        <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Tickets" />
                            </children>
@@ -35,7 +35,7 @@
                         </ListView>
                         <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                            <children>
-                              <TextField minWidth="100.0" onKeyTyped="#handleFilterTickets" promptText="Filter tickets..." HBox.hgrow="ALWAYS">
+                              <TextField fx:id="txfFilterTickets" onKeyTyped="#handleFilterTickets" promptText="Filter tickets..." HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -67,23 +67,23 @@
                         <URL value="@../styles/listViewStyle.css" />
                      </stylesheets>
                   </VBox>
-                  <VBox spacing="10.0" stylesheets="@../styles/milosGreatSolutionStyle.css" HBox.hgrow="ALWAYS">
+                  <VBox spacing="10.0" stylesheets="@../styles/milosGreatSolutionStyle.css" HBox.hgrow="SOMETIMES">
                      <children>
-                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="ALWAYS">
+                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <TextField fx:id="txfTicketTabFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEventComboBox" promptText="Event" HBox.hgrow="ALWAYS" />
-                              <ComboBox fx:id="cmbEvents" maxWidth="200.0" minWidth="-Infinity" onAction="#handleEventForTicketSelected" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
+                              <TextField fx:id="txfFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEventComboBox" promptText="Event" HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="cmbEvents" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
-                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css">
+                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <TextField fx:id="txfTicketTabFilterTicketType" minWidth="200.0" onKeyTyped="#handleFilterTicketTypeComboBox" promptText="Ticket type" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="txfFilterTicketTypes" minWidth="200.0" onKeyTyped="#handleFilterTicketTypeComboBox" promptText="Ticket type" HBox.hgrow="ALWAYS" />
                               <ComboBox fx:id="cmbTicketTypes" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
-                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css">
+                        <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <TextField fx:id="txfTicketTabFilterCustomers" minWidth="200.0" onKeyTyped="#handleFilterCustomerComboBox" promptText="Customer" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="txfFilterCustomers" minWidth="200.0" onKeyTyped="#handleFilterCustomerComboBox" promptText="Customer" HBox.hgrow="ALWAYS" />
                               <ComboBox fx:id="cmbCustomers" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
@@ -109,9 +109,9 @@
                </children>
             </HBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
       </VBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </AnchorPane>

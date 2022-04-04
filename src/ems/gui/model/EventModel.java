@@ -39,17 +39,7 @@ public class EventModel {
         observableEvents.set(observableEvents.indexOf(event), event);
     }
 
-    public void filterEvents(String query) throws Exception {
-        List<Event> filtered = eventLogic.filterEvents(query);
-        observableEvents.setAll(filtered);
-    }
-
     public List<Event> getListOfFiteredEvents(String query) throws Exception {
         return eventLogic.filterEvents(query);
     }
-
-    public void clearFilter() throws Exception {
-        observableEvents = FXCollections.observableList(eventLogic.readAllEvents());
-    }
-
 }

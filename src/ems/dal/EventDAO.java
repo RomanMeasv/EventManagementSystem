@@ -136,11 +136,13 @@ public class EventDAO {
             }
             pstmtInsert.executeUpdate();
 
-            //remove old ticket type tuples
+            //remove old ticket type tuples;
             String sqlCommandDelete = "DELETE FROM TicketTypes WHERE eventId=? AND type NOT IN (?)";
             PreparedStatement pstmtDelete = con.prepareStatement(sqlCommandDelete);
             pstmtDelete.setInt(1, e.getId());
             pstmtDelete.setString(2, String.join(",", e.getTicketTypes()));
+
+            pstmtDelete.executeUpdate();
 
             con.commit();
             con.setAutoCommit(true);

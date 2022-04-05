@@ -60,6 +60,10 @@ public class ModelFacade {
 
     public void updateEvent(Event event) throws Exception {
         eventModel.updateEvent(event);
+        for (Ticket t : ticketModel.getAllTickets().filtered(t -> t.getEvent().equals(event)))
+        {
+            ticketModel.getAllTickets().set(ticketModel.getAllTickets().indexOf(t), t);
+        }
     }
 
     public void createCustomer(Customer customer) throws Exception {
@@ -73,6 +77,10 @@ public class ModelFacade {
 
     public void updateCustomer(Customer customer) throws Exception {
         customerModel.updateCustomer(customer);
+        for (Ticket t : ticketModel.getAllTickets().filtered(t -> t.getCustomer().equals(customer)))
+        {
+            ticketModel.getAllTickets().set(ticketModel.getAllTickets().indexOf(t), t);
+        }
     }
 
     public void createTicket(Ticket ticket) throws Exception {

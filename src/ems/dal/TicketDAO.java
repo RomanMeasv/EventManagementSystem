@@ -24,7 +24,6 @@ public class TicketDAO {
             while (rs.next()) {
                 int eventId = rs.getInt("eventId");
                 int customerId = rs.getInt("customerId");
-                System.out.println(cachedEvents.size());
                 tickets.add(
                         new Ticket(
                             UUID.fromString(rs.getString("uuid")),

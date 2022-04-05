@@ -71,7 +71,19 @@ public class ModelFacade {
         ticketModel.getAllTickets().removeIf(ticket -> ticket.getCustomer().equals(customer));
     }
 
-    public void updateCustomer(Customer customer) throws Exception{
+    public void updateCustomer(Customer customer) throws Exception {
         customerModel.updateCustomer(customer);
+    }
+
+    public void createTicket(Ticket ticket) throws Exception {
+        ticketModel.createTicket(ticket);
+    }
+
+    public void deleteTicket(Ticket ticket) throws Exception {
+        ticketModel.deleteTicket(ticket);
+    }
+
+    public void updateTicket(Ticket ticket) throws Exception {
+        ticketModel.updateTicket(ticket);
     }
 }

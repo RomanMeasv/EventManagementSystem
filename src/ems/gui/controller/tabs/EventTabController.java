@@ -77,9 +77,8 @@ public class EventTabController implements Initializable {
     public void handleRemoveEvent(ActionEvent event) {
         try {
             Event selected = ltvEvents.getSelectionModel().getSelectedItem();
-            if (selected == null) {
+            if (selected == null)
                 return;
-            }
 
             facade.deleteEvent(selected);
 

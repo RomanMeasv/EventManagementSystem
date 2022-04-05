@@ -8,11 +8,7 @@ import java.util.List;
 
 public class EventDAO {
 
-    List<Event> cachedEvents;
-
-    public EventDAO() {
-        cachedEvents = new ArrayList<>();
-    }
+    List<Event> cachedEvents = new ArrayList<>();
 
     public Event createEvent(Event e) throws Exception {
         Event eCreated = null;
@@ -69,7 +65,7 @@ public class EventDAO {
     }
 
     public List<Event> readAllEvents() throws Exception {
-        List<Event> cachedEvents = new ArrayList<>();
+        cachedEvents.clear();
 
         try (Connection con = ConnectionManager.getConnection()) {
 
@@ -92,6 +88,8 @@ public class EventDAO {
             }
         }
 
+        System.out.println("event cached");
+        System.out.println(cachedEvents.size());
         return cachedEvents;
     }
 
@@ -221,7 +219,10 @@ public class EventDAO {
         if (cachedEvents.stream().map(Event::getId).anyMatch(i -> i == id)) {
             return cachedEvents.stream().filter(e -> e.getId() == id).findFirst().get();
         }
-
+        else {
+            return null;
+        }
+        /*
         Event e = null;
 
         try (Connection con = ConnectionManager.getConnection()) {
@@ -246,5 +247,6 @@ public class EventDAO {
             }
         }
         return e;
+         */
     }
 }

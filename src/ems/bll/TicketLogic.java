@@ -5,6 +5,7 @@ import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 import javafx.collections.ObservableList;
 import ems.bll.exceptions.DatabaseException;
+import javafx.collections.transformation.FilteredList;
 
 import java.util.List;
 
@@ -47,14 +48,9 @@ public class TicketLogic {
         }
     }
 
-    public List<Ticket> filterTickets(String query) throws Exception{
-        if(!query.isEmpty()){
-            try{
-                return dataAccess.filterTickets(query);
-            } catch (Exception e){
-                throw new DatabaseException("Could not filter events! Check database connection!", e);
-            }
-        }
-        return readAllTickets();
+    public FilteredList<Ticket> getFilteredTickets(String query, ObservableList<Ticket> allTickets) {
+        return query.isEmpty() ?
+                new FilteredList<>(allTickets) :
+                allTickets.filtered(ticket -> ticket.toString().toLowerCase().contains(query.toLowerCase()));
     }
 }

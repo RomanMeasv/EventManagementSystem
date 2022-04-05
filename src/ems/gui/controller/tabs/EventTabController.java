@@ -2,8 +2,10 @@ package ems.gui.controller.tabs;
 
 import ems.be.Event;
 import ems.gui.model.EventModel;
+import ems.gui.model.ModelFacade;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -38,28 +40,28 @@ public class EventTabController implements Initializable {
     public Button btnCancelEvent;
     public Button btnApplyEvent;
 
-    private EventModel eventModel;
+    private ModelFacade facade;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            facade = ModelFacade.getInstance();
+        } catch (Exception e){
+            PopUp.showError(e.getMessage());
+        }
+
         ltvEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedEvent) -> {
             selectedEventListener(selectedEvent);
         });
-    }
 
-    public void setEventModel(EventModel eventModel){
-        this.eventModel = eventModel;
-    }
-
-    public void setListViewEvents(){
-        ltvEvents.setItems(eventModel.getObservableEvents());
+        ltvEvents.setItems(facade.getAllEvents());
     }
 
     public void handleFilterEvents(KeyEvent keyEvent) {
         try {
             String query = txfFilterEvents.getText();
-            eventModel.filterEvents(query);
-        } catch (Exception e) {
+            ltvEvents.setItems(facade.getFilteredEvents(query));
+        } catch (Exception e){
             PopUp.showError(e.getMessage());
         }
     }
@@ -79,7 +81,7 @@ public class EventTabController implements Initializable {
                 return;
             }
 
-            eventModel.deleteEvent(selected);
+            facade.deleteEvent(selected);
 
             setDisableApplyButtons(true);
 
@@ -89,8 +91,6 @@ public class EventTabController implements Initializable {
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
-        //TODO: Update tickets model
-        //refreshTickets();
     }
 
     public void handleFilterTicketTypes(KeyEvent keyEvent) {
@@ -119,14 +119,14 @@ public class EventTabController implements Initializable {
     }
 
     public void handleCancelEvent(ActionEvent event) {
-        Event e = ltvEvents.getSelectionModel().getSelectedItem();
-        if (e == null) { //a new event was about to be created
+        Event selectedEvent = ltvEvents.getSelectionModel().getSelectedItem();
+        if (selectedEvent == null) { //a new event was about to be created
             clearEventDetails();
             btnApplyEvent.setDisable(true);
             btnCancelEvent.setDisable(true);
         } else //an existing event was about to be edited
         {
-            fillEventDetails(e);
+            fillEventDetails(selectedEvent);
         }
     }
 
@@ -162,14 +162,15 @@ public class EventTabController implements Initializable {
             return;
         }
 
-        if (eventModel.getObservableEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())) {
-            PopUp.showError("Event name already in use!");
-            return;
-        }
-
         try {
             if (selectedEvent == null) { //it's a new event
-                eventModel.createEvent(
+
+                if (facade.getAllEvents().stream().map(Event::getName).toList().contains(txfEventName.getText())) {
+                    PopUp.showError("Event name already in use!");
+                    return;
+                }
+
+                facade.createEvent(
                         new Event(txfEventName.getText(),
                                 txaEventDescription.getText(),
                                 txaEventNotes.getText(),
@@ -183,6 +184,12 @@ public class EventTabController implements Initializable {
 
                 clearEventDetails();
             } else { //it's an existing event
+
+                if (facade.getAllEvents().stream().map(Event::getName).toList().contains(txfEventName.getText()) && !txfEventName.getText().equals(selectedEvent.getName())) {
+                    PopUp.showError("Event name already in use!");
+                    return;
+                }
+
                 selectedEvent.setName(txfEventName.getText());
                 selectedEvent.setDescription(txaEventDescription.getText());
                 selectedEvent.setNotes(txaEventNotes.getText());
@@ -192,16 +199,17 @@ public class EventTabController implements Initializable {
                 selectedEvent.setLocationGuidance(txaEventLocationGuidance.getText());
                 selectedEvent.setTicketTypes(ltvEventTicketTypes.getItems());
 
-                eventModel.updateEvent(selectedEvent);
+                facade.updateEvent(selectedEvent);
             }
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
-        //TODO: Update tickets model
-        //refreshTickets();
+        //ltvEvents.refresh(); //solves many problems yes
     }
 
     private void selectedEventListener(Event selectedEvent) {
+        if(selectedEvent == null)
+            return;
         setDisableApplyButtons(false);
         fillEventDetails(selectedEvent);
     }

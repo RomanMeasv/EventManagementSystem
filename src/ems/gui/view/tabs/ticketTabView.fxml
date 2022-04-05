@@ -71,19 +71,19 @@
                      <children>
                         <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <TextField fx:id="txfFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEventComboBox" promptText="Event" HBox.hgrow="ALWAYS" />
-                              <ComboBox fx:id="cmbEvents" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
+                              <TextField fx:id="txfFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEvents" promptText="Event" HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="cmbEvents" maxWidth="200.0" minWidth="-Infinity" onAction="#showTicketTypesForEvent" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
                         <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <TextField fx:id="txfFilterTicketTypes" minWidth="200.0" onKeyTyped="#handleFilterTicketTypeComboBox" promptText="Ticket type" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="txfFilterTicketTypes" minWidth="200.0" onKeyTyped="#handleFilterTicketTypes" promptText="Ticket type" HBox.hgrow="ALWAYS" />
                               <ComboBox fx:id="cmbTicketTypes" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
                         <HBox maxHeight="-Infinity" stylesheets="@../styles/milosGreatSolutionStyle.css" VBox.vgrow="NEVER">
                            <children>
-                              <TextField fx:id="txfFilterCustomers" minWidth="200.0" onKeyTyped="#handleFilterCustomerComboBox" promptText="Customer" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="txfFilterCustomers" minWidth="200.0" onKeyTyped="#handleFilterCustomers" promptText="Customer" HBox.hgrow="ALWAYS" />
                               <ComboBox fx:id="cmbCustomers" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" visibleRowCount="20" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>

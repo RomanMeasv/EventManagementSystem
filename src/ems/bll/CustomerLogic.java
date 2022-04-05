@@ -4,6 +4,8 @@ import ems.be.Customer;
 import ems.bll.exceptions.DatabaseException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 import java.util.List;
 
@@ -48,12 +50,10 @@ public class CustomerLogic {
          }
      }
 
-     public List<Customer> filterCustomers(String query) throws DatabaseException {
-         try {
-             return  dataAccess.filterCustomers(query);
-         } catch (Exception exception) {
-             throw new DatabaseException("Could not filter Customers! Check database connection!", exception);
-         }
+     public FilteredList<Customer> getFilteredCustomers(String query, ObservableList<Customer> allCustomers) {
+         return query.isEmpty() ?
+                 new FilteredList<>(allCustomers) :
+                 allCustomers.filtered(customer -> customer.toString().toLowerCase().contains(query.toLowerCase()));
      }
 
 }

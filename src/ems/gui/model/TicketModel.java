@@ -4,43 +4,44 @@ import ems.be.Ticket;
 import ems.bll.TicketLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 import java.util.List;
 
 public class TicketModel {
     private TicketLogic ticketLogic;
-    private ObservableList<Ticket> observableTickets;
+    private ObservableList<Ticket> allTickets;
 
-    public TicketModel() throws Exception {
+    //Default visibility modifier so only the facade can construct
+    TicketModel() throws Exception {
         ticketLogic = new TicketLogic();
-        observableTickets = FXCollections.observableList(ticketLogic.readAllTickets());
+        allTickets = FXCollections.observableList(ticketLogic.readAllTickets());
     }
 
-    public ObservableList<Ticket> getObservableTickets() {
-        return observableTickets;
+    public ObservableList<Ticket> getAllTickets() {
+        return allTickets;
     }
 
     public void clearFilter() throws Exception {
-        observableTickets = FXCollections.observableList(ticketLogic.readAllTickets());
+        allTickets = FXCollections.observableList(ticketLogic.readAllTickets());
     }
 
     public void createTicket(Ticket ticket) throws Exception {
         ticketLogic.createTicket(ticket);
-        observableTickets.add(ticket);
+        allTickets.add(ticket);
     }
 
     public void updateTicket(Ticket ticket) throws Exception {
         ticketLogic.updateTicket(ticket);
-        observableTickets.set(observableTickets.indexOf(ticket), ticket);
+        allTickets.set(allTickets.indexOf(ticket), ticket);
     }
 
     public void deleteTicket(Ticket ticket) throws Exception {
         ticketLogic.deleteTicket(ticket);
-        observableTickets.remove(ticket);
+        allTickets.remove(ticket);
     }
 
-    public void filterTickets(String query) throws Exception{
-        List<Ticket> filtered = ticketLogic.filterTickets(query);
-        observableTickets.setAll(filtered);
+    public FilteredList<Ticket> getFilteredTickets(String query) {
+        return ticketLogic.getFilteredTickets(query, allTickets);
     }
 }

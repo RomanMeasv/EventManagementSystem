@@ -1,7 +1,5 @@
 package ems.be;
 
-import java.util.ArrayList;
-
 public class Customer{
     private int id;
     private String name;

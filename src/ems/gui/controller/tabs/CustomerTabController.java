@@ -3,6 +3,7 @@ package ems.gui.controller.tabs;
 import ems.be.Customer;
 import ems.be.Event;
 import ems.gui.model.CustomerModel;
+import ems.gui.model.ModelFacade;
 import ems.gui.view.util.PopUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -31,19 +32,27 @@ public class CustomerTabController implements Initializable {
     public Button btnCancelCustomer;
     public Button btnApplyCustomer;
 
-    private CustomerModel customerModel;
+    private ModelFacade facade;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            facade = ModelFacade.getInstance();
+        } catch (Exception e){
+            PopUp.showError(e.getMessage());
+        }
+
         ltvCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedCustomer) -> {
             selectedCustomerListener(selectedCustomer);
         });
+
+        ltvCustomers.setItems(facade.getAllCustomers());
     }
 
     public void handleFilterCustomers(KeyEvent keyEvent) {
         try {
             String query = txfFilterCustomers.getText();
-            customerModel.filterCustomers(query);
+            ltvCustomers.setItems(facade.getFilteredCustomers(query));
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
@@ -64,7 +73,7 @@ public class CustomerTabController implements Initializable {
                 return;
             }
 
-            customerModel.deleteCustomer(selected);
+            facade.deleteCustomer(selected);
 
             setDisableApplyButtons(true);
 
@@ -74,8 +83,6 @@ public class CustomerTabController implements Initializable {
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
-        //TODO: Update tickets model
-        //refreshTickets();
     }
 
     public void handleFilterAttendingEvents(KeyEvent keyEvent) {
@@ -104,7 +111,7 @@ public class CustomerTabController implements Initializable {
 
         try {
             if (selectedCustomer == null) { //it's a new customer
-                customerModel.createCustomer(
+                facade.createCustomer(
                         new Customer(
                                 txfCustomerName.getText(),
                                 txfCustomerEmail.getText(),
@@ -120,17 +127,17 @@ public class CustomerTabController implements Initializable {
                 selectedCustomer.setPhoneNumber(txfCustomerPhoneNumber.getText());
                 selectedCustomer.setNotes(txaCustomerNotes.getText());
 
-                customerModel.updateCustomer(selectedCustomer);
+                facade.updateCustomer(selectedCustomer);
             }
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
-
-        //TODO: Update tickets model
-        //refreshTickets();
+        //ltvCustomers.refresh(); //solves many problems yes
     }
 
     private void selectedCustomerListener(Customer selectedCustomer) {
+        if(selectedCustomer == null)
+            return;
         setDisableApplyButtons(false);
         fillCustomerDetails(selectedCustomer);
     }

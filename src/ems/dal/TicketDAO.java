@@ -1,6 +1,5 @@
 package ems.dal;
 
-import ems.be.Event;
 import ems.be.Ticket;
 
 import java.sql.Connection;

@@ -5,8 +5,10 @@ import ems.be.Event;
 import ems.be.Ticket;
 import ems.gui.model.CustomerModel;
 import ems.gui.model.EventModel;
+import ems.gui.model.ModelFacade;
 import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -25,31 +27,25 @@ public class OverviewTabController implements Initializable {
     public TextField txfFilterCustomers;
     public TextField txfFilterTickets;
 
-    private EventModel eventModel;
-    private CustomerModel customerModel;
-    private TicketModel ticketModel;
+    private ModelFacade facade;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            ltvOverviewEvents.setItems(eventModel.getObservableEvents());
-            ltvOverviewCustomers.setItems(customerModel.getObservableCustomers());
-            ltvOverviewTickets.setItems(ticketModel.getObservableTickets());
+            facade = ModelFacade.getInstance();
+            ltvOverviewEvents.setItems(facade.getAllEvents());
+            ltvOverviewCustomers.setItems(facade.getAllCustomers());
+            ltvOverviewTickets.setItems(facade.getAllTickets());
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }
 
-    public void setModels(EventModel eventModel, CustomerModel customerModel, TicketModel ticketModel){
-        this.eventModel = eventModel;
-        this.customerModel = customerModel;
-        this.ticketModel = ticketModel;
-    }
-
     public void handleFilterEvents(KeyEvent keyEvent) {
-        try{
+        try {
             String query = txfFilterEvents.getText();
-            eventModel.filterEvents(query);
+            FilteredList<Event> filteredEvents = facade.getFilteredEvents(query);
+            ltvOverviewEvents.setItems(filteredEvents);
         } catch (Exception e){
             PopUp.showError(e.getMessage());
         }
@@ -58,16 +54,18 @@ public class OverviewTabController implements Initializable {
     public void handleFilterCustomers(KeyEvent keyEvent) {
         try {
             String query = txfFilterCustomers.getText();
-            customerModel.filterCustomers(query);
+            FilteredList<Customer> filteredCustomers = facade.getFilteredCustomers(query);
+            ltvOverviewCustomers.setItems(filteredCustomers);
         } catch (Exception e){
             PopUp.showError(e.getMessage());
         }
     }
 
     public void handleFilterTickets(KeyEvent keyEvent) {
-        try{
+        try {
             String query = txfFilterTickets.getText();
-            ticketModel.filterTickets(query);
+            FilteredList<Ticket> filteredTickets = facade.getFilteredTickets(query);
+            ltvOverviewTickets.setItems(filteredTickets);
         } catch (Exception e){
             PopUp.showError(e.getMessage());
         }

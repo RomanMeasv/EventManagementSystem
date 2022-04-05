@@ -4,44 +4,40 @@ import ems.be.Event;
 import ems.bll.EventLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.List;
+import javafx.collections.transformation.FilteredList;
 
 public class EventModel {
     private EventLogic eventLogic;
-    private ObservableList<Event> observableEvents;
+    private ObservableList<Event> allEvents;
 
-    public EventModel() throws Exception {
+    //Default visibility modifier so only the facade can construct
+    EventModel() throws Exception {
         eventLogic = new EventLogic();
-        observableEvents = FXCollections.observableList(eventLogic.readAllEvents());
+        allEvents = FXCollections.observableList(eventLogic.readAllEvents());
     }
 
-    public ObservableList<Event> getObservableEvents() {
-        return observableEvents;
+    public ObservableList<Event> getAllEvents() {
+        return allEvents;
     }
 
-    public void createEvent(Event e) throws Exception {
-        Event created = eventLogic.createEvent(e);
+    public void createEvent(Event event) throws Exception {
+        Event created = eventLogic.createEvent(event);
         if (created != null) {
-            observableEvents.add(created);
+            allEvents.add(created);
         }
     }
 
-    public void deleteEvent(Event e) throws Exception {
-        eventLogic.deleteEvent(e);
-        observableEvents.remove(e);
+    public void deleteEvent(Event event) throws Exception {
+        eventLogic.deleteEvent(event);
+        allEvents.remove(event);
     }
 
     public void updateEvent(Event event) throws Exception {
         eventLogic.updateEvent(event);
-        observableEvents.set(observableEvents.indexOf(event), event);
+        allEvents.set(allEvents.indexOf(event), event);
     }
 
-    public List<Event> getListOfFiteredEvents(String query) throws Exception {
-        return eventLogic.filterEvents(query);
-    }
-
-    public void filterEvents(String query) {
-
+    public FilteredList<Event> getFilteredEvents(String query) throws Exception {
+        return eventLogic.getFilteredEvents(query, allEvents);
     }
 }

@@ -8,6 +8,12 @@ import java.util.List;
 
 public class EventDAO {
 
+    List<Event> cachedEvents;
+
+    public EventDAO() {
+        cachedEvents = new ArrayList<>();
+    }
+
     public Event createEvent(Event e) throws Exception {
         Event eCreated = null;
 
@@ -63,7 +69,7 @@ public class EventDAO {
     }
 
     public List<Event> readAllEvents() throws Exception {
-        List<Event> allEvents = new ArrayList<>();
+        List<Event> cachedEvents = new ArrayList<>();
 
         try (Connection con = ConnectionManager.getConnection()) {
 
@@ -72,7 +78,7 @@ public class EventDAO {
             ResultSet rs = pstmtSelect.executeQuery();
 
             while (rs.next()) {
-                allEvents.add(
+                cachedEvents.add(
                         new Event(
                                 rs.getInt("id"),
                                 rs.getString("name"),
@@ -86,7 +92,7 @@ public class EventDAO {
             }
         }
 
-        return allEvents;
+        return cachedEvents;
     }
 
     public void deleteEvent(Event e) throws Exception {
@@ -212,6 +218,10 @@ public class EventDAO {
 
     //get event by id
     public Event readEvent(int id) throws Exception {
+        if (cachedEvents.stream().map(Event::getId).anyMatch(i -> i == id)) {
+            return cachedEvents.stream().filter(e -> e.getId() == id).findFirst().get();
+        }
+
         Event e = null;
 
         try (Connection con = ConnectionManager.getConnection()) {

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO {
+    List<Customer> cachedCustomers = new ArrayList<>();
+
     public Customer createCustomer(Customer customer) throws Exception {
         Customer customerCreated = null;
         try (Connection con = ConnectionManager.getConnection()) {
@@ -37,15 +39,14 @@ public class CustomerDAO {
     }
 
     public List<Customer> readAllCustomers() throws Exception {
-        List<Customer> allCustomers;
+        cachedCustomers = new ArrayList<>();
         try (Connection con = ConnectionManager.getConnection()) {
             String sqlCommandReadAllCustomers = "SELECT * FROM Customers;";
             Statement stmtReadAllCustomers = con.createStatement();
             ResultSet rs = stmtReadAllCustomers.executeQuery(sqlCommandReadAllCustomers);
 
-            allCustomers = new ArrayList<>();
             while (rs.next()) {
-                allCustomers.add(new Customer(
+                cachedCustomers.add(new Customer(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
@@ -53,7 +54,7 @@ public class CustomerDAO {
                         rs.getString("notes")));
             }
         }
-        return allCustomers;
+        return cachedCustomers;
     }
 
     //update customer by id
@@ -109,6 +110,10 @@ public class CustomerDAO {
 
     //get customer by id
     public Customer readCustomer(int id) throws Exception {
+        if (cachedCustomers.stream().map(Customer::getId).anyMatch(c -> c == id)) {
+            return cachedCustomers.stream().filter(c -> c.getId() == id).findFirst().get();
+        }
+        
         Customer customer = null;
         try (Connection con = ConnectionManager.getConnection()) {
             String sqlCommandGetCustomerById = "SELECT * FROM Customers WHERE id = ?;";

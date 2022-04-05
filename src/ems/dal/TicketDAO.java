@@ -1,5 +1,7 @@
 package ems.dal;
 
+import ems.be.Customer;
+import ems.be.Event;
 import ems.be.Ticket;
 
 import java.sql.Connection;
@@ -10,15 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class TicketDAO {
-    private EventDAO eventDAO;
-    private CustomerDAO customerDAO;
 
-    public TicketDAO() {
-        eventDAO = new EventDAO();
-        customerDAO = new CustomerDAO();
-    }
-
-    public List<Ticket> readAllTickets() throws Exception {
+    public List<Ticket> readAllTickets(List<Event> cachedEvents, List<Customer> cachedCustomers) throws Exception {
         List<Ticket> tickets = new ArrayList<>();
 
         try (Connection con = ConnectionManager.getConnection()) {
@@ -27,13 +22,16 @@ public class TicketDAO {
             ResultSet rs = pstmtSelect.executeQuery();
 
             while (rs.next()) {
+                int eventId = rs.getInt("eventId");
+                int customerId = rs.getInt("customerId");
+                System.out.println(cachedEvents.size());
                 tickets.add(
                         new Ticket(
                             UUID.fromString(rs.getString("uuid")),
                             rs.getBoolean("isValid"),
-                            eventDAO.readEvent(rs.getInt("eventId")),
+                            cachedEvents.stream().filter(e -> e.getId() == eventId).findFirst().orElse(null),
                             rs.getString("ticketType"),
-                            customerDAO.readCustomer(rs.getInt("customerId")))
+                            cachedCustomers.stream().filter(c -> c.getId() == customerId).findFirst().orElse(null))
                 );
             }
         }

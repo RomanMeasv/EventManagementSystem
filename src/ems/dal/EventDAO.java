@@ -7,13 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventDAO {
-
-    List<Event> cachedEvents;
-
-    public EventDAO() {
-        cachedEvents = new ArrayList<>();
-    }
-
     public Event createEvent(Event e) throws Exception {
         Event eCreated = null;
 
@@ -69,7 +62,7 @@ public class EventDAO {
     }
 
     public List<Event> readAllEvents() throws Exception {
-        List<Event> cachedEvents = new ArrayList<>();
+        List<Event> allEvents = new ArrayList<>();
 
         try (Connection con = ConnectionManager.getConnection()) {
 
@@ -78,7 +71,7 @@ public class EventDAO {
             ResultSet rs = pstmtSelect.executeQuery();
 
             while (rs.next()) {
-                cachedEvents.add(
+                allEvents.add(
                         new Event(
                                 rs.getInt("id"),
                                 rs.getString("name"),
@@ -92,7 +85,7 @@ public class EventDAO {
             }
         }
 
-        return cachedEvents;
+        return allEvents;
     }
 
     public void deleteEvent(Event e) throws Exception {
@@ -214,37 +207,5 @@ public class EventDAO {
             }
         }
         return ticketTypes;
-    }
-
-    //get event by id
-    public Event readEvent(int id) throws Exception {
-        if (cachedEvents.stream().map(Event::getId).anyMatch(i -> i == id)) {
-            return cachedEvents.stream().filter(e -> e.getId() == id).findFirst().get();
-        }
-
-        Event e = null;
-
-        try (Connection con = ConnectionManager.getConnection()) {
-
-            String sqlCommandSelect = "SELECT * FROM Events WHERE id=?;";
-            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
-            pstmtSelect.setInt(1, id);
-            ResultSet rs = pstmtSelect.executeQuery();
-
-            if (rs.next()) {
-                e = new Event(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getString("notes"),
-                        rs.getTimestamp("start").toLocalDateTime(),
-                        rs.getTimestamp("end").toLocalDateTime(),
-                        rs.getString("location"),
-                        rs.getString("locationGuidance"),
-                        readTicketTypes(rs.getInt("id"))
-                );
-            }
-        }
-        return e;
     }
 }

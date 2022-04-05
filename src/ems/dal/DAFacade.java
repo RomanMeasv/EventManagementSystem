@@ -2,11 +2,15 @@ package ems.dal;
 
 import ems.be.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAFacade implements IDataAccess {
 
     private static DAFacade instance; //Singleton instance
+
+    List<Event> cachedEvents = new ArrayList<>();
+    List<Customer> cachedCustomers = new ArrayList<>();
 
     UserDAO userDAO;
     TicketDAO ticketDAO;
@@ -15,9 +19,9 @@ public class DAFacade implements IDataAccess {
 
     private DAFacade() {
         userDAO = new UserDAO();
-        ticketDAO = new TicketDAO();
         eventDAO = new EventDAO();
         customerDAO = new CustomerDAO();
+        ticketDAO = new TicketDAO();
     }
 
     public static DAFacade getInstance() {
@@ -61,7 +65,8 @@ public class DAFacade implements IDataAccess {
 
     @Override
     public List<Event> readAllEvents() throws Exception {
-        return eventDAO.readAllEvents();
+        cachedEvents = eventDAO.readAllEvents();
+        return cachedEvents;
     }
 
     @Override
@@ -96,7 +101,8 @@ public class DAFacade implements IDataAccess {
 
     @Override
     public List<Customer> readAllCustomers() throws Exception {
-        return customerDAO.readAllCustomers();
+        cachedCustomers = customerDAO.readAllCustomers();
+        return cachedCustomers;
     }
 
     @Override
@@ -116,7 +122,7 @@ public class DAFacade implements IDataAccess {
 
     @Override
     public List<Ticket> readAllTickets() throws Exception {
-        return ticketDAO.readAllTickets();
+        return ticketDAO.readAllTickets(cachedEvents, cachedCustomers);
     }
 
     @Override

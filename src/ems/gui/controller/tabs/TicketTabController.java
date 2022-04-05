@@ -5,7 +5,6 @@ import ems.be.Event;
 import ems.be.Ticket;
 import ems.gui.model.CustomerModel;
 import ems.gui.model.EventModel;
-import ems.gui.model.ModelFacade;
 import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
@@ -40,30 +39,19 @@ public class TicketTabController implements Initializable {
     public Button btnCancelTicket;
     public Button btnApplyTicket;
 
-    private ModelFacade facade;
+    private TicketModel ticketModel;
+    private EventModel eventModel;
+    private CustomerModel customerModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            facade = ModelFacade.getInstance();
-        } catch (Exception e) {
-            PopUp.showError(e.getMessage());
-        }
-
         ltvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedTicket) -> {
             selectedTicketListener(selectedTicket);
         });
-
-        ltvTickets.setItems(facade.getAllTickets());
     }
 
     public void handleFilterTickets(KeyEvent keyEvent) {
-        try {
-            String query = txfFilterTickets.getText();
-            ltvTickets.setItems(facade.getFilteredTickets(query));
-        } catch (Exception e) {
-            PopUp.showError(e.getMessage());
-        }
+
     }
 
     public void handleNewTicket(ActionEvent event) {
@@ -77,19 +65,20 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleRemoveTicket(ActionEvent event) {
+        Ticket selectedTicket = ltvTickets.getSelectionModel().getSelectedItem();
+
+        if (selectedTicket == null) {
+            return;
+        }
+
         try {
-            Ticket selectedTicket = ltvTickets.getSelectionModel().getSelectedItem();
-            if (selectedTicket == null)
-                return;
+            ticketModel.deleteTicket(selectedTicket);
 
-            facade.deleteTicket(selectedTicket);
-
-            setDisableApplyButtons(true);
+            ltvTickets.getSelectionModel().clearSelection();
 
             clearTicketComboBoxSelection();
             clearTicketComboBoxFilters();
-
-            ltvTickets.getSelectionModel().clearSelection();
+            setDisableApplyButtons(true);
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
@@ -98,16 +87,16 @@ public class TicketTabController implements Initializable {
     public void handleFilterEvents(KeyEvent keyEvent) {
         try {
             String query = txfFilterEvents.getText();
+
             if (query.isEmpty()) {
                 cmbEvents.hide();
-                return;
+            } else {
+                List<Event> filtered = eventModel.getFilteredEvents(query);
+                cmbEvents.setItems(FXCollections.observableArrayList(filtered));
+                cmbEvents.hide();
+                cmbEvents.setVisibleRowCount(filtered.size());
+                cmbEvents.show();
             }
-
-            cmbEvents.setItems(facade.getFilteredEvents(query));
-
-            cmbEvents.hide();
-            cmbEvents.setVisibleRowCount(20);
-            cmbEvents.show();
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
@@ -125,20 +114,19 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleFilterCustomers(KeyEvent keyEvent) {
+        String query = txfFilterCustomers.getText();
         try {
-            String query = txfFilterCustomers.getText();
             if (query.isEmpty()) {
                 cmbCustomers.hide();
-                return;
+            } else {
+                List<Customer> filtered = customerModel.getFilteredCustomers(query);
+                cmbCustomers.setItems(FXCollections.observableArrayList(filtered));
+                cmbCustomers.hide();
+                cmbCustomers.setVisibleRowCount(filtered.size());
+                cmbCustomers.show();
             }
-
-            cmbCustomers.setItems(facade.getFilteredCustomers(query));
-
-            cmbCustomers.hide();
-            cmbCustomers.setVisibleRowCount(20);
-            cmbCustomers.show();
         } catch (Exception e) {
-            PopUp.showError(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -187,7 +175,7 @@ public class TicketTabController implements Initializable {
             //create new tickets from fields
             try {
                 for (int i = 0; i < noTickets; i++) {
-                    facade.createTicket(
+                    ticketModel.createTicket(
                             new Ticket(selectedEvent,
                                     selectedTicketType,
                                     selectedCustomer));
@@ -204,7 +192,7 @@ public class TicketTabController implements Initializable {
             selectedTicket.setValid(chbTicketValidation.isSelected());
             selectedTicket.setTicketType(selectedTicketType);
             try {
-                facade.updateTicket(selectedTicket);
+                ticketModel.updateTicket(selectedTicket);
             } catch (Exception e) {
                 PopUp.showError(e.getMessage());
                 e.printStackTrace();
@@ -262,9 +250,9 @@ public class TicketTabController implements Initializable {
     }
 
     private void setUpFieldsForNewTicket() {
-        cmbEvents.setItems(facade.getAllEvents());
+        cmbEvents.setItems(eventModel.getAllEvents());
         cmbTicketTypes.setItems(FXCollections.observableArrayList(new ArrayList<>()));
-        cmbCustomers.setItems(facade.getAllCustomers());
+        cmbCustomers.setItems(customerModel.getAllCustomers());
 
         setTicketCreationLabels(true);
 

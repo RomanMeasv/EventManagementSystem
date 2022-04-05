@@ -113,10 +113,7 @@ public class CustomerDAO {
         if (cachedCustomers.stream().map(Customer::getId).anyMatch(c -> c == id)) {
             return cachedCustomers.stream().filter(c -> c.getId() == id).findFirst().get();
         }
-        else {
-            return null;
-        }
-        /*
+        
         Customer customer = null;
         try (Connection con = ConnectionManager.getConnection()) {
             String sqlCommandGetCustomerById = "SELECT * FROM Customers WHERE id = ?;";
@@ -135,6 +132,5 @@ public class CustomerDAO {
             }
         }
         return customer;
-         */
     }
 }

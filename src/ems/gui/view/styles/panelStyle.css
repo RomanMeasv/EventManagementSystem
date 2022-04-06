@@ -63,6 +63,6 @@
     -fx-image: url("../resources/navbar/Logout-ico.png");
 }
 
-.logout-tab:selected .image-view {
+.logout-tab:hover .image-view {
     -fx-image: url("../resources/navbar/Logout-ico-active.png");
 }

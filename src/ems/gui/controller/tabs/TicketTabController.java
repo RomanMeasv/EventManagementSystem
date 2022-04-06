@@ -16,9 +16,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
@@ -302,27 +304,33 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleSaveTickets(ActionEvent event) {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save Ticket to...");
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle("Save tickets to...");
         chooser.setInitialDirectory(new File("C:\\"));
-        chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
-
-        File file = chooser.showSaveDialog(null);
-        if (file == null)
+        File directory = chooser.showDialog(null);
+        if (directory == null)
             return;
 
-
+        for (Ticket ticket : ltvTickets.getItems()) {
+            loadTicketPreview(ticket);
+            WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
+            BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
+            try {
+                ImageIO.write(bImage, "png", new File(directory + "/" + ticket.getUuid().toString() + ".png"));
+            } catch (Exception e) {
+                PopUp.showError("Could not save ticket!");
+            }
+        }
     }
 
     public void handleSaveTicket(ActionEvent event) {
         FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save Ticket to...");
+        chooser.setTitle("Save ticket to...");
         chooser.setInitialDirectory(new File("C:\\"));
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
+        chooser.setInitialFileName(ltvTickets.getSelectionModel().getSelectedItem().getUuid().toString());
 
         File file = chooser.showSaveDialog(null);
         if (file == null)
@@ -333,7 +341,7 @@ public class TicketTabController implements Initializable {
         try {
             ImageIO.write(bImage, "png", file);
         } catch (Exception e) {
-            PopUp.showError(e.getMessage());
+            PopUp.showError("Could not save ticket!");
         }
     }
 }

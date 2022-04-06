@@ -11,4 +11,9 @@ public class EventCoordinator extends User{
         setUsername(username);
         setPassword(password);
     }
+
+    @Override
+    public String toString(){
+        return this.getUsername();
+    }
 }

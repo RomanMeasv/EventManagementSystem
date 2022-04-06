@@ -6,7 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageController">
+<TabPane  minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.AdminPageController">
     <tabs>
         <Tab closable="false" styleClass="overview-tab">
             <graphic>
@@ -16,7 +16,17 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="tabs/overviewTabView.fxml" />
+            <fx:include source="tabs/admin/adminOverViewTapView.fxml" />
+        </Tab>
+        <Tab closable="false" styleClass="coordinator-tab">
+            <graphic>
+                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/navbar/Tickets-ico.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <fx:include source="tabs/admin/adminECTabView.fxml" />
         </Tab>
         <Tab closable="false" styleClass="event-tab">
             <graphic>
@@ -26,7 +36,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="tabs/admin/adminOverViewTapView.fxml" />
+            <fx:include source="tabs/admin/adminEventTap.fxml" />
         </Tab>
         <Tab closable="false" styleClass="customer-tab">
             <graphic>
@@ -36,18 +46,20 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="tabs/admin/admin" />
+            <fx:include source="tabs/admin/adminCustomerTap.fxml" />
         </Tab>
-        <Tab closable="false" styleClass="ticket-tab">
-            <graphic>
-                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@resources/navbar/Tickets-ico.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            <fx:include source="tabs/ticketTabView.fxml" />
-        </Tab>
+      <Tab fx:id="tabLogout" closable="false" onSelectionChanged="#handleLogout" styleClass="logout-tab">
+         <graphic>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/navbar/Tickets-ico.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <content>
+
+         </content>
+      </Tab>
     </tabs>
     <stylesheets>
         <URL value="@styles/panelStyle.css" />

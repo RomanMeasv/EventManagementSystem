@@ -4,7 +4,11 @@ import ems.be.EventCoordinator;
 import ems.bll.exceptions.DatabaseException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+
 import java.util.List;
+import java.util.logging.Filter;
 
 public class EventCoordinatorLogic {
 
@@ -47,14 +51,9 @@ public class EventCoordinatorLogic {
         }
     }
 
-    public List<EventCoordinator> filterEventCoordinators(String query) throws DatabaseException {
-        if(!query.isEmpty()){
-            try {
-                return dataAccess.filterEventCoordinators(query);
-            } catch (Exception exception) {
-                throw new DatabaseException("Could not filter event coordinators! Check database connection!", exception);
-            }
-        }
-        return readAllEventCoordinators();
+    public FilteredList<EventCoordinator> filterEventCoordinators(String query, ObservableList<EventCoordinator> allEventCoordinators) throws DatabaseException {
+        return query.isEmpty() ?
+                new FilteredList<>(allEventCoordinators) :
+                allEventCoordinators.filtered(eventCoordinator -> eventCoordinator.getUsername().toLowerCase().contains(query.toLowerCase()));
     }
 }

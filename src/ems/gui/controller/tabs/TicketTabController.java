@@ -3,12 +3,8 @@ package ems.gui.controller.tabs;
 import ems.be.Customer;
 import ems.be.Event;
 import ems.be.Ticket;
-import ems.bll.util.EAN13Generator;
 import ems.bll.util.QRCodeGenerator;
-import ems.gui.model.CustomerModel;
-import ems.gui.model.EventModel;
 import ems.gui.model.ModelFacade;
-import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
@@ -17,13 +13,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class TicketTabController implements Initializable {
@@ -305,6 +304,24 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleSaveTicket(ActionEvent event) {
+        WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
+        BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
 
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save Ticket to...");
+        chooser.setInitialDirectory(new File("C:\\"));
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        File file = chooser.showSaveDialog(null);
+        if (file == null)
+            return;
+
+        try {
+            ImageIO.write(bImage, "png", file);
+        } catch (Exception e) {
+            PopUp.showError(e.getMessage());
+        }
     }
 }

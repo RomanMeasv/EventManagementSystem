@@ -1,3 +1,4 @@
+/* TEXT FIELD */
 .text-field {
     -fx-background-radius: 0 0 0 10px;
 }
@@ -8,4 +9,42 @@
     -fx-background-radius: 0;
     -fx-background-insets: 0;
     -fx-padding: 0;
+}
+
+.combo-box .list-view {
+    -fx-background-color: #FFF;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.combo-box .list-view .list-cell {
+    -fx-background-color: #FFF;
+}
+
+.combo-box .list-view .list-cell:filled {
+    -fx-text-fill: #000;
+}
+
+.combo-box .list-view .list-cell:selected, .combo-box .list-view .list-cell:filled:hover {
+    -fx-background-color: #F7B449;
+}
+
+.combo-box .list-view .list-cell:selected .text, .combo-box .list-view .list-cell:filled:hover .text {
+    -fx-fill: #000;
+}
+
+/* BUTTONS */
+.button {
+    -fx-background-color: #8293E3;
+    -fx-background-radius: 0;
+    -fx-text-fill: #FFF;
+    -fx-background-insets: 0;
+}
+
+.button:hover {
+    -fx-background-color: #5847AD;
+}
+
+.remove-button {
+    -fx-background-radius: 0 0 10px 0;
 }

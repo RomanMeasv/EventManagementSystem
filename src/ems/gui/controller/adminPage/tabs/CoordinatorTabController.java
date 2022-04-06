@@ -23,11 +23,12 @@ public class CoordinatorTabController implements Initializable {
     public ListView<EventCoordinator> ltvCoordinators;
     public TextField txfFilterCoordinators;
     public ComboBox cmbEvents;
-    public TextField txfEventCoordinator;
     public Button btnCancelCoordinator;
     public Button btnApplyCoordinator;
     public ListView<Event> ltvCoordinatorsEvents;
     public TextField txfName;
+    public TextField txfPassword;
+    public TextField txfFilterEvent;
 
     private ModelFacade facade;
     private EventCoordinatorModel eventCoordinatorModel;
@@ -59,7 +60,7 @@ public class CoordinatorTabController implements Initializable {
 
 
     public void handleFilterCoordinators(KeyEvent keyEvent) {
-        String query = txfEventCoordinator.getText();
+        String query = txfFilterCoordinators.getText();
         try {
             ltvCoordinators.setItems(eventCoordinatorModel.filterEventCoordinators(query));
         } catch (Exception e) {

@@ -1,0 +1,9 @@
+.ticket-background {
+    -fx-background-color: #F7B449;
+    -fx-background-radius: 10px;
+}
+
+.label {
+    -fx-background-color: #FFF;
+    -fx-background-radius: 10px;
+}

@@ -1,4 +1,4 @@
-package ems.gui.controller.tabs;
+package ems.gui.controller.coordinatorPage.tabs;
 
 import ems.be.Customer;
 import ems.be.Event;

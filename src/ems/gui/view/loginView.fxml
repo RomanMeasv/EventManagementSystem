@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.LoginPageController">
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.loginPage.LoginPageController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="background-holder" StackPane.alignment="CENTER">
          <children>

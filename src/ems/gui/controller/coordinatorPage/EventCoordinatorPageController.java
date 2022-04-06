@@ -1,4 +1,4 @@
-package ems.gui.controller;
+package ems.gui.controller.coordinatorPage;
 
 import javafx.fxml.Initializable;
 

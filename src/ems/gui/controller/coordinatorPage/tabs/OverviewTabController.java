@@ -1,12 +1,9 @@
-package ems.gui.controller.tabs;
+package ems.gui.controller.coordinatorPage.tabs;
 
 import ems.be.Customer;
 import ems.be.Event;
 import ems.be.Ticket;
-import ems.gui.model.CustomerModel;
-import ems.gui.model.EventModel;
 import ems.gui.model.ModelFacade;
-import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;

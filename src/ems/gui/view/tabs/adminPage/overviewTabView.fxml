@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminTabPane.AdminOverviewTapController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminPage.tabs.OverviewTabController">
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -24,7 +24,7 @@
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Events" />
                            </children>
                         </TextFlow>
-                        <ListView fx:id="ltvOverviewEvents" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
+                        <ListView fx:id="ltvEvents" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
@@ -54,14 +54,14 @@
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Coordinators" />
                            </children>
                         </TextFlow>
-                        <ListView fx:id="ltvOverviewECs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                        <ListView fx:id="ltvCoordinators" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </ListView>
                         <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
                            <children>
-                              <TextField fx:id="txfFilterECs" minWidth="100.0" onKeyTyped="#handleFilterECs" promptText="Filter events..." HBox.hgrow="ALWAYS">
+                              <TextField fx:id="txfFilterCoordinators" minWidth="100.0" onKeyTyped="#handleFilterCoordinators" promptText="Filter coordinators..." HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -82,4 +82,7 @@
          </children>
       </VBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </AnchorPane>

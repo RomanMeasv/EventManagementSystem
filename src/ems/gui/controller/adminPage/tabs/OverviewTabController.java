@@ -1,4 +1,4 @@
-package ems.gui.controller.adminTabPane;
+package ems.gui.controller.adminPage.tabs;
 
 import ems.be.Event;
 import ems.be.EventCoordinator;
@@ -14,11 +14,11 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminOverviewTapController implements Initializable {
-    public ListView <Event> ltvOverviewEvents;
+public class OverviewTabController implements Initializable {
+    public ListView <Event> ltvEvents;
     public TextField txfFilterEvents;
-    public ListView <EventCoordinator> ltvOverviewECs;
-    public TextField txfFilterECs;
+    public ListView <EventCoordinator> ltvCoordinators;
+    public TextField txfFilterCoordinators;
 
     private ModelFacade facade;
     private EventCoordinatorModel eventCoordinatorModel;
@@ -31,8 +31,8 @@ public class AdminOverviewTapController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ltvOverviewEvents.setItems(facade.getAllEvents());
-        ltvOverviewECs.setItems(eventCoordinatorModel.getAllEventCoordinators());
+        ltvEvents.setItems(facade.getAllEvents());
+        ltvCoordinators.setItems(eventCoordinatorModel.getAllEventCoordinators());
 
     }
 
@@ -41,17 +41,17 @@ public class AdminOverviewTapController implements Initializable {
         try {
             String query = txfFilterEvents.getText();
             FilteredList<Event> filteredEvents = facade.getFilteredEvents(query);
-            ltvOverviewEvents.setItems(filteredEvents);
+            ltvEvents.setItems(filteredEvents);
         } catch (Exception e){
             PopUp.showError(e.getMessage());
         }
     }
 
-    public void handleFilterECs(KeyEvent keyEvent) {
+    public void handleFilterCoordinators(KeyEvent keyEvent) {
         try{
-            String query = txfFilterECs.getText();
+            String query = txfFilterCoordinators.getText();
             FilteredList<EventCoordinator> filteredECs = eventCoordinatorModel.filterEventCoordinators(query);
-            ltvOverviewECs.setItems(filteredECs);
+            ltvCoordinators.setItems(filteredECs);
         }catch(Exception e){
             PopUp.showError(e.getMessage());
         }

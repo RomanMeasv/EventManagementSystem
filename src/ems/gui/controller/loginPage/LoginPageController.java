@@ -1,4 +1,4 @@
-package ems.gui.controller;
+package ems.gui.controller.loginPage;
 
 import ems.be.Admin;
 import ems.be.EventCoordinator;
@@ -43,8 +43,8 @@ public class LoginPageController {
                 boolean isAdmin = loggedUser.getClass().equals(Admin.class);
                 boolean isEC = loggedUser.getClass().equals(EventCoordinator.class);
 
-                Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("../view/adminView.fxml")) :
-                        isEC ? FXMLLoader.load(getClass().getResource("../view/eventCoordinatorView.fxml")) : null;
+                Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("/ems/gui/view/adminView.fxml")) :
+                        isEC ? FXMLLoader.load(getClass().getResource("/ems/gui/view/eventCoordinatorView.fxml")) : null;
 
                 if(root == null){
                     return;

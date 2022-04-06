@@ -6,7 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.EventCoordinatorPageController">
+<TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.coordinatorPage.EventCoordinatorPageController">
     <tabs>
         <Tab closable="false" styleClass="overview-tab">
             <graphic>
@@ -16,7 +16,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="tabs/overviewTabView.fxml" />
+            <fx:include source="tabs/coordinatorPage/overviewTabView.fxml" />
         </Tab>
         <Tab closable="false" styleClass="event-tab">
             <graphic>
@@ -26,7 +26,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="tabs/admin/adminOverViewTapView.fxml" />
+            <fx:include source="tabs/coordinatorPage/eventTabView.fxml" />
         </Tab>
         <Tab closable="false" styleClass="customer-tab">
             <graphic>
@@ -36,7 +36,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="tabs/admin/admin" />
+            <fx:include source="tabs/coordinatorPage/customerTabView.fxml" />
         </Tab>
         <Tab closable="false" styleClass="ticket-tab">
             <graphic>
@@ -46,7 +46,7 @@
                     </image>
                 </ImageView>
             </graphic>
-            <fx:include source="tabs/ticketTabView.fxml" />
+            <fx:include source="tabs/coordinatorPage/ticketTabView.fxml" />
         </Tab>
     </tabs>
     <stylesheets>

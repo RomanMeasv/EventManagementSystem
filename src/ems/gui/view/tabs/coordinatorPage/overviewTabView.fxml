@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.tabs.OverviewTabController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.coordinatorPage.tabs.OverviewTabController">
    <children>
       <HBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -41,8 +41,8 @@
                   </HBox>
                </children>
                <stylesheets>
-                  <URL value="@../styles/listViewStyle.css" />
-                  <URL value="@../styles/overviewStyle.css" />
+                  <URL value="@../../styles/listViewStyle.css" />
+                  <URL value="@../../styles/overviewStyle.css" />
                </stylesheets>
             </VBox>
             <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="ALWAYS">
@@ -71,8 +71,8 @@
                   </HBox>
                </children>
                <stylesheets>
-                  <URL value="@../styles/listViewStyle.css" />
-                  <URL value="@../styles/overviewStyle.css" />
+                  <URL value="@../../styles/listViewStyle.css" />
+                  <URL value="@../../styles/overviewStyle.css" />
                </stylesheets>
             </VBox>
             <VBox maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="ALWAYS">
@@ -101,8 +101,8 @@
                   </HBox>
                </children>
                <stylesheets>
-                  <URL value="@../styles/listViewStyle.css" />
-                  <URL value="@../styles/overviewStyle.css" />
+                  <URL value="@../../styles/listViewStyle.css" />
+                  <URL value="@../../styles/overviewStyle.css" />
                </stylesheets>
             </VBox>
          </children>

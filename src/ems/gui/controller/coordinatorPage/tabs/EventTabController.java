@@ -1,11 +1,9 @@
-package ems.gui.controller.tabs;
+package ems.gui.controller.coordinatorPage.tabs;
 
 import ems.be.Event;
-import ems.gui.model.EventModel;
 import ems.gui.model.ModelFacade;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

@@ -1,0 +1,11 @@
+.text-field {
+    -fx-background-radius: 0 0 0 10px;
+}
+
+/* COMBO BOX */
+.combo-box-base {
+    -fx-background-color: #F7B449;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}

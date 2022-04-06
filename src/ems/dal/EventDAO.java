@@ -133,14 +133,12 @@ public class EventDAO {
                 pstmtInsert.setString(4, type);
                 pstmtInsert.addBatch();
             }
-            pstmtInsert.executeUpdate();
+            pstmtInsert.executeBatch();
 
             //remove old ticket type tuples;
-            String sqlCommandDelete = "DELETE FROM TicketTypes WHERE eventId=? AND type NOT IN (?)";
+            String sqlCommandDelete = "DELETE FROM TicketTypes WHERE eventId = ? AND [type] NOT IN (" + "'" + String.join("','", e.getTicketTypes()) + "'" +");"; //not SQL injection safe, but it didnt work with ?
             PreparedStatement pstmtDelete = con.prepareStatement(sqlCommandDelete);
             pstmtDelete.setInt(1, e.getId());
-            pstmtDelete.setString(2, String.join(",", e.getTicketTypes()));
-
             pstmtDelete.executeUpdate();
 
             con.commit();

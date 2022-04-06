@@ -44,9 +44,11 @@ public class CustomerTabController implements Initializable {
         }
 
         ltvCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedCustomer) -> {
-            selectedCustomerListener(selectedCustomer);
-            ltvCustomerAttendingEvents.setItems(FXCollections.observableList(
-            facade.getAllTickets().stream().filter(t -> t.getCustomer().equals(selectedCustomer)).map(t -> t.getEvent()).distinct().collect(java.util.stream.Collectors.toList())));
+            if (selectedCustomer != null) {
+                selectedCustomerListener(selectedCustomer);
+                ltvCustomerAttendingEvents.setItems(FXCollections.observableList(
+                        facade.getAllTickets().stream().filter(t -> t.getCustomer().equals(selectedCustomer)).map(t -> t.getEvent()).distinct().collect(java.util.stream.Collectors.toList())));
+            }
         });
 
         ltvCustomers.setItems(facade.getAllCustomers());
@@ -139,8 +141,6 @@ public class CustomerTabController implements Initializable {
     }
 
     private void selectedCustomerListener(Customer selectedCustomer) {
-        if(selectedCustomer == null)
-            return;
         setDisableApplyButtons(false);
         fillCustomerDetails(selectedCustomer);
     }

@@ -1,5 +1,7 @@
 package ems.be;
 
+import javafx.collections.ObservableList;
+
 public class Customer{
     private int id;
     private String name;

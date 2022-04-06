@@ -8,6 +8,7 @@ import ems.gui.model.EventModel;
 import ems.gui.model.ModelFacade;
 import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
+import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -39,6 +40,13 @@ public class OverviewTabController implements Initializable {
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
+        ltvOverviewEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            ltvOverviewCustomers.setItems(FXCollections.observableList(facade.getAllTickets().stream().filter(ticket -> ticket.getEvent().equals(newValue)).map(Ticket::getCustomer).distinct().collect(java.util.stream.Collectors.toList())));
+            ltvOverviewTickets.setItems(FXCollections.observableList(facade.getAllTickets().stream().filter(ticket -> ticket.getEvent().equals(newValue)).collect(java.util.stream.Collectors.toList())));
+        });
+        ltvOverviewCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            ltvOverviewTickets.setItems(FXCollections.observableList(facade.getAllTickets().stream().filter(ticket -> ticket.getCustomer().equals(newValue)).collect(java.util.stream.Collectors.toList())));
+        });
     }
 
     public void handleFilterEvents(KeyEvent keyEvent) {

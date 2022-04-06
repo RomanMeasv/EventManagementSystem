@@ -5,6 +5,7 @@ import ems.be.Event;
 import ems.gui.model.CustomerModel;
 import ems.gui.model.ModelFacade;
 import ems.gui.view.util.PopUp;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -44,6 +45,8 @@ public class CustomerTabController implements Initializable {
 
         ltvCustomers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedCustomer) -> {
             selectedCustomerListener(selectedCustomer);
+            ltvCustomerAttendingEvents.setItems(FXCollections.observableList(
+            facade.getAllTickets().stream().filter(t -> t.getCustomer().equals(selectedCustomer)).map(t -> t.getEvent()).distinct().collect(java.util.stream.Collectors.toList())));
         });
 
         ltvCustomers.setItems(facade.getAllCustomers());

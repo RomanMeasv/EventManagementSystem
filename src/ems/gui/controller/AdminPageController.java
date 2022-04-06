@@ -1,16 +1,24 @@
 package ems.gui.controller;
 
+
 import ems.be.EventCoordinator;
 import ems.gui.model.EventCoordinatorModel;
 import ems.gui.view.dialogs.ECDialog;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -82,6 +90,18 @@ public class AdminPageController implements Initializable {
             String query = txfFilter.getText();
             eventCoordinatorModel.filterEventCoordinators(query);
         } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void handleLogout(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../view/loginView.fxml"));
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

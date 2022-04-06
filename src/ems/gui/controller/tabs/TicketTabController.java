@@ -3,16 +3,23 @@ package ems.gui.controller.tabs;
 import ems.be.Customer;
 import ems.be.Event;
 import ems.be.Ticket;
+import ems.bll.util.EAN13Generator;
+import ems.bll.util.QRCodeGenerator;
 import ems.gui.model.CustomerModel;
 import ems.gui.model.EventModel;
 import ems.gui.model.ModelFacade;
 import ems.gui.model.TicketModel;
 import ems.gui.view.util.PopUp;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,6 +47,10 @@ public class TicketTabController implements Initializable {
     public Button btnCancelTicket;
     public Button btnApplyTicket;
 
+    public AnchorPane apnTicketPreview;
+    public Label lblEventName, lblStartDate, lblEndDate, lblLocation, lblTicketType;
+    public ImageView imgBarcode, imgQRCode;
+
     private ModelFacade facade;
 
     @Override
@@ -52,6 +63,7 @@ public class TicketTabController implements Initializable {
 
         ltvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedTicket) -> {
             selectedTicketListener(selectedTicket);
+            loadTicketPreview(selectedTicket);
         });
 
         ltvTickets.setItems(facade.getAllTickets());
@@ -270,6 +282,22 @@ public class TicketTabController implements Initializable {
 
         //default value = 1
         txfNoTickets.setText("1");
+    }
+
+    private void loadTicketPreview(Ticket ticket) {
+        lblEventName.setText(ticket.getEvent().getName());
+        lblTicketType.setText(ticket.getTicketType());
+        lblStartDate.setText(ticket.getEvent().getStart().toLocalDate().toString() + " " + ticket.getEvent().getStart().toLocalTime().toString());
+        lblEndDate.setText(ticket.getEvent().getEnd().toLocalDate().toString() + " " + ticket.getEvent().getEnd().toLocalTime().toString());
+        lblLocation.setText(ticket.getEvent().getLocation());
+
+        try {
+            Image qrCode = SwingFXUtils.toFXImage(QRCodeGenerator.generateQRCodeImage(ticket.getUuid().toString()), null);
+            imgQRCode.setImage(qrCode);
+        } catch (Exception e) {
+            PopUp.showError("Unable to generate barcode for image!");
+            e.printStackTrace();
+        }
     }
 
     public void handleSaveTickets(ActionEvent event) {

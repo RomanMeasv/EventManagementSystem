@@ -43,7 +43,7 @@ public class LoginPageController {
                 boolean isAdmin = loggedUser.getClass().equals(Admin.class);
                 boolean isEC = loggedUser.getClass().equals(EventCoordinator.class);
 
-                Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("../view/adminView.fxml")) :
+                Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("../view/adminViewNew.fxml")) :
                         isEC ? FXMLLoader.load(getClass().getResource("../view/eventCoordinatorView.fxml")) : null;
 
                 if(root == null){

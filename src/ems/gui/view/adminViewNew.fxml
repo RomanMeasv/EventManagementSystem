@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.AdminPageController">
+    <tabs>
+        <Tab closable="false" styleClass="overview-tab">
+            <graphic>
+                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/navbar/Overview-ico.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <fx:include source="tabs/overviewTabView.fxml" />
+        </Tab>
+        <Tab closable="false" styleClass="coordinator-tab">
+            <graphic>
+                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/navbar/Tickets-ico.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <fx:include source="tabs/ticketTabView.fxml" />
+        </Tab>
+        <Tab closable="false" styleClass="event-tab">
+            <graphic>
+                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/navbar/Events-ico.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <fx:include source="tabs/eventTabView.fxml" />
+        </Tab>
+        <Tab closable="false" styleClass="customer-tab">
+            <graphic>
+                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@resources/navbar/Customer-ico.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <fx:include source="tabs/customerTabView.fxml" />
+        </Tab>
+      <Tab closable="false" styleClass="logout-tab">
+         <graphic>
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleLogout" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/navbar/Tickets-ico.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <content>
+
+         </content>
+      </Tab>
+    </tabs>
+    <stylesheets>
+        <URL value="@styles/panelStyle.css" />
+        <URL value="@styles/sceneStyle.css" />
+    </stylesheets>
+</TabPane>

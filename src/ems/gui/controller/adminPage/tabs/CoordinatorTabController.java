@@ -5,6 +5,7 @@ import ems.be.Event;
 import ems.be.EventCoordinator;
 import ems.gui.model.EventCoordinatorModel;
 import ems.gui.model.ModelFacade;
+import ems.gui.view.util.PopUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,14 +20,14 @@ import java.util.ResourceBundle;
 public class CoordinatorTabController implements Initializable {
 
 
-    public ListView <EventCoordinator> ltvCoordinators;
+    public ListView<EventCoordinator> ltvCoordinators;
     public TextField txfFilterCoordinators;
-    public TextField txfFilterEvents;
     public ComboBox cmbEvents;
     public TextField txfEventCoordinator;
     public Button btnCancelCoordinator;
-    public Button btnApplyCoordianator;
-    public ListView <Event>ltvCoordinatorsEvents;
+    public Button btnApplyCoordinator;
+    public ListView<Event> ltvCoordinatorsEvents;
+    public TextField txfName;
 
     private ModelFacade facade;
     private EventCoordinatorModel eventCoordinatorModel;
@@ -48,11 +49,32 @@ public class CoordinatorTabController implements Initializable {
     }
 
     public void handleRemoveCoordianator(ActionEvent event) {
+        EventCoordinator coordinator = ltvCoordinators.getSelectionModel().getSelectedItem();
+        try {
+            eventCoordinatorModel.deleteEventCoordinator(coordinator);
+        } catch (Exception e) {
+            PopUp.showError(e.getMessage());
+        }
+    }
+
+
+    public void handleFilterCoordinators(KeyEvent keyEvent) {
+        String query = txfEventCoordinator.getText();
+        try {
+            ltvCoordinators.setItems(eventCoordinatorModel.filterEventCoordinators(query));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleCancelCoordianator(ActionEvent event) {
+    }
+
+    public void handleApplyCoordianator(ActionEvent event) {
     }
 
     public void handleFilterEvents(KeyEvent keyEvent) {
     }
-
 
     public void handleAddEvent(ActionEvent event) {
     }
@@ -60,12 +82,7 @@ public class CoordinatorTabController implements Initializable {
     public void handleRemoveEvent(ActionEvent event) {
     }
 
-    public void handleFilterCoordinators(KeyEvent keyEvent) {
-    }
-
-    public void handleCancelCoordianator(ActionEvent event) {
-    }
-
-    public void handleApplyCoordianator(ActionEvent event) {
+    private void clearFields(){
+        txfName.clear();
     }
 }

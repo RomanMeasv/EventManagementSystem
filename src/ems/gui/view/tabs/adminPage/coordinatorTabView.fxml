@@ -67,7 +67,7 @@
                   </VBox>
                   <VBox spacing="10.0" stylesheets="@../../styles/milosGreatSolutionStyle.css" HBox.hgrow="SOMETIMES">
                      <children>
-                        <TextField fx:id="txfFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEvents" promptText="Name" />
+                        <TextField fx:id="txfName" minWidth="200.0" onKeyTyped="#handleFilterEvents" promptText="Name" />
                         <VBox minWidth="-Infinity" styleClass="list-box" VBox.vgrow="ALWAYS">
                            <children>
                               <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
@@ -122,7 +122,7 @@
             <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@../../styles/dialogButtonStyle.css">
                <children>
                   <Button fx:id="btnCancelCoordinator" mnemonicParsing="false" onAction="#handleCancelCoordianator" text="Cancel" HBox.hgrow="NEVER" />
-                  <Button fx:id="btnApplyCoordianator" mnemonicParsing="false" onAction="#handleApplyCoordianator" text="Apply" HBox.hgrow="NEVER" />
+                  <Button fx:id="btnApplyCoordinator" mnemonicParsing="false" onAction="#handleApplyCoordianator" text="Apply" HBox.hgrow="NEVER" />
                </children>
             </HBox>
          </children>

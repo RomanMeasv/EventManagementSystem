@@ -64,6 +64,7 @@ public class ModelFacade {
         {
             ticketModel.getAllTickets().set(ticketModel.getAllTickets().indexOf(t), t);
         }
+        ticketModel.getAllTickets().removeIf(ticket -> ticket.getEvent().equals(event) && !event.getTicketTypes().contains(ticket.getTicketType()));
     }
 
     public void createCustomer(Customer customer) throws Exception {

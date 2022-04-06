@@ -6,7 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.coordinatorPage.EventCoordinatorPageController">
+<TabPane fx:id="tabPaneCoordinator" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.coordinatorPage.EventCoordinatorPageController">
     <tabs>
         <Tab closable="false" styleClass="overview-tab">
             <graphic>
@@ -48,6 +48,15 @@
             </graphic>
             <fx:include source="tabs/coordinatorPage/ticketTabView.fxml" />
         </Tab>
+      <Tab closable="false" onSelectionChanged="#handleLogout" styleClass="logout-tab">
+         <graphic>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/navbar/Logout-ico.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Tab>
     </tabs>
     <stylesheets>
         <URL value="@styles/panelStyle.css" />

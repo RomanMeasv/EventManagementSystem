@@ -271,4 +271,10 @@ public class TicketTabController implements Initializable {
         //default value = 1
         txfNoTickets.setText("1");
     }
+
+    public void handleSaveTickets(ActionEvent event) {
+    }
+
+    public void handleSaveTicket(ActionEvent event) {
+    }
 }

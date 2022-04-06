@@ -52,6 +52,9 @@ public class EventTabController implements Initializable {
             if (selectedEvent != null) {
                 selectedEventListener(selectedEvent);
             }
+            else {
+                clearEventDetails();
+            }
         });
 
         ltvEvents.setItems(facade.getAllEvents());

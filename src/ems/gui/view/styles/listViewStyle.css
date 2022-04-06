@@ -19,15 +19,15 @@
     -fx-padding: 0;
 }
 
-.list-cell {
+.list-view .list-cell {
     -fx-background-color: #FFF;
 }
 
-.list-cell:selected, .list-cell:filled:hover {
+.list-view .list-cell:selected, .list-view .list-cell:filled:hover {
     -fx-background-color: #8293E3;
 }
 
-.list-cell:selected .text, .list-cell:filled:hover .text {
+.list-view .list-cell:selected .text, .list-view .list-cell:filled:hover .text {
     -fx-fill: #FFF;
 }
 

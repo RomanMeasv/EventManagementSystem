@@ -48,6 +48,10 @@ public class CustomerTabController implements Initializable {
                 ltvCustomerAttendingEvents.setItems(FXCollections.observableList(
                         facade.getAllTickets().stream().filter(t -> t.getCustomer().equals(selectedCustomer)).map(t -> t.getEvent()).distinct().collect(java.util.stream.Collectors.toList())));
             }
+            else {
+                clearCustomerDetails();
+                ltvCustomerAttendingEvents.setItems(FXCollections.observableArrayList());
+            }
         });
 
         ltvCustomers.setItems(facade.getAllCustomers());

@@ -49,7 +49,7 @@ public class TicketTabController implements Initializable {
 
     public AnchorPane apnTicketPreview;
     public Label lblEventName, lblStartDate, lblEndDate, lblLocation, lblTicketType;
-    public ImageView imgBarcode, imgQRCode;
+    public ImageView imgQRCode;
 
     private ModelFacade facade;
 
@@ -60,11 +60,22 @@ public class TicketTabController implements Initializable {
         } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
+        //setting up the page
+        clearTicketPreview();
+        txfNoTickets.setVisible(false);
+        lblTicketUUID.setVisible(false);
+        chbTicketValidation.setVisible(false);
 
         ltvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedTicket) -> {
             if (selectedTicket != null) {
                 selectedTicketListener(selectedTicket);
                 loadTicketPreview(selectedTicket);
+            }
+            else
+            {
+                clearTicketComboBoxFilters();
+                clearTicketComboBoxSelection();
+                clearTicketPreview();
             }
         });
 
@@ -320,6 +331,9 @@ public class TicketTabController implements Initializable {
                 PopUp.showError("Could not save ticket!");
             }
         }
+        clearTicketComboBoxFilters();
+        clearTicketComboBoxSelection();
+        clearTicketPreview();
     }
 
     public void handleSaveTicket(ActionEvent event) {
@@ -342,5 +356,15 @@ public class TicketTabController implements Initializable {
         } catch (Exception e) {
             PopUp.showError("Could not save ticket!");
         }
+    }
+
+    private void clearTicketPreview()
+    {
+        lblEventName.setText("");
+        lblTicketType.setText("");
+        lblStartDate.setText("");
+        lblEndDate.setText("");
+        lblLocation.setText("");
+        imgQRCode.setImage(null);
     }
 }

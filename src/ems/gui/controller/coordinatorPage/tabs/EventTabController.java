@@ -44,7 +44,7 @@ public class EventTabController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             facade = ModelFacade.getInstance();
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
 
@@ -61,7 +61,7 @@ public class EventTabController implements Initializable {
         try {
             String query = txfFilterEvents.getText();
             ltvEvents.setItems(facade.getFilteredEvents(query));
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }

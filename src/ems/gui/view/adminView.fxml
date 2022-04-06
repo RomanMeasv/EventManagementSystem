@@ -6,7 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<TabPane  minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminPage.AdminPageController">
+<TabPane fx:id="tabPaneAdmin" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinHeight="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminPage.AdminPageController">
     <tabs>
         <Tab closable="false" styleClass="overview-tab">
             <graphic>
@@ -48,7 +48,7 @@
             </graphic>
             <fx:include source="tabs/adminPage/customerTabView.fxml" />
         </Tab>
-      <Tab fx:id="tabLogout" closable="false" onSelectionChanged="#handleLogout" styleClass="logout-tab">
+      <Tab closable="false" onSelectionChanged="#handleLogout" styleClass="logout-tab">
          <graphic>
             <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>

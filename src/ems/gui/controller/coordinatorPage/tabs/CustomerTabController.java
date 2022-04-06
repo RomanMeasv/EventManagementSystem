@@ -38,7 +38,7 @@ public class CustomerTabController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             facade = ModelFacade.getInstance();
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
 

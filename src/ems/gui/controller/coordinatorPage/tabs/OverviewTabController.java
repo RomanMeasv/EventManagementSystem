@@ -51,7 +51,7 @@ public class OverviewTabController implements Initializable {
             String query = txfFilterEvents.getText();
             FilteredList<Event> filteredEvents = facade.getFilteredEvents(query);
             ltvOverviewEvents.setItems(filteredEvents);
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }
@@ -61,7 +61,7 @@ public class OverviewTabController implements Initializable {
             String query = txfFilterCustomers.getText();
             FilteredList<Customer> filteredCustomers = facade.getFilteredCustomers(query);
             ltvOverviewCustomers.setItems(filteredCustomers);
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }
@@ -71,7 +71,7 @@ public class OverviewTabController implements Initializable {
             String query = txfFilterTickets.getText();
             FilteredList<Ticket> filteredTickets = facade.getFilteredTickets(query);
             ltvOverviewTickets.setItems(filteredTickets);
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }

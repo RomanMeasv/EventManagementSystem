@@ -50,3 +50,19 @@
 .ticket-tab:selected .image-view {
     -fx-image: url("../resources/navbar/Tickets-ico-active.png");
 }
+
+.coordinator-tab .image-view {
+    -fx-image: url("../resources/navbar/Coordinator-ico.png");
+}
+
+.coordinator-tab:selected .image-view {
+    -fx-image: url("../resources/navbar/Coordinator-ico-active.png");
+}
+
+.logout-tab .image-view {
+    -fx-image: url("../resources/navbar/Logout-ico.png");
+}
+
+.logout-tab:selected .image-view {
+    -fx-image: url("../resources/navbar/Logout-ico-active.png");
+}

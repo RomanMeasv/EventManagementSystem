@@ -300,13 +300,6 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleSaveTickets(ActionEvent event) {
-
-    }
-
-    public void handleSaveTicket(ActionEvent event) {
-        WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
-        BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
-
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Save Ticket to...");
         chooser.setInitialDirectory(new File("C:\\"));
@@ -318,6 +311,23 @@ public class TicketTabController implements Initializable {
         if (file == null)
             return;
 
+
+    }
+
+    public void handleSaveTicket(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save Ticket to...");
+        chooser.setInitialDirectory(new File("C:\\"));
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        File file = chooser.showSaveDialog(null);
+        if (file == null)
+            return;
+
+        WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
+        BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
         try {
             ImageIO.write(bImage, "png", file);
         } catch (Exception e) {

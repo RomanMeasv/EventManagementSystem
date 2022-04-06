@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminPage.tabs.CoordinatorTabController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminPage.tabs.CoordinatorTabController">
    <children>
       <VBox layoutY="10.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -65,10 +65,11 @@
                         <URL value="@../../styles/listViewStyle.css" />
                      </stylesheets>
                   </VBox>
-                  <VBox spacing="10.0" stylesheets="@../../styles/milosGreatSolutionStyle.css" HBox.hgrow="SOMETIMES">
+                  <VBox spacing="10.0" stylesheets="@../../styles/filloutFormStyle.css" HBox.hgrow="SOMETIMES">
                      <children>
-                        <TextField fx:id="txfFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEvents" promptText="Name" />
-                        <VBox minWidth="-Infinity" styleClass="list-box" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="txfFilterEvents" minWidth="200.0" onKeyTyped="#handleFilterEvents" promptText="Name" styleClass="mandatory-field" />
+                        <TextField fx:id="txfPassword" minWidth="200.0" onKeyTyped="#handleFilterEvents" promptText="Password" styleClass="mandatory-field" />
+                        <VBox styleClass="list-box" VBox.vgrow="ALWAYS">
                            <children>
                               <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
                                  <children>
@@ -80,14 +81,14 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </ListView>
-                              <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                              <HBox VBox.vgrow="NEVER">
                                  <children>
                                     <TextField fx:id="txfEventCoordinator" onKeyTyped="#handleFilterEvents" promptText="Filter events" HBox.hgrow="SOMETIMES">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </TextField>
-                                    <ComboBox fx:id="cmbEvents" minWidth="150.0" HBox.hgrow="ALWAYS" />
+                                    <ComboBox fx:id="cmbEvents" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" HBox.hgrow="NEVER" />
                                     <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddEvent" text="ADD" HBox.hgrow="NEVER">
                                        <HBox.margin>
                                           <Insets />
@@ -111,8 +112,8 @@
                               </HBox>
                            </children>
                            <stylesheets>
-                              <URL value="@../../styles/ticketTypeStyle.css" />
                               <URL value="@../../styles/listViewStyle.css" />
+                              <URL value="@../../styles/teamRAMGreatSolutionStyle.css" />
                            </stylesheets>
                         </VBox>
                      </children>

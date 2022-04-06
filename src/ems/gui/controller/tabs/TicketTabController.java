@@ -61,8 +61,10 @@ public class TicketTabController implements Initializable {
         }
 
         ltvTickets.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedTicket) -> {
-            selectedTicketListener(selectedTicket);
-            loadTicketPreview(selectedTicket);
+            if (selectedTicket != null) {
+                selectedTicketListener(selectedTicket);
+                loadTicketPreview(selectedTicket);
+            }
         });
 
         ltvTickets.setItems(facade.getAllTickets());

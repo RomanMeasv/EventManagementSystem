@@ -51,7 +51,9 @@ public class EventTabController implements Initializable {
         }
 
         ltvEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedEvent) -> {
-            selectedEventListener(selectedEvent);
+            if (selectedEvent != null) {
+                selectedEventListener(selectedEvent);
+            }
         });
 
         ltvEvents.setItems(facade.getAllEvents());
@@ -207,8 +209,6 @@ public class EventTabController implements Initializable {
     }
 
     private void selectedEventListener(Event selectedEvent) {
-        if(selectedEvent == null)
-            return;
         setDisableApplyButtons(false);
         fillEventDetails(selectedEvent);
     }

@@ -34,9 +34,9 @@ public class EventCoordinatorModel {
         allEventCoordinators.remove(ec);
     }
 
-    public void updateEventCoordinator(EventCoordinator oldEC, EventCoordinator updatedEC) throws Exception {
-        eventCoordinatorLogic.updateEventCoordinator(updatedEC);
-        allEventCoordinators.set(allEventCoordinators.indexOf(oldEC), updatedEC);
+    public void updateEventCoordinator( EventCoordinator ec) throws Exception {
+        eventCoordinatorLogic.updateEventCoordinator(ec);
+        allEventCoordinators.set(allEventCoordinators.indexOf(ec),ec);
     }
 
     public FilteredList<EventCoordinator> filterEventCoordinators(String query) throws Exception {

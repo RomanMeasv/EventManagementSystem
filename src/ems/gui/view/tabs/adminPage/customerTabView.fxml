@@ -1,8 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminPage.tabs.CustomerTabController">
-
+   <children>
+      <VBox layoutX="30.0" layoutY="40.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="400.0" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Customers" />
+                           </children>
+                        </TextFlow>
+                        <ListView fx:id="ltvCustomers" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                           <children>
+                              <TextField fx:id="txfFilterCustomers" onKeyTyped="#handleFilterCustomers" promptText="Filter customers.." HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveCustomer" styleClass="remove-button" text="REMOVE" HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <stylesheets>
+                        <URL value="@../../styles/ticketTypeStyle.css" />
+                        <URL value="@../../styles/listViewStyle.css" />
+                     </stylesheets>
+                  </VBox>
+                  <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox spacing="10.0" stylesheets="@../../styles/filloutFormStyle.css" VBox.vgrow="ALWAYS">
+                           <children>
+                              <TextField fx:id="txfCustomerName" disable="true" promptText="Name*" style="-fx-opacity: 1;" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                              <TextField fx:id="txfCustomerEmail" disable="true" promptText="Email*" style="-fx-opacity: 1;" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                              <TextField fx:id="txfCustomerPhoneNumber" disable="true" promptText="Phone number*" style="-fx-opacity: 1;" styleClass="mandatory-field" VBox.vgrow="NEVER" />
+                              <TextArea fx:id="txaCustomerNotes" disable="true" promptText="Notes" style="-fx-opacity: 1;" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                        <VBox styleClass="list-box" VBox.vgrow="ALWAYS">
+                           <children>
+                              <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Attending events" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" />
+                                 </padding>
+                              </TextFlow>
+                              <ListView fx:id="ltvCustomerAttendingEvents" disable="true" style="-fx-opacity: 1;" VBox.vgrow="ALWAYS" />
+                              <TextField fx:id="txfFilterAttendingEvents" onKeyTyped="#handleFilterAttendingEvents" promptText="Filter..." VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <stylesheets>
+                              <URL value="@../../styles/attendingListStyle.css" />
+                              <URL value="@../../styles/listViewStyle.css" />
+                           </stylesheets>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </AnchorPane>

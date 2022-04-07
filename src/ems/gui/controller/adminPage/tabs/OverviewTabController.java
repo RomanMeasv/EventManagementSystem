@@ -15,9 +15,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OverviewTabController implements Initializable {
-    public ListView <Event> ltvEvents;
+    public ListView<Event> ltvEvents;
     public TextField txfFilterEvents;
-    public ListView <EventCoordinator> ltvCoordinators;
+    public ListView<EventCoordinator> ltvCoordinators;
     public TextField txfFilterCoordinators;
 
     private ModelFacade facade;
@@ -29,7 +29,7 @@ public class OverviewTabController implements Initializable {
             facade = ModelFacade.getInstance();
             eventCoordinatorModel = new EventCoordinatorModel();
         } catch (Exception e) {
-            e.printStackTrace();
+            PopUp.showError(e.getMessage());
         }
         ltvEvents.setItems(facade.getAllEvents());
         ltvCoordinators.setItems(eventCoordinatorModel.getAllEventCoordinators());
@@ -42,17 +42,17 @@ public class OverviewTabController implements Initializable {
             String query = txfFilterEvents.getText();
             FilteredList<Event> filteredEvents = facade.getFilteredEvents(query);
             ltvEvents.setItems(filteredEvents);
-        } catch (Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }
 
     public void handleFilterCoordinators(KeyEvent keyEvent) {
-        try{
+        try {
             String query = txfFilterCoordinators.getText();
             FilteredList<EventCoordinator> filteredECs = eventCoordinatorModel.filterEventCoordinators(query);
             ltvCoordinators.setItems(filteredECs);
-        }catch(Exception e){
+        } catch (Exception e) {
             PopUp.showError(e.getMessage());
         }
     }

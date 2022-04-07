@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ems.gui.controller.adminPage.tabs.EventTabController"
-            prefHeight="600.0" prefWidth="900.0">
-
+<AnchorPane stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.adminPage.tabs.EventTabController">
+   <children>
+      <VBox layoutX="20.0" layoutY="30.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="400.0" minWidth="-Infinity" prefWidth="250.0" styleClass="list-box" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Events" />
+                           </children>
+                        </TextFlow>
+                        <ListView fx:id="ltvEvents" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <HBox maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                           <children>
+                              <TextField fx:id="txfFilterEvents" onKeyTyped="#handleFilterEvents" promptText="Filter events..." HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveEvent" styleClass="remove-button" text="REMOVE" HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <stylesheets>
+                        <URL value="@../../styles/ticketTypeStyle.css" />
+                        <URL value="@../../styles/listViewStyle.css" />
+                     </stylesheets>
+                  </VBox>
+                  <VBox spacing="10.0" stylesheets="@../../styles/filloutFormStyle.css" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <TextField fx:id="txfEventName" disable="true" minWidth="200.0" promptText="Name" style="-fx-opacity: 1;" styleClass="mandatory-field" />
+                        <TextField fx:id="txfEventDescription" disable="true" minWidth="200.0" promptText="Description" style="-fx-opacity: 1;" styleClass="mandatory-field" />
+                        <VBox styleClass="list-box" VBox.vgrow="ALWAYS">
+                           <children>
+                              <TextFlow styleClass="text-flow" textAlignment="CENTER" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="list-view-header" text="Event coordinators" />
+                                 </children>
+                              </TextFlow>
+                              <ListView fx:id="ltvEventsCoordinators" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </ListView>
+                              <HBox VBox.vgrow="NEVER">
+                                 <children>
+                                    <TextField fx:id="txfFilterEventsCoordinators" onKeyTyped="#handleFilterCoordinators" promptText="FIiter coordinators" HBox.hgrow="SOMETIMES">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <ComboBox fx:id="cmbCoordinators" maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="combo-box" HBox.hgrow="ALWAYS" />
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddCoordinator" text="ADD" HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Button>
+                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveCoordinator" styleClass="remove-button" text="REMOVE" HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <stylesheets>
+                              <URL value="@../../styles/listViewStyle.css" />
+                              <URL value="@../../styles/teamRAMGreatSolutionStyle.css" />
+                           </stylesheets>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" spacing="10.0" stylesheets="@../../styles/dialogButtonStyle.css">
+               <children>
+                  <Button fx:id="btnCancelEvent" mnemonicParsing="false" onAction="#handleCancelEvent" text="Cancel" HBox.hgrow="NEVER" />
+                  <Button fx:id="btnApplyEvent" mnemonicParsing="false" onAction="#handleApplyEvent" text="Apply" HBox.hgrow="NEVER" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </AnchorPane>

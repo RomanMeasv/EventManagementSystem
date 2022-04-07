@@ -315,6 +315,10 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleSaveTickets(ActionEvent event) {
+        if (ltvTickets.getItems().isEmpty()) {
+            return;
+        }
+
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Save tickets to...");
         chooser.setInitialDirectory(new File("C:\\"));
@@ -338,6 +342,10 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleSaveTicket(ActionEvent event) {
+        if (ltvTickets.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Save ticket to...");
         chooser.setInitialDirectory(new File("C:\\"));

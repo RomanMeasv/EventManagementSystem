@@ -230,6 +230,7 @@ public class TicketTabController implements Initializable {
             selectedTicket.setTicketType(selectedTicketType);
             try {
                 facade.updateTicket(selectedTicket);
+                ltvTickets.getSelectionModel().select(selectedTicket); //select the updated ticket, so the right side doesnt get cleared
             } catch (Exception e) {
                 PopUp.showError(e.getMessage());
                 e.printStackTrace();

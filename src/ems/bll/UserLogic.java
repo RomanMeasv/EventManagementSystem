@@ -18,8 +18,7 @@ public class UserLogic {
     public User tryLogin(String username, String password) throws DatabaseException {
         try {
             return dataAccess.tryLogin(username, password);
-        } catch (Exception exception)
-        {
+        } catch (Exception exception) {
             throw new DatabaseException("Could not log in! Check database connection!", exception);
         }
     }

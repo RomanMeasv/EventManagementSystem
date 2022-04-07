@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 import java.util.List;
-import java.util.Locale;
 
 public class EventLogic {
     IDataAccess dataAccess;

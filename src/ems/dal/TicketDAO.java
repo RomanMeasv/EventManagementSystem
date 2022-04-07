@@ -26,11 +26,11 @@ public class TicketDAO {
                 int customerId = rs.getInt("customerId");
                 tickets.add(
                         new Ticket(
-                            UUID.fromString(rs.getString("uuid")),
-                            rs.getBoolean("isValid"),
-                            cachedEvents.stream().filter(e -> e.getId() == eventId).findFirst().orElse(null),
-                            rs.getString("ticketType"),
-                            cachedCustomers.stream().filter(c -> c.getId() == customerId).findFirst().orElse(null))
+                                UUID.fromString(rs.getString("uuid")),
+                                rs.getBoolean("isValid"),
+                                cachedEvents.stream().filter(e -> e.getId() == eventId).findFirst().orElse(null),
+                                rs.getString("ticketType"),
+                                cachedCustomers.stream().filter(c -> c.getId() == customerId).findFirst().orElse(null))
                 );
             }
         }

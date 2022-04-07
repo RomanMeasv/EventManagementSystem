@@ -1,7 +1,6 @@
 package ems.dal;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.Connection;
 
@@ -10,8 +9,7 @@ public class ConnectionManager {
     private static ConnectionManager instance;
     private final SQLServerDataSource ds;
 
-    private ConnectionManager()
-    {
+    private ConnectionManager() {
         ds = new SQLServerDataSource();
         ds.setServerName("10.176.111.31");
         ds.setDatabaseName("EMS_RAM");
@@ -20,12 +18,11 @@ public class ConnectionManager {
         ds.setPassword("CSe21B_1");
     }
 
-    public static ConnectionManager getInstance(){
+    public static ConnectionManager getInstance() {
         return instance == null ? instance = new ConnectionManager() : instance;
     }
 
-    public static Connection getConnection() throws Exception
-    {
+    public static Connection getConnection() throws Exception {
         return getInstance().ds.getConnection();
     }
 }

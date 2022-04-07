@@ -1,6 +1,6 @@
 package ems.be;
 
-public class EventCoordinator extends User{
+public class EventCoordinator extends User {
     public EventCoordinator(String username, String password) {
         setUsername(username);
         setPassword(password);
@@ -13,7 +13,7 @@ public class EventCoordinator extends User{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.getUsername();
     }
 }

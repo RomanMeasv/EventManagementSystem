@@ -15,7 +15,9 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class EventTabController implements Initializable {
 
@@ -51,8 +53,7 @@ public class EventTabController implements Initializable {
         ltvEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedEvent) -> {
             if (selectedEvent != null) {
                 selectedEventListener(selectedEvent);
-            }
-            else {
+            } else {
                 clearEventDetails();
             }
         });
@@ -96,7 +97,8 @@ public class EventTabController implements Initializable {
     }
 
     public void handleFilterTicketTypes(KeyEvent keyEvent) {
-        //TODO: Filter ticket types
+        String query = txfEventTicketType.getText();
+        ltvEventTicketTypes.getItems().filtered(s -> s.toLowerCase().contains(query.toLowerCase());
     }
 
     public void handleAddTicketType(ActionEvent event) {

@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 import java.util.List;
-import java.util.logging.Filter;
 
 public class EventCoordinatorLogic {
 
@@ -21,8 +20,7 @@ public class EventCoordinatorLogic {
     public List<EventCoordinator> readAllEventCoordinators() throws DatabaseException {
         try {
             return dataAccess.readAllEventCoordinators();
-        } catch (Exception exception)
-        {
+        } catch (Exception exception) {
             throw new DatabaseException("Could not read event coordinators! Check database connection!", exception);
         }
     }

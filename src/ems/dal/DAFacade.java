@@ -54,11 +54,6 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
-        return userDAO.filterEventCoordinators(query);
-    }
-
-    @Override
     public Event createEvent(Event e) throws Exception {
         return eventDAO.createEvent(e);
     }
@@ -85,16 +80,6 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public List<String> readAllEventNames() throws Exception {
-        return eventDAO.readAllEventNames();
-    }
-
-    @Override
-    public List<Event> filterEvents(String query) throws Exception {
-        return eventDAO.filterEvents(query);
-    }
-
-    @Override
     public Customer createCustomer(Customer c) throws Exception {
         return customerDAO.createCustomer(c);
     }
@@ -116,18 +101,13 @@ public class DAFacade implements IDataAccess {
     }
 
     @Override
-    public List<Customer> filterCustomers(String query) throws Exception {
-        return customerDAO.filterCustomers(query);
-    }
-
-    @Override
     public List<Ticket> readAllTickets() throws Exception {
         return ticketDAO.readAllTickets(cachedEvents, cachedCustomers);
     }
 
     @Override
-    public Ticket createTicket(Ticket t) throws Exception {
-        return ticketDAO.createTicket(t);
+    public void createTicket(Ticket t) throws Exception {
+        ticketDAO.createTicket(t);
     }
 
     @Override
@@ -138,10 +118,5 @@ public class DAFacade implements IDataAccess {
     @Override
     public void deleteTicket(Ticket t) throws Exception {
         ticketDAO.deleteTicket(t);
-    }
-
-    @Override
-    public List<Ticket> filterTickets(String query) {
-        return null;
     }
 }

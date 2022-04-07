@@ -4,7 +4,10 @@ import ems.be.Admin;
 import ems.be.EventCoordinator;
 import ems.be.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,26 +105,6 @@ public class UserDAO {
             pstmtDelete.setInt(1, ec.getId());
             pstmtDelete.executeUpdate();
         }
-    }
-
-    public List<EventCoordinator> filterEventCoordinators(String query) throws Exception {
-        List<EventCoordinator> filtered = new ArrayList<>();
-
-        try (Connection con = ConnectionManager.getConnection()) {
-
-            String sqlCommandFilter = "SELECT id, username, password FROM Users WHERE roleId = 2 AND username LIKE ?;";
-            PreparedStatement pstmtFilter = con.prepareStatement(sqlCommandFilter);
-            pstmtFilter.setString(1, "%" + query + "%");
-            ResultSet rs = pstmtFilter.executeQuery();
-
-            while (rs.next()) {
-                filtered.add(new EventCoordinator(rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("password")));
-            }
-        }
-
-        return filtered;
     }
 
     public List<String> readAllUsernames() throws Exception {

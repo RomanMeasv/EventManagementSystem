@@ -6,20 +6,10 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.awt.image.BufferedImage;
-import java.nio.file.Paths;
 
 public class QRCodeGenerator {
 
-    //generateQRCodeImage("Scanned from QR code", "qrcode.png");
-    public static void generateQRCodeImage(String barcodeText, String path) throws Exception {
-        QRCodeWriter barcodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix =
-                barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
-
-        MatrixToImageWriter.writeToPath(bitMatrix, "png", Paths.get(path));
-    }
-
-    public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception{
+    public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception {
         QRCodeWriter barcodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix =
                 barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 115, 115);

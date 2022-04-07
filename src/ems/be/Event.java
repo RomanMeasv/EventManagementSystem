@@ -1,7 +1,6 @@
 package ems.be;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Event {
@@ -14,9 +13,6 @@ public class Event {
     private String location;
     private String locationGuidance;
     private List<String> ticketTypes;
-    //private List<EventCoordinator> eventCoordinators;
-
-
 
     public Event(String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketType) {
         this.name = name;
@@ -115,14 +111,8 @@ public class Event {
         this.ticketTypes = ticketTypes;
     }
 
-//    public List<EventCoordinator> getEventCoordinators() {return eventCoordinators;}
-//
-//    public void setEventCoordinators(List<EventCoordinator> eventCoordinators) {
-//        this.eventCoordinators = eventCoordinators;
-//    }
-
     @Override
-    public String toString(){
+    public String toString() {
         return this.name;
     }
 

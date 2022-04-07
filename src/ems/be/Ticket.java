@@ -63,7 +63,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "..." + uuid.toString().substring(uuid.toString().length()-4) + " (" + event.getName() + ", " + customer.getName() + ")";
+        return "..." + uuid.toString().substring(uuid.toString().length() - 4) + " (" + event.getName() + ", " + customer.getName() + ")";
     }
 
     @Override

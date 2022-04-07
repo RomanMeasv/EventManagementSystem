@@ -16,12 +16,12 @@
             <Pane styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" styleClass="form" StackPane.alignment="CENTER">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="260.0" styleClass="form" StackPane.alignment="CENTER">
          <children>
-            <Label layoutX="64.0" layoutY="20.0" styleClass="header" text="Event Management" />
-            <TextField fx:id="txfUsername" alignment="TOP_LEFT" layoutX="51.0" layoutY="128.0" onAction="#handleLogin" promptText="username" styleClass="field" />
-            <PasswordField fx:id="psfPassword" layoutX="51.0" layoutY="167.0" onAction="#handleLogin" promptText="password" styleClass="field" />
-            <Button layoutX="149.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogin" prefWidth="100.0" text="Login" />
+            <Label layoutX="44.0" layoutY="55.0" styleClass="header" text="Event Management" />
+            <TextField fx:id="txfUsername" alignment="TOP_LEFT" layoutX="31.0" layoutY="163.0" onAction="#handleLogin" promptText="username" styleClass="field" />
+            <PasswordField fx:id="psfPassword" layoutX="31.0" layoutY="202.0" onAction="#handleLogin" promptText="password" styleClass="field" />
+            <Button layoutX="129.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogin" prefWidth="100.0" text="Login" />
          </children>
       </AnchorPane>
    </children>

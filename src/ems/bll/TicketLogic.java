@@ -1,10 +1,10 @@
 package ems.bll;
 
 import ems.be.Ticket;
+import ems.bll.exceptions.DatabaseException;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 import javafx.collections.ObservableList;
-import ems.bll.exceptions.DatabaseException;
 import javafx.collections.transformation.FilteredList;
 
 import java.util.List;

@@ -28,7 +28,7 @@ public class EventDAO {
             pstmtInsertEvent.executeUpdate();
             ResultSet rs = pstmtInsertEvent.getGeneratedKeys();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 //create tuples in TicketTypes table
                 String sqlCommandInsertTicketTypes = "INSERT INTO TicketTypes(eventId, [type]) VALUES (?, ?);";
                 PreparedStatement pstmtInsertTicketTypes = con.prepareStatement(sqlCommandInsertTicketTypes);
@@ -121,10 +121,10 @@ public class EventDAO {
 
             //insert ticket types that are not yet present
             String sqlCommandInsert = """
-                                        IF NOT EXISTS(SELECT * FROM TicketTypes WHERE eventId = ? AND [type] = ?) 
-                                        BEGIN 
-                                            INSERT INTO TicketTypes (eventId, type) VALUES (?, ?) 
-                                        END""";
+                    IF NOT EXISTS(SELECT * FROM TicketTypes WHERE eventId = ? AND [type] = ?) 
+                    BEGIN 
+                        INSERT INTO TicketTypes (eventId, type) VALUES (?, ?) 
+                    END""";
             PreparedStatement pstmtInsert = con.prepareStatement(sqlCommandInsert);
             for (String type : e.getTicketTypes()) {
                 pstmtInsert.setInt(1, e.getId());
@@ -136,7 +136,7 @@ public class EventDAO {
             pstmtInsert.executeBatch();
 
             //remove old ticket type tuples;
-            String sqlCommandDelete = "DELETE FROM TicketTypes WHERE eventId = ? AND [type] NOT IN (" + "'" + String.join("','", e.getTicketTypes()) + "'" +");"; //not SQL injection safe, but it didnt work with ?
+            String sqlCommandDelete = "DELETE FROM TicketTypes WHERE eventId = ? AND [type] NOT IN (" + "'" + String.join("','", e.getTicketTypes()) + "'" + ");"; //not SQL injection safe, but it didnt work with ?
             PreparedStatement pstmtDelete = con.prepareStatement(sqlCommandDelete);
             pstmtDelete.setInt(1, e.getId());
             pstmtDelete.executeUpdate();
@@ -144,50 +144,6 @@ public class EventDAO {
             con.commit();
             con.setAutoCommit(true);
         }
-    }
-
-    public List<String> readAllEventNames() throws Exception {
-        List<String> allEventNames = new ArrayList<>();
-
-        try (Connection con = ConnectionManager.getConnection()) {
-
-            String sqlCommandSelect = "SELECT [name] FROM Events";
-            PreparedStatement pstmtSelect = con.prepareStatement(sqlCommandSelect);
-            ResultSet rs = pstmtSelect.executeQuery();
-
-            while (rs.next()) {
-                allEventNames.add(rs.getString("name"));
-            }
-        }
-        return allEventNames;
-    }
-
-    public List<Event> filterEvents(String query) throws Exception {
-        List<Event> filtered = new ArrayList<>();
-
-        try (Connection con = ConnectionManager.getConnection()) {
-
-            String sqlCommandFilter = "SELECT * FROM Events WHERE [name] LIKE ?;";
-            PreparedStatement pstmtFilter = con.prepareStatement(sqlCommandFilter);
-            pstmtFilter.setString(1, "%" + query + "%");
-            ResultSet rs = pstmtFilter.executeQuery();
-
-            while (rs.next()) {
-                filtered.add(new Event(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getString("notes"),
-                        rs.getTimestamp("start").toLocalDateTime(),
-                        rs.getTimestamp("end").toLocalDateTime(),
-                        rs.getString("location"),
-                        rs.getString("locationGuidance"),
-                        readTicketTypes(rs.getInt("id"))
-                ));
-            }
-        }
-
-        return filtered;
     }
 
     private List<String> readTicketTypes(int eventId) throws Exception {

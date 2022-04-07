@@ -37,7 +37,7 @@ public class ModelFacade {
         return ticketModel.getAllTickets();
     }
 
-    public FilteredList<Event> getFilteredEvents(String query) throws Exception {
+    public FilteredList<Event> getFilteredEvents(String query) {
         return eventModel.getFilteredEvents(query);
     }
 
@@ -45,7 +45,7 @@ public class ModelFacade {
         return customerModel.getFilteredCustomers(query);
     }
 
-    public FilteredList<Ticket> getFilteredTickets(String query) throws Exception {
+    public FilteredList<Ticket> getFilteredTickets(String query) {
         return ticketModel.getFilteredTickets(query);
     }
 

@@ -94,7 +94,8 @@ public class CustomerTabController implements Initializable {
     }
 
     public void handleFilterAttendingEvents(KeyEvent keyEvent) {
-        //TODO: Filter attending events
+        String query = txfFilterAttendingEvents.getText();
+        ltvCustomerAttendingEvents.setItems(facade.getFilteredEvents(query));
     }
 
     public void handleCancelCustomer(ActionEvent event) {

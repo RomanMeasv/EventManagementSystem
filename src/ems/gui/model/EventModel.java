@@ -37,7 +37,7 @@ public class EventModel {
         allEvents.set(allEvents.indexOf(event), event);
     }
 
-    public FilteredList<Event> getFilteredEvents(String query) throws Exception {
+    public FilteredList<Event> getFilteredEvents(String query){
         return eventLogic.getFilteredEvents(query, allEvents);
     }
 }

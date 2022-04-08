@@ -98,7 +98,7 @@ public class EventTabController implements Initializable {
 
     public void handleFilterTicketTypes(KeyEvent keyEvent) {
         String query = txfEventTicketType.getText();
-        ltvEventTicketTypes.getItems().filtered(s -> s.toLowerCase().contains(query.toLowerCase());
+        ltvEventTicketTypes.getItems().filtered(s -> s.toLowerCase().contains(query.toLowerCase()));
     }
 
     public void handleAddTicketType(ActionEvent event) {

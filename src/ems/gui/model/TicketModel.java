@@ -45,4 +45,8 @@ public class TicketModel {
     public void saveTicket(File file, BufferedImage image) throws Exception {
         ticketLogic.saveTicket(file, image);
     }
+
+    public void mailTicket(String recipient, Ticket ticket, File ticketFile) throws Exception {
+        ticketLogic.mailTicket(recipient, ticket, ticketFile);
+    }
 }

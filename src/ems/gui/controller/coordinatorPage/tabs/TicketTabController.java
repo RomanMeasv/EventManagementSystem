@@ -347,15 +347,7 @@ public class TicketTabController implements Initializable {
             return;
         }
 
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save ticket to...");
-        chooser.setInitialDirectory(new File("C:\\"));
-        chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
-        chooser.setInitialFileName(getTicketFileName(ticket));
-
-        File file = chooser.showSaveDialog(null);
+        File file =  chooseLocationForTicket(ticket);
         if (file == null)
             return;
 
@@ -384,5 +376,39 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleSendViaEmail(ActionEvent event) {
+        Ticket ticket = ltvTickets.getSelectionModel().getSelectedItem();
+        if (ticket == null) {
+            return;
+        }
+
+        File file =  chooseLocationForTicket(ticket);
+        if (file == null)
+            return;
+
+        WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
+        BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
+        try {
+            facade.saveTicket(file, bImage);
+        } catch (Exception e) {
+            PopUp.showError("Could not save ticket!");
+        }
+
+        try {
+            facade.mailTicket(ticket.getCustomer().getEmail(), ticket, file);
+        } catch (Exception e) {
+            PopUp.showError("Could not mail ticket!");
+        }
+    }
+
+    private File chooseLocationForTicket(Ticket ticket) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save ticket to...");
+        chooser.setInitialDirectory(new File("C:\\"));
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+        chooser.setInitialFileName(getTicketFileName(ticket));
+
+        return chooser.showSaveDialog(null);
     }
 }

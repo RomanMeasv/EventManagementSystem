@@ -102,4 +102,8 @@ public class ModelFacade {
     public void saveTicket(File file, BufferedImage image) throws Exception {
         ticketModel.saveTicket(file, image);
     }
+
+    public void mailTicket(String recipient, Ticket ticket, File ticketFile) throws Exception {
+        ticketModel.mailTicket(recipient, ticket, ticketFile);
+    }
 }

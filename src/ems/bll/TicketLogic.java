@@ -2,12 +2,14 @@ package ems.bll;
 
 import ems.be.Ticket;
 import ems.bll.exceptions.DatabaseException;
+import ems.bll.util.EmailSender;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
@@ -59,5 +61,9 @@ public class TicketLogic {
 
     public void saveTicket(File file, BufferedImage image) throws Exception {
         ImageIO.write(image, "png", file);
+    }
+
+    public void mailTicket(String recipient, Ticket ticket, File ticketFile) throws Exception {
+        EmailSender.sendTicket(recipient, ticket, ticketFile);
     }
 }

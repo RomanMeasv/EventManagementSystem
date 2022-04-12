@@ -48,7 +48,7 @@ public class TicketTabController implements Initializable {
     public Button btnApplyTicket;
 
     public AnchorPane apnTicketPreview;
-    public Label lblEventName, lblStartDate, lblEndDate, lblLocation, lblTicketType;
+    public Label lblCustomerName, lblEventName, lblStartDate, lblEndDate, lblLocation, lblTicketType;
     public ImageView imgQRCode;
 
     private ModelFacade facade;
@@ -70,9 +70,7 @@ public class TicketTabController implements Initializable {
             if (selectedTicket != null) {
                 selectedTicketListener(selectedTicket);
                 loadTicketPreview(selectedTicket);
-            }
-            else
-            {
+            } else {
                 clearTicketComboBoxFilters();
                 clearTicketComboBoxSelection();
                 clearTicketPreview();
@@ -299,6 +297,7 @@ public class TicketTabController implements Initializable {
     }
 
     private void loadTicketPreview(Ticket ticket) {
+        lblCustomerName.setText(ticket.getCustomer().getName());
         lblEventName.setText(ticket.getEvent().getName());
         lblTicketType.setText(ticket.getTicketType());
         lblStartDate.setText(ticket.getEvent().getStart().toLocalDate().toString() + " " + ticket.getEvent().getStart().toLocalTime().toString());
@@ -367,8 +366,8 @@ public class TicketTabController implements Initializable {
         }
     }
 
-    private void clearTicketPreview()
-    {
+    private void clearTicketPreview() {
+        lblCustomerName.setText("");
         lblEventName.setText("");
         lblTicketType.setText("");
         lblStartDate.setText("");

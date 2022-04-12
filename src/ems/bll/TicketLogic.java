@@ -7,6 +7,9 @@ import ems.dal.IDataAccess;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 
 public class TicketLogic {
@@ -52,5 +55,9 @@ public class TicketLogic {
         return query.isEmpty() ?
                 new FilteredList<>(allTickets) :
                 allTickets.filtered(ticket -> ticket.toString().toLowerCase().contains(query.toLowerCase()));
+    }
+
+    public void saveTicket(File file, BufferedImage image) throws Exception {
+        ImageIO.write(image, "png", file);
     }
 }

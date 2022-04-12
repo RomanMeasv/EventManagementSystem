@@ -19,12 +19,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class TicketTabController implements Initializable {
 
@@ -329,8 +329,8 @@ public class TicketTabController implements Initializable {
             loadTicketPreview(ticket);
             WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
             BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
-            try {
-                ImageIO.write(bImage, "png", new File(directory + "/" + ticket.getUuid().toString() + ".png"));
+            try {;
+                facade.saveTicket(new File(directory + "\\" + getTicketFileName(ticket)), bImage);
             } catch (Exception e) {
                 PopUp.showError("Could not save ticket!");
             }
@@ -351,7 +351,7 @@ public class TicketTabController implements Initializable {
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        chooser.setInitialFileName(ltvTickets.getSelectionModel().getSelectedItem().getUuid().toString());
+        chooser.setInitialFileName(getTicketFileName(ltvTickets.getSelectionModel().getSelectedItem()));
 
         File file = chooser.showSaveDialog(null);
         if (file == null)
@@ -360,7 +360,7 @@ public class TicketTabController implements Initializable {
         WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
         BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
         try {
-            ImageIO.write(bImage, "png", file);
+            facade.saveTicket(file, bImage);
         } catch (Exception e) {
             PopUp.showError("Could not save ticket!");
         }
@@ -374,5 +374,10 @@ public class TicketTabController implements Initializable {
         lblEndDate.setText("");
         lblLocation.setText("");
         imgQRCode.setImage(null);
+    }
+
+    private String getTicketFileName(Ticket ticket) {
+        UUID uuid = ticket.getUuid();
+        return  ticket.getCustomer().getName() + ", " + ticket.getEvent().getName() + " (" + uuid.toString().substring(uuid.toString().length()- 4) + ").png";
     }
 }

@@ -6,6 +6,9 @@ import ems.be.Ticket;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 public class ModelFacade {
 
     private static ModelFacade instance; //Singleton instance
@@ -94,5 +97,9 @@ public class ModelFacade {
 
     public void updateTicket(Ticket ticket) throws Exception {
         ticketModel.updateTicket(ticket);
+    }
+
+    public void saveTicket(File file, BufferedImage image) throws Exception {
+        ticketModel.saveTicket(file, image);
     }
 }

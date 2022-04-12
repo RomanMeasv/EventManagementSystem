@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailSender {
-    
+
     private static String getOutlookPath() throws IOException{
         Process p = Runtime.getRuntime()
                 .exec(new String[]{"cmd.exe", "/c", "assoc", ".pst"});

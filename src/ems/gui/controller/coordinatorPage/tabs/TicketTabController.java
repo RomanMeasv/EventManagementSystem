@@ -382,4 +382,7 @@ public class TicketTabController implements Initializable {
         UUID uuid = ticket.getUuid();
         return  ticket.getCustomer().getName() + ", " + ticket.getEvent().getName() + " (" + uuid.toString().substring(uuid.toString().length()- 4) + ").png";
     }
+
+    public void handleSendViaEmail(ActionEvent event) {
+    }
 }

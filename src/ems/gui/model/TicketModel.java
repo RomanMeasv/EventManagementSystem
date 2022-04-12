@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-import java.io.IOException;
 import java.util.List;
 
 public class TicketModel {
@@ -40,9 +39,5 @@ public class TicketModel {
 
     public FilteredList<Ticket> getFilteredTickets(String query) {
         return ticketLogic.getFilteredTickets(query, allTickets);
-    }
-
-    public void sentTicketViaMail() throws Exception {
-        ticketLogic.sendTicketViaMail();
     }
 }

@@ -95,8 +95,4 @@ public class ModelFacade {
     public void updateTicket(Ticket ticket) throws Exception {
         ticketModel.updateTicket(ticket);
     }
-
-    public void sendTicketViaMail() throws Exception {
-        ticketModel.sentTicketViaMail();
-    }
 }

@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.coordinatorPage.tabs.TicketTabController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../styles/sceneStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ems.gui.controller.coordinatorPage.tabs.TicketTabController">
    <children>
       <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -130,7 +130,6 @@
                   </HBox>
                   <HBox spacing="10.0" HBox.hgrow="NEVER">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleSendMail" text="Send Via Mail" />
                         <Button mnemonicParsing="false" onAction="#handleSaveTicket" text="Save ticket" />
                         <Button fx:id="btnCancelTicket" mnemonicParsing="false" onAction="#handleCancelTicket" text="Cancel" HBox.hgrow="NEVER" />
                         <Button fx:id="btnApplyTicket" mnemonicParsing="false" onAction="#handleApplyTicket" text="Apply" HBox.hgrow="NEVER" />

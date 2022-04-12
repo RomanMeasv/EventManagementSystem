@@ -6,7 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-import java.util.List;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class TicketModel {
     private TicketLogic ticketLogic;
@@ -39,5 +40,9 @@ public class TicketModel {
 
     public FilteredList<Ticket> getFilteredTickets(String query) {
         return ticketLogic.getFilteredTickets(query, allTickets);
+    }
+
+    public void saveTicket(File file, BufferedImage image) throws Exception {
+        ticketLogic.saveTicket(file, image);
     }
 }

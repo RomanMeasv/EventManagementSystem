@@ -10,7 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailSender {
-    private static String getOutlookPath() throws Exception{
+    
+    private static String getOutlookPath() throws IOException{
         Process p = Runtime.getRuntime()
                 .exec(new String[]{"cmd.exe", "/c", "assoc", ".pst"});
         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -37,7 +38,7 @@ public class EmailSender {
         }
     }
 
-    public static void sendTicket(String recipient, Ticket ticket, File ticketFile) throws Exception {
+    public static void sendTicket(String recipient, Ticket ticket, File ticketFile) throws IOException {
         String outlookPath = getOutlookPath();
 
         String subject = "Your ticket for event " + ticket.getEvent().getName();
@@ -48,7 +49,6 @@ public class EmailSender {
         String mString = (recipient + "?subject=" + subject + "&body=" + body).replace(" ", "%20").replace("\n", "%0A");
 
         String outlookCommand = " /c ipm.note /m \"" + mString + "\" /a \"" + ticketFile.getAbsolutePath() + "\"";
-        //execute outlook
         Runtime.getRuntime().exec(outlookPath + outlookCommand);
     }
 }

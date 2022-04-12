@@ -3,6 +3,7 @@ package ems.gui.controller.coordinatorPage.tabs;
 import ems.be.Customer;
 import ems.be.Event;
 import ems.be.Ticket;
+import ems.bll.util.EmailSender;
 import ems.bll.util.QRCodeGenerator;
 import ems.gui.model.ModelFacade;
 import ems.gui.view.util.PopUp;
@@ -341,7 +342,8 @@ public class TicketTabController implements Initializable {
     }
 
     public void handleSaveTicket(ActionEvent event) {
-        if (ltvTickets.getSelectionModel().getSelectedItem() == null) {
+        Ticket ticket = ltvTickets.getSelectionModel().getSelectedItem();
+        if (ticket == null) {
             return;
         }
 
@@ -351,7 +353,7 @@ public class TicketTabController implements Initializable {
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        chooser.setInitialFileName(getTicketFileName(ltvTickets.getSelectionModel().getSelectedItem()));
+        chooser.setInitialFileName(getTicketFileName(ticket));
 
         File file = chooser.showSaveDialog(null);
         if (file == null)

@@ -19,12 +19,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class TicketTabController implements Initializable {
 
@@ -48,7 +48,7 @@ public class TicketTabController implements Initializable {
     public Button btnApplyTicket;
 
     public AnchorPane apnTicketPreview;
-    public Label lblEventName, lblStartDate, lblEndDate, lblLocation, lblTicketType;
+    public Label lblCustomerName, lblEventName, lblStartDate, lblEndDate, lblLocation, lblTicketType;
     public ImageView imgQRCode;
 
     private ModelFacade facade;
@@ -70,9 +70,7 @@ public class TicketTabController implements Initializable {
             if (selectedTicket != null) {
                 selectedTicketListener(selectedTicket);
                 loadTicketPreview(selectedTicket);
-            }
-            else
-            {
+            } else {
                 clearTicketComboBoxFilters();
                 clearTicketComboBoxSelection();
                 clearTicketPreview();
@@ -299,6 +297,7 @@ public class TicketTabController implements Initializable {
     }
 
     private void loadTicketPreview(Ticket ticket) {
+        lblCustomerName.setText(ticket.getCustomer().getName());
         lblEventName.setText(ticket.getEvent().getName());
         lblTicketType.setText(ticket.getTicketType());
         lblStartDate.setText(ticket.getEvent().getStart().toLocalDate().toString() + " " + ticket.getEvent().getStart().toLocalTime().toString());
@@ -330,8 +329,8 @@ public class TicketTabController implements Initializable {
             loadTicketPreview(ticket);
             WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
             BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
-            try {
-                ImageIO.write(bImage, "png", new File(directory + "/" + ticket.getUuid().toString() + ".png"));
+            try {;
+                facade.saveTicket(new File(directory + "\\" + getTicketFileName(ticket)), bImage);
             } catch (Exception e) {
                 PopUp.showError("Could not save ticket!");
             }
@@ -352,7 +351,7 @@ public class TicketTabController implements Initializable {
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        chooser.setInitialFileName(ltvTickets.getSelectionModel().getSelectedItem().getUuid().toString());
+        chooser.setInitialFileName(getTicketFileName(ltvTickets.getSelectionModel().getSelectedItem()));
 
         File file = chooser.showSaveDialog(null);
         if (file == null)
@@ -361,19 +360,24 @@ public class TicketTabController implements Initializable {
         WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
         BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
         try {
-            ImageIO.write(bImage, "png", file);
+            facade.saveTicket(file, bImage);
         } catch (Exception e) {
             PopUp.showError("Could not save ticket!");
         }
     }
 
-    private void clearTicketPreview()
-    {
+    private void clearTicketPreview() {
+        lblCustomerName.setText("");
         lblEventName.setText("");
         lblTicketType.setText("");
         lblStartDate.setText("");
         lblEndDate.setText("");
         lblLocation.setText("");
         imgQRCode.setImage(null);
+    }
+
+    private String getTicketFileName(Ticket ticket) {
+        UUID uuid = ticket.getUuid();
+        return  ticket.getCustomer().getName() + ", " + ticket.getEvent().getName() + " (" + uuid.toString().substring(uuid.toString().length()- 4) + ").png";
     }
 }

@@ -102,14 +102,15 @@
                         </HBox>
                         <AnchorPane VBox.vgrow="ALWAYS">
                            <children>
-                              <AnchorPane fx:id="apnTicketPreview" layoutX="41.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="420.0" styleClass="ticket-background" stylesheets="@../../styles/ticketPreviewStyle.css">
+                              <AnchorPane fx:id="apnTicketPreview" layoutX="120.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="220.0" styleClass="ticket-background" stylesheets="@../../styles/ticketPreviewStyle.css" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                  <children>
-                                    <Label fx:id="lblEventName" layoutX="-58.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" rotate="-90.0" text="Event name" />
-                                    <Label fx:id="lblStartDate" layoutX="22.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" rotate="-90.0" text="Start date" />
-                                    <Label fx:id="lblEndDate" layoutX="62.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" rotate="-90.0" text="End date" />
-                                    <Label fx:id="lblLocation" layoutX="-18.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" rotate="-90.0" text="Event location" />
-                                    <Label fx:id="lblTicketType" layoutX="102.0" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" rotate="-90.0" text="Ticket type" />
-                                    <ImageView fx:id="imgQRCode" fitHeight="115.0" fitWidth="115.0" layoutX="250.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                    <Label fx:id="lblCustomerName" layoutX="20.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" text="Customer name" />
+                                    <Label fx:id="lblEventName" layoutX="20.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" text="Event name" />
+                                    <Label fx:id="lblStartDate" layoutX="20.0" layoutY="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" text="Start date" />
+                                    <Label fx:id="lblEndDate" layoutX="20.0" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" text="End date" />
+                                    <Label fx:id="lblLocation" layoutX="20.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" text="Event location" />
+                                    <Label fx:id="lblTicketType" layoutX="20.0" layoutY="185.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="180.0" text="Ticket type" />
+                                    <ImageView fx:id="imgQRCode" fitHeight="115.0" fitWidth="115.0" layoutX="53.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@qrcode.png" />
                                        </image>

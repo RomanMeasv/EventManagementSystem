@@ -376,4 +376,12 @@ public class TicketTabController implements Initializable {
         lblLocation.setText("");
         imgQRCode.setImage(null);
     }
+
+    public void handleSendMail(ActionEvent event) {
+        try {
+            facade.sendTicketViaMail();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

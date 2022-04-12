@@ -2,21 +2,25 @@ package ems.bll;
 
 import ems.be.Ticket;
 import ems.bll.exceptions.DatabaseException;
+import ems.bll.util.MailSender;
 import ems.dal.DAFacade;
 import ems.dal.IDataAccess;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import java.io.IOException;
 import java.util.List;
 
 public class TicketLogic {
     IDataAccess dataAccess;
+    MailSender mailSender;
 
     public TicketLogic() {
         dataAccess = DAFacade.getInstance();
     }
 
     public List<Ticket> readAllTickets() throws Exception {
+        mailSender = new MailSender();
         try {
             return dataAccess.readAllTickets();
         } catch (Exception e) {
@@ -52,5 +56,9 @@ public class TicketLogic {
         return query.isEmpty() ?
                 new FilteredList<>(allTickets) :
                 allTickets.filtered(ticket -> ticket.toString().toLowerCase().contains(query.toLowerCase()));
+    }
+
+    public void sendTicketViaMail() throws IOException {
+        mailSender.openOutlook();
     }
 }

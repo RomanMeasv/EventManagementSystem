@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class EmailSender {
 
-    private static String getOutlookPath() throws IOException{
+    private static String getOutlookPath() throws IOException {
         Process p = Runtime.getRuntime()
                 .exec(new String[]{"cmd.exe", "/c", "assoc", ".pst"});
         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));

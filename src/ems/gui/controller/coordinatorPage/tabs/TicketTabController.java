@@ -3,7 +3,6 @@ package ems.gui.controller.coordinatorPage.tabs;
 import ems.be.Customer;
 import ems.be.Event;
 import ems.be.Ticket;
-import ems.bll.util.EmailSender;
 import ems.bll.util.QRCodeGenerator;
 import ems.gui.model.ModelFacade;
 import ems.gui.view.util.PopUp;
@@ -330,7 +329,8 @@ public class TicketTabController implements Initializable {
             loadTicketPreview(ticket);
             WritableImage ticketSnapshot = apnTicketPreview.snapshot(null, null);
             BufferedImage bImage = SwingFXUtils.fromFXImage(ticketSnapshot, null);
-            try {;
+            try {
+                ;
                 facade.saveTicket(new File(directory + "\\" + getTicketFileName(ticket)), bImage);
             } catch (Exception e) {
                 PopUp.showError("Could not save ticket!");
@@ -347,7 +347,7 @@ public class TicketTabController implements Initializable {
             return;
         }
 
-        File file =  chooseLocationForTicket(ticket);
+        File file = chooseLocationForTicket(ticket);
         if (file == null)
             return;
 
@@ -372,7 +372,7 @@ public class TicketTabController implements Initializable {
 
     private String getTicketFileName(Ticket ticket) {
         UUID uuid = ticket.getUuid();
-        return  ticket.getCustomer().getName() + ", " + ticket.getEvent().getName() + " (" + uuid.toString().substring(uuid.toString().length()- 4) + ").png";
+        return ticket.getCustomer().getName() + ", " + ticket.getEvent().getName() + " (" + uuid.toString().substring(uuid.toString().length() - 4) + ").png";
     }
 
     public void handleSendViaEmail(ActionEvent event) {
@@ -381,7 +381,7 @@ public class TicketTabController implements Initializable {
             return;
         }
 
-        File file =  chooseLocationForTicket(ticket);
+        File file = chooseLocationForTicket(ticket);
         if (file == null)
             return;
 

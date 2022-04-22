@@ -8,10 +8,10 @@ public class UserModel {
     private UserLogic userLogic;
 
     public UserModel() {
-         userLogic = new UserLogic();
+        userLogic = new UserLogic();
     }
 
     public User tryLogin(String username, String password) throws DatabaseException {
-        return userLogic.tryLogin(username,password);
+        return userLogic.tryLogin(username, password);
     }
 }

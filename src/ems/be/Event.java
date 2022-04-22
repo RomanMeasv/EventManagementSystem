@@ -23,8 +23,6 @@ public class Event {
         this.location = location;
         this.locationGuidance = locationGuidance;
         this.ticketTypes = ticketType;
-
-        //this.eventCoordinators = eventCoordinators;
     }
 
     public Event(int id, String name, String description, String notes, LocalDateTime start, LocalDateTime end, String location, String locationGuidance, List<String> ticketTypes) {

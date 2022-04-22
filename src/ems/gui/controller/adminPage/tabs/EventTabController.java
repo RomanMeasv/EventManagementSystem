@@ -88,14 +88,6 @@ public class EventTabController implements Initializable {
 
     }
 
-    public void handleAddCoordinator(ActionEvent event) {
-        //adds a coordinator from combobox into events list of via versa
-    }
-
-    public void handleRemoveCoordinator(ActionEvent event) {
-        //removes a selected coordinator from listview from event list or what ever architecture we will go with
-
-    }
 
     public void handleCancelEvent(ActionEvent event) {
         cleatEventDetails();

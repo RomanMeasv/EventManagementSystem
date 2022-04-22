@@ -81,7 +81,7 @@
                                        </font>
                                     </TextField>
                                     <ComboBox fx:id="cmbCoordinators" maxHeight="1.7976931348623157E308" minWidth="200.0" styleClass="combo-box" HBox.hgrow="ALWAYS" />
-                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddCoordinator" text="ADD" HBox.hgrow="NEVER">
+                                    <Button minWidth="-Infinity" mnemonicParsing="false"  text="ADD" HBox.hgrow="NEVER">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -89,7 +89,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Button>
-                                    <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRemoveCoordinator" styleClass="remove-button" text="REMOVE" HBox.hgrow="NEVER">
+                                    <Button minWidth="-Infinity" mnemonicParsing="false"  styleClass="remove-button" text="REMOVE" HBox.hgrow="NEVER">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>

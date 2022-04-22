@@ -15,9 +15,7 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 public class EventTabController implements Initializable {
 

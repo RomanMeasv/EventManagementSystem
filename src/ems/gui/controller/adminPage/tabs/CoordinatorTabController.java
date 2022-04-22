@@ -128,11 +128,6 @@ public class CoordinatorTabController implements Initializable {
 
     public void handleFilterEvents(KeyEvent keyEvent) {
         String query = txfFilterEvent.getText();
-//        try {
-//            ltvCoordinatorsEvents.setItems(eventCoordinatorModel.filterEventCoordinators(query));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void handleAddEvent(ActionEvent event) {

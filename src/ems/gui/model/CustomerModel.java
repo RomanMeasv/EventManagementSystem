@@ -42,7 +42,4 @@ public class CustomerModel {
         return customerLogic.getFilteredCustomers(query, allCustomers);
     }
 
-    public void filterCustomers(String query) {
-
-    }
 }

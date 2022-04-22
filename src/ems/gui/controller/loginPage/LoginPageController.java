@@ -46,7 +46,7 @@ public class LoginPageController {
                 Parent root = isAdmin ? FXMLLoader.load(getClass().getResource("/ems/gui/view/adminView.fxml")) :
                         isEC ? FXMLLoader.load(getClass().getResource("/ems/gui/view/eventCoordinatorView.fxml")) : null;
 
-                if(root == null){
+                if (root == null) {
                     return;
                 }
 

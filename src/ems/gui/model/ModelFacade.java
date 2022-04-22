@@ -63,8 +63,7 @@ public class ModelFacade {
 
     public void updateEvent(Event event) throws Exception {
         eventModel.updateEvent(event);
-        for (Ticket t : ticketModel.getAllTickets().filtered(t -> t.getEvent().equals(event)))
-        {
+        for (Ticket t : ticketModel.getAllTickets().filtered(t -> t.getEvent().equals(event))) {
             ticketModel.getAllTickets().set(ticketModel.getAllTickets().indexOf(t), t);
         }
         ticketModel.getAllTickets().removeIf(ticket -> ticket.getEvent().equals(event) && !event.getTicketTypes().contains(ticket.getTicketType()));
@@ -81,8 +80,7 @@ public class ModelFacade {
 
     public void updateCustomer(Customer customer) throws Exception {
         customerModel.updateCustomer(customer);
-        for (Ticket t : ticketModel.getAllTickets().filtered(t -> t.getCustomer().equals(customer)))
-        {
+        for (Ticket t : ticketModel.getAllTickets().filtered(t -> t.getCustomer().equals(customer))) {
             ticketModel.getAllTickets().set(ticketModel.getAllTickets().indexOf(t), t);
         }
     }
